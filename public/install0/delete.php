@@ -1,5 +1,5 @@
 <?php
-//Delete install Folder
+    //Delete install Folder
     $dir = '../install';
     $it = new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS);
     $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);

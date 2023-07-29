@@ -11,16 +11,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
     <!-- Bootstrap CSS-->
-    <link rel="stylesheet" href="<?php echo asset('vendor/bootstrap/css/bootstrap.min.css') ?>" type="text/css">
+    <link rel="stylesheet" href="<?php echo asset('../../vendor/bootstrap/css/bootstrap.min.css') ?>" type="text/css">
     <!-- Google fonts - Roboto -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
     <!-- theme stylesheet-->
-    <link rel="stylesheet" href="<?php echo asset('css/style.default.css') ?>" id="theme-stylesheet"
+    <link rel="stylesheet" href="<?php echo asset('../../css/style.default.css') ?>" id="theme-stylesheet"
           type="text/css">
     <!-- Custom stylesheet - for your changes-->
-    <link rel="stylesheet" href="<?php echo asset('css/custom-' . $general_setting->theme) ?>" type="text/css">
+    <link rel="stylesheet" href="<?php echo asset('../../css/custom-' . $general_setting->theme) ?>" type="text/css">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="img/favicon.ico">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
 </head>
 <body>
 <div class="page login-page">
@@ -28,8 +28,8 @@
         <div class="form-outer text-center d-flex align-items-center">
             <div class="form-inner">
                 <div class="logo"><span>{{$general_setting->site_title}}</span></div>
-                @include('shared.errors')
-                @include('shared.flash_message')
+                {{-- @include('shared.errors') --}}
+                {{-- @include('shared.flash_message') --}}
                 <form method="POST" action="{{ route('login') }}" id="login-form">
                     @csrf
                     <div class="form-group-material">
@@ -98,7 +98,7 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo asset('vendor/jquery/jquery.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo asset('../../vendor/jquery/jquery.min.js') ?>"></script>
 </body>
 </html>
 

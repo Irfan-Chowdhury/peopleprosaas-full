@@ -10,67 +10,92 @@ class RouteServiceProvider extends ServiceProvider
     // protected $namespace = 'App\Http\Controllers';
     // protected $namespace = 'App\Http\Controllers'; // Hide for laravel-7
 
-
     public const HOME = 'profile';
 
-    /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
+    // public function boot()
+    // {
+    //     parent::boot();
+    // }
+    // public function map()
+    // {
+    //     $this->mapApiRoutes();
+    //     $this->mapWebRoutes();
+    // }
 
-        parent::boot();
-    }
+    // protected function mapWebRoutes()
+    // {
+    //     Route::middleware('web')
+    //          ->namespace($this->namespace)
+    //          ->group(base_path('routes/web.php'));
 
-    /**
-     * Define the routes for the application.
-     *
-     * @return void
-     */
-    public function map()
-    {
-        $this->mapApiRoutes();
+    //     Route::middleware('web')
+    //          ->namespace($this->namespace)
+    //          ->group(base_path('routes/general.php'));
+    // }
 
-        $this->mapWebRoutes();
+    // protected function mapApiRoutes()
+    // {
+    //     Route::prefix('api')
+    //          ->middleware('api')
+    //          ->namespace($this->namespace)
+    //          ->group(base_path('routes/api.php'));
+    // }
 
-        //
-    }
 
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
-    protected function mapWebRoutes()
-    {
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/web.php'));
 
-        Route::middleware('web')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/general.php'));
-    }
+    // ================== SAAS =============
 
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
+
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
-             ->middleware('api')
-             ->namespace($this->namespace)
-             ->group(base_path('routes/api.php'));
+        foreach ($this->centralDomains() as $domain) {
+            Route::prefix('api')
+                ->domain($domain)
+                ->middleware('api')
+                // ->namespace($this->namespace)
+                ->group(base_path('routes/api.php'));
+        }
+    }
+
+    protected function centralDomains(): array
+    {
+        return config('tenancy.central_domains');
+    }
+
+    protected function mapWebRoutes()
+    {
+        foreach ($this->centralDomains() as $domain) {
+            Route::middleware('web')
+                ->domain($domain)
+                // ->namespace($this->namespace)
+                ->group(base_path('routes/web.php'));
+
+            Route::middleware('web')
+                ->domain($domain)
+                // ->namespace($this->namespace)
+                ->group(base_path('routes/general.php'));
+        }
+    }
+
+    public function boot()
+    {
+        $this->mapApiRoutes();
+        $this->mapWebRoutes();
     }
 
 
+
+
+    // public function handle($request, Closure $next)
+    // {
+    //     // Check the request domain and set the route file accordingly
+    //     if ($request->getHost() === config('tenancy.central_domains')) {
+    //         $routeFile = 'web.php';
+    //     } else {
+    //         $routeFile = 'tenant.php';
+    //     }
+    //     // Load the specified route file
+    //     app('router')->setRoutes(require base_path('routes/' . $routeFile));
+    //     return $next($request);
+    // }
 }

@@ -94,6 +94,25 @@
       0 => 'Spatie\\Permission\\PermissionServiceProvider',
     ),
   ),
+  'stancl/tenancy' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Stancl\\Tenancy\\TenancyServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Tenancy' => 'Stancl\\Tenancy\\Facades\\Tenancy',
+      'GlobalCache' => 'Stancl\\Tenancy\\Facades\\GlobalCache',
+    ),
+  ),
+  'sven/artisan-view' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Sven\\ArtisanView\\ServiceProvider',
+    ),
+  ),
   'yajra/laravel-datatables-oracle' => 
   array (
     'providers' => 

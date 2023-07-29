@@ -1,6 +1,9 @@
 @extends('layout.main')
 
 @section('content')
+
+    @php $general_settings = DB::table('general_settings')->latest()->first(); @endphp
+
     <div class="col-md-12 p-3">
 
         <div class="col-md-3 p-3">

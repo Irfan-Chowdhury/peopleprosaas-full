@@ -1,3 +1,5 @@
+@php $general_settings = DB::table('general_settings')->latest()->first(); @endphp
+
 <!-- navbar-->
 <header class="header">
     <nav class="navbar">

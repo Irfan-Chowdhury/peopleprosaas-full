@@ -25,6 +25,13 @@ class GeneralSettingController extends Controller
 {
     use ENVFilePutContent;
 
+    public function testGeneral(Request $request)
+    {
+        // return $request->getHost();
+        return GeneralSetting::latest()->first();
+    }
+
+
 	public function index()
 	{
 		if (auth()->user()->can('view-general-setting'))

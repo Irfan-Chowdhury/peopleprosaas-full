@@ -1,3 +1,9 @@
+{{-- @php $general_setting = DB::table('general_settings')->latest()->first(); @endphp --}}
+
+@php
+         $general_settings = \App\Models\GeneralSetting::latest()->first();
+@endphp
+
 <!DOCTYPE html>
 <html>
 

@@ -1,3 +1,5 @@
+@php $general_settings = DB::table('general_settings')->latest()->first(); @endphp
+
 <!DOCTYPE html>
 <html>
 
@@ -206,12 +208,12 @@
                             @else
                             <img class="profile-photo sm mr-1" src="{{ asset('uploads/profile_photos/avatar.jpg')}}">
                             @endif
-                            <span> {{auth()->user()->username}}</span> 
+                            <span> {{auth()->user()->username}}</span>
                         </a>
                         <ul class="right-sidebar">
                             <li>
                                 <a href="{{route('profile')}}">
-                                    <i class="dripicons-user"></i> 
+                                    <i class="dripicons-user"></i>
                                     {{trans('file.Profile')}}
                                 </a>
                             </li>

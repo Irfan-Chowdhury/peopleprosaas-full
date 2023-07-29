@@ -1,3 +1,4 @@
+@php $general_settings = DB::table('general_settings')->latest()->first(); @endphp
 
 <nav class="bg-white border-bottom shadow-sm">
     <div class="container">

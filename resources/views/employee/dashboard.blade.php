@@ -1,5 +1,10 @@
 @extends('layout.main')
 @section('content')
+
+    @php
+         $general_settings = \App\Models\GeneralSetting::latest()->first();
+    @endphp
+
     <style>
         .nav-tabs li a {
             padding: 0.75rem 1.25rem;

@@ -1,3 +1,5 @@
+@php $general_settings = DB::table('general_settings')->latest()->first(); @endphp
+
 <!doctype html>
 <!--[if IE 6 ]><html lang="en-us" class="ie6"> <![endif]-->
 <!--[if IE 7 ]><html lang="en-us" class="ie7"> <![endif]-->

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class PermissionsTableSeeder extends Seeder
+class PermissionsSeeder extends Seeder
 {
     // php artisan db:seed --class=PermissionsTableSeeder
 
@@ -1498,6 +1498,11 @@ class PermissionsTableSeeder extends Seeder
 				'id' => 296,
 				'guard_name' => 'web',
 				'name' => 'get-leave-notification'
+			),
+            array(
+				'id' => 297,
+				'guard_name' => 'web',
+				'name' => 'report-pension'
 			),
 		);
 		DB::table('permissions')->insert($permissions);

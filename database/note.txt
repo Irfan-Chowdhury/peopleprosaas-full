@@ -14,6 +14,8 @@ php artisan migrate:rollback --step=1 --path=database/migrations/primary
 
 php artisan make:migration add_limit_coupon_to_coupons_table --table=coupons
 
+Seed for Tenant
+https://stackoverflow.com/questions/67970122/stancl-tenancy-i-want-to-auto-seed-when-tenant-is-created
 
 =============================
 
