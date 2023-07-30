@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-use App\Http\Controllers\GeneralSettingController;
-use App\Http\Controllers\LandLord\LandingPageController;
+use App\Http\Controllers\Landlord\LandingPageController;
+use App\Http\Controllers\Landlord\DashboardController;
 use Illuminate\Support\Facades\Route;
-use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
-use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
+
 
 /*
 |--------------------------------------------------------------------------
-| Tenant Routes
+| Landlord Routes
 |--------------------------------------------------------------------------
 |
 | Here you can register the tenant routes for your application.
@@ -26,7 +25,12 @@ use Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains;
 
 // Route::get('/', 'LandingPageController@index');
 
+
 Route::get('/', [LandingPageController::class, 'index']);
+
+Route::get('super-admin/dashboard',[DashboardController::class, 'index']);
+
+
 
 
 
