@@ -9,6 +9,6 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        return view('landlord.super-admin.dashboard.index');
+        return view('landlord.super-admin.pages.dashboard.index');
     }
 }

@@ -39,8 +39,6 @@
 {{-- @include('performance.goal-type.delete-checkbox-confirm-modal')  --}}
 
 
-
-
 @endsection
 
 @push('scripts')

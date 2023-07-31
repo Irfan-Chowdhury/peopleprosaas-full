@@ -23,7 +23,7 @@
         </li>
         <li><a href="#cms" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-stack"></i><span>{{trans('file.CMS')}}</span><span></a>
             <ul id="cms" class="collapse list-unstyled ">
-                <li id="cms-language-menu"><a href="">{{trans('file.Languages')}}</a></li>
+                <li id="cms-language-menu"><a href="{{ route('language.index') }}">{{trans('file.Languages')}}</a></li>
                 <li id="cms-hero-menu"><a href="">{{trans('file.Hero Section')}}</a></li>
                 <li id="cms-module-menu"><a href="">{{trans('file.Module Section')}}</a></li>
                 <li id="cms-feature-menu"><a href="">{{trans('file.Feature Section')}}</a></li>
