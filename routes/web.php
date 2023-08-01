@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\Landlord\LandingPageController;
 use App\Http\Controllers\Landlord\DashboardController;
 use App\Http\Controllers\Landlord\LanguageController;
+use App\Http\Controllers\Landlord\SocialController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -39,6 +40,17 @@ Route::prefix('super-admin')->group(function () {
             Route::get('/edit/{language}', 'edit')->name('language.edit');
             Route::post('/update/{language}', 'update')->name('language.update')->middleware('demoCheck');
             Route::get('/destroy/{language}', 'destroy')->name('language.destroy')->middleware('demoCheck');
+        });
+    });
+
+    Route::prefix('social-section')->group(function () {
+        Route::controller(SocialController::class)->group(function () {
+            Route::get('/', 'index')->name('social.index');
+            Route::post('/store', 'store')->name('social.store')->middleware('demoCheck');
+            
+            // Route::get('/edit/{language}', 'edit')->name('language.edit');
+            // Route::post('/update/{language}', 'update')->name('language.update')->middleware('demoCheck');
+            // Route::get('/destroy/{language}', 'destroy')->name('language.destroy')->middleware('demoCheck');
         });
     });
 });

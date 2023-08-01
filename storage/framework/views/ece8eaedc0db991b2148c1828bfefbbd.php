@@ -190,7 +190,12 @@
                     $('#languageId').val(response.id);
                     $('#name').val(response.name);
                     $('#locale').val(response.locale);
-                    $('#isDefault').prop('checked',response.is_default);
+                    if (response.is_default === 1) {
+                        $('#isDefault').prop('checked', true);
+                    } else {
+                        $('#isDefault').prop('checked', false);
+                    }
+                    // $('#isDefault').prop('checked',response.is_default);
                     $('#editModal').modal('show');
                 }
             })

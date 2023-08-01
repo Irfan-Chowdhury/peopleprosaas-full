@@ -17,7 +17,7 @@ class DemoCheck
     {
         if (env('USER_VERIFIED')!=1) {
             if($request->ajax()){
-                return response()->json(['exceptionMsg' => 'Disabled for demo !'], 422);
+                return response()->json(['errorMsg' => 'Disabled for demo !'], 422);
             }else {
                 return redirect()->back()->withErrors(['errors' => ['Disabled for demo !']]);
             }

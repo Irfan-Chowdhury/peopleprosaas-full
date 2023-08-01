@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('locale');
             $table->boolean('is_default');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

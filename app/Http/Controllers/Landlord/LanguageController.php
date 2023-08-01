@@ -41,16 +41,6 @@ class LanguageController extends Controller
                     $button = '<button type="button" data-id="' . $row->id . '" class="edit btn btn-primary btn-sm"><i class="dripicons-pencil"></i></button>';
                     $button .= '&nbsp;&nbsp;';
                     $button .= '<button type="button" data-id="' . $row->id . '" class="delete btn btn-danger btn-sm"><i class="dripicons-trash"></i></button>';
-
-                    // if(auth()->user()->can('edit-company'))
-                    // {
-                    //     $button .= '<button type="button" name="edit" id="' . $row->id . '" class="edit btn btn-primary btn-sm"><i class="dripicons-pencil"></i></button>';
-                    //     $button .= '&nbsp;&nbsp;';
-                    // }
-                    // if(auth()->user()->can('delete-company'))
-                    // {
-                    //     $button .= '<button type="button" name="delete" id="' . $row->id . '" class="delete btn btn-danger btn-sm"><i class="dripicons-trash"></i></button>';
-                    // }
                     return $button;
                 })
                 ->rawColumns(['is_default','action'])
@@ -72,7 +62,7 @@ class LanguageController extends Controller
             ]);
             return response()->json(['success'=>'Data Saved Successfully']);
         } catch (Exception $exception) {
-            return response()->json(['exceptionMsg' => $exception->getMessage()], 422);
+            return response()->json(['errorMsg' => $exception->getMessage()], 422);
         }
     }
 
@@ -85,6 +75,7 @@ class LanguageController extends Controller
     {
         // If English default and I update then it set none
         try {
+
             $languageCount = Language::where('is_default',1)->count();
             if($request->is_default)
                 Language::where('is_default',1)->update(['is_default'=> 0]);
@@ -94,14 +85,21 @@ class LanguageController extends Controller
                     throw new Exception("At least one language should be default");
             }
 
-            $language->update([
-                'name' =>  $request->name,
-                'locale' =>  $request->locale,
-                'is_default' => $request->is_default ?? 0,
-            ]);
+            $language = Language::find($language->id);
+            $language->name = $request->name;
+            $language->locale = $request->locale;
+            $language->is_default = $request->is_default ?? 0; //This process work
+            $language->update();
+
+            // $language->update([
+            //     'name' =>  $request->name,
+            //     'locale' =>  $request->locale,
+            //     'is_default' => $request->is_default ?? 0, //This process not work
+            // ]);
+
             return response()->json(['success'=>'Data Updated Successfully']);
         } catch (Exception $exception) {
-            return response()->json(['exceptionMsg' => $exception->getMessage()], 422);
+            return response()->json(['errorMsg' => $exception->getMessage()], 422);
         }
     }
 
@@ -111,7 +109,7 @@ class LanguageController extends Controller
             $language->delete();
             return response()->json(['success'=>'Data Deleted Successfully']);
         } catch (Exception $exception) {
-            return response()->json(['exceptionMsg' => $exception->getMessage()], 422);
+            return response()->json(['errorMsg' => $exception->getMessage()], 422);
         }
     }
 }

@@ -28,7 +28,7 @@
                 <li id="cms-tenant-signup-menu"><a href=""><?php echo e(trans('file.Tenant Signup Description')); ?></a></li>
                 <li id="cms-blog-menu"><a href=""><?php echo e(trans('file.Blog Section')); ?></a></li>
                 <li id="cms-page-menu"><a href=""><?php echo e(trans('file.Page Section')); ?></a></li>
-                <li id="cms-social-menu"><a href=""><?php echo e(trans('file.Social Section')); ?></a></li>
+                <li id="cms-social-menu"><a href="<?php echo e(route('social.index')); ?>"><?php echo e(trans('file.Social Section')); ?></a></li>
             </ul>
         </li>
 

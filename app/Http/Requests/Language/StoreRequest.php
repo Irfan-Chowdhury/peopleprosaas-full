@@ -14,13 +14,9 @@ class StoreRequest extends FormRequest
 
     public function rules(): array
     {
-        // return [
-        //     'name' => 'required| unique:languages,name,NULL,id,deleted_at,NULL',
-        //     'locale' => 'required|unique:languages,locale,NULL,id,deleted_at,NULL',
-        // ];
         return [
-            'name' => 'required| unique:languages,name',
-            'locale' => 'required|unique:languages,locale',
+            'name' => 'required| unique:languages,name,NULL,id,deleted_at,NULL',
+            'locale' => 'required|unique:languages,locale,NULL,id,deleted_at,NULL',
         ];
     }
 }

@@ -17,13 +17,9 @@ class UpdateRequest extends FormRequest
 
     public function rules(): array
     {
-        // return [
-        //     'attribute_name' => 'required|unique:attribute_translations,attribute_name,'.$this->attribute_translation_id.',id,deleted_at,NULL',
-        // ];
-
         return [
-            'name' => 'required|unique:languages,name,'.$this->language_id,
-            'locale' => 'required|unique:languages,locale,'.$this->language_id,
+            'name' => 'required|unique:languages,name,'.$this->language_id.',id,deleted_at,NULL',
+            'locale' => 'required|unique:languages,locale,'.$this->language_id.',id,deleted_at,NULL',
         ];
     }
 }

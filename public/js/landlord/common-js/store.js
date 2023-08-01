@@ -15,8 +15,8 @@
                 console.log(response);
 
                 let html = '<div class="alert alert-danger">';
-                if(response.responseJSON.exceptionMsg) {
-                    html += '<p>' + response.responseJSON.exceptionMsg + '</p>';
+                if(response.responseJSON.errorMsg) {
+                    html += '<p>' + response.responseJSON.errorMsg + '</p>';
                 }else {
                     let dataValues = Object.values(response.responseJSON.errors);
                     for (let count = 0; count < dataValues.length; count++) {
