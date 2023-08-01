@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Language\UpdateRequest;
 use App\Http\Requests\Language\StoreRequest;
 use App\Models\Landlord\Language;
+use App\Services\LanguageService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -14,14 +15,16 @@ use JoeDixon\Translation\Drivers\Translation;
 class LanguageController extends Controller
 {
     private $translation;
-    public function __construct(Translation $translation)
+    private $languageService;
+    public function __construct(Translation $translation, LanguageService $languageService)
     {
         $this->translation = $translation;
+        $this->languageService = $languageService;
     }
 
     public function index()
     {
-        $languages = Language::all();
+        $languages = $this->languageService->getAll();
 
         if (request()->ajax()) {
             return datatables()->of($languages)

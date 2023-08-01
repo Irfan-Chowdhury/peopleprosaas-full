@@ -182,13 +182,13 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ViewComposerServiceProvider::class,
         App\Providers\TenancyServiceProvider::class,
-
+        App\Providers\RepositoryServiceProvider::class,
 
 
 		Yajra\Datatables\DatatablesServiceProvider::class,
 		App\Providers\LanguageServiceProvider::class,
 		Barryvdh\DomPDF\ServiceProvider::class,
-		Maatwebsite\Excel\ExcelServiceProvider::class
+		Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*

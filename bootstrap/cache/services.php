@@ -44,10 +44,11 @@
     40 => 'App\\Providers\\RouteServiceProvider',
     41 => 'App\\Providers\\ViewComposerServiceProvider',
     42 => 'App\\Providers\\TenancyServiceProvider',
-    43 => 'Yajra\\Datatables\\DatatablesServiceProvider',
-    44 => 'App\\Providers\\LanguageServiceProvider',
-    45 => 'Barryvdh\\DomPDF\\ServiceProvider',
-    46 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    43 => 'App\\Providers\\RepositoryServiceProvider',
+    44 => 'Yajra\\Datatables\\DatatablesServiceProvider',
+    45 => 'App\\Providers\\LanguageServiceProvider',
+    46 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    47 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'eager' => 
   array (
@@ -80,10 +81,11 @@
     26 => 'App\\Providers\\RouteServiceProvider',
     27 => 'App\\Providers\\ViewComposerServiceProvider',
     28 => 'App\\Providers\\TenancyServiceProvider',
-    29 => 'Yajra\\Datatables\\DatatablesServiceProvider',
-    30 => 'App\\Providers\\LanguageServiceProvider',
-    31 => 'Barryvdh\\DomPDF\\ServiceProvider',
-    32 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    29 => 'App\\Providers\\RepositoryServiceProvider',
+    30 => 'Yajra\\Datatables\\DatatablesServiceProvider',
+    31 => 'App\\Providers\\LanguageServiceProvider',
+    32 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    33 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'deferred' => 
   array (
