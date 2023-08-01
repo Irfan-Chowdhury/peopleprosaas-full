@@ -15,41 +15,50 @@
                 dataType: "json",
                 error: function(response) {
                     console.log(response);
-
-                    let html = '<div class="alert alert-danger">';
-                    if(response.responseJSON.errorMsg) {
-                        html += '<p>' + response.responseJSON.errorMsg + '</p>';
-                    }else {
-                        let dataValues = Object.values(response.responseJSON.errors);
-                        for (let count = 0; count < dataValues.length; count++) {
-                            html += '<p>' + dataValues[count] + '</p>';
-                        }
-                    }
-                    html += '</div>';
-
-                    $('#displayErrorMessageEdit').fadeIn("slow");
-                    $('#displayErrorMessageEdit').html(html);
-                    setTimeout(function() {
-                        $('#displayErrorMessageEdit').fadeOut("slow");
-                    }, 3000);
+                    let htmlContent = prepareMessage(response);
+                    displayErrorMessage(htmlContent);
                     $('#updateButton').text('Update');
                 },
                 success: function (response) {
                     console.log(response);
-                    // Swal.fire('Any fool can use a computer');
-
+                    displaySuccessMessage(response.success);
                     $('#dataListTable').DataTable().ajax.reload();
                     $('#updateForm')[0].reset();
                     $("#editModal").modal('hide');
-                    $('#generalResult').fadeIn("slow");
-                    $('#generalResult').addClass('alert alert-success').html(response.success);
-                    setTimeout(function() {
-                        $('#generalResult').fadeOut("slow");
-                    }, 3000);
                     $('#updateButton').text('Update');
                 }
             });
         });
     });
-
 })(jQuery);
+
+
+
+
+
+//'<div class="alert alert-danger">';
+// let htmlContent = '';
+// if(response.responseJSON.errorMsg) {
+//     htmlContent += '<p class="text-danger">' + response.responseJSON.errorMsg + '</p>';
+// }else {
+//     let dataValues = Object.values(response.responseJSON.errors);
+//     for (let count = 0; count < dataValues.length; count++) {
+//         htmlContent += '<p class="text-danger">' + dataValues[count] + '</p>';
+//     }
+// }
+// htmlContent += '</div>';
+
+
+// $('#displayErrorMessageEdit').fadeIn("slow");
+// $('#displayErrorMessageEdit').html(htmlContent);
+// setTimeout(function() {
+//     $('#displayErrorMessageEdit').fadeOut("slow");
+// }, 3000);
+
+
+
+// $('#generalResult').fadeIn("slow");
+// $('#generalResult').addClass('alert alert-success').html(response.success);
+// setTimeout(function() {
+//     $('#generalResult').fadeOut("slow");
+// }, 3000);

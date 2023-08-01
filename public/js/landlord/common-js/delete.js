@@ -1,46 +1,40 @@
 (function ($) {
     "use strict";
 
-    $(document).on("click",".delete",function(e){
+    $(document).on("click", ".delete", function (e) {
         e.preventDefault();
         let languageId = $(this).data("id");
-        // return console.log(destroyURL + languageId);
 
-        if (!confirm('Are you sure you want to continue?')) {
-            alert(false);
-        }else{
-            $.get({
-                url: destroyURL + languageId,
-                error: function(response) {
-                    console.log(response);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
 
-                    let html = '<div class="alert alert-danger">';
-                    if(response.responseJSON.errorMsg) {
-                        html += '<p>' + response.responseJSON.errorMsg + '</p>';
-                    }else {
-                        let dataValues = Object.values(response.responseJSON.errors);
-                        for (let count = 0; count < dataValues.length; count++) {
-                            html += '<p>' + dataValues[count] + '</p>';
-                        }
+                $.get({
+                    url: destroyURL + languageId,
+                    error: function (response) {
+                        console.log(response);
+                        let htmlContent = prepareMessage(response);
+                        displayErrorMessage(htmlContent);
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        Swal.fire(
+                            'Deleted!',
+                            'Your data has been deleted.',
+                            'success'
+                        );
+                        $('#dataListTable').DataTable().ajax.reload();
                     }
-                    html += '</div>';
-                    $('#generalResult').fadeIn("slow");
-                    $('#generalResult').html(html);
-                    setTimeout(function() {
-                        $('#generalResult').fadeOut("slow");
-                    }, 3000);
-                },
-                success: function (response) {
-                    console.log(response);
-                    $('#dataListTable').DataTable().ajax.reload();
-                    $('#generalResult').fadeIn("slow");
-                    $('#generalResult').addClass('alert alert-success').html(response.success);
-                    setTimeout(function() {
-                        $('#generalResult').fadeOut("slow");
-                    }, 3000);
-                }
-            });
-        }
+                });
+            }
+        })
     });
 
 })(jQuery);
