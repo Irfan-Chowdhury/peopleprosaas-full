@@ -201,38 +201,6 @@
                 }
             })
         });
-
-        //------ Bulk Delete ---------
-        // $("#bulk_delete").on("click",function(){
-        //     var idsArray = [];
-        //     let table = $('#dataListTable').DataTable();
-        //     idsArray = table.rows({selected: true}).ids().toArray();
-        //     // console.log(idsArray);
-
-        //     if(idsArray.length == 0){
-        //         alert("Please Select at least one checkbox.");
-        //     }else{
-
-        //         $('#bulkDeleteConfirmModal').modal('show');
-        //         $("#bulkDeleteSubmitModal").on("click",function(e){
-        //             $.ajax({
-        //                 url: "{{ route('ip_setting.bulk_delete') }}",
-        //                 method: "GET",
-        //                 data: {idsArray:idsArray},
-        //                 success: function (data) {
-        //                     console.log(data);
-        //                     if (data.success) {
-        //                         $('#bulkDeleteConfirmModal').modal('hide');
-        //                         table.rows('.selected').deselect();
-        //                         $('#dataListTable').DataTable().ajax.reload();
-        //                     }
-        //                     $('#generalResult').html(data.success).slideDown(300).delay(5000).slideUp(300);
-        //                 }
-        //             });
-        //         });
-        //     }
-
-        // });
     </script>
 
     <script type="text/javascript" src="{{asset('js/landlord/common-js/store.js')}}"></script>

@@ -1,6 +1,5 @@
-@extends('landlord.super-admin.layouts.master')
-@section('landlord-content')
-    @push('css')
+<?php $__env->startSection('landlord-content'); ?>
+    <?php $__env->startPush('css'); ?>
         <style>
             #icons {
                 opacity: 0;
@@ -48,7 +47,7 @@
                 font-size: 20px;
             }
         </style>
-    @endpush
+    <?php $__env->stopPush(); ?>
 
     <div class="container-fluid">
         <div class="row">
@@ -56,22 +55,22 @@
                 <form method="POST" id="submitForm">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
-                            <h4>{{ trans('file.Social Section') }}</h4>
+                            <h4><?php echo e(trans('file.Social Section')); ?></h4>
                         </div>
                         <div class="card-body collapse show" id="gs_collapse">
                             <p class="italic">
-                                <small>{{ trans('file.The field labels marked with * are required input fields') }}.</small>
+                                <small><?php echo e(trans('file.The field labels marked with * are required input fields')); ?>.</small>
                             </p>
                             <div id="custom-field">
 
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <label class="font-weight-bold">@lang('file.Icon') <span class="text-danger">*</span>
+                                        <label class="font-weight-bold"><?php echo app('translator')->get('file.Icon'); ?> <span class="text-danger">*</span>
                                         </label>
                                         <input type="text" required name="icon" class="form-control icon"
                                             data-toggle="collapse" href="#icon_collapse" aria-expanded="false"
                                             aria-controls="icon_collapse"
-                                            placeholder="{{ trans('file.Click to choose icon') }}" />
+                                            placeholder="<?php echo e(trans('file.Click to choose icon')); ?>" />
                                     </div>
                                     <div class="collapse icon_collapse" id="icon_collapse">
                                         <div class="card">
@@ -80,30 +79,30 @@
                                         </div>
                                     </div>
 
-                                    @include('landlord.super-admin.partials.input-field', [
+                                    <?php echo $__env->make('landlord.super-admin.partials.input-field', [
                                         'colSize' => 3,
                                         'labelName' => 'Name',
                                         'fieldType' => 'text',
                                         'nameData' => 'name',
                                         'placeholderData' => 'Name',
                                         'isRequired' => true,
-                                    ])
+                                    ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-                                    @include('landlord.super-admin.partials.input-field', [
+                                    <?php echo $__env->make('landlord.super-admin.partials.input-field', [
                                         'colSize' => 3,
                                         'labelName' => 'Link',
                                         'fieldType' => 'text',
                                         'nameData' => 'link',
                                         'placeholderData' => 'https://facebook.com/',
                                         'isRequired' => true,
-                                    ])
+                                    ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                                 </div>
                                 <hr>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary mar-bot-30"
-                                        id="submitButton">{{ trans('file.Save') }}</button>
+                                        id="submitButton"><?php echo e(trans('file.Save')); ?></button>
                                 </div>
                             </div>
                         </div>
@@ -119,9 +118,9 @@
                 <thead>
                     <tr>
                         <th class="not-exported"></th>
-                        <th>{{ __('Icon') }}</th>
-                        <th>{{ __('Name') }}</th>
-                        <th class="not-exported">{{ __('Action') }}</th>
+                        <th><?php echo e(__('Icon')); ?></th>
+                        <th><?php echo e(__('Name')); ?></th>
+                        <th class="not-exported"><?php echo e(__('Action')); ?></th>
                     </tr>
                 </thead>
                 <tbody id="tablecontents"></tbody>
@@ -129,14 +128,14 @@
         </div>
     </div>
 
-    @include('landlord.super-admin.partials.icon-template')
-    @include('landlord.super-admin.pages.socials.edit-modal')
-@endsection
+    <?php echo $__env->make('landlord.super-admin.partials.icon-template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('landlord.super-admin.pages.socials.edit-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php $__env->stopSection(); ?>
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script type="text/javascript">
-        let storeURL = "{{ route('social.store') }}";
+        let storeURL = "<?php echo e(route('social.store')); ?>";
         let editURL = '/super-admin/socials/edit/';
         let updateURL = '/super-admin/socials/update/';
         let destroyURL = '/super-admin/socials/destroy/';
@@ -182,7 +181,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('social.index') }}",
+                    url: "<?php echo e(route('social.index')); ?>",
                 },
                 columns: [{
                         data: 'id',
@@ -206,12 +205,12 @@
 
                 "order": [],
                 'language': {
-                    'lengthMenu': '_MENU_ {{ __('records per page') }}',
-                    "info": '{{ trans('file.Showing') }} _START_ - _END_ (_TOTAL_)',
-                    "search": '{{ trans('file.Search') }}',
+                    'lengthMenu': '_MENU_ <?php echo e(__('records per page')); ?>',
+                    "info": '<?php echo e(trans('file.Showing')); ?> _START_ - _END_ (_TOTAL_)',
+                    "search": '<?php echo e(trans('file.Search')); ?>',
                     'paginate': {
-                        'previous': '{{ trans('file.Previous') }}',
-                        'next': '{{ trans('file.Next') }}'
+                        'previous': '<?php echo e(trans('file.Previous')); ?>',
+                        'next': '<?php echo e(trans('file.Next')); ?>'
                     }
                 },
                 'columnDefs': [{
@@ -328,9 +327,11 @@
         }
     </script>
 
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/iconTemplate.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/store.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/update.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/delete.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script>
-@endpush
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/iconTemplate.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/store.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/update.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/delete.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/alertMessages.js')); ?>"></script>
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('landlord.super-admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/pages/socials/index.blade.php ENDPATH**/ ?>

@@ -43,14 +43,14 @@ Route::prefix('super-admin')->group(function () {
         });
     });
 
-    Route::prefix('social-section')->group(function () {
+    Route::prefix('socials')->group(function () {
         Route::controller(SocialController::class)->group(function () {
             Route::get('/', 'index')->name('social.index');
             Route::post('/store', 'store')->name('social.store')->middleware('demoCheck');
-            
-            // Route::get('/edit/{language}', 'edit')->name('language.edit');
-            // Route::post('/update/{language}', 'update')->name('language.update')->middleware('demoCheck');
-            // Route::get('/destroy/{language}', 'destroy')->name('language.destroy')->middleware('demoCheck');
+            Route::get('/edit/{social}', 'edit')->name('social.edit');
+            Route::post('/update/{social}', 'update')->name('language.update')->middleware('demoCheck');
+            Route::get('/destroy/{social}', 'destroy')->name('social.destroy')->middleware('demoCheck');
+            Route::post('/sort', 'sort')->name('social.sort')->middleware('demoCheck');
         });
     });
 });

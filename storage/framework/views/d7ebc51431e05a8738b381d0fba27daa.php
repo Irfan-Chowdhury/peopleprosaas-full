@@ -8,43 +8,38 @@
                 </button>
             </div>
 
-
             <div class="modal-body">
-                <div id="displayErrorMessageEdit"></div>
-
                 <form method="POST" id="updateForm">
-                    <input type="hidden" name="language_id" id="languageId">
+                    <input type="hidden" name="social_id" id="itemId">
 
                     <div class="row">
+                        <div class="col-sm-12">
+                            <label class="font-weight-bold"><?php echo app('translator')->get('file.Icon'); ?> <span class="text-danger">*</span> </label>
+                            <input type="text" required name="icon" class="form-control icon" data-toggle="collapse" href="#icon_collapse_edit" aria-expanded="false" aria-controls="icon_collapse_edit" placeholder="<?php echo e(trans('file.Click to choose icon')); ?>"/>
+                        </div>
+                        <div class="collapse icon_collapse" id="icon_collapse_edit">
+                            <div class="card">
+                                <div class="card-body">
+                                </div>
+                            </div>
+                        </div>
+
                         <?php echo $__env->make('landlord.super-admin.partials.input-field',[
-                            'colSize' => 4,
+                            'colSize' => 12,
                             'labelName' => 'Name',
                             'fieldType' => 'text',
                             'nameData' => 'name',
-                            'idData' => 'name',
-                            'placeholderData' => 'Language Name',
-                            'isRequired' => false,
+                            'placeholderData' => 'Name',
+                            'isRequired' => true,
                         ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                         <?php echo $__env->make('landlord.super-admin.partials.input-field',[
-                            'colSize'=>4,
-                            'fieldType'=>'text',
-                            'labelName'=>'Locale',
-                            'nameData'=>'locale',
-                            'idData' => 'locale',
-                            'placeholderData'=>'eg: en,bn,es etc..',
-                            'isRequired'=> false,
-                        ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
-
-                        <?php echo $__env->make('landlord.super-admin.partials.input-field',[
-                            'colSize' => 4,
-                            'labelName' => 'Default',
-                            'fieldType' => 'checkbox',
-                            'nameData' => 'is_default',
-                            'idData' => 'isDefault',
-                            'isRequired' => false,
-                            'valueData' => 1
+                            'colSize' => 12,
+                            'labelName' => 'Link',
+                            'fieldType' => 'text',
+                            'nameData' => 'link',
+                            'placeholderData' => 'https://facebook.com/',
+                            'isRequired' => true,
                         ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
                     </div>
 
@@ -60,4 +55,4 @@
 
 
 
-<?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/pages/languages/edit-modal.blade.php ENDPATH**/ ?>
+<?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/pages/socials/edit-modal.blade.php ENDPATH**/ ?>
