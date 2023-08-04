@@ -1,25 +1,30 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Contracts\BaseContract;
 use Illuminate\Database\Eloquent\Model;
 
-class BaseRepository implements BaseContract {
-
+class BaseRepository implements BaseContract
+{
     protected $model;
-    public function __construct(Model $model){
+
+    public function __construct(Model $model)
+    {
         $this->model = $model;
     }
 
-    public function all() {
+    public function all()
+    {
         return $this->model->all();
     }
+
     public function getById($id)
     {
         return $this->model->find($id);
     }
 
-    public function create(array $data) :void
+    public function create(array $data): void
     {
         $this->model->create($data);
     }
@@ -28,6 +33,7 @@ class BaseRepository implements BaseContract {
     {
         $this->getById($id)->update($data);
     }
+
     public function delete($id)
     {
         $this->getById($id)->delete();

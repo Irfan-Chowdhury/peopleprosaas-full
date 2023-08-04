@@ -3,18 +3,15 @@
 namespace App\Http\Controllers\Landlord;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Language\UpdateRequest;
 use App\Http\Requests\Language\StoreRequest;
+use App\Http\Requests\Language\UpdateRequest;
 use App\Models\Landlord\Language;
 use App\Services\LanguageService;
-use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use JoeDixon\Translation\Drivers\Translation;
 
 class LanguageController extends Controller
 {
     private $languageService;
+
     public function __construct(LanguageService $languageService)
     {
         $this->languageService = $languageService;
@@ -33,6 +30,7 @@ class LanguageController extends Controller
     public function store(StoreRequest $request)
     {
         $result = $this->languageService->storeLanguage($request);
+
         return response()->json($result['alertMsg'], $result['statusCode']);
     }
 
@@ -44,12 +42,14 @@ class LanguageController extends Controller
     public function update(UpdateRequest $request, Language $language)
     {
         $result = $this->languageService->updateLanguage($request, $language);
+
         return response()->json($result['alertMsg'], $result['statusCode']);
     }
 
     public function destroy(Language $language)
     {
         $result = $this->languageService->deleteLanguage($language);
+
         return response()->json($result['alertMsg'], $result['statusCode']);
     }
 }
