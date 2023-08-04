@@ -6,9 +6,6 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
     public function authorize(): bool
     {
         return true;
@@ -19,7 +16,17 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:languages,name,'.$this->language_id.',id,deleted_at,NULL',
-            'locale' => 'required|unique:languages,locale,'.$this->language_id.',id,deleted_at,NULL',
+            'locale' => [
+                'required',
+                'string',
+                'unique:languages,locale,'.$this->language_id.',id,deleted_at,NULL',
+                // 'regex:/^[a-z]*$/',
+                function ($attribute, $value, $fail) {
+                    if ($value !== strtolower($value)) {
+                        $fail('The :attribute must be in lowercase.');
+                    }
+                },
+            ],
         ];
     }
 }

@@ -12,6 +12,9 @@ class LanguageRepository extends BaseRepository implements LanguageContract {
         parent::__construct($this->$model);
     }
 
+    /**
+     * LanguageController.
+    */
     public function setDefaultZeroToAll()
     {
         return $this->model->where('is_default',1)->update(['is_default'=> 0]);
@@ -19,7 +22,7 @@ class LanguageRepository extends BaseRepository implements LanguageContract {
 
     public function defaultLanguagesCount()
     {
-        return  $this->model->where('is_default',1)->count(); //where('is_default',1)->count();
+        return  $this->model->where('is_default',1)->count();
     }
 
 

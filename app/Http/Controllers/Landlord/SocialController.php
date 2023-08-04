@@ -13,7 +13,7 @@ class SocialController extends Controller
 {
     public function index()
     {
-        $socials = Social::all();
+        $socials = Social::orderBy('position','ASC')->get();
 
         if (request()->ajax()) {
             return datatables()->of($socials)
@@ -46,11 +46,12 @@ class SocialController extends Controller
     public function store(StoreRequest $request)
     {
         try {
+            $maxPosition = Social::max('position') + 1;
             Social::create([
                 'name' =>  $request->name,
                 'icon' =>  $request->icon,
                 'link' =>  $request->link,
-                'position' => 1,
+                'position' => $maxPosition,
             ]);
             return response()->json(['success'=>'Data Saved Successfully']);
         } catch (Exception $exception) {
@@ -98,7 +99,6 @@ class SocialController extends Controller
                 }
             }
         }
-        // $this->cacheForget('social');
-        return response()->json('Order changed successfully');
+        return response()->json(['success'=>'Order changed successfully']);
     }
 }
