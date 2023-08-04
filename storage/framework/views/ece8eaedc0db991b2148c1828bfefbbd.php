@@ -1,16 +1,15 @@
-@extends('landlord.super-admin.layouts.master')
-@section('landlord-content')
+<?php $__env->startSection('landlord-content'); ?>
 
 <section>
     <div class="container-fluid"><span id="generalResult"></span></div>
 
     <div class="container-fluid mb-3">
-        <h4 class="font-weight-bold mt-3">{{__('Languages')}}</h4>
+        <h4 class="font-weight-bold mt-3"><?php echo e(__('Languages')); ?></h4>
         <div id="success_alert" role="alert"></div>
         <br>
 
-        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createModal"><i class="fa fa-plus"></i> {{__('file.Add New')}}</button>
-        {{-- <button type="button" class="btn btn-danger" name="bulk_delete" id="bulkDelete"><i class="fa fa-minus-circle"></i> {{__('Bulk Delete')}}</button> --}}
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createModal"><i class="fa fa-plus"></i> <?php echo e(__('file.Add New')); ?></button>
+        
     </div>
 
     <div class="container">
@@ -19,10 +18,10 @@
                 <thead>
                     <tr>
                         <th class="not-exported"></th>
-                        <th>{{__('Name')}}</th>
-                        <th>{{__('Locale')}}</th>
-                        <th>{{__('Default')}}</th>
-                        <th class="not-exported">{{__('Action')}}</th>
+                        <th><?php echo e(__('Name')); ?></th>
+                        <th><?php echo e(__('Locale')); ?></th>
+                        <th><?php echo e(__('Default')); ?></th>
+                        <th class="not-exported"><?php echo e(__('Action')); ?></th>
                     </tr>
                 </thead>
             </table>
@@ -30,13 +29,13 @@
     </div>
 </section>
 
-@include('landlord.super-admin.pages.languages.create-modal')
-@include('landlord.super-admin.pages.languages.edit-modal')
+<?php echo $__env->make('landlord.super-admin.pages.languages.create-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('landlord.super-admin.pages.languages.edit-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -76,7 +75,7 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('language.datatable') }}",
+                    url: "<?php echo e(route('language.datatable')); ?>",
                 },
                 columns: [
                     {
@@ -105,12 +104,12 @@
 
                 "order": [],
                 'language': {
-                    'lengthMenu': '_MENU_ {{__("records per page")}}',
-                    "info": '{{trans("file.Showing")}} _START_ - _END_ (_TOTAL_)',
-                    "search": '{{trans("file.Search")}}',
+                    'lengthMenu': '_MENU_ <?php echo e(__("records per page")); ?>',
+                    "info": '<?php echo e(trans("file.Showing")); ?> _START_ - _END_ (_TOTAL_)',
+                    "search": '<?php echo e(trans("file.Search")); ?>',
                     'paginate': {
-                        'previous': '{{trans("file.Previous")}}',
-                        'next': '{{trans("file.Next")}}'
+                        'previous': '<?php echo e(trans("file.Previous")); ?>',
+                        'next': '<?php echo e(trans("file.Next")); ?>'
                     }
                 },
                 'columnDefs': [
@@ -172,7 +171,7 @@
             new $.fn.dataTable.FixedHeader(table);
         });
 
-        let storeURL = "{{route('language.store')}}";
+        let storeURL = "<?php echo e(route('language.store')); ?>";
         let updateURL = '/super-admin/languages/update/';
         let destroyURL = '/super-admin/languages/destroy/';
 
@@ -203,8 +202,10 @@
         });
     </script>
 
-    <script type="text/javascript" src="{{asset('js/landlord/common-js/store.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/landlord/common-js/update.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/landlord/common-js/delete.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/landlord/common-js/alertMessages.js')}}"></script>
-@endpush
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/store.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/update.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/delete.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/alertMessages.js')); ?>"></script>
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('landlord.super-admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/pages/languages/index.blade.php ENDPATH**/ ?>

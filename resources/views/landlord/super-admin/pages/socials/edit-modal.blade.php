@@ -10,7 +10,7 @@
 
             <div class="modal-body">
                 <form method="POST" id="updateForm">
-                    <input type="hidden" name="social_id" id="itemId">
+                    <input type="hidden" name="social_id" id="modelId">
 
                     <div class="row">
                         <div class="col-sm-12">

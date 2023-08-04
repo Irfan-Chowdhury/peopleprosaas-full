@@ -14,10 +14,24 @@ class BaseRepository implements BaseContract {
     public function all() {
         return $this->model->all();
     }
-    public function find($id){}
-    public function create(array $data){}
-    public function update($id, array $data){}
-    public function delete($id){}
+    public function getById($id)
+    {
+        return $this->model->find($id);
+    }
+
+    public function create(array $data) :void
+    {
+        $this->model->create($data);
+    }
+
+    public function update($id, array $data)
+    {
+        $this->getById($id)->update($data);
+    }
+    public function delete($id)
+    {
+        $this->getById($id)->delete();
+    }
 
     // public function productsWithCategory() {
     //     // Specific implementation for "Product with Category" scenario

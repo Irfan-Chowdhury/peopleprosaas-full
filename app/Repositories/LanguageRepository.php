@@ -6,7 +6,21 @@ use App\Models\Landlord\Language;
 use App\Repositories\BaseRepository;
 class LanguageRepository extends BaseRepository implements LanguageContract {
 
+    protected $model;
     public function __construct(Language $model){
-        parent::__construct($model);
+        $this->$model = $model;
+        parent::__construct($this->$model);
     }
+
+    public function setDefaultZeroToAll()
+    {
+        return $this->model->where('is_default',1)->update(['is_default'=> 0]);
+    }
+
+    public function defaultLanguagesCount()
+    {
+        return  $this->model->where('is_default',1)->count(); //where('is_default',1)->count();
+    }
+
+
 }

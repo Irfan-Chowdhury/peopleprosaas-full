@@ -4,10 +4,10 @@
     $(document).ready(function() {
         $("#updateForm").on("submit",function(e){
             e.preventDefault();
-            let itemId = $('#itemId').val();
+            let modelId = $('#modelId').val();
             $('#updateButton').text('Updating...');
             $.post({
-                url: updateURL + itemId,
+                url: updateURL + modelId,
                 data: new FormData(this),
                 contentType: false,
                 cache: false,

@@ -36,6 +36,7 @@ Route::prefix('super-admin')->group(function () {
     Route::prefix('languages')->group(function () {
         Route::controller(LanguageController::class)->group(function () {
             Route::get('/', 'index')->name('language.index');
+            Route::get('/datatable', 'datatable')->name('language.datatable');
             Route::post('/store', 'store')->name('language.store')->middleware('demoCheck');
             Route::get('/edit/{language}', 'edit')->name('language.edit');
             Route::post('/update/{language}', 'update')->name('language.update')->middleware('demoCheck');

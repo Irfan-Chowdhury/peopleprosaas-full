@@ -13,7 +13,7 @@
                 <div id="displayErrorMessageEdit"></div>
 
                 <form method="POST" id="updateForm">
-                    <input type="hidden" name="language_id" id="languageId">
+                    <input type="hidden" name="language_id" id="modelId">
 
                     <div class="row">
                         @include('landlord.super-admin.partials.input-field',[
