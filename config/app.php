@@ -187,6 +187,7 @@ return [
 
 		Yajra\Datatables\DatatablesServiceProvider::class,
 		App\Providers\LanguageServiceProvider::class,
+		App\Providers\AlertServiceProvider::class,
 		Barryvdh\DomPDF\ServiceProvider::class,
 		Maatwebsite\Excel\ExcelServiceProvider::class,
     ],

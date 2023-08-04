@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Contracts\LanguageContract;
+use App\Facades\Alert;
 use Exception;
 use Illuminate\Support\Facades\File;
 use JoeDixon\Translation\Drivers\Translation;
@@ -69,9 +70,10 @@ class LanguageService
             $this->languageContract->create($data);
             $this->translation->addLanguage($request->locale, $request->name);
 
-            return self::displaySuccessMsg('Data Saved Successfully');
+            return Alert::successMessage('Data Saved Successfully');
+            
         } catch (Exception $exception) {
-            return self::displayErrorMsg($exception->getMessage());
+            return Alert::errorMessage($exception->getMessage());
         }
     }
 
@@ -94,10 +96,10 @@ class LanguageService
             $data = $this->requestHandle($request);
             $this->languageContract->update($language->id, $data);
 
-            return self::displaySuccessMsg('Data Updated Successfully');
+            return Alert::successMessage('Data Updated Successfully');
 
         } catch (Exception $exception) {
-            return self::displayErrorMsg($exception->getMessage());
+            return Alert::errorMessage($exception->getMessage());
         }
     }
 
@@ -108,10 +110,10 @@ class LanguageService
 
             $this->langFileDelete($language);
 
-            return self::displaySuccessMsg('Data Saved Successfully');
+            return Alert::successMessage('Data Saved Successfully');
 
         } catch (Exception $exception) {
-            return self::displayErrorMsg($exception->getMessage());
+            return Alert::errorMessage($exception->getMessage());
         }
     }
 
@@ -141,19 +143,19 @@ class LanguageService
         return $data;
     }
 
-    protected static function displaySuccessMsg($message): array
-    {
-        return [
-            'alertMsg' => ['success' => $message],
-            'statusCode' => 202,
-        ];
-    }
+    // protected static function success($message): array
+    // {
+    //     return [
+    //         'alertMsg' => ['success' => $message],
+    //         'statusCode' => 202,
+    //     ];
+    // }
 
-    protected static function displayErrorMsg($message): array
-    {
-        return [
-            'alertMsg' => ['errorMsg' => $message],
-            'statusCode' => 422,
-        ];
-    }
+    // protected static function errorMessage($message): array
+    // {
+    //     return [
+    //         'alertMsg' => ['errorMsg' => $message],
+    //         'statusCode' => 422,
+    //     ];
+    // }
 }

@@ -47,8 +47,9 @@
     43 => 'App\\Providers\\RepositoryServiceProvider',
     44 => 'Yajra\\Datatables\\DatatablesServiceProvider',
     45 => 'App\\Providers\\LanguageServiceProvider',
-    46 => 'Barryvdh\\DomPDF\\ServiceProvider',
-    47 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    46 => 'App\\Providers\\AlertServiceProvider',
+    47 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    48 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'eager' => 
   array (
@@ -84,8 +85,9 @@
     29 => 'App\\Providers\\RepositoryServiceProvider',
     30 => 'Yajra\\Datatables\\DatatablesServiceProvider',
     31 => 'App\\Providers\\LanguageServiceProvider',
-    32 => 'Barryvdh\\DomPDF\\ServiceProvider',
-    33 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
+    32 => 'App\\Providers\\AlertServiceProvider',
+    33 => 'Barryvdh\\DomPDF\\ServiceProvider',
+    34 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
   ),
   'deferred' => 
   array (
