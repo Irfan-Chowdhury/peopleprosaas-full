@@ -62,6 +62,11 @@ class LanguageService
     public function storeLanguage($request)
     {
         try {
+            $path = base_path('resources/lang/'.$request->locale);
+            if (File::exists($path)) {
+                throw new Exception('A file name with the locale "'.$request->locale.'" already exists.', 1);
+            }
+
             if ($request->is_default) {
                 $this->languageContract->setDefaultZeroToAll();
             }
@@ -69,6 +74,7 @@ class LanguageService
             $data = $this->requestHandle($request);
             $this->languageContract->create($data);
             $this->translation->addLanguage($request->locale, $request->name);
+
 
             return Alert::successMessage('Data Saved Successfully');
 
@@ -80,6 +86,12 @@ class LanguageService
     public function updateLanguage($request, $language)
     {
         try {
+
+            $path = base_path('resources/lang/'.$request->locale);
+            if (File::exists($path) && ($language->locale !== $request->locale)) {
+                throw new Exception('A file name with the locale "'.$request->locale.'" already exists.', 1);
+            }
+
             $languageCount = $this->languageContract->defaultLanguagesCount();
 
             if ($request->is_default) {

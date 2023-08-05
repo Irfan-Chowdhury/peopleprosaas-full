@@ -12,7 +12,7 @@ class AlertService
         ];
     }
 
-    protected static function errorMessage($message): array
+    public static function errorMessage($message): array
     {
         return [
             'alertMsg' => ['errorMsg' => $message],

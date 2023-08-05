@@ -3,6 +3,7 @@
 
 namespace App\Http\View\Composers;
 
+use App\Models\Landlord\Language;
 use Exception;
 use Illuminate\View\View;
 use JoeDixon\Translation\Drivers\Translation;
@@ -18,8 +19,13 @@ class LayoutComposer {
 
 	public function compose(View $view)
 	{
-		$languages = $this->translation->allLanguages();
-		$view->with('languages', $languages);
+        if(config('database.connections.peopleprosaas_landlord')) {
+            $languages = Language::all();
+        }
+        else {
+            $languages = $this->translation->allLanguages();
+        }
+        $view->with('languages', $languages);
 	}
 
 }

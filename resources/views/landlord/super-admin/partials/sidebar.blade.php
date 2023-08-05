@@ -38,8 +38,10 @@
         <li><a href="#localization" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-web"></i><span>{{trans('file.Localization')}}</span><span></a>
             <ul id="localization" class="collapse list-unstyled ">
                 <li id="localization-language-menu"><a href="{{ route('language.index') }}">{{trans('file.Language Setting')}}</a></li>
-                <li id="localization-translation-menu"><a href="{{ route('lang.translations.index', $language) }}">{{trans('file.Translation')}} </a></li>
-                <li id="localization-add-translation-menu"><a href="{{ route('lang.translations.create', $language) }}">{{trans('file.Add Translation')}} </a></li>
+                {{-- <li id="localization-translation-menu"><a href="{{ route('lang.translations.index', $language) }}">{{trans('file.Translation')}} </a></li>
+                <li id="localization-add-translation-menu"><a href="{{ route('lang.translations.create', $language) }}">{{trans('file.Add Translation')}} </a></li> --}}
+                <li id="localization-translation-menu"><a href="{{ route('lang.translations.index', 'English') }}">{{trans('file.Translation')}} </a></li>
+                <li id="localization-add-translation-menu"><a href="{{ route('lang.translations.create', 'English') }}">{{trans('file.Add Translation')}} </a></li>
             </ul>
         </li>
         <li><a href=""><i class="dripicons-ticket"></i> {{trans('file.Support Tickets')}}</a></li>

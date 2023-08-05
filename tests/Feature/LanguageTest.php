@@ -53,7 +53,13 @@ test('Store - locale must be in lowercase', function () {
 
 
 
+// it('stops if A file name with the locale already exists', function () {
+//     $this->post(route('language.store'), array_merge(languageData(), ['locale' =>'stuooo']));
+//     throw new Exception('Something happened');
+// })->throws(Exception::class);
+
+
 test('Language Store', function () {
-    $response =  $this->post('/super-admin/languages/store', languageData());
+    $this->post('/super-admin/languages/store', languageData());
     $this->assertCount(1, Language::all());
 });

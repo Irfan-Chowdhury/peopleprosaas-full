@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Landlord;
 
 use App\Http\Controllers\Controller;
+use App\Models\Landlord\Language;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use JoeDixon\Translation\Drivers\Translation;
@@ -98,6 +100,9 @@ class TranslationController extends Controller
     public function languageSwitch($locale)
     {
         setcookie('language', $locale, time() + (86400 * 365), '/');
+
+        Language::where('is_default', 1)->update(['is_default' => 0]);
+        Language::where('locale', $locale)->update(['is_default' => 1]);
 
         return back();
     }

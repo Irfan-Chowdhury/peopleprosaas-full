@@ -54,8 +54,8 @@ Route::prefix('super-admin')->group(function () {
 
             Route::post('/update', 'update')->name('lang.translations.update');
             // Route::get('/create', 'create')->name('languages.create');
-            Route::post('/store', 'store')->name('languages.store');
-            Route::get('/switch/{lang}', 'languageSwitch')->name('language.switch');
+            // Route::post('/store', 'store')->name('languages.store');
+            Route::get('/switch/{lang}', 'languageSwitch')->name('lang.switch');
             Route::get('/delete', 'languageDelete')->name('lang.delete');
         });
     });

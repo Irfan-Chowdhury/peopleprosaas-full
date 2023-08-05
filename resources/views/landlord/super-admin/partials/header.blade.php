@@ -51,13 +51,19 @@
                             <i class="dripicons-web"></i>
                         </a>
                         <ul class="right-sidebar">
-                            <a href="#">English</a>
-                            <a href="#">Bangla</a>
-                            {{-- @foreach($languages as $lang)
-                                <li>
-                                    <a href="{{route('language.switch',$lang)}}">{{$lang}}</a>
-                                </li>
-                            @endforeach --}}
+                            @if(config('database.connections.peopleprosaas_landlord'))
+                                @foreach($languages as $lang)
+                                    <li>
+                                        <a href="{{route('lang.switch',$lang->locale)}}">{{$lang->name}}</a>
+                                    </li>
+                                @endforeach
+                            @else
+                                @foreach($languages as $lang)
+                                    <li>
+                                        <a href="{{route('lang.switch',$lang)}}">{{$lang}}</a>
+                                    </li>
+                                @endforeach
+                            @endif
                         </ul>
                     </li>
 
