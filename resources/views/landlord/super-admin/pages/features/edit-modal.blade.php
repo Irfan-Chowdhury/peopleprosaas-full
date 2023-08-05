@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel"> @lang('file.Edit Social') </h5>
+                <h5 class="modal-title" id="editModalLabel"> @lang('file.Edit Feature') </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -10,7 +10,7 @@
 
             <div class="modal-body">
                 <form method="POST" id="updateForm">
-                    <input type="hidden" name="social_id" id="modelId">
+                    <input type="hidden" name="feature_id" id="modelId">
 
                     <div class="row">
                         <div class="col-sm-12">
@@ -32,15 +32,6 @@
                             'placeholderData' => 'Name',
                             'isRequired' => true,
                         ])
-
-                        @include('landlord.super-admin.partials.input-field',[
-                            'colSize' => 12,
-                            'labelName' => 'Link',
-                            'fieldType' => 'text',
-                            'nameData' => 'link',
-                            'placeholderData' => 'https://facebook.com/',
-                            'isRequired' => true,
-                        ])
                     </div>
 
                     <div class="modal-footer">
@@ -51,6 +42,7 @@
         </div>
     </div>
 </div>
+
 
 
 

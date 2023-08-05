@@ -22,7 +22,7 @@
                 <li id="cms-language-menu"><a href="<?php echo e(route('language.index')); ?>"><?php echo e(trans('file.Languages')); ?></a></li>
                 <li id="cms-hero-menu"><a href=""><?php echo e(trans('file.Hero Section')); ?></a></li>
                 <li id="cms-module-menu"><a href=""><?php echo e(trans('file.Module Section')); ?></a></li>
-                <li id="cms-feature-menu"><a href=""><?php echo e(trans('file.Feature Section')); ?></a></li>
+                <li id="cms-feature-menu"><a href="<?php echo e(route('feature.index')); ?>"><?php echo e(trans('file.Feature Section')); ?></a></li>
                 <li id="cms-faq-menu"><a href="}"><?php echo e(trans('file.FAQ Section')); ?></a></li>
                 <li id="cms-testimonial-menu"><a href=""><?php echo e(trans('file.Testimonial Section')); ?></a></li>
                 <li id="cms-tenant-signup-menu"><a href=""><?php echo e(trans('file.Tenant Signup Description')); ?></a></li>

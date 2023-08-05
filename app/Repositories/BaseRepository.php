@@ -19,6 +19,7 @@ class BaseRepository implements BaseContract
         return $this->model->all();
     }
 
+
     public function getById($id)
     {
         return $this->model->find($id);
@@ -38,6 +39,23 @@ class BaseRepository implements BaseContract
     {
         $this->getById($id)->delete();
     }
+
+    // Feature
+    public function getMaxPosition() :int
+    {
+        return $this->model->max('position') ?? 0;
+    }
+
+
+    // Feature
+    public function getOrderByPosition()
+    {
+        return $this->model->orderBy('position','ASC');
+    }
+
+
+
+
 
     // public function productsWithCategory() {
     //     // Specific implementation for "Product with Category" scenario

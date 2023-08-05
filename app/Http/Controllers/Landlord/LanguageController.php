@@ -7,6 +7,7 @@ use App\Http\Requests\Language\StoreRequest;
 use App\Http\Requests\Language\UpdateRequest;
 use App\Models\Landlord\Language;
 use App\Services\LanguageService;
+
 class LanguageController extends Controller
 {
     private $languageService;

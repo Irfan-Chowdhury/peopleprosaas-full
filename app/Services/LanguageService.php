@@ -71,7 +71,7 @@ class LanguageService
             $this->translation->addLanguage($request->locale, $request->name);
 
             return Alert::successMessage('Data Saved Successfully');
-            
+
         } catch (Exception $exception) {
             return Alert::errorMessage($exception->getMessage());
         }

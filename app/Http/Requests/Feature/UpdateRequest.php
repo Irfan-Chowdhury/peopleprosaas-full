@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Social;
+namespace App\Http\Requests\Feature;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:socials,name,NULL,id,deleted_at,NULL',
-            'icon' => 'required|unique:socials,icon,NULL,id,deleted_at,NULL',
-            'link' => 'required|unique:socials,link,NULL,id,deleted_at,NULL',
+            'icon' => 'required|unique:features,icon,'.$this->feature_id.',id,deleted_at,NULL',
+            'name' => 'required|unique:features,name,'.$this->feature_id.',id,deleted_at,NULL',
         ];
     }
 }

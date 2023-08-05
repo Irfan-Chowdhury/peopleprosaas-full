@@ -1948,3 +1948,4 @@
         </div>
     </section>
 </div>
+<?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/partials/icon-template.blade.php ENDPATH**/ ?>

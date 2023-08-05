@@ -13,30 +13,27 @@ class SocialController extends Controller
 {
     public function index()
     {
-        $socials = Social::orderBy('position','ASC')->get();
+        $socials = Social::orderBy('position', 'ASC')->get();
 
         if (request()->ajax()) {
             return datatables()->of($socials)
-                ->setRowId(function ($row)
-                {
+                ->setRowId(function ($row) {
                     return $row->id;
                 })
-                ->addColumn('icon',function ($row)
-                {
-                    return $row->icon ?? "" ;
+                ->addColumn('icon', function ($row) {
+                    return '<i class="'.$row->icon.' text-primary"></i>&nbsp;'.$row->icon;
                 })
-                ->addColumn('name',function ($row)
-                {
-                    return $row->name ?? "" ;
+                ->addColumn('name', function ($row) {
+                    return $row->name ?? '';
                 })
-                ->addColumn('action', function ($row)
-                {
-                    $button = '<button type="button" data-id="' . $row->id . '" class="edit btn btn-primary btn-sm"><i class="dripicons-pencil"></i></button>';
+                ->addColumn('action', function ($row) {
+                    $button = '<button type="button" data-id="'.$row->id.'" class="edit btn btn-primary btn-sm"><i class="dripicons-pencil"></i></button>';
                     $button .= '&nbsp;&nbsp;';
-                    $button .= '<button type="button" data-id="' . $row->id . '" class="delete btn btn-danger btn-sm"><i class="dripicons-trash"></i></button>';
+                    $button .= '<button type="button" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm"><i class="dripicons-trash"></i></button>';
+
                     return $button;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['icon', 'action'])
                 ->make(true);
         }
 
@@ -48,12 +45,13 @@ class SocialController extends Controller
         try {
             $maxPosition = Social::max('position') + 1;
             Social::create([
-                'name' =>  $request->name,
-                'icon' =>  $request->icon,
-                'link' =>  $request->link,
+                'name' => $request->name,
+                'icon' => $request->icon,
+                'link' => $request->link,
                 'position' => $maxPosition,
             ]);
-            return response()->json(['success'=>'Data Saved Successfully']);
+
+            return response()->json(['success' => 'Data Saved Successfully']);
         } catch (Exception $exception) {
             return response()->json(['errorMsg' => $exception->getMessage()], 422);
         }
@@ -68,11 +66,12 @@ class SocialController extends Controller
     {
         try {
             $social->update([
-                'name' =>  $request->name,
-                'icon' =>  $request->icon,
+                'name' => $request->name,
+                'icon' => $request->icon,
                 'link' => $request->link, //This process not work
             ]);
-            return response()->json(['success'=>'Data Updated Successfully']);
+
+            return response()->json(['success' => 'Data Updated Successfully']);
         } catch (Exception $exception) {
             return response()->json(['errorMsg' => $exception->getMessage()], 422);
         }
@@ -82,7 +81,8 @@ class SocialController extends Controller
     {
         try {
             $social->delete();
-            return response()->json(['success'=>'Data Deleted Successfully']);
+
+            return response()->json(['success' => 'Data Deleted Successfully']);
         } catch (Exception $exception) {
             return response()->json(['errorMsg' => $exception->getMessage()], 422);
         }
@@ -99,6 +99,7 @@ class SocialController extends Controller
                 }
             }
         }
-        return response()->json(['success'=>'Order changed successfully']);
+
+        return response()->json(['success' => 'Order changed successfully']);
     }
 }

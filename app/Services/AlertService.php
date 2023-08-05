@@ -2,16 +2,16 @@
 
 namespace App\Services;
 
-
 class AlertService
 {
     public static function successMessage($message): array
     {
         return [
             'alertMsg' => ['success' => $message],
-            'statusCode' => 202,
+            'statusCode' => 200,
         ];
     }
+
     protected static function errorMessage($message): array
     {
         return [
@@ -19,6 +19,4 @@ class AlertService
             'statusCode' => 422,
         ];
     }
-
-
 }

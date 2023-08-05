@@ -14,7 +14,7 @@
 uses(
     Tests\TestCase::class,
     Illuminate\Foundation\Testing\RefreshDatabase::class,
-    App\Http\traits\TestTrait::class,
+    // App\Http\traits\TestTrait::class,
 )->in('Feature');
 
 /*
@@ -54,6 +54,13 @@ function languageData():array
         'name' => 'English',
         'locale' => 'en',
         'is_default' => 0,
+    ];
+}
+function featureData():array
+{
+    return [
+        'name' => 'fa fa-address-book-o',
+        'icon' => 'book',
     ];
 }
 

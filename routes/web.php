@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Landlord\LandingPageController;
 use App\Http\Controllers\Landlord\DashboardController;
+use App\Http\Controllers\Landlord\FeatureController;
 use App\Http\Controllers\Landlord\LanguageController;
 use App\Http\Controllers\Landlord\SocialController;
 use Illuminate\Support\Facades\Route;
@@ -49,9 +50,21 @@ Route::prefix('super-admin')->group(function () {
             Route::get('/', 'index')->name('social.index');
             Route::post('/store', 'store')->name('social.store')->middleware('demoCheck');
             Route::get('/edit/{social}', 'edit')->name('social.edit');
-            Route::post('/update/{social}', 'update')->name('language.update')->middleware('demoCheck');
+            Route::post('/update/{social}', 'update')->name('social.update')->middleware('demoCheck');
             Route::get('/destroy/{social}', 'destroy')->name('social.destroy')->middleware('demoCheck');
             Route::post('/sort', 'sort')->name('social.sort')->middleware('demoCheck');
+        });
+    });
+
+    Route::prefix('features')->group(function () {
+        Route::controller(FeatureController::class)->group(function () {
+            Route::get('/', 'index')->name('feature.index');
+            Route::get('/datatable', 'datatable')->name('feature.datatable');
+            Route::post('/store', 'store')->name('feature.store')->middleware('demoCheck');
+            Route::get('/edit/{feature}', 'edit')->name('feature.edit');
+            Route::post('/update/{feature}', 'update')->name('feature.update')->middleware('demoCheck');
+            Route::get('/destroy/{feature}', 'destroy')->name('feature.destroy')->middleware('demoCheck');
+            Route::post('/sort', 'sort')->name('feature.sort')->middleware('demoCheck');
         });
     });
 });
