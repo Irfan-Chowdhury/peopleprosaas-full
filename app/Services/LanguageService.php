@@ -119,8 +119,10 @@ class LanguageService
 
     protected function langFileDelete($language): void
     {
-        $oldDirectory = base_path('resources/lang/'.$language->locale);
-        File::deleteDirectory($oldDirectory);
+        $path = base_path('resources/lang/'.$language->locale);
+        if (File::exists($path)) {
+            File::deleteDirectory($path);
+        }
     }
 
     protected function langFileUpdate($request, $language): void

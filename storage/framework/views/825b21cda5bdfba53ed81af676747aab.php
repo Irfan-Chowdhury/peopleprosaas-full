@@ -19,7 +19,6 @@
         </li>
         <li><a href="#cms" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-stack"></i><span><?php echo e(trans('file.CMS')); ?></span><span></a>
             <ul id="cms" class="collapse list-unstyled ">
-                <li id="cms-language-menu"><a href="<?php echo e(route('language.index')); ?>"><?php echo e(trans('file.Languages')); ?></a></li>
                 <li id="cms-hero-menu"><a href=""><?php echo e(trans('file.Hero Section')); ?></a></li>
                 <li id="cms-module-menu"><a href=""><?php echo e(trans('file.Module Section')); ?></a></li>
                 <li id="cms-feature-menu"><a href="<?php echo e(route('feature.index')); ?>"><?php echo e(trans('file.Feature Section')); ?></a></li>
@@ -32,6 +31,13 @@
             </ul>
         </li>
 
+        <li><a href="#localization" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-web"></i><span><?php echo e(trans('file.Localization')); ?></span><span></a>
+            <ul id="localization" class="collapse list-unstyled ">
+                <li id="localization-language-menu"><a href="<?php echo e(route('language.index')); ?>"><?php echo e(trans('file.Language Setting')); ?></a></li>
+                <li id="localization-translation-menu"><a href="<?php echo e(route('lang.translations.index', $language)); ?>"><?php echo e(trans('file.Translation')); ?> </a></li>
+                <li id="localization-add-translation-menu"><a href="<?php echo e(route('lang.translations.create', $language)); ?>"><?php echo e(trans('file.Add Translation')); ?> </a></li>
+            </ul>
+        </li>
         <li><a href=""><i class="dripicons-ticket"></i> <?php echo e(trans('file.Support Tickets')); ?></a></li>
         <li><a href=""><i class="dripicons-gear"></i> <?php echo e(trans('file.settings')); ?></a></li>
         <li><a href=""><i class="dripicons-mail"></i> <?php echo e(trans('file.Mail Setting')); ?></a></li>

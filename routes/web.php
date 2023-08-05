@@ -7,6 +7,8 @@ use App\Http\Controllers\Landlord\DashboardController;
 use App\Http\Controllers\Landlord\FeatureController;
 use App\Http\Controllers\Landlord\LanguageController;
 use App\Http\Controllers\Landlord\SocialController;
+use App\Http\Controllers\Landlord\TranslationController;
+use App\Http\Controllers\LanguageSettingController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -42,6 +44,19 @@ Route::prefix('super-admin')->group(function () {
             Route::get('/edit/{language}', 'edit')->name('language.edit');
             Route::post('/update/{language}', 'update')->name('language.update')->middleware('demoCheck');
             Route::get('/destroy/{language}', 'destroy')->name('language.destroy')->middleware('demoCheck');
+        });
+
+        // Translation
+        Route::controller(TranslationController::class)->group(function () {
+            Route::get('/{language}/translations', 'index')->name('lang.translations.index');
+            Route::get('/{language}/translations/create', 'create')->name('lang.translations.create');
+            Route::post('/{language}/translations/store', 'store')->name('lang.translations.store');
+
+            Route::post('/update', 'update')->name('lang.translations.update');
+            // Route::get('/create', 'create')->name('languages.create');
+            Route::post('/store', 'store')->name('languages.store');
+            Route::get('/switch/{lang}', 'languageSwitch')->name('language.switch');
+            Route::get('/delete', 'languageDelete')->name('lang.delete');
         });
     });
 

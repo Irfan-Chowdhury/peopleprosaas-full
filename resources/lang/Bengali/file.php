@@ -1,7 +1,6 @@
 <?php
 
 return array (
-  'failed' => 'test',
   'About' => 'সম্পর্ক',
   'Absent' => 'Absent',
   'Account' => 'Account',
@@ -59,11 +58,11 @@ return array (
   'Debit' => 'ডেবিট',
   'Deductions' => 'Deductions',
   'Deferred' => 'বিলম্বিত',
-  'Deleting' =>
+  'Deleting' => 
   array (
-    '' =>
+    '' => 
     array (
-      '' =>
+      '' => 
       array (
         '' => 'মোছা হচ্ছে ...',
       ),
@@ -260,6 +259,7 @@ return array (
   'Trainings' => 'প্রশিক্ষণ',
   'Transaction' => 'লেনদেন',
   'Transfer' => 'স্থানান্তর',
+  'Translation' => 'অনুবাদ',
   'Travel' => 'ভ্রমনের',
   'Tuesday' => 'মঙ্গলবার',
   'Type' => 'Type',
@@ -288,6 +288,7 @@ return array (
   'category' => 'বিভাগে',
   'company' => 'প্রতিষ্ঠান',
   'delete' => 'মুছে ফেলা',
+  'failed' => 'test',
   'gif,jpg,png,jpeg' => 'জিআইএফ, জেপিজি, পিএনজি, জেপিইগ',
   'location' => 'অবস্থান',
   'logout' => 'প্রস্থান',

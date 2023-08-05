@@ -23,7 +23,6 @@
         </li>
         <li><a href="#cms" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-stack"></i><span>{{trans('file.CMS')}}</span><span></a>
             <ul id="cms" class="collapse list-unstyled ">
-                <li id="cms-language-menu"><a href="{{ route('language.index') }}">{{trans('file.Languages')}}</a></li>
                 <li id="cms-hero-menu"><a href="">{{trans('file.Hero Section')}}</a></li>
                 <li id="cms-module-menu"><a href="">{{trans('file.Module Section')}}</a></li>
                 <li id="cms-feature-menu"><a href="{{ route('feature.index') }}">{{trans('file.Feature Section')}}</a></li>
@@ -36,6 +35,13 @@
             </ul>
         </li>
 
+        <li><a href="#localization" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-web"></i><span>{{trans('file.Localization')}}</span><span></a>
+            <ul id="localization" class="collapse list-unstyled ">
+                <li id="localization-language-menu"><a href="{{ route('language.index') }}">{{trans('file.Language Setting')}}</a></li>
+                <li id="localization-translation-menu"><a href="{{ route('lang.translations.index', $language) }}">{{trans('file.Translation')}} </a></li>
+                <li id="localization-add-translation-menu"><a href="{{ route('lang.translations.create', $language) }}">{{trans('file.Add Translation')}} </a></li>
+            </ul>
+        </li>
         <li><a href=""><i class="dripicons-ticket"></i> {{trans('file.Support Tickets')}}</a></li>
         <li><a href=""><i class="dripicons-gear"></i> {{trans('file.settings')}}</a></li>
         <li><a href=""><i class="dripicons-mail"></i> {{trans('file.Mail Setting')}}</a></li>
