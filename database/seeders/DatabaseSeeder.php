@@ -18,13 +18,20 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(CountriesTableSeeder::class);
 
-        $this->call([
-            CountriesTableSeeder::class,
-            GeneralSettingSeeder::class,
-            PermissionsSeeder::class,
-            RoleSeeder::class,
-            UserSeeder::class,
-        ]);
+        if(config('database.connections.peopleprosaas_landlord')) {
+            $this->call([
+                UserSeeder::class,
+            ]);
+        }
+        else {
+            $this->call([
+                CountriesTableSeeder::class,
+                GeneralSettingSeeder::class,
+                PermissionsSeeder::class,
+                RoleSeeder::class,
+                UserSeeder::class,
+            ]);
+        }
 
     }
 }

@@ -29,6 +29,7 @@ class User extends Authenticatable
         'profile_photo',
         'profile_bg',
         'is_active',
+        'is_super_admin',
         'last_login_ip',
         'last_login_date',
     ];

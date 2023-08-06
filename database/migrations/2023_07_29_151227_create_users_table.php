@@ -13,25 +13,26 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('role_id')->nullable();
-            $table->string('name',191)->nullable();
+            // $table->unsignedBigInteger('role_id')->nullable();
+            $table->string('first_name',191);
+            $table->string('last_name',191);
             $table->string('username', 191)->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->boolean('is_active')->nullable();
-            $table->boolean('is_admin')->default(false);
+            $table->boolean('is_super_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('role_id', 'users_role_id_foreign')->references('id')->on('roles')->onDelete('set NULL');
+            // $table->foreign('role_id', 'users_role_id_foreign')->references('id')->on('roles')->onDelete('set NULL');
         });
     }
 
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign('users_role_id_foreign');
+            // $table->dropForeign('users_role_id_foreign');
             $table->dropIfExists('users');
         });
     }

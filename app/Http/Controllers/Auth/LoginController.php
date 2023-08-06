@@ -33,6 +33,13 @@ class LoginController extends Controller
      // over riding the method for custom redirecting after login
      protected function authenticated(Request $request, $user)
      {
+        if(config('database.connections.peopleprosaas_landlord')) {
+            if ($user->is_super_admin) {
+                return redirect('/super-admin/dashboard');
+            }
+        }
+
+
         //saving login timestamps and ip after login
         $user->timestamps = false;
         $user->last_login_date = Carbon::now()->toDateTimeString();

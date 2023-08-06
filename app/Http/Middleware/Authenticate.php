@@ -14,8 +14,16 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
+        if(config('database.connections.peopleprosaas_landlord')) {
+            if (! $request->expectsJson()) {
+                return route('landlord.login');
+            }
         }
+        else {
+            if (! $request->expectsJson()) {
+                return route('login');
+            }
+        }
+
     }
 }

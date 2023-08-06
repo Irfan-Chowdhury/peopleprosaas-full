@@ -115,7 +115,7 @@
                                 </li>
                             {{-- @endif --}}
                             <li>
-                                <form id="logout-form" action="" method="POST">
+                                <form id="logout-form" action="{{ route('landlord.logout') }}" method="POST">
                                     @csrf
                                     <button class="btn btn-link" type="submit"><i class="dripicons-exit"></i> {{trans('file.logout')}}</button>
                                 </form>
