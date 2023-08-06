@@ -9,7 +9,8 @@
     <meta name="csrf-token" content="CmSeExxpkZmScDB9ArBZKMGKAyzPqnxEriplXWrS">
     {{-- <link rel="icon" type="image/png" href="{{url('public/landlord/images/logo', $general_setting->site_logo)}}" /> --}}
     <!-- Document Title -->
-    {{-- <title>{{$general_setting->meta_title ?? 'SalePro SAAS'}}</title> --}}
+    {{-- <title>{{$general_setting->meta_title ?? 'PeoplePro SAAS'}}</title> --}}
+    <title>PeoplePro SAAS</title>
     <!-- Links -->
     {{-- <meta name="description" content="{{$general_setting->meta_description ?? 'Buy SalePro inventory management & POS SAAS php script'}}" />
     <meta property="og:url" content="{{url()->full()}}" />
@@ -211,9 +212,9 @@
 </head>
 
 <body>
-    @if(session()->has('not_permitted'))
+    {{-- @if(session()->has('not_permitted'))
       <div class="alert alert-danger alert-dismissible text-center">{{ session()->get('not_permitted') }}</div>
-    @endif
+    @endif --}}
     <!--Header-->
     <!--Header Area starts-->
     @if(!env('USER_VERIFIED'))
@@ -259,11 +260,11 @@
 
                 <div class="col-lg-4 col-5" style="text-align:right">
                     <ul class="offset-menu-wrapper p-0 d-none d-lg-flex d-xl-flex">
-                        {{-- @foreach($socials as $social)
+                        @foreach($socials as $social)
                         <li>
                             <a href="{{$social->link}}"><i class="{{$social->icon}}"></i></a>
                         </li>
-                        @endforeach --}}
+                        @endforeach
                         {{-- @if(count($languages) > 1)
                         <li class="dropdown">
                             <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -287,20 +288,22 @@
         <nav id="mobile-nav"></nav>
     </header>
 
-    <section class="hero mt-0">
+    {{-- <section class="hero mt-0">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2 text-center hero-text mb-5">
-                    <h1 class="heading"></h1>
-                    <h2 class="light h5 mb-3"></h2>
-                    <a href="#packages" class="button style1"></a>
+                    <h1 class="heading">{{$hero->heading}}</h1>
+                    <h2 class="light h5 mb-3">{{$hero->sub_heading}}</h2>
+                    <a href="#packages" class="button style1">{{$hero->button_text}}</a>
                 </div>
                 <div class="col-md-8 offset-md-2">
-                    {{-- <img class="hero-img" src="{{url('/landlord/images')}}/{{$hero->image}}" alt=""/> --}}
+                    <img class="hero-img" src="{{url('/landlord/images')}}/{{$hero->image}}" alt=""/>
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
+
+
 
     {{-- @if(count($modules) > 0)
     <section id="features" class="">
@@ -391,7 +394,7 @@
     </section>
     @endif --}}
 
-    <section id="packages"class="grey-bg">
+    {{-- <section id="packages"class="grey-bg">
         <div class="container">
             <div class="col-md-6 offset-md-3 text-center mb-5">
                 <h2 class="regular">Pricing plans</h2>
@@ -432,76 +435,76 @@
                         </div>
                     </div>
                 </div>
-                {{-- @foreach($packages as $package) --}}
+                @foreach($packages as $package)
                 <?php
-                    // $features = json_decode($package->features);
+                    $features = json_decode($package->features);
                 ?>
                 <div class="col">
                     <div class="pricing">
                         <div class="pricing-header">
-                            {{-- <span class="h3">{{$package->name}}</span> --}}
+                            <span class="h3">{{$package->name}}</span>
                         </div>
                         <div class="price">
                             <div>
-                                {{-- <span class="h4"><span class="currency-code">{{$general_setting->currency}}</span> <span class="package-price" data-monthly="{{$package->monthly_fee}}" data-yearly="{{$package->yearly_fee}}">{{$package->monthly_fee}}/month</span></span><br>
-                                <button href="#customer-signup" data-free="{{$package->is_free_trial}}" data-package_id="{{$package->id}}" class="button style2 signup-btn">Sign Up</button> --}}
+                                <span class="h4"><span class="currency-code">{{$general_setting->currency}}</span> <span class="package-price" data-monthly="{{$package->monthly_fee}}" data-yearly="{{$package->yearly_fee}}">{{$package->monthly_fee}}/month</span></span><br>
+                                <button href="#customer-signup" data-free="{{$package->is_free_trial}}" data-package_id="{{$package->id}}" class="button style2 signup-btn">Sign Up</button>
                             </div>
                         </div>
                         <div class="pricing-details">
-                            {{-- @if($package->is_free_trial)
+                            @if($package->is_free_trial)
                                 <p>{{$general_setting->free_trial_limit}} days</p>
                             @else
                                 <p>N/A</p>
-                            @endif --}}
-                            {{-- @if(in_array("product_and_categories", $features))
+                            @endif
+                            @if(in_array("product_and_categories", $features))
                                 <p><i class="ti-check"></i></p>
                             @else
                                 <p><i class="ti-close"></i></p>
-                            @endif --}}
+                            @endif
 
-                            {{-- @if(in_array("purchase_and_sale", $features))
+                            @if(in_array("purchase_and_sale", $features))
                                 <p><i class="ti-check"></i></p>
                             @else
                                 <p><i class="ti-close"></i></p>
-                            @endif --}}
+                            @endif
 
-                            {{-- @if(in_array("sale_return", $features))
+                            @if(in_array("sale_return", $features))
                                 <p><i class="ti-check"></i></p>
                             @else
                                 <p><i class="ti-close"></i></p>
-                            @endif --}}
+                            @endif
 
-                            {{-- @if(in_array("purchase_return", $features))
+                            @if(in_array("purchase_return", $features))
                                 <p><i class="ti-check"></i></p>
                             @else
                                 <p><i class="ti-close"></i></p>
-                            @endif --}}
+                            @endif
 
-                            {{-- @if(in_array("expense", $features))
+                            @if(in_array("expense", $features))
                                 <p><i class="ti-check"></i></p>
                             @else
                                 <p><i class="ti-close"></i></p>
-                            @endif --}}
+                            @endif
 
-                            {{-- @if(in_array("transfer", $features))
+                            @if(in_array("transfer", $features))
                                 <p><i class="ti-check"></i></p>
                             @else
                                 <p><i class="ti-close"></i></p>
-                            @endif --}}
+                            @endif
 
-                            {{-- @if(in_array("quotation", $features))
+                            @if(in_array("quotation", $features))
                                 <p><i class="ti-check"></i></p>
                             @else
                                 <p><i class="ti-close"></i></p>
-                            @endif --}}
+                            @endif
 
-                            {{-- @if(in_array("delivery", $features))
+                            @if(in_array("delivery", $features))
                                 <p><i class="ti-check"></i></p>
                             @else
                                 <p><i class="ti-close"></i></p>
-                            @endif --}}
+                            @endif
 
-                            {{-- @if(in_array("stock_count_and_adjustment", $features))
+                            @if(in_array("stock_count_and_adjustment", $features))
                                 <p><i class="ti-check"></i></p>
                             @else
                                 <p><i class="ti-close"></i></p>
@@ -553,16 +556,16 @@
                                 <p>{{$package->number_of_employee}}</p>
                             @else
                                 <p>{{trans('file.Unlimited')}}</p>
-                            @endif --}}
+                            @endif
                         </div>
                     </div>
                 </div>
-                {{-- @endforeach --}}
+                @endforeach
             </div>
 
-            {{-- @foreach($packages as $package)
+            @foreach($packages as $package)
             <?php
-                // $features = json_decode($package->features);
+                $features = json_decode($package->features);
             ?>
             <div class="pricing-m d-block d-lg-none d-xl-none mb-5">
                 <div class="d-flex justify-content-between">
@@ -707,11 +710,11 @@
                     </div>
                 </div>
             </div>
-            @endforeach --}}
+            @endforeach
         </div>
-    </section>
+    </section> --}}
 
-    <section class="grey-bg">
+    {{-- <section class="grey-bg">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3 text-center mb-5">
@@ -720,7 +723,7 @@
             </div>
             <div class="swiper mySwiper swiper-container-horizontal swiper-container-autoheight">
                 <div class="swiper-wrapper" style="height: 348px;">
-                {{-- @foreach($testimonials as $testimonial)
+                @foreach($testimonials as $testimonial)
                     <div class="swiper-slide swiper-slide-active" style="width: 563px; margin-right: 50px;">
                         <div class="review">
                             <div class="review-text">
@@ -729,30 +732,30 @@
                             <div class="reviewer"><img src="{{asset('/public/landlord/images/testimonial')}}/{{$testimonial->image}}" alt="{{$testimonial->name}}" /> {{$testimonial->name}}@if($testimonial->business_name), {{$testimonial->business_name}}@endif</div>
                         </div>
                     </div>
-                @endforeach --}}
+                @endforeach
                 </div>
                 <div class="swiper-nav-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"><i class="ti-arrow-right"></i></div>
                 <div class="swiper-nav-prev swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"><i class="ti-arrow-left"></i></div>
                 <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span></div>
             <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
         </div>
-    </section>
+    </section> --}}
 
-    <section id="customer-signup">
+    {{-- <section id="customer-signup">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3 text-center mb-3">
-                    {{-- @if($tenant_signup_description)
+                    @if($tenant_signup_description)
                         <h2 class="regular">{{$tenant_signup_description->heading}}</h2>
                         <p class="lead mb-3">{{$tenant_signup_description->sub_heading}}</p>
                     @else
                         <h2 class="regular">Customer Sign Up</h2>
                         <p class="lead mb-3">SalePro is packed with all the features you'll need to seamlessly run your business</p>
-                    @endif --}}
+                    @endif
                 </div>
             </div>
             <div class="col-md-6 offset-md-3 mb-5">
-                <form action="" method="POST"  class="form row customer-signup-form">
+                <form action="{{route('tenant.checkout')}}" method="POST"  class="form row customer-signup-form">
                     @csrf
                     <div class="col-12">
                         <input type="hidden" name="package_id" value="1">
@@ -790,7 +793,8 @@
                 </form>
             </div>
         </div>
-    </section>
+    </section> --}}
+
     {{-- @if(count($blogs) > 0)
     <section id="blog">
         <div class="container">
@@ -815,7 +819,7 @@
     </section>
     @endif --}}
 
-    @if(env('USER_VERIFIED')==0)
+    {{-- @if(env('USER_VERIFIED')==0)
     <section class="pt-5">
         <div class="container">
             <div class="place-cta row">
@@ -830,7 +834,7 @@
             </div>
         </div>
     </section>
-    @endif
+    @endif --}}
 
     <!-- Footer section Starts-->
     {{-- <div class="footer-wrapper pt-0">
@@ -981,7 +985,7 @@
             });
 
         })(jQuery);
-    </script>
+    </script> --}}
     <script>
         function isNumberKey(evt) {
             var charCode = (evt.which) ? evt.which : evt.keyCode
@@ -989,15 +993,15 @@
                 return false;
             return true;
         }
-    </script> --}}
+    </script>
 
-    {{-- @if(isset($general_setting->ga_script))
+    @if(isset($general_setting->ga_script))
     {!!$general_setting->ga_script!!}
     @endif
 
     @if(isset($general_setting->chat_script))
     {!!$general_setting->chat_script!!}
-    @endif --}}
+    @endif
 
     @if(env('USER_VERIFIED')==0)
     <!-- Google tag (gtag.js) -->

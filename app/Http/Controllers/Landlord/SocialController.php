@@ -6,14 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Social\StoreRequest;
 use App\Http\Requests\Social\UpdateRequest;
 use App\Models\Landlord\Social;
+use App\Services\SocialService;
 use Exception;
 use Illuminate\Http\Request;
 
 class SocialController extends Controller
 {
-    public function index()
+    public function index(SocialService $socialService)
     {
-        $socials = Social::orderBy('position', 'ASC')->get();
+        $socials = $socialService->getAll();
 
         if (request()->ajax()) {
             return datatables()->of($socials)
