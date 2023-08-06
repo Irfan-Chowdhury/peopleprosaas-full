@@ -34,7 +34,8 @@ class MakeRepository extends Command
             $modelPath = "App\Models\{$baseName}";
         }
 
-        $repositoryContent = "<?php\n\nnamespace App\Repositories;\n\nuse App\Contracts\\{$contractName};\nuse $modelPath;\n\nclass {$RepositoryName} extends BaseRepository implements {$contractName}\n{\n    protected \$model;\n\n    public function __construct(Social \$model)\n    {\n        \$this->\$model = \$model;\n        parent::__construct(\$this->\$model);\n    }\n}";
+        // $repositoryContent = "<?php\n\nnamespace App\Repositories;\n\nuse App\Contracts\\{$contractName};\nuse $modelPath;\n\nclass {$RepositoryName} extends BaseRepository implements {$contractName}\n{\n    protected \$model;\n\n    public function __construct(Social \$model)\n    {\n        \$this->\$model = \$model;\n        parent::__construct(\$this->\$model);\n    }\n}";
+        $repositoryContent = $this->formatOfContent($contractName, $modelPath, $RepositoryName, $baseName);
 
         $filePath = app_path("Repositories/{$RepositoryName}.php");
 
@@ -46,5 +47,27 @@ class MakeRepository extends Command
         file_put_contents($filePath, $repositoryContent);
 
         $this->info("Repository [app/Repositories/{$RepositoryName}.php] created successfully!");
+    }
+
+    public function formatOfContent($contractName, $modelPath, $RepositoryName, $baseName)
+    {
+return
+"<?php
+
+namespace App\Repositories;
+
+use App\Contracts\\{$contractName};
+use $modelPath;
+
+class {$RepositoryName} extends BaseRepository implements {$contractName}
+{
+    protected \$model;
+
+    public function __construct({$baseName} \$model)
+    {
+        \$this->\$model = \$model;
+        parent::__construct(\$this->\$model);
+    }
+}";
     }
 }
