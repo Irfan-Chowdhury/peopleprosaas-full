@@ -8,6 +8,12 @@
             @case('text')
                 <input {{ $isRequired ? 'required':'' }} type="text" name="{{ $nameData }}" id="{{ isset($idData) ? $idData : null }}" @if(isset($valueData)) value="{{ $valueData }}" @else placeholder="{{ $placeholderData }}" @endif class="form-control">
                 @break
+            @case('number')
+                <input {{ $isRequired ? 'required':'' }} type="number" name="{{ $nameData }}" id="{{ isset($idData) ? $idData : null }}" @if(isset($valueData)) value="{{ $valueData }}" @else placeholder="{{ $placeholderData }}" @endif class="form-control">
+                @break
+            @case('file')
+                <input {{ $isRequired ? 'required':'' }} type="file" name="{{ $nameData }}" id="{{ isset($idData) ? $idData : null }}" class="form-control">
+                @break
             @case('textarea')
                 <textarea  {{ $isRequired ? 'required':'' }} name="{{ $nameData }}" id="{{ isset($idData) ? $idData : null }}" @if(isset($placeholderData)) placeholder="{{ $placeholderData }}" @endif class="form-control ckeditor" rows="4"> @if(isset($valueData)) {{ $valueData }} @endif </textarea>
                 @break

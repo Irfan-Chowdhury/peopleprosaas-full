@@ -1,3 +1,8 @@
+@php
+    $generalSetting =  DB::table('general_settings')->latest()->first();
+
+@endphp
+
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
 
@@ -228,7 +233,7 @@
                     <div class="mobile-menu-icon d-lg-none"><i class="ti-menu"></i></div>
                     <div class="logo">
                         <a href="{{url('/')}}">
-                            {{-- <img class="lazy" src="{{url('public/landlord/images/logo', $general_setting->site_logo)}}" alt="Brand logo"> --}}
+                            <img class="lazy" src="{{asset('landlord/images/logo/'. $generalSetting->site_logo)}}">
                         </a>
                     </div>
                 </div>
@@ -261,9 +266,9 @@
                 <div class="col-lg-4 col-5" style="text-align:right">
                     <ul class="offset-menu-wrapper p-0 d-none d-lg-flex d-xl-flex">
                         @foreach($socials as $social)
-                        <li>
-                            <a href="{{$social->link}}"><i class="{{$social->icon}}"></i></a>
-                        </li>
+                            <li>
+                                <a href="{{$social->link}}"><i class="{{$social->icon}}"></i></a>
+                            </li>
                         @endforeach
                         {{-- @if(count($languages) > 1)
                         <li class="dropdown">

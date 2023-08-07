@@ -2,11 +2,17 @@
 
 use App\Models\Landlord\Feature;
 
+beforeEach(function () {
+    $this->userAuthenticated();
+});
 
-// Testing Page Response Status
+
+
+
 it('gives back a successful response for home page', function () {
     $this->get(route('feature.index'))->assertOk();
 });
+
 
 it('returns correct view', function() {
     // Act & Assert

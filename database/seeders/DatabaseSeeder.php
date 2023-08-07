@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
         if(config('database.connections.peopleprosaas_landlord')) {
             $this->call([
                 UserSeeder::class,
+                GeneralSettingSeeder::class,
             ]);
         }
         else {

@@ -86,7 +86,6 @@ class LanguageService
     public function updateLanguage($request, $language)
     {
         try {
-
             $path = base_path('resources/lang/'.$request->locale);
             if (File::exists($path) && ($language->locale !== $request->locale)) {
                 throw new Exception('A file name with the locale "'.$request->locale.'" already exists.', 1);

@@ -13,6 +13,10 @@ interface BaseContract {
 
     public function getOrderByPosition();
 
+    public function fetchLatestData();
+
+    public function latestDataUpdate(array $data);
+
 
     // Add other specific methods here as needed
 }

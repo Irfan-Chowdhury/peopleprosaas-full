@@ -14,22 +14,47 @@ class GeneralSettingSeeder extends Seeder
     {
         GeneralSetting::truncate();
 
-        $siteTitle = "PeoplePro";
         $timeZone = "Asia/Dhaka";
         $dateFormat = "d-m-Y";
 
-        GeneralSetting::create([
-            'site_title' => $siteTitle,
-            'site_logo'  => "logo.png",
-            'time_zone' => $timeZone,
-            'currency' => "$",
-            'currency_format' => "prefix",
-            'default_payment_bank' => 1,
-            'date_format' => $dateFormat,
-            'theme' => "default.css",
-            'footer' => "LionCoders",
-            'footer_link' => "https://www.lion-coders.com",
-        ]);
+        if(config('database.connections.peopleprosaas_landlord'))
+        {
+            $siteTitle = "PeopleProSAAS";
+
+            $data = [
+                'site_title' => $siteTitle,
+                'site_logo'  => "logo.png",
+                'time_zone' => $timeZone,
+                'phone' => '01829498634',
+                'email' => 'support@lion-coders.com',
+                'free_trial_limit' => 5,
+                'currency_code' => "USD",
+                'frontend_layout' => "regular",
+                'date_format' => $dateFormat,
+                'footer' => "LionCoders",
+                'footer_link' => "https://www.lion-coders.com",
+                'developed_by' => 'LionCoders',
+            ];
+        }
+        else {
+            $siteTitle = "PeoplePro";
+
+            $data = [
+                'site_title' => $siteTitle,
+                'site_logo'  => "logo.png",
+                'time_zone' => $timeZone,
+                'currency' => "$",
+                'currency_format' => "prefix",
+                'default_payment_bank' => 1,
+                'date_format' => $dateFormat,
+                'theme' => "default.css",
+                'footer' => "LionCoders",
+                'footer_link' => "https://www.lion-coders.com",
+            ];
+        }
+
+
+        GeneralSetting::create($data);
 
         //writting timezone info in .env file
         $this->dataWriteInENVFile('APP_NAME',$siteTitle);

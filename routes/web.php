@@ -6,6 +6,7 @@ use App\Http\Controllers\Landlord\AdminController;
 use App\Http\Controllers\Landlord\LandingPageController;
 use App\Http\Controllers\Landlord\DashboardController;
 use App\Http\Controllers\Landlord\FeatureController;
+use App\Http\Controllers\Landlord\GeneralSettingController;
 use App\Http\Controllers\Landlord\LanguageController;
 use App\Http\Controllers\Landlord\SocialController;
 use App\Http\Controllers\Landlord\TranslationController;
@@ -85,6 +86,20 @@ Route::middleware('auth')->group(function () {
                 Route::post('/update/{feature}', 'update')->name('feature.update')->middleware('demoCheck');
                 Route::get('/destroy/{feature}', 'destroy')->name('feature.destroy')->middleware('demoCheck');
                 Route::post('/sort', 'sort')->name('feature.sort')->middleware('demoCheck');
+            });
+        });
+
+        Route::prefix('settings')->group(function () {
+            Route::controller(GeneralSettingController::class)->group(function () {
+                Route::get('/', 'index')->name('setting.general.index');
+
+                Route::post('/general', 'generalSettingManage')->name('setting.general.manage')->middleware('demoCheck');
+                // Route::get('/datatable', 'datatable')->name('feature.datatable');
+                // Route::post('/store', 'store')->name('feature.store')->middleware('demoCheck');
+                // Route::get('/edit/{feature}', 'edit')->name('feature.edit');
+                // Route::post('/update/{feature}', 'update')->name('feature.update')->middleware('demoCheck');
+                // Route::get('/destroy/{feature}', 'destroy')->name('feature.destroy')->middleware('demoCheck');
+                // Route::post('/sort', 'sort')->name('feature.sort')->middleware('demoCheck');
             });
         });
     });

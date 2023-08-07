@@ -14,6 +14,7 @@
 uses(
     Tests\TestCase::class,
     Illuminate\Foundation\Testing\RefreshDatabase::class,
+    Tests\Authenticate::class,
     // App\Http\traits\TestTrait::class,
 )->in('Feature');
 
@@ -61,6 +62,24 @@ function featureData():array
     return [
         'name' => 'fa fa-address-book-o',
         'icon' => 'book',
+    ];
+}
+
+function generalSettingData()
+{
+    return [
+        'site_title' => "PeopleProSAAS",
+        // 'site_logo'  => "logo.png",
+        'time_zone' => "Asia/Dhaka",
+        'phone' => '01829498634',
+        'email' => 'support@lion-coders.com',
+        'free_trial_limit' => 5,
+        'currency_code' => "USD",
+        'frontend_layout' => "regular",
+        'date_format' => "d-m-Y",
+        'footer' => "LionCoders",
+        'footer_link' => "https://www.lion-coders.com",
+        'developed_by' => 'LionCoders',
     ];
 }
 

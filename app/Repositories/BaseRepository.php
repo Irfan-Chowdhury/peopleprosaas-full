@@ -19,6 +19,18 @@ class BaseRepository implements BaseContract
         return $this->model->all();
     }
 
+    // GeneralSettingController
+    public function fetchLatestData()
+    {
+        return $this->model->latest()->first();
+    }
+
+    // GeneralSettingController
+    public function latestDataUpdate(array $data) :void
+    {
+        $this->fetchLatestData()->update($data);
+    }
+
 
     public function getById($id)
     {

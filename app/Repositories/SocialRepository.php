@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Contracts\SocialContract;
 use App\Models\Landlord\Social;
 
-class SocialRepository extends BaseRepositoryc
+class SocialRepository extends BaseRepository implements SocialContract
 {
     protected $model;
 
