@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Landlord;
 
 use App\Facades\Alert;
+use App\Facades\Utility;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Hero\HeroManageRequest;
 use App\Models\Landlord\Hero;
@@ -39,7 +40,7 @@ class HeroController extends Controller
                 'button_text' => $request->button_text,
             ];
 
-            $imageName = $this->imageHandle($request);
+            $imageName = Utility::imageFileHandle($request->image, $path='landlord/images/hero/');
             if($imageName) {
                 $data['image'] = $imageName;
             }
@@ -52,27 +53,5 @@ class HeroController extends Controller
         }
 
         return response()->json($result['alertMsg'], $result['statusCode']);
-
-    }
-
-    protected function imageHandle($request)
-    {
-        $imageName = null;
-
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imagesDirectory = public_path('landlord/images/hero/');
-
-            if (File::isDirectory($imagesDirectory)) {
-                File::cleanDirectory($imagesDirectory);
-            }
-
-            $ext = pathinfo($image->getClientOriginalName(), PATHINFO_EXTENSION);
-            $imageName = date("Ymdhis") . 1;
-            $imageName = $imageName . '.' . $ext;
-
-            $image->move($imagesDirectory, $imageName);
-        }
-        return $imageName;
     }
 }

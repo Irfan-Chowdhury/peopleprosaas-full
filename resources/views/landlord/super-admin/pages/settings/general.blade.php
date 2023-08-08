@@ -53,20 +53,25 @@
                         'placeholderData' => 'USD',
                         'isRequired' => true,
                         'valueData'=> isset($generalSetting->currency_code) ? $generalSetting->currency_code : null
-
                     ])
+
+
 
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="font-weight-bold">{{trans("file.Date Format")}}  </label>
                             <select name="date_format" class="selectpicker form-control">
-                                <option value="d-m-Y" {{ $generalSetting->date_format === 'd-m-Y' ? 'selected' : ''}}>dd-mm-yyyy(23-05-2020)</option>
+                                @foreach ($dateFormat as $key => $item)
+                                    <option value="{{ $key }}" {{ $generalSetting->date_format === $key ? 'selected' : ''}}>{{ $item }}</option>
+
+                                @endforeach
+                                {{-- <option value="d-m-Y" {{ $generalSetting->date_format === 'd-m-Y' ? 'selected' : ''}}>dd-mm-yyyy(23-05-2020)</option>
                                 <option value="Y-m-d" {{ $generalSetting->date_format === 'Y-m-d' ? 'selected' : ''}}>yyyy-mm-dd(2020-05-23)</option>
                                 <option value="m/d/Y" {{ $generalSetting->date_format === 'm/d/Y' ? 'selected' : ''}}>mm/dd/yyyy(05/23/2020)</option>
                                 <option value="Y/m/d" {{ $generalSetting->date_format === 'Y/m/d' ? 'selected' : ''}}>yyyy/mm/dd(2020/05/23)</option>
                                 <option value="Y-M-d" {{ $generalSetting->date_format === 'Y-M-d' ? 'selected' : ''}}>yyyy-MM-dd(2020-May-23)</option>
                                 <option value="M-d-Y" {{ $generalSetting->date_format === 'M-d-Y' ? 'selected' : ''}}>MM-dd-yyyy(May-23-2020)</option>
-                                <option value="d-M-Y" {{ $generalSetting->date_format === 'd-M-Y' ? 'selected' : ''}}>dd-MM-yyyy(23-May-2020)</option>
+                                <option value="d-M-Y" {{ $generalSetting->date_format === 'd-M-Y' ? 'selected' : ''}}>dd-MM-yyyy(23-May-2020)</option> --}}
                             </select>
                         </div>
                     </div>
@@ -121,7 +126,7 @@
                         'fieldType' => 'file',
                         'nameData' => 'site_logo',
                         'placeholderData' => '',
-                        'isRequired' => true,
+                        'isRequired' => false,
                     ])
 
                     <div class="col-md-6">

@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Contracts\GeneralSettingContract;
 use App\Facades\Alert;
+use App\Facades\Utility;
 use Exception;
 use Illuminate\Support\Facades\File;
 
@@ -30,6 +31,9 @@ class GeneralSettingService
                 $data['site_logo'] = $imageName;
             }
             $this->generalSettingContract->latestDataUpdate($data);
+
+            Utility::setEnv('APP_NAME', $data['site_title']);
+
             return Alert::successMessage('Data Submitted Successfully');
         }
         catch (Exception $exception) {
@@ -63,7 +67,6 @@ class GeneralSettingService
         $data = [
             'site_title' => $request->site_title,
             // 'site_logo'  => "logo.png",
-            // 'site_logo'  => $imageName,
             'time_zone' => $request->time_zone,
             'phone' =>  $request->phone,
             'email' =>  $request->email,
@@ -77,21 +80,5 @@ class GeneralSettingService
         ];
 
         return $data;
-    }
-
-
-
-
-    public function timeZoneData() : array
-    {
-        $zones_array = array();
-        $timestamp = time();
-        foreach (timezone_identifiers_list() as $key => $zone)
-        {
-            date_default_timezone_set($zone);
-            $zones_array[$key]['zone'] = $zone;
-            $zones_array[$key]['diff_from_GMT'] = 'UTC/GMT ' . date('P', $timestamp);
-        }
-        return $zones_array;
     }
 }

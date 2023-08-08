@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Landlord;
 
 use App\Contracts\GeneralSettingContract;
+use App\Facades\Utility;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GeneralSetting\GeneralSettingRequest;
 use App\Models\Landlord\GeneralSetting;
@@ -22,9 +23,10 @@ class GeneralSettingController extends Controller
     public function index()
     {
         $generalSetting =  $this->generalSettingService->getLatestData();
-        $timeZones = $this->generalSettingService->timeZoneData();
+        $timeZones = Utility::timeZoneData();
+        $dateFormat = Utility::dateFormat();
 
-        return view('landlord.super-admin.pages.settings.index', compact('timeZones','generalSetting'));
+        return view('landlord.super-admin.pages.settings.index', compact('timeZones','generalSetting','dateFormat'));
     }
 
     public function generalSettingManage(GeneralSettingRequest $request)
