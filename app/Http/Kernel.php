@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
 		'XSS' => \App\Http\Middleware\XSS::class,
 		'admin' => \App\Http\Middleware\CheckAdmin::class,
 		'demoCheck' => \App\Http\Middleware\DemoCheck::class,
+		'setLocale' => \App\Http\Middleware\SetLocale::class,
     ];
 
     /**

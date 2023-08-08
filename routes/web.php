@@ -7,12 +7,13 @@ use App\Http\Controllers\Landlord\LandingPageController;
 use App\Http\Controllers\Landlord\DashboardController;
 use App\Http\Controllers\Landlord\FeatureController;
 use App\Http\Controllers\Landlord\GeneralSettingController;
+use App\Http\Controllers\Landlord\HeroController;
 use App\Http\Controllers\Landlord\LanguageController;
 use App\Http\Controllers\Landlord\SocialController;
 use App\Http\Controllers\Landlord\TranslationController;
 use App\Http\Controllers\LanguageSettingController;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return 'This is Landlord Section - web.php';
-// });
+Route::get('/lang', function () {
+    // return Session::has('SuperAdminLocale') ?? 'en';
+});
 
 // Route::get('/', 'LandingPageController@index');
 
@@ -38,8 +39,10 @@ Route::get('/super-admin', [AdminController::class, 'showLoginForm'])->name('lan
 Route::post('/super-admin', [AdminController::class, 'login'])->name('landlord.login.proccess');
 Route::post('/super-admin/logout', [AdminController::class, 'logout'])->name('landlord.logout');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','setLocale'])->group(function () {
     Route::prefix('super-admin')->group(function () {
+
+
         Route::get('dashboard',[DashboardController::class, 'index'])->name('landlord.dashboard');
 
         Route::prefix('languages')->group(function () {
@@ -86,6 +89,13 @@ Route::middleware('auth')->group(function () {
                 Route::post('/update/{feature}', 'update')->name('feature.update')->middleware('demoCheck');
                 Route::get('/destroy/{feature}', 'destroy')->name('feature.destroy')->middleware('demoCheck');
                 Route::post('/sort', 'sort')->name('feature.sort')->middleware('demoCheck');
+            });
+        });
+
+        Route::prefix('heroes')->group(function () {
+            Route::controller(HeroController::class)->group(function () {
+                Route::get('/', 'index')->name('hero.index');
+                Route::post('/', 'updateOrCreate')->name('hero.updateOrCreate')->middleware('demoCheck');
             });
         });
 

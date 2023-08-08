@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use JoeDixon\Translation\Drivers\Translation;
 use JoeDixon\Translation\Http\Requests\LanguageRequest;
@@ -101,8 +102,9 @@ class TranslationController extends Controller
     {
         setcookie('language', $locale, time() + (86400 * 365), '/');
 
-        Language::where('is_default', 1)->update(['is_default' => 0]);
-        Language::where('locale', $locale)->update(['is_default' => 1]);
+        $language = Language::where('locale', $locale)->first();
+        Session::put('TempSuperAdminLangId', $language->id);
+        Session::put('SuperAdminLocale', $language->locale);
 
         return back();
     }

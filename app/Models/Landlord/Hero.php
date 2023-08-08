@@ -10,7 +10,7 @@ class Hero extends Model
     use HasFactory;
 
     protected $fillable = [
-        'lang_id',
+        'language_id',
         'heading',
         'sub_heading',
         'image',

@@ -293,7 +293,7 @@
         <nav id="mobile-nav"></nav>
     </header>
 
-    {{-- <section class="hero mt-0">
+    <section class="hero mt-0">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2 text-center hero-text mb-5">
@@ -302,11 +302,11 @@
                     <a href="#packages" class="button style1">{{$hero->button_text}}</a>
                 </div>
                 <div class="col-md-8 offset-md-2">
-                    <img class="hero-img" src="{{url('/landlord/images')}}/{{$hero->image}}" alt=""/>
+                    <img class="hero-img" src="{{asset('landlord/images/hero/'.$hero->image)}}" alt=""/>
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
 
 
 

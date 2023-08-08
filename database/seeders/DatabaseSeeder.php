@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 UserSeeder::class,
                 GeneralSettingSeeder::class,
+                LanguageSeeder::class,
+                HeroSeeder::class,
+                SocialSeeder::class,
             ]);
         }
         else {

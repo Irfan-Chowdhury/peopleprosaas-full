@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Landlord;
 
 use App\Http\Controllers\Controller;
+use App\Models\Landlord\Language;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -19,6 +21,9 @@ class AdminController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($user->is_super_admin) {
+            $language = Language::where('is_default',1)->first();
+            Session::put('DefaultSuperAdminLangId', $language->id);
+            Session::put('SuperAdminLocale', $language->locale);
             return redirect('/super-admin/dashboard');
         }
     }
@@ -31,6 +36,8 @@ class AdminController extends Controller
 
     public function logout(Request $request)
     {
+        Session::forget(['TempSuperAdminLangId','DefaultSuperAdminLangId']);
+
         Auth::logout();
 
         return redirect('/super-admin');
