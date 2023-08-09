@@ -48,10 +48,12 @@ class LanguageService
                     return "<div class='p-2 badge badge-warning'>No</div>";
                 })
                 ->addColumn('action', function ($row) {
-                    $button = '<button type="button" data-id="'.$row->id.'" class="edit btn btn-primary btn-sm"><i class="dripicons-pencil"></i></button>';
+                    $button = '';
+                    $button .= '<button type="button" data-id="'.$row->id.'" class="edit btn btn-primary btn-sm"><i class="dripicons-pencil"></i></button>';
                     $button .= '&nbsp;&nbsp;';
-                    $button .= '<button type="button" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm"><i class="dripicons-trash"></i></button>';
-
+                    if ($row->locale !== 'en') {
+                        $button .= '<button type="button" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm"><i class="dripicons-trash"></i></button>';
+                    }
                     return $button;
                 })
                 ->rawColumns(['is_default', 'action'])

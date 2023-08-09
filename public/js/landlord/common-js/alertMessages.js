@@ -2,7 +2,10 @@ let prepareMessage = response => {
     let htmlContent = '';
     if(response.responseJSON.errorMsg) {
         htmlContent += '<p class="text-danger">' + response.responseJSON.errorMsg + '</p>';
-    }else {
+    }else if (response.status===500){
+        htmlContent += '<p class="text-danger">' + response.status + ' | ' + response.statusText + '</p>';
+    }
+    else {
         let dataValues = Object.values(response.responseJSON.errors);
         for (let count = 0; count < dataValues.length; count++) {
             htmlContent += '<p class="text-danger">' + dataValues[count] + '</p>';

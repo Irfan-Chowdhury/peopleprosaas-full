@@ -3,6 +3,8 @@ using directory inside "database/migrations".
 let need a directory name "batch".
 
 create migration files -
+php artisan make:migration create_flights_table
+
 php artisan make:migration update_foreign_key_to_employees_table --path=database/migrations/modify
 
 run migrate -

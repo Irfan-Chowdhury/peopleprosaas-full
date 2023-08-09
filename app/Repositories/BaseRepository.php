@@ -19,10 +19,27 @@ class BaseRepository implements BaseContract
         return $this->model->all();
     }
 
+    public function getAllWithRelation($relation)
+    {
+        return $this->model->with($relation)->get();
+    }
+
     // GeneralSettingController
     public function fetchLatestData()
     {
         return $this->model->latest()->first();
+    }
+
+    // ModuleController
+    public function fetchLatestDataByLanguageId($languageId)
+    {
+        return $this->model->where('language_id',$languageId)->latest()->first();
+    }
+
+    // ModuleController
+    public function fetchLatestDataByLanguageIdWithRelation($relation, $languageId)
+    {
+        return $this->model->with($relation)->where('language_id',$languageId)->latest()->first();
     }
 
     // GeneralSettingController
@@ -42,6 +59,7 @@ class BaseRepository implements BaseContract
         $this->model->create($data);
     }
 
+    // Module Service,
     public function update($id, array $data)
     {
         $this->getById($id)->update($data);
@@ -63,6 +81,12 @@ class BaseRepository implements BaseContract
     public function getOrderByPosition()
     {
         return $this->model->orderBy('position','ASC')->get();
+    }
+
+    // ModuleController
+    public function updateOrCreate($condition, $data) : void
+    {
+        $this->model->updateOrCreate($condition, $data);
     }
 
 

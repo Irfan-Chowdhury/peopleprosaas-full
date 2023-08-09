@@ -48,7 +48,6 @@ class UtilityService
 
         if ($imageFile) {
             $image = $imageFile;
-            // $imagesDirectory = public_path('landlord/images/hero/');
             $imagesDirectory = public_path($expectedDirectory);
 
             if ($isPrevImgFileDelete && File::isDirectory($imagesDirectory)) {

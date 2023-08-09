@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('heroes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('language_id')->nullable();
+            $table->foreignId('language_id')->nullable();
             $table->string('heading');
             $table->text('sub_heading');
             $table->string('image');
             $table->string('button_text')->default('Try for free');
             $table->timestamps();
 
-            $table->foreign('language_id', 'heroes_language_id_foreign')->references('id')->on('languages')->onDelete('set NULL');
+            $table->foreign('language_id', 'heroes_language_id_foreign')->references('id')->on('languages')->onDelete('cascade');
 
         });
     }

@@ -85,7 +85,7 @@ class FeatureService
         try {
             $this->featureContract->delete($id);
 
-            return Alert::successMessage('Data Saved Successfully');
+            return Alert::successMessage('Data Deleted Successfully');
 
         } catch (Exception $exception) {
             return Alert::errorMessage($exception->getMessage());

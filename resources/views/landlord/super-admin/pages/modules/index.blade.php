@@ -1,108 +1,58 @@
 @extends('landlord.super-admin.layouts.master')
 @section('landlord-content')
-    @push('css')
-        @include('landlord.super-admin.partials.icon-template-css')
-    @endpush
 
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <form method="POST" action="{{ route('social.store') }}" id="submitForm">
-                    @csrf
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center">
-                            <h4>{{ trans('file.Social Section') }}</h4>
-                        </div>
-                        <div class="card-body collapse show" id="gs_collapse">
-                            <p class="italic">
-                                <small>{{ trans('file.The field labels marked with * are required input fields') }}.</small>
-                            </p>
-                            <div id="custom-field">
+@push('css')
+    @include('landlord.super-admin.partials.icon-template-css')
+@endpush
 
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <label class="font-weight-bold">@lang('file.Icon') <span class="text-danger">*</span>
-                                        </label>
-                                        <input type="text" required name="icon" class="form-control icon"
-                                            data-toggle="collapse" href="#icon_collapse" aria-expanded="false"
-                                            aria-controls="icon_collapse"
-                                            placeholder="{{ trans('file.Click to choose icon') }}" />
-                                    </div>
-                                    <div class="collapse icon_collapse" id="icon_collapse">
-                                        <div class="card">
-                                            <div class="card-body">
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    @include('landlord.super-admin.partials.input-field', [
-                                        'colSize' => 3,
-                                        'labelName' => 'Name',
-                                        'fieldType' => 'text',
-                                        'nameData' => 'name',
-                                        'placeholderData' => 'Name',
-                                        'isRequired' => true,
-                                    ])
+@include('landlord.super-admin.pages.modules.create')
 
-                                    @include('landlord.super-admin.partials.input-field', [
-                                        'colSize' => 3,
-                                        'labelName' => 'Link',
-                                        'fieldType' => 'text',
-                                        'nameData' => 'link',
-                                        'placeholderData' => 'https://facebook.com/',
-                                        'isRequired' => true,
-                                    ])
-                                </div>
-                                <hr>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary mar-bot-30"
-                                        id="submitButton">{{ trans('file.Save') }}</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
+
+<div class="container">
+    <div class="table-responsive">
+        <table id="dataListTable" class="table">
+            <thead>
+                <tr>
+                    <th class="not-exported"></th>
+                    <th>{{ __('Icon') }}</th>
+                    <th>{{ __('Name') }}</th>
+                    <th class="not-exported">{{ __('Action') }}</th>
+                </tr>
+            </thead>
+            <tbody id="tablecontents"></tbody>
+        </table>
     </div>
+</div>
 
-    <div class="container">
-        <div class="table-responsive">
-            <table id="dataListTable" class="table">
-                <thead>
-                    <tr>
-                        <th class="not-exported"></th>
-                        <th>{{ __('Icon') }}</th>
-                        <th>{{ __('Name') }}</th>
-                        <th class="not-exported">{{ __('Action') }}</th>
-                    </tr>
-                </thead>
-                <tbody id="tablecontents"></tbody>
-            </table>
-        </div>
-    </div>
+@include('landlord.super-admin.partials.icon-template')
+@include('landlord.super-admin.pages.modules.edit-modal')
 
-    @include('landlord.super-admin.partials.icon-template')
-    @include('landlord.super-admin.pages.socials.edit-modal')
 @endsection
 
 
 @push('scripts')
     <script type="text/javascript">
-        let storeURL = "{{ route('social.store') }}";
-        let editURL = '/super-admin/socials/edit/';
-        let updateURL = '/super-admin/socials/update/';
-        let destroyURL = '/super-admin/socials/destroy/';
-        let sortURL = "{{ route('social.sort') }}";
-
+        let datatableURL = "{{ route('module.datatable') }}";
+        let storeURL = "{{ route('module.store') }}";
+        let editURL = '/super-admin/modules/edit/';
+        // let updateURL = '/super-admin/socials/update/';
+        let destroyURL = '/super-admin/modules/destroy/';
+        let sortURL = "{{ route('module.sort') }}";
 
 
         $(document).ready(function() {
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            $('#toggleCard').change(function() {
+                if (this.checked) {
+                    $('#cardContent').slideDown();
+                } else {
+                    $('#cardContent').slideUp();
                 }
             });
 
@@ -117,9 +67,7 @@
                                     $(this).val()
                                 );
 
-                                column
-                                    .search(val ? '^' + val + '$' : '', true, false)
-                                    .draw();
+                                column.search(val ? '^' + val + '$' : '', true, false).draw();
                             });
 
                         column.data().unique().sort().each(function(d, j) {
@@ -137,9 +85,10 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('social.index') }}",
+                    url: datatableURL,
                 },
-                columns: [{
+                columns: [
+                    {
                         data: 'id',
                         orderable: false,
                         searchable: false
@@ -158,7 +107,6 @@
                         orderable: false,
                     }
                 ],
-
                 "order": [],
                 'language': {
                     'lengthMenu': '_MENU_ {{ __('records per page') }}',
@@ -243,10 +191,10 @@
                 },
                 success: function(response) {
                     console.log(response);
-                    $("#editModal input[name='social_id']").val(response.id);
+                    $("#editModal input[name='module_detail_id']").val(response.id);
                     $("#editModal input[name='icon']").val(response.icon);
                     $("#editModal input[name='name']").val(response.name);
-                    $("#editModal input[name='link']").val(response.link);
+                    $("#editModal input[name='description']").val(response.description);
                     $('#editModal').modal('show');
                 }
             })
@@ -285,7 +233,7 @@
 
     <script type="text/javascript" src="{{ asset('js/landlord/common-js/iconTemplate.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/landlord/common-js/store.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/update.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('js/landlord/common-js/update.js') }}"></script> --}}
     <script type="text/javascript" src="{{ asset('js/landlord/common-js/delete.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script>
 @endpush

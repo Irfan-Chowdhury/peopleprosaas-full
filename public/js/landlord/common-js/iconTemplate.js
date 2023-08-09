@@ -16,5 +16,4 @@
         $(this).closest('.collapse').removeClass('show');
     });
 
-
 })(jQuery);

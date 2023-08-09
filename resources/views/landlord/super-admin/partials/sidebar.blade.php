@@ -24,7 +24,7 @@
         <li><a href="#cms" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-stack"></i><span>{{trans('file.CMS')}}</span><span></a>
             <ul id="cms" class="collapse list-unstyled ">
                 <li id="cms-hero-menu"><a href="{{ route('hero.index') }}">{{trans('file.Hero Section')}}</a></li>
-                <li id="cms-module-menu"><a href="">{{trans('file.Module Section')}}</a></li>
+                <li id="cms-module-menu"><a href="{{ route('module.index') }}">{{trans('file.Module Section')}}</a></li>
                 <li id="cms-feature-menu"><a href="{{ route('feature.index') }}">{{trans('file.Feature Section')}}</a></li>
                 <li id="cms-faq-menu"><a href="}">{{trans('file.FAQ Section')}}</a></li>
                 <li id="cms-testimonial-menu"><a href="">{{trans('file.Testimonial Section')}}</a></li>

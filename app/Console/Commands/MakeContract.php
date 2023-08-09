@@ -27,7 +27,7 @@ class MakeContract extends Command
     public function handle()
     {
         $name = $this->argument('name');
-        $contractContent = "<?php\n\nnamespace App\Contracts;\n\ninterface {$name} extends BaseContract\n{\n    // Add your service logic here\n}";
+        $contractContent = "<?php\n\nnamespace App\Contracts;\n\ninterface {$name} extends BaseContract\n{\n    // Add your signature here\n}";
 
         $filePath = app_path("Contracts/{$name}.php");
 

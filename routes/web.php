@@ -9,6 +9,7 @@ use App\Http\Controllers\Landlord\FeatureController;
 use App\Http\Controllers\Landlord\GeneralSettingController;
 use App\Http\Controllers\Landlord\HeroController;
 use App\Http\Controllers\Landlord\LanguageController;
+use App\Http\Controllers\Landlord\ModuleController;
 use App\Http\Controllers\Landlord\SocialController;
 use App\Http\Controllers\Landlord\TranslationController;
 use App\Http\Controllers\LanguageSettingController;
@@ -60,10 +61,7 @@ Route::middleware(['auth','setLocale'])->group(function () {
                 Route::get('/{language}/translations', 'index')->name('lang.translations.index');
                 Route::get('/{language}/translations/create', 'create')->name('lang.translations.create');
                 Route::post('/{language}/translations/store', 'store')->name('lang.translations.store');
-
                 Route::post('/update', 'update')->name('lang.translations.update');
-                // Route::get('/create', 'create')->name('languages.create');
-                // Route::post('/store', 'store')->name('languages.store');
                 Route::get('/switch/{lang}', 'languageSwitch')->name('lang.switch');
                 Route::get('/delete', 'languageDelete')->name('lang.delete');
             });
@@ -98,6 +96,18 @@ Route::middleware(['auth','setLocale'])->group(function () {
                 Route::post('/', 'updateOrCreate')->name('hero.updateOrCreate')->middleware('demoCheck');
             });
         });
+        Route::prefix('modules')->group(function () {
+            Route::controller(ModuleController::class)->group(function () {
+                Route::get('/', 'index')->name('module.index');
+                Route::get('/datatable', 'datatable')->name('module.datatable');
+                Route::post('/store', 'store')->name('module.store')->middleware('demoCheck');
+                Route::get('/edit/{moduleDetail}', 'edit')->name('module.edit');
+                Route::post('/update/{module}', 'update')->name('module.update')->middleware('demoCheck');
+                Route::get('/destroy/{module}', 'destroy')->name('module.destroy')->middleware('demoCheck');
+                Route::post('/sort', 'sort')->name('module.sort')->middleware('demoCheck');
+            });
+        });
+
 
         Route::prefix('settings')->group(function () {
             Route::controller(GeneralSettingController::class)->group(function () {
