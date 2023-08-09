@@ -310,29 +310,23 @@
 
 
 
-    {{-- @if(count($modules) > 0)
     <section id="features" class="">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3 text-center mb-5">
-                    @if($module_description)
-                        <h2 class="regular">{{$module_description->heading}}</h2>
-                        <p class="lead mb-5">{{$module_description->sub_heading}}</p>
-                    @else
-                        <h2 class="regular">One App, all the features</h2>
-                        <p class="lead mb-5">SalePro is packed with all the features you will need to seamlessly run your business</p>
-                    @endif
+                    <h2 class="regular">{{$module->heading}}</h2>
+                    <p class="lead mb-5">{{$module->sub_heading}}</p>
                 </div>
                 <div class="col-md-5">
-                    @if($module_description && $module_description->image)
-                        <img class="mb-5" src="{{url('/landlord/images')}}/{{$module_description->image}}" alt="Module image"/>
+                    @if(isset($module) && $module->image)
+                        <img class="mb-5" src="{{asset('landlord/images/module/'.$module->image)}}" alt="Module image"/>
                     @else
                         <img class="mb-5" src="landlord/images/preview.png" alt=""/>
                     @endif
                 </div>
                 <div class="col-md-6 offset-md-1">
                     <div class="row">
-                        @foreach($modules as $module)
+                        @foreach($module->moduleDetails as $module)
                         <div class="col-md-6 feature">
                             <div class="icon">
                                 <i class="{{$module->icon}}"></i>
@@ -346,7 +340,6 @@
             </div>
         </div>
     </section>
-    @endif --}}
 
     {{-- @if(count($features) > 0)
     <section class="grey-bg">

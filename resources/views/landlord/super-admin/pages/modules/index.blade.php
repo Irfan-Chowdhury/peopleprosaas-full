@@ -36,7 +36,7 @@
         let datatableURL = "{{ route('module.datatable') }}";
         let storeURL = "{{ route('module.store') }}";
         let editURL = '/super-admin/modules/edit/';
-        // let updateURL = '/super-admin/socials/update/';
+        let updateURL = '/super-admin/modules/update/';
         let destroyURL = '/super-admin/modules/destroy/';
         let sortURL = "{{ route('module.sort') }}";
 
@@ -233,7 +233,7 @@
 
     <script type="text/javascript" src="{{ asset('js/landlord/common-js/iconTemplate.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/landlord/common-js/store.js') }}"></script>
-    {{-- <script type="text/javascript" src="{{ asset('js/landlord/common-js/update.js') }}"></script> --}}
+    <script type="text/javascript" src="{{ asset('js/landlord/common-js/update.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/landlord/common-js/delete.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script>
 @endpush

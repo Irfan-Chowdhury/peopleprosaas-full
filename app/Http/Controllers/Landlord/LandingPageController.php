@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Landlord;
 
+use App\Contracts\ModuleContract;
 use App\Contracts\SocialContract;
 use App\Http\Controllers\Controller;
 use App\Models\Landlord\Hero;
@@ -25,11 +26,11 @@ class LandingPageController extends Controller
 
 
 
-    public function index(SocialService $socialService)
+    public function index(SocialService $socialService, ModuleContract $moduleContract)
     {
         $socials = $socialService->getAll();
         $hero = Hero::where('language_id',1)->latest()->first();
-
-        return view('landlord.public-section.landing_page.index',compact('socials','hero'));
+        $module  = $moduleContract->fetchLatestDataByLanguageIdWithRelation(['moduleDetails'], $this->languageId);
+        return view('landlord.public-section.landing_page.index',compact('socials','hero','module'));
     }
 }

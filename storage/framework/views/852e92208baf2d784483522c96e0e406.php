@@ -35,7 +35,7 @@
         let datatableURL = "<?php echo e(route('module.datatable')); ?>";
         let storeURL = "<?php echo e(route('module.store')); ?>";
         let editURL = '/super-admin/modules/edit/';
-        // let updateURL = '/super-admin/socials/update/';
+        let updateURL = '/super-admin/modules/update/';
         let destroyURL = '/super-admin/modules/destroy/';
         let sortURL = "<?php echo e(route('module.sort')); ?>";
 
@@ -232,7 +232,7 @@
 
     <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/iconTemplate.js')); ?>"></script>
     <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/store.js')); ?>"></script>
-    
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/update.js')); ?>"></script>
     <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/delete.js')); ?>"></script>
     <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/alertMessages.js')); ?>"></script>
 <?php $__env->stopPush(); ?>

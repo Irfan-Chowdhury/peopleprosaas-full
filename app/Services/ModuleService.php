@@ -80,6 +80,19 @@ class ModuleService
         return $result;
     }
 
+    public function updateInfo($request, $id)
+    {
+        try {
+            $data = $this->requestHandle($request);
+            $this->moduleDetailContract->update($id, $data);
+
+            return Alert::successMessage('Data Updated Successfully');
+
+        } catch (Exception $exception) {
+            return Alert::errorMessage($exception->getMessage());
+        }
+    }
+
     public function remove($id)
     {
         try {
@@ -121,7 +134,6 @@ class ModuleService
             'name' => $request->name,
             'description' => $request->description,
             'icon' => $request->icon,
-            'position' => $maxPosition,
         ];
 
         if ($maxPosition) {

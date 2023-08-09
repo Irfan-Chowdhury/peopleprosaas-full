@@ -2,7 +2,7 @@ let prepareMessage = response => {
     let htmlContent = '';
     if(response.responseJSON.errorMsg) {
         htmlContent += '<p class="text-danger">' + response.responseJSON.errorMsg + '</p>';
-    }else if (response.status===500){
+    }else if (isErrorCodes(response.status)){
         htmlContent += '<p class="text-danger">' + response.status + ' | ' + response.statusText + '</p>';
     }
     else {
@@ -41,3 +41,16 @@ let displaySuccessMessage = customMessage => {
         title: customMessage
     })
 }
+
+
+let isErrorCodes = errorCode => {
+    return laravelErrorCodes.some(error => error.code === errorCode);
+}
+
+const laravelErrorCodes = [
+    { code: 400, message: "Bad Request" },
+    { code: 401, message: "Unauthorized" },
+    { code: 403, message: "Forbidden" },
+    { code: 404, message: "Not Found" },
+    { code: 500, message: "Internal Server Error" },
+];

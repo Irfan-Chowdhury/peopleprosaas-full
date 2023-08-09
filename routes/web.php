@@ -102,7 +102,7 @@ Route::middleware(['auth','setLocale'])->group(function () {
                 Route::get('/datatable', 'datatable')->name('module.datatable');
                 Route::post('/store', 'store')->name('module.store')->middleware('demoCheck');
                 Route::get('/edit/{moduleDetail}', 'edit')->name('module.edit');
-                Route::post('/update/{module}', 'update')->name('module.update')->middleware('demoCheck');
+                Route::post('/update/{moduleDetail}', 'update')->name('module.update')->middleware('demoCheck');
                 Route::get('/destroy/{module}', 'destroy')->name('module.destroy')->middleware('demoCheck');
                 Route::post('/sort', 'sort')->name('module.sort')->middleware('demoCheck');
             });

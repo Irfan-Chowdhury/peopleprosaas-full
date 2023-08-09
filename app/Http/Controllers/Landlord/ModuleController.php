@@ -8,6 +8,7 @@ use App\Facades\Alert;
 use App\Facades\Utility;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Module\StoreModuleRequest;
+use App\Http\Requests\Module\UpdateModuleRequest;
 use App\Models\Landlord\Module;
 use App\Models\Landlord\ModuleDetail;
 use App\Services\ModuleService;
@@ -57,6 +58,13 @@ class ModuleController extends Controller
     public function edit(ModuleDetail $moduleDetail)
     {
         return response()->json($moduleDetail);
+    }
+
+    public function update(UpdateModuleRequest $request, $id)
+    {
+        $result = $this->moduleService->updateInfo($request, $id);
+
+        return response()->json($result['alertMsg'], $result['statusCode']);
     }
 
     public function destroy($id)
