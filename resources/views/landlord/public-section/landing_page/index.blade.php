@@ -341,7 +341,7 @@
         </div>
     </section>
 
-    {{-- @if(count($features) > 0)
+    @if(count($features) > 0)
     <section class="grey-bg">
         <div class="container">
             <div class="row">
@@ -356,41 +356,40 @@
             </div>
         </div>
     </section>
-    @endif --}}
+    @endif
 
-    {{-- @if(count($faqs) > 0)
-    <section id="faq" class="accordion pb-0" id="accordionExample">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 offset-md-3 text-center mb-5">
-                    @if($faq_description)
-                        <h2 class="regular">{{$faq_description->heading}}</h2>
-                        <p class="lead">{{$faq_description->sub_heading}}</p>
-                    @else
-                        <h2 class="regular">Frequently Asked Questions</h2>
-                        <p class="lead">Have questions? we have answered common ones below.</p>
-                    @endif
-                </div>
-                <div class="col-md-6 offset-md-3 mb-5">
-                    @foreach($faqs as $faq)
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="heading1">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1" aria-expanded="false" aria-controls="collapse1">
-                            {{$faq->question}}
-                        </button>
-                        </h2>
-                        <div id="collapse1" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                {!!$faq->answer!!}
-                            </div>
-                        </div>
+    @if(isset($faq))
+        <section id="faq" class="accordion pb-0" id="accordionExample">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3 text-center mb-5">
+                        <h2 class="regular">{{$faq->heading}}</h2>
+                        <p class="lead">{{$faq->sub_heading}}</p>
                     </div>
-                    @endforeach
+                    <div class="col-md-6 offset-md-3 mb-5">
+                        @foreach($faq->faqDetails as $key => $item)
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading1">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $key }}" aria-expanded="false" aria-controls="collapse1">
+                                    {{$item->question}}
+                                </button>
+                                </h2>
+                                <div id="collapse-{{ $key }}" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        {!!$item->answer!!}
+                                    </div>
+                                </div>
+                            </div>
+
+                        @endforeach
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    @endif --}}
+        </section>
+    @endif
+
+
+
 
     {{-- <section id="packages"class="grey-bg">
         <div class="container">

@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\Landlord\AdminController;
 use App\Http\Controllers\Landlord\LandingPageController;
 use App\Http\Controllers\Landlord\DashboardController;
+use App\Http\Controllers\Landlord\FaqController;
 use App\Http\Controllers\Landlord\FeatureController;
 use App\Http\Controllers\Landlord\GeneralSettingController;
 use App\Http\Controllers\Landlord\HeroController;
@@ -29,13 +30,11 @@ use Illuminate\Support\Facades\Session;
 */
 
 Route::get('/lang', function () {
-    // return Session::has('SuperAdminLocale') ?? 'en';
+    // return Session::has('DefaultSuperAdminLocale') ?? 'en';
 });
 
-// Route::get('/', 'LandingPageController@index');
 
-
-Route::get('/', [LandingPageController::class, 'index']);
+Route::get('/', [LandingPageController::class, 'index'])->name('landingPage.index');
 Route::get('/super-admin', [AdminController::class, 'showLoginForm'])->name('landlord.login')->middleware('guest');
 Route::post('/super-admin', [AdminController::class, 'login'])->name('landlord.login.proccess');
 Route::post('/super-admin/logout', [AdminController::class, 'logout'])->name('landlord.logout');
@@ -96,6 +95,7 @@ Route::middleware(['auth','setLocale'])->group(function () {
                 Route::post('/', 'updateOrCreate')->name('hero.updateOrCreate')->middleware('demoCheck');
             });
         });
+
         Route::prefix('modules')->group(function () {
             Route::controller(ModuleController::class)->group(function () {
                 Route::get('/', 'index')->name('module.index');
@@ -103,8 +103,20 @@ Route::middleware(['auth','setLocale'])->group(function () {
                 Route::post('/store', 'store')->name('module.store')->middleware('demoCheck');
                 Route::get('/edit/{moduleDetail}', 'edit')->name('module.edit');
                 Route::post('/update/{moduleDetail}', 'update')->name('module.update')->middleware('demoCheck');
-                Route::get('/destroy/{module}', 'destroy')->name('module.destroy')->middleware('demoCheck');
+                Route::get('/destroy/{moduleDetail}', 'destroy')->name('module.destroy')->middleware('demoCheck');
                 Route::post('/sort', 'sort')->name('module.sort')->middleware('demoCheck');
+            });
+        });
+
+        Route::prefix('faqs')->group(function () {
+            Route::controller(FaqController::class)->group(function () {
+                Route::get('/', 'index')->name('faq.index');
+                Route::get('/datatable', 'datatable')->name('faq.datatable');
+                Route::post('/store', 'store')->name('faq.store')->middleware('demoCheck');
+                Route::get('/edit/{faqDetail}', 'edit')->name('faq.edit');
+                Route::post('/update/{faqDetail}', 'update')->name('faq.update')->middleware('demoCheck');
+                Route::get('/destroy/{faqDetail}', 'destroy')->name('faq.destroy')->middleware('demoCheck');
+                Route::post('/sort', 'sort')->name('faq.sort')->middleware('demoCheck');
             });
         });
 

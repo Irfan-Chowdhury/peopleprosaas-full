@@ -1,11 +1,8 @@
-<?php $__env->startSection('landlord-content'); ?>
-
-<?php $__env->startPush('css'); ?>
-    <?php echo $__env->make('landlord.super-admin.partials.icon-template-css', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php $__env->stopPush(); ?>
+@extends('landlord.super-admin.layouts.master')
+@section('landlord-content')
 
 
-<?php echo $__env->make('landlord.super-admin.pages.modules.create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+@include('landlord.super-admin.pages.faqs.create')
 
 
 <div class="container">
@@ -14,9 +11,8 @@
             <thead>
                 <tr>
                     <th class="not-exported"></th>
-                    <th><?php echo e(__('Icon')); ?></th>
-                    <th><?php echo e(__('Name')); ?></th>
-                    <th class="not-exported"><?php echo e(__('Action')); ?></th>
+                    <th>{{ __('file.Question') }}</th>
+                    <th class="not-exported">{{ __('file.Action') }}</th>
                 </tr>
             </thead>
             <tbody id="tablecontents"></tbody>
@@ -24,20 +20,19 @@
     </div>
 </div>
 
-<?php echo $__env->make('landlord.super-admin.partials.icon-template', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php echo $__env->make('landlord.super-admin.pages.modules.edit-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+@include('landlord.super-admin.pages.modules.edit-modal')
 
-<?php $__env->stopSection(); ?>
+@endsection
 
 
-<?php $__env->startPush('scripts'); ?>
+@push('scripts')
     <script type="text/javascript">
-        let datatableURL = "<?php echo e(route('module.datatable')); ?>";
-        let storeURL = "<?php echo e(route('module.store')); ?>";
-        let editURL = '/super-admin/modules/edit/';
-        let updateURL = '/super-admin/modules/update/';
-        let destroyURL = '/super-admin/modules/destroy/';
-        let sortURL = "<?php echo e(route('module.sort')); ?>";
+        let datatableURL = "{{ route('faq.datatable') }}";
+        let storeURL = "{{ route('faq.store') }}";
+        let editURL = '/super-admin/faqs/edit/';
+        let updateURL = '/super-admin/faqs/update/';
+        let destroyURL = '/super-admin/faqs/destroy/';
+        let sortURL = "{{ route('faq.sort') }}";
 
 
         $(document).ready(function() {
@@ -93,12 +88,8 @@
                         searchable: false
                     },
                     {
-                        data: 'icon',
-                        name: 'icon',
-                    },
-                    {
-                        data: 'name',
-                        name: 'name',
+                        data: 'question',
+                        name: 'question',
                     },
                     {
                         data: 'action',
@@ -108,17 +99,17 @@
                 ],
                 "order": [],
                 'language': {
-                    'lengthMenu': '_MENU_ <?php echo e(__('records per page')); ?>',
-                    "info": '<?php echo e(trans('file.Showing')); ?> _START_ - _END_ (_TOTAL_)',
-                    "search": '<?php echo e(trans('file.Search')); ?>',
+                    'lengthMenu': '_MENU_ {{ __('records per page') }}',
+                    "info": '{{ trans('file.Showing') }} _START_ - _END_ (_TOTAL_)',
+                    "search": '{{ trans('file.Search') }}',
                     'paginate': {
-                        'previous': '<?php echo e(trans('file.Previous')); ?>',
-                        'next': '<?php echo e(trans('file.Next')); ?>'
+                        'previous': '{{ trans('file.Previous') }}',
+                        'next': '{{ trans('file.Next') }}'
                     }
                 },
                 'columnDefs': [{
                         "orderable": false,
-                        'targets': [0, 3],
+                        'targets': [0, 2],
                     },
                     {
                         'render': function(data, type, row, meta) {
@@ -190,10 +181,9 @@
                 },
                 success: function(response) {
                     console.log(response);
-                    $("#editModal input[name='module_detail_id']").val(response.id);
-                    $("#editModal input[name='icon']").val(response.icon);
-                    $("#editModal input[name='name']").val(response.name);
-                    $("#editModal input[name='description']").val(response.description);
+                    $("#editModal input[name='faq_detail_id']").val(response.id);
+                    $("#editModal input[name='question']").val(response.question);
+                    $("#editModal input[name='answer']").val(response.answer);
                     $('#editModal').modal('show');
                 }
             })
@@ -230,11 +220,9 @@
         }
     </script>
 
-    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/iconTemplate.js')); ?>"></script>
-    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/store.js')); ?>"></script>
-    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/update.js')); ?>"></script>
-    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/delete.js')); ?>"></script>
-    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/alertMessages.js')); ?>"></script>
-<?php $__env->stopPush(); ?>
-
-<?php echo $__env->make('landlord.super-admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/pages/modules/index.blade.php ENDPATH**/ ?>
+    <script type="text/javascript" src="{{ asset('js/landlord/common-js/iconTemplate.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/landlord/common-js/store.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/landlord/common-js/update.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/landlord/common-js/delete.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script>
+@endpush

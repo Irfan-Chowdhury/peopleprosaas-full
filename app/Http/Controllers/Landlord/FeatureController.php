@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Landlord;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Feature\StoreRequest;
 use App\Http\Requests\Feature\UpdateRequest;
+use App\Models\Landlord\Module;
 use App\Services\FeatureService;
 use Illuminate\Http\Request;
 

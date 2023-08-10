@@ -104,7 +104,8 @@ class TranslationController extends Controller
 
         $language = Language::where('locale', $locale)->first();
         Session::put('TempSuperAdminLangId', $language->id);
-        Session::put('SuperAdminLocale', $language->locale);
+        Session::put('DefaultSuperAdminLocale', $language->locale);
+        Session::put('TempSuperAdminLocale', $language->locale);
 
         return back();
     }

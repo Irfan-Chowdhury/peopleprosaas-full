@@ -108,8 +108,8 @@ class ModuleService
     public function sortingDataTable($request)
     {
         try {
-            $modules = $this->moduleDetailContract->all();
-            foreach ($modules as $item) {
+            $allPositionData = $this->moduleDetailContract->all();
+            foreach ($allPositionData as $item) {
                 $item->timestamps = false; // To disable update_at field updation
                 foreach ($request->order as $order) {
                     if ($order['id'] == $item->id) {

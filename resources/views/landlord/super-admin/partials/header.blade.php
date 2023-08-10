@@ -19,6 +19,9 @@
                     <li class="nav-item">
                         <a class="dropdown-header-name" style="padding-right: 10px" href="" data-toggle="tooltip" title="Clear all cache with refresh"><i class="fa fa-refresh"></i></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="dropdown-header-name" style="padding-right: 10px" href="{{ route('landingPage.index') }}" target="_blank" title="View Website"><i class="dripicons-preview"></i></a>
+                    </li>
                     <li class="nav-item"><a id="btnFullscreen" data-toggle="tooltip"
                                             title="{{__('Full Screen')}}"><i class="dripicons-expand"></i></a></li>
                     <li class="nav-item">
@@ -48,13 +51,17 @@
                     <li class="nav-item">
                         <a rel="nofollow" href="#" class="nav-link dropdown-item" data-toggle="tooltip"
                            title="{{__('Language')}}">
-                            <i class="dripicons-web"></i>
+                            <i class="dripicons-web">
+                                {{-- {{ __(strtoupper('en')) }} --}}
+                                {{ Session::has('TempSuperAdminLocale') ? strtoupper(Session::get('TempSuperAdminLocale')) : strtoupper(Session::has('DefaultSuperAdminLocale')) }}
+
+                            </i>
                         </a>
                         <ul class="right-sidebar">
                             @if(config('database.connections.peopleprosaas_landlord'))
                                 @foreach($languages as $lang)
                                     <li>
-                                        <a href="{{route('lang.switch',$lang->locale)}}">{{$lang->name}}</a>
+                                        <a href="{{route('lang.switch',$lang->locale)}}">{{$lang->name.' ('.$lang->locale.')'}}</a>
                                     </li>
                                 @endforeach
                             @else

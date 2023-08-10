@@ -10,8 +10,14 @@ class Faq extends Model
     use HasFactory;
 
     protected $fillable = [
-        'question',
-        'answer',
-        'order'
+        'language_id',
+        'heading',
+        'sub_heading'
     ];
+
+    public function faqDetails()
+    {
+        return $this->hasMany(FaqDetail::class,'faq_id')
+                ->orderBy('position','ASC');
+    }
 }

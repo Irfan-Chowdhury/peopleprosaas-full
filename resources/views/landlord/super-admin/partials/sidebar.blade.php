@@ -26,7 +26,7 @@
                 <li id="cms-hero-menu"><a href="{{ route('hero.index') }}">{{trans('file.Hero Section')}}</a></li>
                 <li id="cms-module-menu"><a href="{{ route('module.index') }}">{{trans('file.Module Section')}}</a></li>
                 <li id="cms-feature-menu"><a href="{{ route('feature.index') }}">{{trans('file.Feature Section')}}</a></li>
-                <li id="cms-faq-menu"><a href="}">{{trans('file.FAQ Section')}}</a></li>
+                <li id="cms-faq-menu"><a href="{{ route('faq.index') }}">{{trans('file.FAQ Section')}}</a></li>
                 <li id="cms-testimonial-menu"><a href="">{{trans('file.Testimonial Section')}}</a></li>
                 <li id="cms-tenant-signup-menu"><a href="">{{trans('file.Tenant Signup Description')}}</a></li>
                 <li id="cms-blog-menu"><a href="">{{trans('file.Blog Section')}}</a></li>

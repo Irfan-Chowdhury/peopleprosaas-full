@@ -93,3 +93,27 @@ function HeroData()
         'image' => 'logo.png',
     ];
 }
+function FaqData()
+{
+    return [
+        'language_id'=> 1,
+        'heading'=> 'Frequently Asked Questions',
+        'sub_heading'=> 'Have questions? we have answered common ones below.',
+        'is_allow' => true,
+        'question' => 'What is PeoplePro SAAS?',
+        'answer' => 'SalePro SAAS is a PHP Laravel Script',
+        'position' => 1
+    ];
+}
+function FaqData_2()
+{
+    return [
+        'language_id'=> 1,
+        'heading'=> 'Test Frequently Asked Questions',
+        'sub_heading'=> 'Test Have questions? we have answered common ones below.',
+        'is_allow' => true,
+        'question' => 'Test What is PeoplePro SAAS?',
+        'answer' => 'Test SalePro SAAS is a PHP Laravel Script',
+        'position' => 2
+    ];
+}

@@ -10,35 +10,25 @@
 
             <div class="modal-body">
                 <form method="POST" id="updateForm">
-                    <input type="hidden" name="module_detail_id" id="modelId">
+                    <input type="hidden" name="faq_detail_id" id="modelId">
 
                     <div class="row">
-                        <div class="col-sm-12">
-                            <label class="font-weight-bold">@lang('file.Icon') <span class="text-danger">*</span> </label>
-                            <input type="text" required name="icon" class="form-control icon" data-toggle="collapse" href="#icon_collapse_edit" aria-expanded="false" aria-controls="icon_collapse_edit" placeholder="{{trans('file.Click to choose icon')}}"/>
-                        </div>
-                        <div class="collapse icon_collapse" id="icon_collapse_edit">
-                            <div class="card">
-                                <div class="card-body">
-                                </div>
-                            </div>
-                        </div>
 
                         @include('landlord.super-admin.partials.input-field',[
                             'colSize' => 12,
-                            'labelName' => 'Name',
+                            'labelName' => 'Question',
                             'fieldType' => 'text',
-                            'nameData' => 'name',
-                            'placeholderData' => 'Name',
+                            'nameData' => 'question',
+                            'placeholderData' => 'What is FAQ ?',
                             'isRequired' => true,
                         ])
 
                         @include('landlord.super-admin.partials.input-field',[
                             'colSize' => 12,
-                            'labelName' => 'Description',
+                            'labelName' => 'Answer',
                             'fieldType' => 'text',
-                            'nameData' => 'description',
-                            'placeholderData' => 'https://facebook.com/',
+                            'nameData' => 'answer',
+                            'placeholderData' => 'e.g: Frequently Ask Question.',
                             'isRequired' => true,
                         ])
                     </div>

@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
                 LanguageSeeder::class,
                 HeroSeeder::class,
                 SocialSeeder::class,
+                ModuleSeeder::class,
+                FaqSeeder::class,
             ]);
         }
         else {

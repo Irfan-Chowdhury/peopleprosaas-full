@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Contracts\BaseContract;
+use App\Contracts\FaqContract;
+use App\Contracts\FaqDetailContract;
 use App\Contracts\FeatureContract;
 use App\Contracts\GeneralSettingContract;
 use App\Contracts\LanguageContract;
@@ -10,6 +12,8 @@ use App\Contracts\ModuleContract;
 use App\Contracts\ModuleDetailContract;
 use App\Contracts\SocialContract;
 use App\Repositories\BaseRepository;
+use App\Repositories\FaqDetailRepository;
+use App\Repositories\FaqRepository;
 use App\Repositories\FeatureRepository;
 use App\Repositories\GeneralSettingRepository;
 use App\Repositories\LanguageRepository;
@@ -20,9 +24,6 @@ use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     */
     public function register(): void
     {
         $this->app->bind(BaseContract::class, BaseRepository::class);
@@ -32,11 +33,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(GeneralSettingContract::class, GeneralSettingRepository::class);
         $this->app->bind(ModuleContract::class, ModuleRepository::class);
         $this->app->bind(ModuleDetailContract::class, ModuleDetailRepository::class);
+        $this->app->bind(FaqContract::class, FaqRepository::class);
+        $this->app->bind(FaqDetailContract::class, FaqDetailRepository::class);
     }
 
-    /**
-     * Bootstrap services.
-     */
+    
     public function boot(): void
     {
 

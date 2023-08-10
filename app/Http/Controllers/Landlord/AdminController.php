@@ -23,7 +23,7 @@ class AdminController extends Controller
         if ($user->is_super_admin) {
             $language = Language::where('is_default',1)->first();
             Session::put('DefaultSuperAdminLangId', $language->id);
-            Session::put('SuperAdminLocale', $language->locale);
+            Session::put('DefaultSuperAdminLocale', $language->locale);
             return redirect('/super-admin/dashboard');
         }
     }

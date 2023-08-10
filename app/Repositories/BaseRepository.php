@@ -30,13 +30,13 @@ class BaseRepository implements BaseContract
         return $this->model->latest()->first();
     }
 
-    // ModuleController
+    // ModuleController, FaqController
     public function fetchLatestDataByLanguageId($languageId)
     {
         return $this->model->where('language_id',$languageId)->latest()->first();
     }
 
-    // ModuleController
+    // ModuleController, FaqController
     public function fetchLatestDataByLanguageIdWithRelation($relation, $languageId)
     {
         return $this->model->with($relation)->where('language_id',$languageId)->latest()->first();

@@ -8,7 +8,7 @@
                 </div>
                 <hr>
                 <div class="card-body">
-                    <form id="submitForm" action="{{ route('hero.updateOrCreate') }}" method="POST" enctype="multipart/form-data">
+                    <form id="submitForm" action="{{ route('module.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="row">
