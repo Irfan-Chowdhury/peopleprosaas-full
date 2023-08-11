@@ -12,6 +12,7 @@ use App\Http\Controllers\Landlord\HeroController;
 use App\Http\Controllers\Landlord\LanguageController;
 use App\Http\Controllers\Landlord\ModuleController;
 use App\Http\Controllers\Landlord\SocialController;
+use App\Http\Controllers\Landlord\TestimonialController;
 use App\Http\Controllers\Landlord\TranslationController;
 use App\Http\Controllers\LanguageSettingController;
 use Illuminate\Support\Facades\Route;
@@ -117,6 +118,18 @@ Route::middleware(['auth','setLocale'])->group(function () {
                 Route::post('/update/{faqDetail}', 'update')->name('faq.update')->middleware('demoCheck');
                 Route::get('/destroy/{faqDetail}', 'destroy')->name('faq.destroy')->middleware('demoCheck');
                 Route::post('/sort', 'sort')->name('faq.sort')->middleware('demoCheck');
+            });
+        });
+
+        Route::prefix('testimonials')->group(function () {
+            Route::controller(TestimonialController::class)->group(function () {
+                Route::get('/', 'index')->name('testimonial.index');
+                Route::get('/datatable', 'datatable')->name('testimonial.datatable');
+                Route::post('/store', 'store')->name('testimonial.store')->middleware('demoCheck');
+                Route::get('/edit/{testimonial}', 'edit')->name('testimonial.edit');
+                Route::post('/update/{testimonial}', 'update')->name('testimonial.update')->middleware('demoCheck');
+                Route::get('/destroy/{testimonial}', 'destroy')->name('testimonial.destroy')->middleware('demoCheck');
+                Route::post('/sort', 'sort')->name('testimonial.sort')->middleware('demoCheck');
             });
         });
 

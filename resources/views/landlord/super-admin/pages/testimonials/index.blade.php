@@ -1,9 +1,6 @@
 @extends('landlord.super-admin.layouts.master')
 @section('landlord-content')
-
-
-@include('landlord.super-admin.pages.faqs.create')
-
+@include('landlord.super-admin.pages.testimonials.create')
 
 <div class="container">
     <div class="table-responsive">
@@ -11,8 +8,9 @@
             <thead>
                 <tr>
                     <th class="not-exported"></th>
-                    <th>{{ __('file.Question') }}</th>
-                    <th class="not-exported">{{ __('file.Action') }}</th>
+                    <th>{{ __('file.Image') }}</th>
+                    <th>{{ __('file.Name') }}</th>
+                    <th class="not-exported">{{ __('Action') }}</th>
                 </tr>
             </thead>
             <tbody id="tablecontents"></tbody>
@@ -20,20 +18,19 @@
     </div>
 </div>
 
-@include('landlord.super-admin.pages.faqs.edit-modal')
+@include('landlord.super-admin.pages.testimonials.edit-modal')
 
 @endsection
 
 
 @push('scripts')
     <script type="text/javascript">
-        let datatableURL = "{{ route('faq.datatable') }}";
-        let storeURL = "{{ route('faq.store') }}";
-        let editURL = '/super-admin/faqs/edit/';
-        let updateURL = '/super-admin/faqs/update/';
-        let destroyURL = '/super-admin/faqs/destroy/';
-        let sortURL = "{{ route('faq.sort') }}";
-
+        let dataTableURL = "{{ route('testimonial.datatable') }}";
+        let storeURL = "{{ route('testimonial.store') }}";
+        let editURL = "/super-admin/testimonials/edit/";
+        let updateURL = '/super-admin/testimonials/update/';
+        let destroyURL = '/super-admin/testimonials/destroy/';
+        let sortURL = "{{ route('testimonial.sort') }}";
 
         $(document).ready(function() {
             $.ajaxSetup({
@@ -41,15 +38,6 @@
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
-
-            $('#toggleCard').change(function() {
-                if (this.checked) {
-                    $('#cardContent').slideDown();
-                } else {
-                    $('#cardContent').slideUp();
-                }
-            });
-
             let table = $('#dataListTable').DataTable({
                 initComplete: function() {
                     this.api().columns([1]).every(function() {
@@ -61,7 +49,9 @@
                                     $(this).val()
                                 );
 
-                                column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
                             });
 
                         column.data().unique().sort().each(function(d, j) {
@@ -79,17 +69,20 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: datatableURL,
+                    url: dataTableURL,
                 },
-                columns: [
-                    {
+                columns: [{
                         data: 'id',
                         orderable: false,
                         searchable: false
                     },
                     {
-                        data: 'question',
-                        name: 'question',
+                        data: 'image',
+                        name: 'image',
+                    },
+                    {
+                        data: 'name',
+                        name: 'name',
                     },
                     {
                         data: 'action',
@@ -97,6 +90,7 @@
                         orderable: false,
                     }
                 ],
+
                 "order": [],
                 'language': {
                     'lengthMenu': '_MENU_ {{ __('records per page') }}',
@@ -109,7 +103,7 @@
                 },
                 'columnDefs': [{
                         "orderable": false,
-                        'targets': [0, 2],
+                        'targets': [0, 3],
                     },
                     {
                         'render': function(data, type, row, meta) {
@@ -173,17 +167,14 @@
         //--------- Edit -------
         $(document).on('click', '.edit', function() {
             let id = $(this).data("id");
-            $.ajax({
+            $.get({
                 url: editURL + id,
-                method: "GET",
-                data: {
-                    id: id
-                },
                 success: function(response) {
                     console.log(response);
-                    $("#editModal input[name='faq_detail_id']").val(response.id);
-                    $("#editModal input[name='question']").val(response.question);
-                    $("#editModal input[name='answer']").val(response.answer);
+                    $("#editModal input[name='testimonial_id']").val(response.id);
+                    $("#editModal input[name='name']").val(response.name);
+                    $("#editModal input[name='business_name']").val(response.business_name);
+                    $("#editModal input[name='description']").val(response.description);
                     $('#editModal').modal('show');
                 }
             })

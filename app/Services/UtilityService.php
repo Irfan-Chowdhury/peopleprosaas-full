@@ -62,4 +62,19 @@ class UtilityService
         }
         return $imageName;
     }
+
+    public function fileDelete($filePath, $fileName)
+    {
+        if ($fileName && !config('database.connections.peopleprosaas_landlord') && File::exists(public_path().$filePath.$fileName))
+           File::delete(public_path().$filePath.$fileName);
+        else if($fileName && File::exists($filePath.$fileName))
+           File::delete($filePath.$fileName);
+
+
+        // if($fileName && !config('database.connections.peopleprosaas_landlord') && file_exists('public/'.$filePath.$fileName))
+        //     unlink('public/'.$filePath.$fileName);
+        // elseif($fileName && file_exists($filePath.$fileName))
+        //     unlink($filePath.$fileName);
+
+    }
 }

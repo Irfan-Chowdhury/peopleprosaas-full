@@ -77,7 +77,7 @@ class BaseRepository implements BaseContract
     }
 
 
-    // Feature, LandlordController
+    // Feature, LandlordController, TestimonialController, LandingPageController
     public function getOrderByPosition()
     {
         return $this->model->orderBy('position','ASC')->get();

@@ -711,7 +711,7 @@
         </div>
     </section> --}}
 
-    {{-- <section class="grey-bg">
+    <section class="grey-bg">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3 text-center mb-5">
@@ -720,23 +720,24 @@
             </div>
             <div class="swiper mySwiper swiper-container-horizontal swiper-container-autoheight">
                 <div class="swiper-wrapper" style="height: 348px;">
-                @foreach($testimonials as $testimonial)
+                @forelse($testimonials as $testimonial)
                     <div class="swiper-slide swiper-slide-active" style="width: 563px; margin-right: 50px;">
                         <div class="review">
                             <div class="review-text">
-                                {!!$testimonial->text!!}
+                                {!!$testimonial->description!!}
                             </div>
-                            <div class="reviewer"><img src="{{asset('/public/landlord/images/testimonial')}}/{{$testimonial->image}}" alt="{{$testimonial->name}}" /> {{$testimonial->name}}@if($testimonial->business_name), {{$testimonial->business_name}}@endif</div>
+                            <div class="reviewer"><img src="{{asset('landlord/images/testimonial')}}/{{$testimonial->image}}" alt="{{$testimonial->name}}" /> {{$testimonial->name}}@if($testimonial->business_name), {{$testimonial->business_name}}@endif</div>
                         </div>
                     </div>
-                @endforeach
+                @empty
+                @endforelse
                 </div>
                 <div class="swiper-nav-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"><i class="ti-arrow-right"></i></div>
                 <div class="swiper-nav-prev swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"><i class="ti-arrow-left"></i></div>
                 <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active" tabindex="0" role="button" aria-label="Go to slide 1"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 2"></span><span class="swiper-pagination-bullet" tabindex="0" role="button" aria-label="Go to slide 3"></span></div>
             <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
         </div>
-    </section> --}}
+    </section>
 
     {{-- <section id="customer-signup">
         <div class="container">

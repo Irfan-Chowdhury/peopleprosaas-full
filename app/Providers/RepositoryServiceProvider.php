@@ -11,6 +11,7 @@ use App\Contracts\LanguageContract;
 use App\Contracts\ModuleContract;
 use App\Contracts\ModuleDetailContract;
 use App\Contracts\SocialContract;
+use App\Contracts\TestimonialContract;
 use App\Repositories\BaseRepository;
 use App\Repositories\FaqDetailRepository;
 use App\Repositories\FaqRepository;
@@ -20,6 +21,7 @@ use App\Repositories\LanguageRepository;
 use App\Repositories\ModuleDetailRepository;
 use App\Repositories\ModuleRepository;
 use App\Repositories\SocialRepository;
+use App\Repositories\TestimonialRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -35,9 +37,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ModuleDetailContract::class, ModuleDetailRepository::class);
         $this->app->bind(FaqContract::class, FaqRepository::class);
         $this->app->bind(FaqDetailContract::class, FaqDetailRepository::class);
+        $this->app->bind(TestimonialContract::class, TestimonialRepository::class);
     }
 
-    
+
     public function boot(): void
     {
 

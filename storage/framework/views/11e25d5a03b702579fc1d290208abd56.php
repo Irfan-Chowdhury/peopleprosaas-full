@@ -1,8 +1,7 @@
-@extends('landlord.super-admin.layouts.master')
-@section('landlord-content')
+<?php $__env->startSection('landlord-content'); ?>
 
 
-@include('landlord.super-admin.pages.faqs.create')
+<?php echo $__env->make('landlord.super-admin.pages.faqs.create', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 
 <div class="container">
@@ -11,8 +10,8 @@
             <thead>
                 <tr>
                     <th class="not-exported"></th>
-                    <th>{{ __('file.Question') }}</th>
-                    <th class="not-exported">{{ __('file.Action') }}</th>
+                    <th><?php echo e(__('file.Question')); ?></th>
+                    <th class="not-exported"><?php echo e(__('file.Action')); ?></th>
                 </tr>
             </thead>
             <tbody id="tablecontents"></tbody>
@@ -20,19 +19,19 @@
     </div>
 </div>
 
-@include('landlord.super-admin.pages.faqs.edit-modal')
+<?php echo $__env->make('landlord.super-admin.pages.faqs.edit-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script type="text/javascript">
-        let datatableURL = "{{ route('faq.datatable') }}";
-        let storeURL = "{{ route('faq.store') }}";
+        let datatableURL = "<?php echo e(route('faq.datatable')); ?>";
+        let storeURL = "<?php echo e(route('faq.store')); ?>";
         let editURL = '/super-admin/faqs/edit/';
         let updateURL = '/super-admin/faqs/update/';
         let destroyURL = '/super-admin/faqs/destroy/';
-        let sortURL = "{{ route('faq.sort') }}";
+        let sortURL = "<?php echo e(route('faq.sort')); ?>";
 
 
         $(document).ready(function() {
@@ -99,12 +98,12 @@
                 ],
                 "order": [],
                 'language': {
-                    'lengthMenu': '_MENU_ {{ __('records per page') }}',
-                    "info": '{{ trans('file.Showing') }} _START_ - _END_ (_TOTAL_)',
-                    "search": '{{ trans('file.Search') }}',
+                    'lengthMenu': '_MENU_ <?php echo e(__('records per page')); ?>',
+                    "info": '<?php echo e(trans('file.Showing')); ?> _START_ - _END_ (_TOTAL_)',
+                    "search": '<?php echo e(trans('file.Search')); ?>',
                     'paginate': {
-                        'previous': '{{ trans('file.Previous') }}',
-                        'next': '{{ trans('file.Next') }}'
+                        'previous': '<?php echo e(trans('file.Previous')); ?>',
+                        'next': '<?php echo e(trans('file.Next')); ?>'
                     }
                 },
                 'columnDefs': [{
@@ -220,9 +219,11 @@
         }
     </script>
 
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/iconTemplate.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/store.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/update.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/delete.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script>
-@endpush
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/iconTemplate.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/store.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/update.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/delete.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/alertMessages.js')); ?>"></script>
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('landlord.super-admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/pages/faqs/index.blade.php ENDPATH**/ ?>

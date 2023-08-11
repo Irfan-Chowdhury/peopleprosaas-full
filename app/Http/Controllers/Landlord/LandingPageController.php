@@ -6,6 +6,7 @@ use App\Contracts\FaqContract;
 use App\Contracts\FeatureContract;
 use App\Contracts\ModuleContract;
 use App\Contracts\SocialContract;
+use App\Contracts\TestimonialContract;
 use App\Http\Controllers\Controller;
 use App\Models\Landlord\Hero;
 use App\Models\Landlord\Social;
@@ -27,14 +28,20 @@ class LandingPageController extends Controller
     }
 
 
-
-    public function index(SocialService $socialService, ModuleContract $moduleContract, FeatureContract $featureContract, FaqContract $faqContract)
+    public function index(
+        SocialService $socialService,
+        ModuleContract $moduleContract,
+        FeatureContract $featureContract,
+        FaqContract $faqContract,
+        TestimonialContract $testimonialContract
+    )
     {
         $socials = $socialService->getAll();
         $hero = Hero::where('language_id',1)->latest()->first();
         $module  = $moduleContract->fetchLatestDataByLanguageIdWithRelation(['moduleDetails'], $this->languageId);
         $faq  = $faqContract->fetchLatestDataByLanguageIdWithRelation(['faqDetails'], $this->languageId);
         $features = $featureContract->all();
-        return view('landlord.public-section.landing_page.index',compact('socials','hero','module','features','faq'));
+        $testimonials = $testimonialContract->getOrderByPosition();
+        return view('landlord.public-section.landing_page.index',compact(['socials','hero','module','features','faq','testimonials']));
     }
 }

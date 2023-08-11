@@ -10,34 +10,42 @@
 
             <div class="modal-body">
                 <form method="POST" id="updateForm">
-                    <input type="hidden" name="module_detail_id" id="modelId">
+                    <input type="hidden" name="testimonial_id" id="modelId">
 
                     <div class="row">
 
                         @include('landlord.super-admin.partials.input-field',[
-                            'colSize' => 12,
-                            'labelName' => 'Icon',
-                            'fieldType' => 'text',
-                            'nameData' => 'icon',
-                            'placeholderData' => 'e.g fa fa-book',
-                            'isRequired' => true,
-                        ])
-
-                        @include('landlord.super-admin.partials.input-field',[
-                            'colSize' => 12,
+                            'colSize' => 4,
                             'labelName' => 'Name',
                             'fieldType' => 'text',
                             'nameData' => 'name',
-                            'placeholderData' => 'e.g: Purchase',
-                            'isRequired' => true,
+                            'placeholderData' => 'e.g: Irfan Chowdhury',
+                            'isRequired' => false,
+                        ])
+
+                        @include('landlord.super-admin.partials.input-field',[
+                            'colSize' => 4,
+                            'labelName' => 'Business Name',
+                            'fieldType' => 'text',
+                            'nameData' => 'business_name',
+                            'placeholderData' => 'e.g: LionCoders',
+                            'isRequired' => false,
+                        ])
+                        @include('landlord.super-admin.partials.input-field',[
+                            'colSize' => 4,
+                            'labelName' => 'Image',
+                            'fieldType' => 'file',
+                            'nameData' => 'image',
+                            'placeholderData' => null,
+                            'isRequired' => false,
                         ])
                         @include('landlord.super-admin.partials.input-field',[
                             'colSize' => 12,
                             'labelName' => 'Description',
                             'fieldType' => 'text',
                             'nameData' => 'description',
-                            'placeholderData' => 'e.g: Create purchase order and automatically update your daily stocks.',
-                            'isRequired' => true,
+                            'placeholderData' => 'e.g: Good Support Team.',
+                            'isRequired' => false,
                         ])
                     </div>
 
