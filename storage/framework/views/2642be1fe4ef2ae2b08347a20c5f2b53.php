@@ -394,7 +394,59 @@
         </div>
     </section>
 
-    
+    <section id="customer-signup">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 offset-md-3 text-center mb-3">
+                    <?php if($tenantSignupDescription): ?>
+                        <h2 class="regular"><?php echo e($tenantSignupDescription->heading); ?></h2>
+                        <p class="lead mb-3"><?php echo e($tenantSignupDescription->sub_heading); ?></p>
+                    <?php else: ?>
+                        <h2 class="regular">Customer Irfan Up</h2>
+                        <p class="lead mb-3">SalePro is packed with all the features you'll need to seamlessly run your business</p>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="col-md-6 offset-md-3 mb-5">
+                <form action="" method="POST"  class="form row customer-signup-form">
+                    <?php echo csrf_field(); ?>
+                    <div class="col-12">
+                        <input type="hidden" name="package_id" value="1">
+                        <input type="hidden" name="subscription_type" value="monthly">
+                        <input type="hidden" name="price" value="">
+                        <input class="form-control" type="text" name="company_name"  placeholder="company name..." required>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" name="phone_number"  placeholder="contact number..." required>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" name="email"  placeholder="email..." required>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="text" name="name"  placeholder="username..." required>
+                    </div>
+                    <div class="col-md-6">
+                        <input class="form-control" type="password" name="password"  placeholder="password..." required>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="input-group mt-3">
+                            <input class="form-control mt-0" type="text" name="tenant"  placeholder="subdomain..." aria-label="subdomain..." aria-describedby="basic-addon2" required>
+                          <span class="input-group-text" id="basic-addon2"><?php echo e('@'.env('CENTRAL_DOMAIN')); ?></span>
+                        </div>
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <div class="card-element" class="form-control">
+                        </div>
+                        <div class="card-errors" role="alert"></div>
+                    </div>
+                    <div class="col-12 mt-3">
+                        <p id="waiting-msg mb-3"></p>
+                        <input id="submit-btn" type="submit" class="button style1 d-block w-100" value="<?php echo e(trans('file.submit')); ?>">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
 
     
 

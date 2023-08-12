@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('tenant_signup_descriptions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('language_id')->nullable();
+            $table->foreignId('language_id');
             $table->string('heading');
             $table->string('sub_heading');
             $table->timestamps();
 
-            $table->foreign('language_id', 'tenant_signup_descriptions_language_id_foreign')->references('id')->on('languages')->onDelete('set NULL');
+            $table->foreign('language_id', 'tenant_signup_descriptions_language_id_foreign')->references('id')->on('languages')->onDelete('cascade');
         });
     }
 

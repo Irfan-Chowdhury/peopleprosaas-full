@@ -24,7 +24,7 @@
                 <li id="cms-feature-menu"><a href="<?php echo e(route('feature.index')); ?>"><?php echo e(trans('file.Feature Section')); ?></a></li>
                 <li id="cms-faq-menu"><a href="<?php echo e(route('faq.index')); ?>"><?php echo e(trans('file.FAQ Section')); ?></a></li>
                 <li id="cms-testimonial-menu"><a href="<?php echo e(route('testimonial.index')); ?>"><?php echo e(trans('file.Testimonial Section')); ?></a></li>
-                <li id="cms-tenant-signup-menu"><a href=""><?php echo e(trans('file.Tenant Signup Description')); ?></a></li>
+                <li id="cms-tenant-signup-menu"><a href="<?php echo e(route('tenantSignupDescription.index')); ?>"><?php echo e(trans('file.Tenant Signup Description')); ?></a></li>
                 <li id="cms-blog-menu"><a href=""><?php echo e(trans('file.Blog Section')); ?></a></li>
                 <li id="cms-page-menu"><a href=""><?php echo e(trans('file.Page Section')); ?></a></li>
                 <li id="cms-social-menu"><a href="<?php echo e(route('social.index')); ?>"><?php echo e(trans('file.Social Section')); ?></a></li>

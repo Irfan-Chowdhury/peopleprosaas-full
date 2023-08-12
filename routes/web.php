@@ -12,6 +12,7 @@ use App\Http\Controllers\Landlord\HeroController;
 use App\Http\Controllers\Landlord\LanguageController;
 use App\Http\Controllers\Landlord\ModuleController;
 use App\Http\Controllers\Landlord\SocialController;
+use App\Http\Controllers\Landlord\TenantSignupDescriptionController;
 use App\Http\Controllers\Landlord\TestimonialController;
 use App\Http\Controllers\Landlord\TranslationController;
 use App\Http\Controllers\LanguageSettingController;
@@ -130,6 +131,13 @@ Route::middleware(['auth','setLocale'])->group(function () {
                 Route::post('/update/{testimonial}', 'update')->name('testimonial.update')->middleware('demoCheck');
                 Route::get('/destroy/{testimonial}', 'destroy')->name('testimonial.destroy')->middleware('demoCheck');
                 Route::post('/sort', 'sort')->name('testimonial.sort')->middleware('demoCheck');
+            });
+        });
+
+        Route::prefix('tenant-signup-description')->group(function () {
+            Route::controller(TenantSignupDescriptionController::class)->group(function () {
+                Route::get('/', 'index')->name('tenantSignupDescription.index');
+                Route::post('/update-or-create', 'updateOrCreate')->name('tenantSignupDescription.updateOrCreate')->middleware('demoCheck');
             });
         });
 

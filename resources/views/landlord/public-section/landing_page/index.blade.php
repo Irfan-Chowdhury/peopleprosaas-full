@@ -739,13 +739,13 @@
         </div>
     </section>
 
-    {{-- <section id="customer-signup">
+    <section id="customer-signup">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3 text-center mb-3">
-                    @if($tenant_signup_description)
-                        <h2 class="regular">{{$tenant_signup_description->heading}}</h2>
-                        <p class="lead mb-3">{{$tenant_signup_description->sub_heading}}</p>
+                    @if($tenantSignupDescription)
+                        <h2 class="regular">{{$tenantSignupDescription->heading}}</h2>
+                        <p class="lead mb-3">{{$tenantSignupDescription->sub_heading}}</p>
                     @else
                         <h2 class="regular">Customer Sign Up</h2>
                         <p class="lead mb-3">SalePro is packed with all the features you'll need to seamlessly run your business</p>
@@ -753,7 +753,7 @@
                 </div>
             </div>
             <div class="col-md-6 offset-md-3 mb-5">
-                <form action="{{route('tenant.checkout')}}" method="POST"  class="form row customer-signup-form">
+                <form action="" method="POST"  class="form row customer-signup-form">
                     @csrf
                     <div class="col-12">
                         <input type="hidden" name="package_id" value="1">
@@ -791,7 +791,7 @@
                 </form>
             </div>
         </div>
-    </section> --}}
+    </section>
 
     {{-- @if(count($blogs) > 0)
     <section id="blog">

@@ -30,7 +30,7 @@ class BaseRepository implements BaseContract
         return $this->model->latest()->first();
     }
 
-    // ModuleController, FaqController
+    // ModuleController ||  FaqController || TenantSignUpController
     public function fetchLatestDataByLanguageId($languageId)
     {
         return $this->model->where('language_id',$languageId)->latest()->first();
@@ -77,13 +77,13 @@ class BaseRepository implements BaseContract
     }
 
 
-    // Feature, LandlordController, TestimonialController, LandingPageController
+    // Feature || LandlordController ||  TestimonialController || LandingPageController
     public function getOrderByPosition()
     {
         return $this->model->orderBy('position','ASC')->get();
     }
 
-    // ModuleController
+    // ModuleController || TenantSignUpController
     public function updateOrCreate($condition, $data) : void
     {
         $this->model->updateOrCreate($condition, $data);

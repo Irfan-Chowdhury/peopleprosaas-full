@@ -6,6 +6,7 @@ use App\Contracts\FaqContract;
 use App\Contracts\FeatureContract;
 use App\Contracts\ModuleContract;
 use App\Contracts\SocialContract;
+use App\Contracts\TenantSignupDescriptionContract;
 use App\Contracts\TestimonialContract;
 use App\Http\Controllers\Controller;
 use App\Models\Landlord\Hero;
@@ -33,7 +34,8 @@ class LandingPageController extends Controller
         ModuleContract $moduleContract,
         FeatureContract $featureContract,
         FaqContract $faqContract,
-        TestimonialContract $testimonialContract
+        TestimonialContract $testimonialContract,
+        TenantSignupDescriptionContract $tenantSignupDescriptionContract
     )
     {
         $socials = $socialService->getAll();
@@ -42,6 +44,10 @@ class LandingPageController extends Controller
         $faq  = $faqContract->fetchLatestDataByLanguageIdWithRelation(['faqDetails'], $this->languageId);
         $features = $featureContract->all();
         $testimonials = $testimonialContract->getOrderByPosition();
-        return view('landlord.public-section.landing_page.index',compact(['socials','hero','module','features','faq','testimonials']));
+        $tenantSignupDescription = null; // $tenantSignupDescriptionContract->fetchLatestDataByLanguageId($this->languageId);
+
+        return view('landlord.public-section.landing_page.index',compact([
+            'socials','hero','module','features','faq','testimonials','tenantSignupDescription'
+        ]));
     }
 }

@@ -117,3 +117,14 @@ function FaqData_2()
         'position' => 2
     ];
 }
+
+function TenantSignupDescriptionData()
+{
+    return  [
+        'language_id' => 1,
+        'heading' => 'Customer Sign Up',
+        'sub_heading' => 'SalePro is packed with all the features you\'ll need to seamlessly run your business',
+    ];
+}
+
+

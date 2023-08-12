@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
                 ModuleSeeder::class,
                 FaqSeeder::class,
                 TestimonialSeeder::class,
+                TenantSignupDescriptionSeeder::class,
             ]);
         }
         else {
