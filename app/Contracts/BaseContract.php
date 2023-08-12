@@ -6,6 +6,9 @@ namespace App\Contracts;
 interface BaseContract {
     public function all();
 
+    // BlogController || LandingPageController
+    public function getAllByLanguageId($languageId);
+
     public function getAllWithRelation($relation);
 
     public function fetchLatestDataByLanguageId($languageId);

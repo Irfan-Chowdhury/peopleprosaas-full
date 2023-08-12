@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Contracts\BaseContract;
+use App\Contracts\BlogContract;
 use App\Contracts\FaqContract;
 use App\Contracts\FaqDetailContract;
 use App\Contracts\FeatureContract;
@@ -14,6 +15,7 @@ use App\Contracts\SocialContract;
 use App\Contracts\TenantSignupDescriptionContract;
 use App\Contracts\TestimonialContract;
 use App\Repositories\BaseRepository;
+use App\Repositories\BlogRepository;
 use App\Repositories\FaqDetailRepository;
 use App\Repositories\FaqRepository;
 use App\Repositories\FeatureRepository;
@@ -41,6 +43,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(FaqDetailContract::class, FaqDetailRepository::class);
         $this->app->bind(TestimonialContract::class, TestimonialRepository::class);
         $this->app->bind(TenantSignupDescriptionContract::class, TenantSignupDescriptionRepository::class);
+        $this->app->bind(BlogContract::class, BlogRepository::class);
     }
 
 

@@ -53,7 +53,6 @@ class FaqService
     public function save($request, $languageId) : array
     {
         try {
-            $maxPosition = $this->faqDetailContract->getMaxPosition() + 1;
             $data = $this->requestHandle($request);
 
             $this->faqUpdateOrCreate($data, $languageId);

@@ -793,7 +793,7 @@
         </div>
     </section>
 
-    {{-- @if(count($blogs) > 0)
+    @if(count($blogs) > 0)
     <section id="blog">
         <div class="container">
             <div class="row">
@@ -803,7 +803,7 @@
                 @foreach($blogs as $blog)
                 <div class="col-md-4">
                     <a href="{{url('/blog')}}/{{$blog->slug}}">
-                        <img src="{{asset('public/landlord/images/blog')}}/{{$blog->featured_image}}" alt="{{$blog->title}}"/>
+                        <img src="{{asset('landlord/images/blog')}}/{{$blog->image}}" alt="{{$blog->title}}"/>
                         <h4 class="mt-3">{{$blog->title}}</h4>
                     </a>
                 </div>
@@ -815,7 +815,7 @@
         </div>
 
     </section>
-    @endif --}}
+    @endif
 
     {{-- @if(env('USER_VERIFIED')==0)
     <section class="pt-5">

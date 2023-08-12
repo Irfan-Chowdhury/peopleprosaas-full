@@ -18,7 +18,7 @@
                                 'fieldType' => 'text',
                                 'nameData' => 'name',
                                 'placeholderData' => 'e.g: Irfan Chowdhury',
-                                'isRequired' => false,
+                                'isRequired' => true,
                             ])
                             @include('landlord.super-admin.partials.input-field',[
                                 'colSize' => 4,
@@ -26,7 +26,7 @@
                                 'fieldType' => 'text',
                                 'nameData' => 'business_name',
                                 'placeholderData' => 'e.g: LionCoders',
-                                'isRequired' => false,
+                                'isRequired' => true,
                             ])
                             @include('landlord.super-admin.partials.input-field',[
                                 'colSize' => 4,
@@ -34,7 +34,7 @@
                                 'fieldType' => 'file',
                                 'nameData' => 'image',
                                 'placeholderData' => null,
-                                'isRequired' => false,
+                                'isRequired' => true,
                             ])
                             @include('landlord.super-admin.partials.input-field',[
                                 'colSize' => 12,
@@ -42,7 +42,7 @@
                                 'fieldType' => 'textarea',
                                 'nameData' => 'description',
                                 'placeholderData' => 'e.g: Good Support Team.',
-                                'isRequired' => false,
+                                'isRequired' => true,
                             ])
 
                             <div class="col-4 form-group mt-3">

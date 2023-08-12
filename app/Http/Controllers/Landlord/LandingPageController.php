@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Landlord;
 
+use App\Contracts\BlogContract;
 use App\Contracts\FaqContract;
 use App\Contracts\FeatureContract;
 use App\Contracts\ModuleContract;
@@ -35,7 +36,8 @@ class LandingPageController extends Controller
         FeatureContract $featureContract,
         FaqContract $faqContract,
         TestimonialContract $testimonialContract,
-        TenantSignupDescriptionContract $tenantSignupDescriptionContract
+        TenantSignupDescriptionContract $tenantSignupDescriptionContract,
+        BlogContract $blogContract
     )
     {
         $socials = $socialService->getAll();
@@ -44,10 +46,10 @@ class LandingPageController extends Controller
         $faq  = $faqContract->fetchLatestDataByLanguageIdWithRelation(['faqDetails'], $this->languageId);
         $features = $featureContract->all();
         $testimonials = $testimonialContract->getOrderByPosition();
-        $tenantSignupDescription = null; // $tenantSignupDescriptionContract->fetchLatestDataByLanguageId($this->languageId);
-
+        $tenantSignupDescription =  $tenantSignupDescriptionContract->fetchLatestDataByLanguageId($this->languageId);
+        $blogs =  $blogContract->getAllByLanguageId($this->languageId);
         return view('landlord.public-section.landing_page.index',compact([
-            'socials','hero','module','features','faq','testimonials','tenantSignupDescription'
+            'socials','hero','module','features','faq','testimonials','tenantSignupDescription','blogs'
         ]));
     }
 }

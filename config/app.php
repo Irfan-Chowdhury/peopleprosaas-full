@@ -169,9 +169,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-        /*
-         * Package Service Providers...
-         */
+
 
         /*
          * Application Service Providers...
@@ -185,12 +183,17 @@ return [
         App\Providers\TenancyServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
 
+        /*
+         * Package Service Providers...
+        */
 
 		Yajra\Datatables\DatatablesServiceProvider::class,
 		App\Providers\LanguageServiceProvider::class,
 		App\Providers\AlertServiceProvider::class,
 		Barryvdh\DomPDF\ServiceProvider::class,
 		Maatwebsite\Excel\ExcelServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+
     ],
 
     /*
@@ -246,6 +249,7 @@ return [
 		'Datatables' => Yajra\Datatables\Facades\Datatables::class,
 		'PDF' => Barryvdh\DomPDF\Facade::class,
 		'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\Landlord\AdminController;
+use App\Http\Controllers\Landlord\BlogController;
 use App\Http\Controllers\Landlord\LandingPageController;
 use App\Http\Controllers\Landlord\DashboardController;
 use App\Http\Controllers\Landlord\FaqController;
@@ -43,7 +44,6 @@ Route::post('/super-admin/logout', [AdminController::class, 'logout'])->name('la
 
 Route::middleware(['auth','setLocale'])->group(function () {
     Route::prefix('super-admin')->group(function () {
-
 
         Route::get('dashboard',[DashboardController::class, 'index'])->name('landlord.dashboard');
 
@@ -138,6 +138,17 @@ Route::middleware(['auth','setLocale'])->group(function () {
             Route::controller(TenantSignupDescriptionController::class)->group(function () {
                 Route::get('/', 'index')->name('tenantSignupDescription.index');
                 Route::post('/update-or-create', 'updateOrCreate')->name('tenantSignupDescription.updateOrCreate')->middleware('demoCheck');
+            });
+        });
+
+        Route::prefix('blogs')->group(function () {
+            Route::controller(BlogController::class)->group(function () {
+                Route::get('/', 'index')->name('blog.index');
+                Route::get('/datatable', 'datatable')->name('blog.datatable');
+                Route::post('/store', 'store')->name('blog.store')->middleware('demoCheck');
+                Route::get('/edit/{blog}', 'edit')->name('blog.edit');
+                Route::post('/update/{id}', 'update')->name('blog.update')->middleware('demoCheck');
+                Route::get('/destroy/{id}', 'destroy')->name('blog.destroy')->middleware('demoCheck');
             });
         });
 

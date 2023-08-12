@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\File;
-
+use Str;
+use Image;
 class UtilityService
 {
     public function timeZoneData() : array
@@ -19,7 +22,7 @@ class UtilityService
         return $zones_array;
     }
 
-    public function dateFormat()
+    public function dateFormat() : array
     {
         return [
             'd-m-Y' => 'dd-mm-yyyy(23-05-2020)',
@@ -42,7 +45,7 @@ class UtilityService
     }
 
 
-    public function imageFileHandle($imageFile, $expectedDirectory, $isPrevImgFileDelete=true)
+    public function imageFileHandle($imageFile, $expectedDirectory, $isPrevImgFileDelete=true, $prevImageName=null)
     {
         $imageName = null;
 
@@ -54,6 +57,10 @@ class UtilityService
                 File::cleanDirectory($imagesDirectory);
             }
 
+            // if ($isPrevImgFileDelete && File::isDirectory($imagesDirectory) && $prevImageName) {
+            //     $this->fileDelete($imagesDirectory, $prevImageName);
+            // }
+
             $ext = pathinfo($image->getClientOriginalName(), PATHINFO_EXTENSION);
             $imageName = date("Ymdhis") . 1;
             $imageName = $imageName . '.' . $ext;
@@ -63,7 +70,19 @@ class UtilityService
         return $imageName;
     }
 
-    public function fileDelete($filePath, $fileName)
+    public function imageFileStore($image, $directory, $width, $height) : string|null
+    {
+        $imageName = null;
+        if ($image) {
+            $imageName = Str::random(10). '.' .$image->getClientOriginalExtension();
+            $location  = public_path($directory.$imageName);
+            Image::make($image)->resize($width, $height)->save($location);
+        }
+
+        return $imageName;
+    }
+
+    public function fileDelete($filePath, $fileName) : void
     {
         if ($fileName && !config('database.connections.peopleprosaas_landlord') && File::exists(public_path().$filePath.$fileName))
            File::delete(public_path().$filePath.$fileName);
@@ -75,6 +94,12 @@ class UtilityService
         //     unlink('public/'.$filePath.$fileName);
         // elseif($fileName && file_exists($filePath.$fileName))
         //     unlink($filePath.$fileName);
+    }
 
+    public function slugGenerate($string) : string
+    {
+        $string = strtolower($string);
+
+        return preg_replace('/\s+/u', '-', trim($string));
     }
 }

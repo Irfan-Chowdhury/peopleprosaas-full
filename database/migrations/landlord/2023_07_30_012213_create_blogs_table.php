@@ -13,16 +13,21 @@ return new class extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('language_id');
             $table->string('title');
             $table->string('slug');
             $table->text('description');
-            $table->string('featured_image');
+            $table->string('image');
             $table->string('meta_title', 100)->nullable();
             $table->string('meta_description', 200)->nullable();
             $table->string('og_title', 100)->nullable();
             $table->string('og_description', 200)->nullable();
             $table->string('og_image')->nullable();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('language_id', 'blogs_language_id_foreign')->references('id')->on('languages')->onDelete('cascade');
+
         });
     }
 
@@ -31,6 +36,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('blogs');
+        Schema::table('blogs', function (Blueprint $table) {
+            $table->dropForeign('blogs_language_id_foreign');
+            $table->dropIfExists('blogs');
+        });
     }
 };

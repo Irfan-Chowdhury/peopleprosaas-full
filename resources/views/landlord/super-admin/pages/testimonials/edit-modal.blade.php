@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel"> @lang('file.Edit Module') </h5>
+                <h5 class="modal-title" id="editModalLabel"> @lang('file.Edit Testimonial') </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -20,7 +20,7 @@
                             'fieldType' => 'text',
                             'nameData' => 'name',
                             'placeholderData' => 'e.g: Irfan Chowdhury',
-                            'isRequired' => false,
+                            'isRequired' => true,
                         ])
 
                         @include('landlord.super-admin.partials.input-field',[
@@ -29,7 +29,7 @@
                             'fieldType' => 'text',
                             'nameData' => 'business_name',
                             'placeholderData' => 'e.g: LionCoders',
-                            'isRequired' => false,
+                            'isRequired' => true,
                         ])
                         @include('landlord.super-admin.partials.input-field',[
                             'colSize' => 4,
@@ -37,7 +37,7 @@
                             'fieldType' => 'file',
                             'nameData' => 'image',
                             'placeholderData' => null,
-                            'isRequired' => false,
+                            'isRequired' => true,
                         ])
                         @include('landlord.super-admin.partials.input-field',[
                             'colSize' => 12,
@@ -45,7 +45,7 @@
                             'fieldType' => 'text',
                             'nameData' => 'description',
                             'placeholderData' => 'e.g: Good Support Team.',
-                            'isRequired' => false,
+                            'isRequired' => true,
                         ])
                     </div>
 
