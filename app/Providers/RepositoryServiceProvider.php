@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Contracts\AnalyticSettingContract;
 use App\Contracts\BaseContract;
 use App\Contracts\BlogContract;
 use App\Contracts\FaqContract;
@@ -15,6 +16,7 @@ use App\Contracts\PageContract;
 use App\Contracts\SocialContract;
 use App\Contracts\TenantSignupDescriptionContract;
 use App\Contracts\TestimonialContract;
+use App\Repositories\AnalyticSettingRepository;
 use App\Repositories\BaseRepository;
 use App\Repositories\BlogRepository;
 use App\Repositories\FaqDetailRepository;
@@ -47,6 +49,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(TenantSignupDescriptionContract::class, TenantSignupDescriptionRepository::class);
         $this->app->bind(BlogContract::class, BlogRepository::class);
         $this->app->bind(PageContract::class, PageRepository::class);
+        $this->app->bind(AnalyticSettingContract::class, AnalyticSettingRepository::class);
     }
 
 

@@ -1,43 +1,34 @@
 @extends('landlord.super-admin.layouts.master')
 @section('landlord-content')
+
+
     <div class="container-fluid mb-3">
+
+
         <div class="row">
+            <div class="col-3">
+              <div class="list-group" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-action active" id="general-setting" data-toggle="list" href="#generalSetting" role="tab" aria-controls="home">Home</a>
+                <a class="list-group-item list-group-item-action" id="analytics-setting" data-toggle="list" href="#analyticsSetting" role="tab" aria-controls="settings">Analytics Setting</a>
 
-            <div class="col-4">
-                <div class="card mb-0">
-                    <div id="collapse1" class="collapse show" aria-labelledby="generalSettings" data-parent="#accordion">
-                        <div class="card-body">
-                            <div class="list-group" id="list-tab" role="tablist">
-                                <a class="list-group-item list-group-item-action active" id="general-setting"
-                                    data-toggle="list" href="#generalSetting" role="tab"
-                                    aria-controls="home">@lang('file.General Setting')</a>
-                                <a class="list-group-item list-group-item-action" id="bug-update-setting" data-toggle="list"
-                                    href="#bugUpdateSetting" role="tab" aria-controls="home">@lang('file.Payment Setting')</a>
-                                <a class="list-group-item list-group-item-action" id="version-upgrade-setting"
-                                    data-toggle="list" href="#versionUpgradeSetting" role="tab"
-                                    aria-controls="home">@lang('file.SEO Setting')</a>
-                                <a class="list-group-item list-group-item-action" id="version-upgrade-setting"
-                                    data-toggle="list" href="#versionUpgradeSetting" role="tab"
-                                    aria-controls="home">@lang('file.Analytics Setting')</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{-- <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#analyticsSetting" role="tab" aria-controls="profile">Profile</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a> --}}
+              </div>
             </div>
+            <div class="col-9">
+              <div class="tab-content" id="nav-tabContent">
 
-            {{-- @include('includes.session_message') --}}
+                @include('landlord.super-admin.pages.settings.general')
 
-
-            <div class="col-8">
-                <div class="tab-content" id="nav-tabContent">
-
-                    <!--General Setting-->
-                    @include('landlord.super-admin.pages.settings.general')
+                @include('landlord.super-admin.pages.settings.analytic_setting')
 
 
-                </div>
+                <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">Profile</div>
+                <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">Messages</div>
+
+              </div>
             </div>
-        </div>
+          </div>
     </div>
 @endsection
 
@@ -47,6 +38,7 @@
             "use strict";
 
             let generalSettingURL = "{{ route('setting.general.manage') }}";
+            let settingAanalyticManage = "{{ route('setting.analytic.manage') }}";
 
             $(document).ready(function() {
                 $.ajaxSetup({
@@ -59,6 +51,11 @@
                     e.preventDefault();
                     var formData = new FormData(this);
                     generateSetting('generalButton', generalSettingURL, formData);
+                });
+                $("#analyticSettingSubmit").on("submit", function(e) {
+                    e.preventDefault();
+                    var formData = new FormData(this);
+                    generateSetting('analyticButton', settingAanalyticManage, formData);
                 });
             });
 

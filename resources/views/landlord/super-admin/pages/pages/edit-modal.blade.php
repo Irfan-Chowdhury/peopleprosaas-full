@@ -19,12 +19,12 @@
                             'fieldType' => 'text',
                             'nameData' => 'title',
                             'placeholderData' => 'Page Title',
-                            'isRequired' => false,
+                            'isRequired' => true,
                         ])
 
                         <div class="col-md-12 mt-3">
-                            <label class="font-weight-bold">@lang('file.Description')</label>
-                            <textarea name="description" id="edit-description" class="form-control text-editor" placeholder="{{ trans('file.Description') }}"></textarea>
+                            <label class="font-weight-bold">@lang('file.Description') <span class="text-danger">*</span></label>
+                            <textarea name="description" required id="edit-description" class="form-control text-editor" placeholder="{{ trans('file.Description') }}"></textarea>
                         </div>
 
                         @include('landlord.super-admin.partials.input-field', [

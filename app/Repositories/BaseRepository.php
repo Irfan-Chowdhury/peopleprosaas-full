@@ -55,7 +55,7 @@ class BaseRepository implements BaseContract
     }
 
     // GeneralSettingController
-    public function latestDataUpdate(array $data) :void
+    public function latestDataUpdate(array $data) : void
     {
         $this->fetchLatestData()->update($data);
     }
@@ -95,7 +95,7 @@ class BaseRepository implements BaseContract
         return $this->model->orderBy('position','ASC')->get();
     }
 
-    // ModuleController || TenantSignUpController
+    // ModuleController || TenantSignUpController || SettingController: 
     public function updateOrCreate($condition, $data) : void
     {
         $this->model->updateOrCreate($condition, $data);

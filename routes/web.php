@@ -8,7 +8,7 @@ use App\Http\Controllers\Landlord\LandingPageController;
 use App\Http\Controllers\Landlord\DashboardController;
 use App\Http\Controllers\Landlord\FaqController;
 use App\Http\Controllers\Landlord\FeatureController;
-use App\Http\Controllers\Landlord\GeneralSettingController;
+use App\Http\Controllers\Landlord\SettingController;
 use App\Http\Controllers\Landlord\HeroController;
 use App\Http\Controllers\Landlord\LanguageController;
 use App\Http\Controllers\Landlord\ModuleController;
@@ -172,10 +172,13 @@ Route::middleware(['auth','setLocale'])->group(function () {
 
 
         Route::prefix('settings')->group(function () {
-            Route::controller(GeneralSettingController::class)->group(function () {
+            Route::controller(SettingController::class)->group(function () {
                 Route::get('/', 'index')->name('setting.general.index');
 
                 Route::post('/general', 'generalSettingManage')->name('setting.general.manage')->middleware('demoCheck');
+                Route::post('/analytic', 'analyticSettingManage')->name('setting.analytic.manage')->middleware('demoCheck');
+
+
                 // Route::get('/datatable', 'datatable')->name('feature.datatable');
                 // Route::post('/store', 'store')->name('feature.store')->middleware('demoCheck');
                 // Route::get('/edit/{feature}', 'edit')->name('feature.edit');
