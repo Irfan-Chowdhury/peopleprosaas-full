@@ -7,6 +7,7 @@ use App\Facades\Utility;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\AnalyticSettingRequest;
 use App\Http\Requests\Setting\GeneralSettingRequest;
+use App\Http\Requests\Setting\SeoSettingRequest;
 use App\Models\Landlord\AnalyticSetting;
 use App\Models\Landlord\GeneralSetting;
 use App\Services\GeneralSettingService;
@@ -23,10 +24,11 @@ class SettingController extends Controller
     {
         $generalSetting =  $this->settingService->getLatestGeneralSettingData();
         $analyticSetting =  $this->settingService->getLatestAnalyticSettingData();
+        $seoSetting =  $this->settingService->getLatestSeoSettingData();
         $timeZones = Utility::timeZoneData();
         $dateFormat = Utility::dateFormat();
 
-        return view('landlord.super-admin.pages.settings.index', compact(['timeZones','generalSetting','dateFormat','analyticSetting']));
+        return view('landlord.super-admin.pages.settings.index', compact(['timeZones','generalSetting','dateFormat','analyticSetting','seoSetting']));
     }
 
     public function generalSettingManage(GeneralSettingRequest $request)
@@ -39,6 +41,13 @@ class SettingController extends Controller
     public function analyticSettingManage(AnalyticSettingRequest $request)
     {
         $result = $this->settingService->updateAnalyticSetting($request);
+
+        return response()->json($result['alertMsg'], $result['statusCode']);
+    }
+
+    public function seoSettingManage(SeoSettingRequest $request)
+    {
+        $result = $this->settingService->updateSeoSetting($request);
 
         return response()->json($result['alertMsg'], $result['statusCode']);
     }

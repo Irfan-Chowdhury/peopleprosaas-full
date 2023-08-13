@@ -177,6 +177,7 @@ Route::middleware(['auth','setLocale'])->group(function () {
 
                 Route::post('/general', 'generalSettingManage')->name('setting.general.manage')->middleware('demoCheck');
                 Route::post('/analytic', 'analyticSettingManage')->name('setting.analytic.manage')->middleware('demoCheck');
+                Route::post('/seo', 'seoSettingManage')->name('setting.seo.manage')->middleware('demoCheck');
 
 
                 // Route::get('/datatable', 'datatable')->name('feature.datatable');

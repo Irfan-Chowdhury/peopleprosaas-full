@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Contracts\AnalyticSettingContract;
 use App\Contracts\GeneralSettingContract;
+use App\Contracts\SeoSettingContract;
 use App\Facades\Alert;
 use App\Facades\Utility;
 use App\Models\Landlord\AnalyticSetting;
@@ -14,9 +15,13 @@ use Illuminate\Support\Facades\File;
 class SettingService
 {
 
+    private $siteLogoPath = "landlord/images/logo/";
+    private $ogImagePath = "landlord/images/seo-setting/";
+
     public function __construct(
         private GeneralSettingContract $generalSettingContract,
         private AnalyticSettingContract $analyticSettingContract,
+        private SeoSettingContract $seoSettingContract,
     ){}
 
     public function getLatestGeneralSettingData() : object | null
@@ -26,6 +31,10 @@ class SettingService
     public function getLatestAnalyticSettingData() : object | null
     {
         return $this->analyticSettingContract->fetchLatestData();
+    }
+    public function getLatestSeoSettingData() : object | null
+    {
+        return $this->seoSettingContract->fetchLatestData();
     }
 
     public function updateGeneralSetting($request)
@@ -45,11 +54,10 @@ class SettingService
                 'developed_by' =>  $request->developed_by,
             ];
 
-            $imageName = $this->imageHandle($request);
+            $imageName = $this->imageHandle($request->site_logo, $this->siteLogoPath);
             if($imageName) {
                 $data['site_logo'] = $imageName;
             }
-            // $this->generalSettingContract->latestDataUpdate($data);
             $this->generalSettingContract->updateOrCreate([], $data);
 
             Utility::setEnv('APP_NAME', $data['site_title']);
@@ -79,13 +87,35 @@ class SettingService
         }
     }
 
-    protected function imageHandle($request)
+    public function updateSeoSetting($request)
+    {
+        try {
+            $data = [
+                'meta_title' => $request->meta_title,
+                'meta_description'  => $request->meta_description,
+                'og_title' => $request->og_title,
+                'og_description' => $request->og_description,
+            ];
+            $imageName = $this->imageHandle($request->og_image, $this->ogImagePath);
+            if($imageName) {
+                $data['og_image'] = $imageName;
+            }
+
+            $this->seoSettingContract->updateOrCreate([], $data);
+
+            return Alert::successMessage('Data Submitted Successfully');
+        }
+        catch (Exception $exception) {
+            return Alert::errorMessage($exception->getMessage());
+        }
+    }
+
+    protected function imageHandle($image, $path)
     {
         $imageName = null;
 
-        if ($request->hasFile('site_logo')) {
-            $image = $request->file('site_logo');
-            $imagesDirectory = public_path('landlord/images/logo');
+        if ($image) {
+            $imagesDirectory = public_path($path);
 
             if (File::isDirectory($imagesDirectory)) {
                 File::cleanDirectory($imagesDirectory);

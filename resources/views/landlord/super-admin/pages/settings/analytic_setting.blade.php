@@ -12,7 +12,7 @@
                         'fieldType' => 'text',
                         'nameData' => 'google_analytics_script',
                         'placeholderData' => 'Paste your Google Analytics Snippet',
-                        'isRequired' => false,
+                        'isRequired' => true,
                         'valueData'=> isset($analyticSetting->google_analytics_script) ? $analyticSetting->google_analytics_script : null
                     ])
                     @include('landlord.super-admin.partials.input-field',[
@@ -21,7 +21,7 @@
                         'fieldType' => 'text',
                         'nameData' => 'facebook_pixel_script',
                         'placeholderData' => 'Meta Pixel Snippet',
-                        'isRequired' => false,
+                        'isRequired' => true,
                         'valueData'=> isset($analyticSetting->facebook_pixel_script) ? $analyticSetting->facebook_pixel_script : null
                     ])
                     @include('landlord.super-admin.partials.input-field',[
@@ -30,7 +30,7 @@
                         'fieldType' => 'text',
                         'nameData' => 'chat_script',
                         'placeholderData' => 'Chat Snippet Start',
-                        'isRequired' => false,
+                        'isRequired' => true,
                         'valueData'=> isset($analyticSetting->chat_script) ? $analyticSetting->chat_script : null
                     ])
                 </div>

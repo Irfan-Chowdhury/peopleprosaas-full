@@ -10,6 +10,7 @@
               <div class="list-group" id="list-tab" role="tablist">
                 <a class="list-group-item list-group-item-action active" id="general-setting" data-toggle="list" href="#generalSetting" role="tab" aria-controls="home">Home</a>
                 <a class="list-group-item list-group-item-action" id="analytics-setting" data-toggle="list" href="#analyticsSetting" role="tab" aria-controls="settings">Analytics Setting</a>
+                <a class="list-group-item list-group-item-action" id="seo-setting" data-toggle="list" href="#seoSetting" role="tab" aria-controls="settings">SEO Setting</a>
 
                 {{-- <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#analyticsSetting" role="tab" aria-controls="profile">Profile</a>
                 <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Messages</a> --}}
@@ -21,6 +22,8 @@
                 @include('landlord.super-admin.pages.settings.general')
 
                 @include('landlord.super-admin.pages.settings.analytic_setting')
+
+                @include('landlord.super-admin.pages.settings.seo_setting')
 
 
                 <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">Profile</div>
@@ -39,6 +42,7 @@
 
             let generalSettingURL = "{{ route('setting.general.manage') }}";
             let settingAanalyticManage = "{{ route('setting.analytic.manage') }}";
+            let settingSeoManage = "{{ route('setting.seo.manage') }}";
 
             $(document).ready(function() {
                 $.ajaxSetup({
@@ -56,6 +60,11 @@
                     e.preventDefault();
                     var formData = new FormData(this);
                     generateSetting('analyticButton', settingAanalyticManage, formData);
+                });
+                $("#seoSettingSubmit").on("submit", function(e) {
+                    e.preventDefault();
+                    var formData = new FormData(this);
+                    generateSetting('seoButton', settingSeoManage, formData);
                 });
             });
 

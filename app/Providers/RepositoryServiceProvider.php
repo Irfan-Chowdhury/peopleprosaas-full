@@ -13,6 +13,7 @@ use App\Contracts\LanguageContract;
 use App\Contracts\ModuleContract;
 use App\Contracts\ModuleDetailContract;
 use App\Contracts\PageContract;
+use App\Contracts\SeoSettingContract;
 use App\Contracts\SocialContract;
 use App\Contracts\TenantSignupDescriptionContract;
 use App\Contracts\TestimonialContract;
@@ -27,6 +28,7 @@ use App\Repositories\LanguageRepository;
 use App\Repositories\ModuleDetailRepository;
 use App\Repositories\ModuleRepository;
 use App\Repositories\PageRepository;
+use App\Repositories\SeoSettingRepository;
 use App\Repositories\SocialRepository;
 use App\Repositories\TenantSignupDescriptionRepository;
 use App\Repositories\TestimonialRepository;
@@ -50,6 +52,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(BlogContract::class, BlogRepository::class);
         $this->app->bind(PageContract::class, PageRepository::class);
         $this->app->bind(AnalyticSettingContract::class, AnalyticSettingRepository::class);
+        $this->app->bind(SeoSettingContract::class, SeoSettingRepository::class);
     }
 
 
