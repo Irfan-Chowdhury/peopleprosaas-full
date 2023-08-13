@@ -21,6 +21,7 @@ return array (
   'Admin' => 'Admin',
   'Administration' => 'Administration',
   'All' => 'All',
+  'All Blog Posts' => 'All Blog Posts',
   'All_Department' => 'All Department',
   'Allocated Day' => 'Allocated Day',
   'Allowances' => 'Allowances',

@@ -37,7 +37,12 @@ Route::get('/lang', function () {
 });
 
 
-Route::get('/', [LandingPageController::class, 'index'])->name('landingPage.index');
+Route::controller(LandingPageController::class)->group(function () {
+    Route::get('/', 'index')->name('landingPage.index');
+    Route::get('/blogs', 'blog')->name('landingPage.blog');
+    Route::get('/blogs/{slug}', 'blogDetail')->name('landingPage.blogDetail');
+});
+
 Route::get('/super-admin', [AdminController::class, 'showLoginForm'])->name('landlord.login')->middleware('guest');
 Route::post('/super-admin', [AdminController::class, 'login'])->name('landlord.login.proccess');
 Route::post('/super-admin/logout', [AdminController::class, 'logout'])->name('landlord.logout');
