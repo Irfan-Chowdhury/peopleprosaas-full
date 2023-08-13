@@ -3,7 +3,7 @@
 
 <div class="container-fluid mb-3">
     <div class="card">
-        <div class="card-header"><h3>{{__('file.Blog Section')}}</h3></div>
+        <div class="card-header"><h3>{{__('file.Page Section')}}</h3></div>
         <div class="card-body">
             <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createModal"><i class="fa fa-plus"></i> {{__('file.Add New')}}</button>
         </div>
@@ -16,8 +16,7 @@
             <thead>
                 <tr>
                     <th class="not-exported"></th>
-                    <th>{{ __('file.Image') }}</th>
-                    <th>{{ __('file.Blog Title') }}</th>
+                    <th>{{ __('file.Page Title') }}</th>
                     <th class="not-exported">{{ __('Action') }}</th>
                 </tr>
             </thead>
@@ -26,19 +25,20 @@
     </div>
 </div>
 
-@include('landlord.super-admin.pages.blogs.create-modal')
-@include('landlord.super-admin.pages.blogs.edit-modal')
+@include('landlord.super-admin.pages.pages.create-modal')
+@include('landlord.super-admin.pages.pages.edit-modal')
 
 @endsection
 
 @push('scripts')
 <script type="text/javascript">
-    let dataTableURL = "{{ route('blog.datatable') }}";
-    let storeURL = "{{ route('blog.store') }}";
-    let editURL = "/super-admin/blogs/edit/";
-    let updateURL = '/super-admin/blogs/update/';
-    let destroyURL = '/super-admin/blogs/destroy/';
+    let dataTableURL = "{{ route('page.datatable') }}";
+    let storeURL = "{{ route('page.store') }}";
+    let editURL = "/super-admin/pages/edit/";
+    let updateURL = '/super-admin/pages/update/';
+    let destroyURL = '/super-admin/pages/destroy/';
 </script>
+
 <script type="text/javascript">
         (function ($) {
             "use strict";
@@ -59,9 +59,7 @@
                                         $(this).val()
                                     );
 
-                                    column
-                                        .search(val ? '^' + val + '$' : '', true, false)
-                                        .draw();
+                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
                                 });
 
                             column.data().unique().sort().each(function(d, j) {
@@ -87,10 +85,6 @@
                             searchable: false
                         },
                         {
-                            data: 'image',
-                            name: 'image',
-                        },
-                        {
                             data: 'title',
                             name: 'title',
                         },
@@ -113,7 +107,7 @@
                     },
                     'columnDefs': [{
                             "orderable": false,
-                            'targets': [0, 3],
+                            'targets': [0, 2],
                         },
                         {
                             'render': function(data, type, row, meta) {
@@ -181,13 +175,11 @@
                     url: editURL + id,
                     success: function(response) {
                         console.log(response);
-                        $("#editModal input[name='blog_id']").val(response.id);
+                        $("#editModal input[name='page_id']").val(response.id);
                         $("#editModal input[name='title']").val(response.title);
                         tinyMCE.get('edit-description').setContent(response.description);
                         $("#editModal input[name='meta_title']").val(response.meta_title);
-                        $("#editModal input[name='og_title']").val(response.og_title);
                         $("#metaDescriptionEdit").val(response.meta_description);
-                        $("#ogDescriptionEdit").val(response.og_description);
                         $('#editModal').modal('show');
                     }
                 })

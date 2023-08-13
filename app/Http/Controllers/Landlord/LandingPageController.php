@@ -6,11 +6,13 @@ use App\Contracts\BlogContract;
 use App\Contracts\FaqContract;
 use App\Contracts\FeatureContract;
 use App\Contracts\ModuleContract;
+use App\Contracts\PageContract;
 use App\Contracts\SocialContract;
 use App\Contracts\TenantSignupDescriptionContract;
 use App\Contracts\TestimonialContract;
 use App\Http\Controllers\Controller;
 use App\Models\Landlord\Hero;
+use App\Models\Landlord\Page;
 use App\Models\Landlord\Social;
 use App\Services\SocialService;
 use Illuminate\Http\Response;
@@ -21,7 +23,11 @@ class LandingPageController extends Controller
 {
 
     public $languageId;
-    public function __construct(public SocialContract $socialContract, public BlogContract $blogContract)
+    public function __construct(
+        public SocialContract $socialContract,
+        public BlogContract $blogContract,
+        public PageContract $pageContract
+    )
     {
         $this->middleware(function ($request, $next){
             $this->languageId = Session::has('TempSuperAdminLangId')==true ? Session::get('TempSuperAdminLangId') : Session::get('DefaultSuperAdminLangId');
@@ -38,7 +44,7 @@ class LandingPageController extends Controller
         TenantSignupDescriptionContract $tenantSignupDescriptionContract,
     )
     {
-        $socials = $this->socialContract->getOrderByPosition();
+        $socials = $this->socialContract->getOrderByPosition(); //Common
         $hero = Hero::where('language_id',1)->latest()->first();
         $module  = $moduleContract->fetchLatestDataByLanguageIdWithRelation(['moduleDetails'], $this->languageId);
         $faq  = $faqContract->fetchLatestDataByLanguageIdWithRelation(['faqDetails'], $this->languageId);
@@ -46,21 +52,37 @@ class LandingPageController extends Controller
         $testimonials = $testimonialContract->getOrderByPosition();
         $tenantSignupDescription =  $tenantSignupDescriptionContract->fetchLatestDataByLanguageId($this->languageId);
         $blogs =  $this->blogContract->getAllByLanguageId($this->languageId);
+        $pages =  $this->pageContract->getAllByLanguageId($this->languageId); //Common
+
         return view('landlord.public-section.pages.landing-page.index',compact([
-            'socials','hero','module','features','faq','testimonials','tenantSignupDescription','blogs'
+            'socials','hero','module','features','faq','testimonials','tenantSignupDescription','blogs','pages'
         ]));
     }
 
     public function blog()
     {
-        $socials = $this->socialContract->getOrderByPosition();
+        $socials = $this->socialContract->getOrderByPosition(); //Common
         $blogs =  $this->blogContract->getAllByLanguageId($this->languageId);
+        $pages =  $this->pageContract->getAllByLanguageId($this->languageId); //Common
 
-        return view('landlord.public-section.pages.blogs.index',compact('socials','blogs'));
+        return view('landlord.public-section.pages.blogs.index',compact('socials','blogs','pages'));
     }
 
     public function blogDetail($slug)
     {
-        return $slug;
+        $socials = $this->socialContract->getOrderByPosition(); //Common
+        $blog =  $this->blogContract->fetchLatestDataBySlug($slug);
+        $pages =  $this->pageContract->getAllByLanguageId($this->languageId); //Common
+
+        return view('landlord.public-section.pages.blogs.blog-details',compact('socials', 'blog', 'pages'));
+    }
+
+    public function pageDetails($slug)
+    {
+        $socials = $this->socialContract->getOrderByPosition(); //Common
+        $page =  $this->pageContract->fetchLatestDataBySlug($slug);
+        $pages =  $this->pageContract->getAllByLanguageId($this->languageId); //Common
+
+        return view('landlord.public-section.pages.pages.page-details',compact('socials', 'page', 'pages'));
     }
 }

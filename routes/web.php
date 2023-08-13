@@ -12,6 +12,7 @@ use App\Http\Controllers\Landlord\GeneralSettingController;
 use App\Http\Controllers\Landlord\HeroController;
 use App\Http\Controllers\Landlord\LanguageController;
 use App\Http\Controllers\Landlord\ModuleController;
+use App\Http\Controllers\Landlord\PageController;
 use App\Http\Controllers\Landlord\SocialController;
 use App\Http\Controllers\Landlord\TenantSignupDescriptionController;
 use App\Http\Controllers\Landlord\TestimonialController;
@@ -41,6 +42,7 @@ Route::controller(LandingPageController::class)->group(function () {
     Route::get('/', 'index')->name('landingPage.index');
     Route::get('/blogs', 'blog')->name('landingPage.blog');
     Route::get('/blogs/{slug}', 'blogDetail')->name('landingPage.blogDetail');
+    Route::get('/pages/{slug}', 'pageDetails')->name('landingPage.pageDetail');
 });
 
 Route::get('/super-admin', [AdminController::class, 'showLoginForm'])->name('landlord.login')->middleware('guest');
@@ -154,6 +156,17 @@ Route::middleware(['auth','setLocale'])->group(function () {
                 Route::get('/edit/{blog}', 'edit')->name('blog.edit');
                 Route::post('/update/{id}', 'update')->name('blog.update')->middleware('demoCheck');
                 Route::get('/destroy/{id}', 'destroy')->name('blog.destroy')->middleware('demoCheck');
+            });
+        });
+
+        Route::prefix('pages')->group(function () {
+            Route::controller(PageController::class)->group(function () {
+                Route::get('/', 'index')->name('page.index');
+                Route::get('/datatable', 'datatable')->name('page.datatable');
+                Route::post('/store', 'store')->name('page.store')->middleware('demoCheck');
+                Route::get('/edit/{page}', 'edit')->name('page.edit');
+                Route::post('/update/{id}', 'update')->name('page.update')->middleware('demoCheck');
+                Route::get('/destroy/{id}', 'destroy')->name('page.destroy')->middleware('demoCheck');
             });
         });
 

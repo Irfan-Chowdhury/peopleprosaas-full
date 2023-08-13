@@ -16,7 +16,7 @@
     @if(!env('USER_VERIFIED'))
     <div class="d-block text-center"><a class="button style1 w-100" href="https://lion-coders.com/software/salepro-saas">Buy Salepro SAAS</a></div>
     @endif
-    
+
     <section class="hero mt-0">
         <div class="container">
             <div class="row">
@@ -526,14 +526,14 @@
                 </div>
                 @foreach($blogs as $blog)
                 <div class="col-md-4">
-                    <a href="{{url('/blog')}}/{{$blog->slug}}">
+                    <a href="{{ route('landingPage.blogDetail',$blog->slug) }}">
                         <img src="{{asset('landlord/images/blog')}}/{{$blog->image}}" alt="{{$blog->title}}"/>
                         <h4 class="mt-3">{{$blog->title}}</h4>
                     </a>
                 </div>
                 @endforeach
                 <div class="col-md-6 offset-md-3 text-center mt-3 mb-5">
-                    <a href="{{url('blog')}}" class="button style1">{{ __('file.All Blogs') }}</a>
+                    <a href="{{url('blogs')}}" class="button style1">{{ __('file.All Blogs') }}</a>
                 </div>
             </div>
         </div>

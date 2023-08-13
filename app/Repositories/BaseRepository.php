@@ -42,6 +42,12 @@ class BaseRepository implements BaseContract
         return $this->model->where('language_id',$languageId)->latest()->first();
     }
 
+    // LandingpageController: pageDetails()
+    public function fetchLatestDataBySlug($slug)
+    {
+        return $this->model->where('slug',$slug)->latest()->first();
+    }
+
     // ModuleController || FaqController
     public function fetchLatestDataByLanguageIdWithRelation($relation, $languageId)
     {

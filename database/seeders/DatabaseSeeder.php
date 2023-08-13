@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
                 FaqSeeder::class,
                 TestimonialSeeder::class,
                 TenantSignupDescriptionSeeder::class,
+                PageSeeder::class,
             ]);
         }
         else {

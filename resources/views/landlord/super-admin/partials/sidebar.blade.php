@@ -30,7 +30,7 @@
                 <li id="cms-testimonial-menu"><a href="{{ route('testimonial.index') }}">{{trans('file.Testimonial Section')}}</a></li>
                 <li id="cms-tenant-signup-menu"><a href="{{ route('tenantSignupDescription.index') }}">{{trans('file.Tenant Signup Description')}}</a></li>
                 <li id="cms-blog-menu"><a href="{{ route('blog.index') }}">{{trans('file.Blog Section')}}</a></li>
-                <li id="cms-page-menu"><a href="">{{trans('file.Page Section')}}</a></li>
+                <li id="cms-page-menu"><a href="{{ route('page.index') }}">  {{trans('file.Page Section')}}</a></li>
                 <li id="cms-social-menu"><a href="{{ route('social.index') }}">{{trans('file.Social Section')}}</a></li>
             </ul>
         </li>

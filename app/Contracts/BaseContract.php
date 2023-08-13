@@ -13,6 +13,8 @@ interface BaseContract {
 
     public function fetchLatestDataByLanguageId($languageId);
 
+    public function fetchLatestDataBySlug($slug);
+    
     public function fetchLatestDataByLanguageIdWithRelation($relation, $languageId);
 
     public function getById($id);

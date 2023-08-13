@@ -287,11 +287,11 @@
     @yield('public-content')
 
     <!-- Footer section Starts-->
-    {{-- <div class="footer-wrapper pt-0">
+    <div class="footer-wrapper pt-0">
         <div class="container">
             <div class="footer-links">
-                @foreach($pages as $page)
-                <a href="{{url('page/'.$page->slug)}}">{{$page->title}}</a>
+                @foreach($pages as $key => $page)
+                    <a href="{{url('pages/'.$page->slug)}}">{{$page->title}} &nbsp; @if($key !== (count($pages)-1)) | @endif</a>
                 @endforeach
             </div>
             <div class="footer-bottom">
@@ -302,10 +302,10 @@
                     </li>
                     @endforeach
                 </ul>
-                <p class="copyright">&copy; {{$general_setting->site_title}} {{date_format(date_create(date('Y-m-d')), $general_setting->date_format)}}. All rights reserved</p>
+                {{-- <p class="copyright">&copy; {{$general_setting->site_title}} {{date_format(date_create(date('Y-m-d')), $general_setting->date_format)}}. All rights reserved</p> --}}
             </div>
         </div>
-    </div> --}}
+    </div>
     <!-- Footer section Ends-->
 
     <!--Scroll to top starts-->
