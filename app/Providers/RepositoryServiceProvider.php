@@ -10,6 +10,7 @@ use App\Contracts\FaqDetailContract;
 use App\Contracts\FeatureContract;
 use App\Contracts\GeneralSettingContract;
 use App\Contracts\LanguageContract;
+use App\Contracts\MailSettingContract;
 use App\Contracts\ModuleContract;
 use App\Contracts\ModuleDetailContract;
 use App\Contracts\PageContract;
@@ -26,6 +27,7 @@ use App\Repositories\FaqRepository;
 use App\Repositories\FeatureRepository;
 use App\Repositories\GeneralSettingRepository;
 use App\Repositories\LanguageRepository;
+use App\Repositories\MailSettingRepository;
 use App\Repositories\ModuleDetailRepository;
 use App\Repositories\ModuleRepository;
 use App\Repositories\PageRepository;
@@ -56,6 +58,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(AnalyticSettingContract::class, AnalyticSettingRepository::class);
         $this->app->bind(SeoSettingContract::class, SeoSettingRepository::class);
         $this->app->bind(PaymentSettingContract::class, PaymentSettingRepository::class);
+        $this->app->bind(MailSettingContract::class, MailSettingRepository::class);
     }
 
 

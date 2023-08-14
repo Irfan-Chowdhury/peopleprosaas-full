@@ -7,6 +7,7 @@ use App\Facades\Utility;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Setting\AnalyticSettingRequest;
 use App\Http\Requests\Setting\GeneralSettingRequest;
+use App\Http\Requests\Setting\MailSettingRequest;
 use App\Http\Requests\Setting\PaymentSettingRequest;
 use App\Http\Requests\Setting\SeoSettingRequest;
 use App\Models\Landlord\AnalyticSetting;
@@ -26,13 +27,18 @@ class SettingController extends Controller
         $timeZones = Utility::timeZoneData();
         $dateFormat = Utility::dateFormat();
         $generalSetting =  $this->settingService->getLatestGeneralSettingData();
+
         $paymentSetting =  $this->settingService->getLatestPaymentSettingData();
+        $paymentGateWays = explode(",",$paymentSetting->active_payment_gateway);
+
+        $mailSetting =  $this->settingService->getLatestMailSettingData();
+
         $analyticSetting =  $this->settingService->getLatestAnalyticSettingData();
         $seoSetting =  $this->settingService->getLatestSeoSettingData();
 
 
         return view('landlord.super-admin.pages.settings.index', compact([
-            'timeZones' , 'dateFormat', 'generalSetting', 'paymentSetting', 'analyticSetting', 'seoSetting'
+            'timeZones' , 'dateFormat', 'generalSetting', 'paymentSetting', 'mailSetting', 'paymentGateWays', 'analyticSetting', 'seoSetting'
         ]));
     }
 
@@ -60,6 +66,13 @@ class SettingController extends Controller
     public function paymentSettingManage(PaymentSettingRequest $request)
     {
         $result = $this->settingService->updatePaymentSetting($request);
+
+        return response()->json($result['alertMsg'], $result['statusCode']);
+    }
+
+    public function mailSettingManage(MailSettingRequest $request)
+    {
+        $result = $this->settingService->updateMailSetting($request);
 
         return response()->json($result['alertMsg'], $result['statusCode']);
     }

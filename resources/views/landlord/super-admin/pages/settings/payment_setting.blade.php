@@ -1,4 +1,4 @@
-<div class="tab-pane fade show active" id="paymentSetting" role="tabpanel" aria-labelledby="payment-setting">    <div class="card">
+<div class="tab-pane fade" id="paymentSetting" role="tabpanel" aria-labelledby="payment-setting">    <div class="card">
     <h4 class="card-header p-3"><b>@lang('file.Payment Setting')</b></h4>
     <hr>
     <div class="card-body">
@@ -11,10 +11,10 @@
                     <select name="active_payment_gateway[]" class="selectpicker form-control"
                             data-live-search="true" data-live-search-style="contains" multiple
                             title='{{__('Selecting',['key'=>trans('file.No Payment Gateway')])}}...'>
-                            <option value="stripe">Stripe</option>
-                            <option value="paystack">Paystack</option>
-                            <option value="paypal">Paypal</option>
-                            <option value="razorpay">Razorpay</option>
+                            <option value="stripe" {{ in_array('stripe', $paymentGateWays) ? 'selected' : null }}>@lang('file.Stripe')</option>
+                            <option value="paystack" {{ in_array('paystack', $paymentGateWays) ? 'selected' : null }}>@lang('file.Paystack')</option>
+                            <option value="paypal" {{ in_array('paypal', $paymentGateWays) ? 'selected' : null }}>@lang('file.Paypal')</option>
+                            <option value="razorpay" {{ in_array('razorpay', $paymentGateWays) ? 'selected' : null }}>@lang('file.Razorpay')</option>
                     </select>
                 </div>
                 <div class="col-md-12">

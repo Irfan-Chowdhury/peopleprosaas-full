@@ -44,11 +44,7 @@
                 <li id="localization-add-translation-menu"><a href="{{ route('lang.translations.create', config('app.locale')) }}">{{trans('file.Add Translation')}} </a></li>
             </ul>
         </li>
-        <li><a href=""><i class="dripicons-ticket"></i> {{trans('file.Support Tickets')}}</a></li>
-        <li><a href="{{ route('setting.general.index') }}"><i class="dripicons-gear"></i> {{trans('file.settings')}}</a></li>
-        <li><a href=""><i class="dripicons-mail"></i> {{trans('file.Mail Setting')}}</a></li>
-        {{-- @if(Auth::user()->role_id != 5) --}}
+        <li><a href="{{ route('setting.general.index') }}"><i class="dripicons-gear"></i> {{trans('file.Settings')}}</a></li>
         <li><a target="_blank" href=""> <i class="dripicons-information"></i><span>{{trans('file.Documentation')}}</span></a></li>
-        {{-- @endif --}}
     </ul>
   </nav>

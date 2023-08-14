@@ -45,6 +45,7 @@
 
             let generalSettingURL = "{{ route('setting.general.manage') }}";
             let paymentSettingURL = "{{ route('setting.payment.manage') }}";
+            let mailSettingURL = "{{ route('setting.mail.manage') }}";
             let analyticSettingURL = "{{ route('setting.analytic.manage') }}";
             let seoSettingURL = "{{ route('setting.seo.manage') }}";
 
@@ -64,6 +65,11 @@
                     e.preventDefault();
                     var formData = new FormData(this);
                     generateSetting('paymentButton', paymentSettingURL, formData);
+                });
+                $("#mailSettingSubmit").on("submit", function(e) {
+                    e.preventDefault();
+                    var formData = new FormData(this);
+                    generateSetting('mailButton', mailSettingURL, formData);
                 });
                 $("#analyticSettingSubmit").on("submit", function(e) {
                     e.preventDefault();

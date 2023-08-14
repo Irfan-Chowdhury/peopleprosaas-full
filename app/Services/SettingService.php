@@ -5,6 +5,7 @@ namespace App\Services;
 
 use App\Contracts\AnalyticSettingContract;
 use App\Contracts\GeneralSettingContract;
+use App\Contracts\MailSettingContract;
 use App\Contracts\PaymentSettingContract;
 use App\Contracts\SeoSettingContract;
 use App\Facades\Alert;
@@ -21,6 +22,7 @@ class SettingService
     public function __construct(
         private GeneralSettingContract $generalSettingContract,
         private PaymentSettingContract $paymentSettingContract,
+        private MailSettingContract $mailSettingContract,
         private AnalyticSettingContract $analyticSettingContract,
         private SeoSettingContract $seoSettingContract,
     ){}
@@ -33,6 +35,11 @@ class SettingService
     public function getLatestPaymentSettingData() : object | null
     {
         return $this->paymentSettingContract->fetchLatestData();
+    }
+
+    public function getLatestMailSettingData() : object | null
+    {
+        return $this->mailSettingContract->fetchLatestData();
     }
 
     public function getLatestAnalyticSettingData() : object | null
@@ -77,6 +84,29 @@ class SettingService
         }
     }
 
+
+    public function updateMailSetting($request)
+    {
+        try {
+            $data = [
+                'driver'  => $request->driver,
+                'host' => $request->host,
+                'port' => $request->port,
+                'from_address' => $request->from_address,
+                'from_name' => $request->from_name,
+                'username' => $request->username,
+                'password' => $request->password,
+                'encryption' => $request->encryption,
+            ];
+
+            $this->mailSettingContract->updateOrCreate([], $data);
+
+            return Alert::successMessage('Data Submitted Successfully');
+        }
+        catch (Exception $exception) {
+            return Alert::errorMessage($exception->getMessage());
+        }
+    }
 
     public function updatePaymentSetting($request)
     {
