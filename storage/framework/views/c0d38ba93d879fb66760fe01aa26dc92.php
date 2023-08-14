@@ -1,5 +1,4 @@
-@extends('landlord.super-admin.layouts.master')
-@section('landlord-content')
+<?php $__env->startSection('landlord-content'); ?>
 
 
     <div class="container-fluid mb-3">
@@ -8,25 +7,22 @@
         <div class="row">
             <div class="col-3">
                 <div class="list-group" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action active" id="general-setting" data-toggle="list" href="#generalSetting" role="tab" aria-controls="home">@lang('file.General Setting')</a>
-                    <a class="list-group-item list-group-item-action" id="payment-setting" data-toggle="list" href="#paymentSetting" role="tab" aria-controls="settings">@lang('file.Payment Setting')</a>
-                    <a class="list-group-item list-group-item-action" id="mail-setting" data-toggle="list" href="#mailSetting" role="tab" aria-controls="settings">@lang('file.Mail Setting')</a>
-                    <a class="list-group-item list-group-item-action" id="analytics-setting" data-toggle="list" href="#analyticsSetting" role="tab" aria-controls="settings">@lang('file.Analytics Setting')</a>
-                    <a class="list-group-item list-group-item-action" id="seo-setting" data-toggle="list" href="#seoSetting" role="tab" aria-controls="settings">@lang('file.SEO Setting')</a>
+                    <a class="list-group-item list-group-item-action active" id="general-setting" data-toggle="list" href="#generalSetting" role="tab" aria-controls="home"><?php echo app('translator')->get('file.General Setting'); ?></a>
+                    <a class="list-group-item list-group-item-action" id="payment-setting" data-toggle="list" href="#paymentSetting" role="tab" aria-controls="settings"><?php echo app('translator')->get('file.Payment Setting'); ?></a>
+                    <a class="list-group-item list-group-item-action" id="analytics-setting" data-toggle="list" href="#analyticsSetting" role="tab" aria-controls="settings"><?php echo app('translator')->get('file.Analytics Setting'); ?></a>
+                    <a class="list-group-item list-group-item-action" id="seo-setting" data-toggle="list" href="#seoSetting" role="tab" aria-controls="settings"><?php echo app('translator')->get('file.SEO Setting'); ?></a>
                 </div>
             </div>
             <div class="col-9">
               <div class="tab-content" id="nav-tabContent">
 
-                @include('landlord.super-admin.pages.settings.general')
+                <?php echo $__env->make('landlord.super-admin.pages.settings.general', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-                @include('landlord.super-admin.pages.settings.payment_setting')
+                <?php echo $__env->make('landlord.super-admin.pages.settings.payment_setting', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-                @include('landlord.super-admin.pages.settings.mail_setting')
+                <?php echo $__env->make('landlord.super-admin.pages.settings.analytic_setting', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-                @include('landlord.super-admin.pages.settings.analytic_setting')
-
-                @include('landlord.super-admin.pages.settings.seo_setting')
+                <?php echo $__env->make('landlord.super-admin.pages.settings.seo_setting', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 
                 <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">Profile</div>
@@ -36,17 +32,17 @@
             </div>
           </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script type="text/javascript">
         (function($) {
             "use strict";
 
-            let generalSettingURL = "{{ route('setting.general.manage') }}";
-            let paymentSettingURL = "{{ route('setting.payment.manage') }}";
-            let analyticSettingURL = "{{ route('setting.analytic.manage') }}";
-            let seoSettingURL = "{{ route('setting.seo.manage') }}";
+            let generalSettingURL = "<?php echo e(route('setting.general.manage')); ?>";
+            let paymentSettingURL = "<?php echo e(route('setting.payment.manage')); ?>";
+            let analyticSettingURL = "<?php echo e(route('setting.analytic.manage')); ?>";
+            let seoSettingURL = "<?php echo e(route('setting.seo.manage')); ?>";
 
             $(document).ready(function() {
                 $.ajaxSetup({
@@ -103,5 +99,7 @@
         })(jQuery);
     </script>
 
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script>
-@endpush
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/alertMessages.js')); ?>"></script>
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('landlord.super-admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/pages/settings/index.blade.php ENDPATH**/ ?>

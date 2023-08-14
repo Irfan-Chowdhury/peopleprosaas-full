@@ -5,10 +5,10 @@ namespace App\Services;
 
 use App\Contracts\AnalyticSettingContract;
 use App\Contracts\GeneralSettingContract;
+use App\Contracts\PaymentSettingContract;
 use App\Contracts\SeoSettingContract;
 use App\Facades\Alert;
 use App\Facades\Utility;
-use App\Models\Landlord\AnalyticSetting;
 use Exception;
 use Illuminate\Support\Facades\File;
 
@@ -20,6 +20,7 @@ class SettingService
 
     public function __construct(
         private GeneralSettingContract $generalSettingContract,
+        private PaymentSettingContract $paymentSettingContract,
         private AnalyticSettingContract $analyticSettingContract,
         private SeoSettingContract $seoSettingContract,
     ){}
@@ -28,10 +29,17 @@ class SettingService
     {
         return $this->generalSettingContract->fetchLatestData();
     }
+
+    public function getLatestPaymentSettingData() : object | null
+    {
+        return $this->paymentSettingContract->fetchLatestData();
+    }
+
     public function getLatestAnalyticSettingData() : object | null
     {
         return $this->analyticSettingContract->fetchLatestData();
     }
+
     public function getLatestSeoSettingData() : object | null
     {
         return $this->seoSettingContract->fetchLatestData();
@@ -68,6 +76,33 @@ class SettingService
             return Alert::errorMessage($exception->getMessage());
         }
     }
+
+
+    public function updatePaymentSetting($request)
+    {
+        try {
+            $data = [
+                'active_payment_gateway' => implode(",", $request->active_payment_gateway),
+                'stripe_public_key'  => $request->stripe_public_key,
+                'stripe_secret_key' => $request->stripe_secret_key,
+                'paystack_public_key' => $request->paystack_public_key,
+                'paystack_secret_key' => $request->paystack_secret_key,
+                'paypal_client_id' => $request->paypal_client_id,
+                'paypal_client_secret' => $request->paypal_client_secret,
+                'razorpay_number' => $request->razorpay_number,
+                'razorpay_key' => $request->razorpay_key,
+                'razorpay_secret' => $request->razorpay_secret,
+            ];
+
+            $this->paymentSettingContract->updateOrCreate([], $data);
+
+            return Alert::successMessage('Data Submitted Successfully');
+        }
+        catch (Exception $exception) {
+            return Alert::errorMessage($exception->getMessage());
+        }
+    }
+
 
     public function updateAnalyticSetting($request)
     {
