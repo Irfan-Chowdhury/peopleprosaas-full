@@ -1,5 +1,5 @@
-// (function ($) {
-//     "use strict";
+(function ($) {
+    "use strict";
 
     $("#submitForm").on("submit",function(e){
         e.preventDefault();
@@ -28,7 +28,7 @@
         });
     });
 
-// })(jQuery);
+})(jQuery);
 
 
 

@@ -1,21 +1,23 @@
-@extends('landlord.super-admin.layouts.master')
-@section('landlord-content')
+<?php $__env->startSection('landlord-content'); ?>
+
+
+
     <div class="container-fluid mb-3">
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    @include('includes.session_message')
+                    <?php echo $__env->make('includes.session_message', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                     <div class="card-header d-flex align-items-center p-3">
-                        <h4 >{{trans('file.Hero Section')}}</h4>
+                        <h4 ><?php echo e(trans('file.Hero Section')); ?></h4>
                     </div>
                     <hr>
                     <div class="card-body">
-                        <form id="submitForm" action="{{ route('hero.updateOrCreate') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
+                        <form id="submitForm" action="<?php echo e(route('hero.updateOrCreate')); ?>" method="POST" enctype="multipart/form-data">
+                            <?php echo csrf_field(); ?>
 
                             <div class="row">
-                                @include('landlord.super-admin.partials.input-field',[
+                                <?php echo $__env->make('landlord.super-admin.partials.input-field',[
                                     'colSize' => 4,
                                     'labelName' => 'Heading',
                                     'fieldType' => 'text',
@@ -23,8 +25,8 @@
                                     'placeholderData' => 'e.g: PeopleProSaaS is a HRM software.',
                                     'isRequired' => false,
                                     'valueData'=> isset($hero->heading) ? $hero->heading : null
-                                ])
-                                @include('landlord.super-admin.partials.input-field',[
+                                ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                <?php echo $__env->make('landlord.super-admin.partials.input-field',[
                                     'colSize' => 4,
                                     'labelName' => 'Button Text',
                                     'fieldType' => 'text',
@@ -32,16 +34,16 @@
                                     'placeholderData' => 'e.g: Try for free',
                                     'isRequired' => false,
                                     'valueData'=> isset($hero->button_text) ? $hero->button_text : null
-                                ])
-                                @include('landlord.super-admin.partials.input-field',[
+                                ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                <?php echo $__env->make('landlord.super-admin.partials.input-field',[
                                     'colSize' => 4,
                                     'labelName' => 'Image',
                                     'fieldType' => 'file',
                                     'nameData' => 'image',
                                     'placeholderData' => null,
                                     'isRequired' => false,
-                                ])
-                                @include('landlord.super-admin.partials.input-field',[
+                                ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                <?php echo $__env->make('landlord.super-admin.partials.input-field',[
                                     'colSize' => 12,
                                     'labelName' => 'Sub-Heading',
                                     'fieldType' => 'textarea',
@@ -49,10 +51,10 @@
                                     'placeholderData' => 'e.g: PeopleProSaaS is a HRM software.',
                                     'isRequired' => false,
                                     'valueData'=> isset($hero->sub_heading) ? $hero->sub_heading : null
-                                ])
+                                ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                                 <div class="col-4 form-group mt-3">
-                                    <button type="submit" id="submitButton" class="btn btn-primary">@lang('file.Submit')</button>
+                                    <button type="submit" id="submitButton" class="btn btn-primary"><?php echo app('translator')->get('file.Submit'); ?></button>
                                 </div>
 
                             </div>
@@ -62,15 +64,15 @@
             </div>
         </div>
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script type="text/javascript">
         (function($) {
             "use strict";
 
-            let updateOrCreateURL = "{{ route('hero.updateOrCreate') }}";
+            let updateOrCreateURL = "<?php echo e(route('hero.updateOrCreate')); ?>";
 
             $(document).ready(function() {
                 $.ajaxSetup({
@@ -78,6 +80,7 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
+
                 $("#submitForm").on("submit", function(e) {
                     e.preventDefault();
                     var formData = new FormData(this);
@@ -111,5 +114,7 @@
         })(jQuery);
     </script>
 
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script>
-@endpush
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/alertMessages.js')); ?>"></script>
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('landlord.super-admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/pages/heroes/index.blade.php ENDPATH**/ ?>

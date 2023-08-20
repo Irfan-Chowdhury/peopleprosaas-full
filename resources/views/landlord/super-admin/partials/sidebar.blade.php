@@ -17,8 +17,8 @@
         <li><a href=""><i class="dripicons-card"></i> {{trans('file.Payments')}}</a></li>
         <li><a href="#package" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-archive"></i><span>{{trans('file.Package')}}</span><span></a>
             <ul id="package" class="collapse list-unstyled ">
-                <li id="package-list-menu"><a href="">{{trans('file.Package List')}}</a></li>
-                <li id="package-create-menu"><a href="">{{trans('file.Add Package')}}</a></li>
+                <li id="package-list-menu"><a href="{{ route('package.index') }}">{{trans('file.Package List')}}</a></li>
+                <li id="package-create-menu"><a href="{{ route('package.create') }}">{{trans('file.Add Package')}}</a></li>
             </ul>
         </li>
         <li><a href="#cms" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-stack"></i><span>{{trans('file.CMS')}}</span><span></a>

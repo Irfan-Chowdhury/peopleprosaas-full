@@ -3,7 +3,6 @@
 
 
     <link rel="stylesheet" href="<?php echo asset('css/kendo.default.v2.min.css') ?>" type="text/css">
-
     <script type="text/javascript" src="<?php echo asset('js/kendo.all.min.js') ?>"></script>
 
     <section>
@@ -75,7 +74,6 @@
                         checkboxes: {
                             checkChildren: true
                         },
-
                         check: onCheck,
 
                         dataSource: [

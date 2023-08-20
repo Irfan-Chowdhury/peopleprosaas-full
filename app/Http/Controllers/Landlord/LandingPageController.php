@@ -30,7 +30,8 @@ class LandingPageController extends Controller
     )
     {
         $this->middleware(function ($request, $next){
-            $this->languageId = Session::has('TempSuperAdminLangId')==true ? Session::get('TempSuperAdminLangId') : Session::get('DefaultSuperAdminLangId');
+            // $this->languageId = Session::has('TempSuperAdminLangId')==true ? Session::get('TempSuperAdminLangId') : Session::get('DefaultSuperAdminLangId');
+            $this->languageId = Session::has('TempPublicLangId')==true ? Session::get('TempPublicLangId') : Session::get('DefaultSuperAdminLangId');
             return $next($request);
         });
     }
@@ -47,6 +48,16 @@ class LandingPageController extends Controller
         $socials = $this->socialContract->getOrderByPosition(); //Common
         $hero = Hero::where('language_id',1)->latest()->first();
         $module  = $moduleContract->fetchLatestDataByLanguageIdWithRelation(['moduleDetails'], $this->languageId);
+
+        // ========= Test ================
+
+        // return $this->languageId;
+        // return Session::get('DefaultSuperAdminLangId');
+        // $languageId = Session::has('TempSuperAdminLangId')==true ? Session::get('TempSuperAdminLangId') : Session::get('DefaultSuperAdminLangId');
+        // return $languageId;
+
+        // ========== Test =============
+
         $faq  = $faqContract->fetchLatestDataByLanguageIdWithRelation(['faqDetails'], $this->languageId);
         $features = $featureContract->all();
         $testimonials = $testimonialContract->getOrderByPosition();

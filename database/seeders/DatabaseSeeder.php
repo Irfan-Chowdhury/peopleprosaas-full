@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
                 TestimonialSeeder::class,
                 TenantSignupDescriptionSeeder::class,
                 PageSeeder::class,
+                LandlordPermissionsSeeder::class,
             ]);
         }
         else {

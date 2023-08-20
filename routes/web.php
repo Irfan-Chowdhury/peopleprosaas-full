@@ -12,6 +12,7 @@ use App\Http\Controllers\Landlord\SettingController;
 use App\Http\Controllers\Landlord\HeroController;
 use App\Http\Controllers\Landlord\LanguageController;
 use App\Http\Controllers\Landlord\ModuleController;
+use App\Http\Controllers\Landlord\PackageController;
 use App\Http\Controllers\Landlord\PageController;
 use App\Http\Controllers\Landlord\SocialController;
 use App\Http\Controllers\Landlord\TenantSignupDescriptionController;
@@ -37,13 +38,15 @@ Route::get('/lang', function () {
     // return Session::has('DefaultSuperAdminLocale') ?? 'en';
 });
 
-
-Route::controller(LandingPageController::class)->group(function () {
-    Route::get('/', 'index')->name('landingPage.index');
-    Route::get('/blogs', 'blog')->name('landingPage.blog');
-    Route::get('/blogs/{slug}', 'blogDetail')->name('landingPage.blogDetail');
-    Route::get('/pages/{slug}', 'pageDetails')->name('landingPage.pageDetail');
+Route::middleware(['setPublicLocale'])->group(function () {
+    Route::controller(LandingPageController::class)->group(function () {
+        Route::get('/', 'index')->name('landingPage.index');
+        Route::get('/blogs', 'blog')->name('landingPage.blog');
+        Route::get('/blogs/{slug}', 'blogDetail')->name('landingPage.blogDetail');
+        Route::get('/pages/{slug}', 'pageDetails')->name('landingPage.pageDetail');
+    });
 });
+
 
 Route::get('/super-admin', [AdminController::class, 'showLoginForm'])->name('landlord.login')->middleware('guest');
 Route::post('/super-admin', [AdminController::class, 'login'])->name('landlord.login.proccess');
@@ -53,6 +56,18 @@ Route::middleware(['auth','setLocale'])->group(function () {
     Route::prefix('super-admin')->group(function () {
 
         Route::get('dashboard',[DashboardController::class, 'index'])->name('landlord.dashboard');
+
+        Route::prefix('packages')->group(function () {
+            Route::controller(PackageController::class)->group(function () {
+                Route::get('/', 'index')->name('package.index');
+                Route::get('/create', 'create')->name('package.create');
+                Route::post('/store', 'store')->name('package.store')->middleware('demoCheck');
+                Route::get('/edit/{package}', 'edit')->name('package.edit');
+                Route::post('/update/{package}', 'update')->name('package.update')->middleware('demoCheck');
+                Route::get('/destroy/{package}', 'destroy')->name('package.destroy')->middleware('demoCheck');
+                Route::post('/sort', 'sort')->name('package.sort')->middleware('demoCheck');
+            });
+        });
 
         Route::prefix('languages')->group(function () {
             Route::controller(LanguageController::class)->group(function () {

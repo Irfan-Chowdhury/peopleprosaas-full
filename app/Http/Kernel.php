@@ -67,6 +67,7 @@ class Kernel extends HttpKernel
 		'admin' => \App\Http\Middleware\CheckAdmin::class,
 		'demoCheck' => \App\Http\Middleware\DemoCheck::class,
 		'setLocale' => \App\Http\Middleware\SetLocale::class,
+		'setPublicLocale' => \App\Http\Middleware\SetPublicLocale::class,
     ];
 
     /**

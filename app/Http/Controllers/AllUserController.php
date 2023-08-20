@@ -47,7 +47,7 @@ class AllUserController extends Controller {
                                         <div>"
                                             .$full_name.'</br>'.$username.'</br>'.
                                             // '<b>Role :</b> '.$row->RoleUser->role_name;
-                                            '<b>Role :</b> '.$row->RoleUser->name;
+                                            '<b>Role :</b> '.$row->RoleUser->name.
                                         "</div>
                                     </div>";
 
@@ -89,7 +89,6 @@ class AllUserController extends Controller {
                                     $button .= '<button type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="dripicons-cross"></i></button>';
                                 }
                             }
-
                             return $button;
                         })
                         ->rawColumns(['username','contacts','login_info','action'])
@@ -104,7 +103,6 @@ class AllUserController extends Controller {
 
 	public function edit($id)
 	{
-
 		if (request()->ajax())
 		{
 			$data = User::findOrFail($id);
