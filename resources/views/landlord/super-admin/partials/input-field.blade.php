@@ -18,7 +18,7 @@
                 <textarea  {{ $isRequired ? 'required':'' }} name="{{ $nameData }}" id="{{ isset($idData) ? $idData : null }}" @if(isset($placeholderData)) placeholder="{{ $placeholderData }}" @endif class="form-control ckeditor" rows="4"> @if(isset($valueData)) {{ $valueData }} @endif </textarea>
                 @break
             @case('checkbox')
-                <input {{ $isRequired ? 'required':'' }} type="checkbox"  name="{{ $nameData }}" id="{{ isset($idData) ? $idData : null }}" @if(isset($valueData)) value="{{ $valueData }}" @endif> &nbsp;
+                <input  @if(isset($isChecked)) {{ $isChecked ? 'checked' : '' }}  @endif {{ $isRequired ? 'required':'' }} type="checkbox"  name="{{ $nameData }}" id="{{ isset($idData) ? $idData : null }}" @if(isset($valueData)) value="{{ $valueData }}" @endif> &nbsp;
                 <label class="font-weight-bold">{{trans("file.$labelName")}}</label>
                 @break
             @default

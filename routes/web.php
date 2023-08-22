@@ -60,6 +60,7 @@ Route::middleware(['auth','setLocale'])->group(function () {
         Route::prefix('packages')->group(function () {
             Route::controller(PackageController::class)->group(function () {
                 Route::get('/', 'index')->name('package.index');
+                Route::get('/datatable', 'datatable')->name('package.datatable');
                 Route::get('/create', 'create')->name('package.create');
                 Route::post('/store', 'store')->name('package.store')->middleware('demoCheck');
                 Route::get('/edit/{package}', 'edit')->name('package.edit');

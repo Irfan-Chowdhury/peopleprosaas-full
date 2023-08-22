@@ -12,7 +12,43 @@ class PackageController extends Controller
 {
     public function index()
     {
-        return 1;
+        return view('landlord.super-admin.pages.packages.index');
+    }
+
+    public function datatable()
+    {
+        $packages = Package::all();
+
+        return datatables()->of($packages)
+        ->setRowId(function ($row) {
+            return $row->id;
+        })
+        ->addColumn('name', function ($row) {
+            return $row->name;
+        })
+        ->addColumn('is_free_trial', function ($row) {
+            return $row->is_free_trial ? 'Yes' : 'No' ;
+        })
+        ->addColumn('monthly_fee', function ($row) {
+            return $row->monthly_fee;
+        })
+        ->addColumn('yearly_fee', function ($row) {
+            return $row->yearly_fee;
+        })
+        ->addColumn('number_of_user_account', function ($row) {
+            return $row->number_of_user_account;
+        })
+        ->addColumn('number_of_employee', function ($row) {
+            return $row->number_of_employee;
+        })
+        ->addColumn('action', function ($row) {
+            $button = '<a href="'.route('package.edit', $row->id) .'" class="edit btn btn-primary btn-sm" title="Edit"><i class="dripicons-pencil"></i></a>&nbsp;&nbsp;';
+            $button .= '<button type="button" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm"><i class="dripicons-trash"></i></button>';
+
+            return $button;
+        })
+        ->rawColumns(['image', 'action'])
+        ->make(true);
     }
 
     public function create()
@@ -21,7 +57,6 @@ class PackageController extends Controller
 
         $permissionsData = $this->reFormatPermissionData($dbPermissions);
         // return $uniqueParentIds = $this->uniqueParentIds($permissionsData);
-
         // $topLevelItems = $this->displayDataAsNestedTree($permissionsData);
         // return $permissionIds = $this->displayPermissionIdsByParent($topLevelItems);
 
@@ -116,8 +151,111 @@ class PackageController extends Controller
         // $dbPermissions =  Package::latest()->first();
         // return json_decode($dbPermissions->permissions);
 
-        $selectedparentSlugs = explode(',',$request->features[0]);
+        // $selectedparentSlugs = explode(',',$request->features[0]);
+        // $skipSlug = [
+        //     'customize-setting',
+        //     'core_hr',
+        //     'timesheet'
+        // ];
 
+        // $matchedSlugs = [];
+        // foreach ($skipSlug as $element) {
+        //     if (in_array($element, $selectedparentSlugs)) {
+        //         $matchedSlugs[] = $element;
+        //     }
+        // }
+
+        // $selectedparentSlugs = array_values(array_diff($selectedparentSlugs, $matchedSlugs));
+
+        // $data1 = Permission::select('id','name','parent','treeview')
+        //         ->whereIn('parent', $selectedparentSlugs)
+        //         ->orderBy('id','ASC')
+        //         ->get()->toArray();
+
+        // $parentSlug = array_merge($selectedparentSlugs, $matchedSlugs);
+
+        // $data2 = Permission::select('id','name','parent','treeview')
+        //         ->whereIn('name', $parentSlug)
+        //         ->orderBy('id','ASC')
+        //         ->get()->toArray();
+
+        // // $mergedData = array_merge($data1, $data2);
+
+        // $resultOfPermissions = array_merge($data1, $data2);
+        // usort($resultOfPermissions, function ($a, $b) {
+        //     return $a['id'] - $b['id'];
+        // });
+
+        $resultOfPermissions = $this->featureAndPermissionManage($request->features[0]);
+
+        $permission_names = array_column($resultOfPermissions,'name');
+        $permission_ids = array_column($resultOfPermissions,'id');
+
+        // return json_decode(json_encode($permission_names));
+        // return implode(',', $permission_names);
+
+        // $data = [
+        //     'name' => $request->name,
+        //     'is_free_trial' => $request->is_free_trial,
+        //     'monthly_fee' => $request->monthly_fee,
+        //     'yearly_fee' => $request->yearly_fee,
+        //     'number_of_user_account' => $request->number_of_user_account,
+        //     'number_of_employee' => $request->number_of_employee,
+        //     'features' => $request->features[0],
+        //     'permission_ids' => $request->permission_ids,
+        //     'is_active' => $request->is_active,
+        // ];
+
+        Package::create([
+            'name' => $request->name,
+            'is_free_trial' => $request->is_free_trial ? true : false,
+            'monthly_fee' => $request->monthly_fee,
+            'yearly_fee' => $request->yearly_fee,
+            'number_of_user_account' => $request->number_of_user_account,
+            'number_of_employee' => $request->number_of_employee,
+            'features' => $request->features[0],
+            'permissions' => json_encode($resultOfPermissions),
+            'permission_names' => implode(',', $permission_names),
+            'permission_ids' => implode(',', $permission_ids),
+            'is_active' => $request->is_active ? true : false,
+        ]);
+
+        return 'Store Successfully';
+    }
+
+    public function edit(Package $package)
+    {
+        $permissionNames = explode(',',$package->permission_names);
+        return view('landlord.super-admin.pages.packages.edit',compact('package', 'permissionNames'));
+    }
+
+    public function update(Package $package, Request $request)
+    {
+        $resultOfPermissions = $this->featureAndPermissionManage($request->features[0]);
+        $permission_names = array_column($resultOfPermissions,'name');
+        $permission_ids = array_column($resultOfPermissions,'id');
+
+        $package->update([
+            'name' => $request->name,
+            'is_free_trial' => $request->is_free_trial ? true : false,
+            'monthly_fee' => $request->monthly_fee,
+            'yearly_fee' => $request->yearly_fee,
+            'number_of_user_account' => $request->number_of_user_account,
+            'number_of_employee' => $request->number_of_employee,
+            'features' => $request->features[0],
+            'permissions' => json_encode($resultOfPermissions),
+            'permission_names' => implode(',', $permission_names),
+            'permission_ids' => implode(',', $permission_ids),
+            'is_active' => $request->is_active ? true : false,
+        ]);
+
+        return 'Updated Successfully';
+
+    }
+
+    protected function featureAndPermissionManage($features) : array
+    {
+        $selectedparentSlugs = explode(',',$features);
         $skipSlug = [
             'customize-setting',
             'core_hr',
@@ -152,45 +290,8 @@ class PackageController extends Controller
             return $a['id'] - $b['id'];
         });
 
-        $permission_names = array_column($resultOfPermissions,'name');
-        $permission_ids = array_column($resultOfPermissions,'id');
-
-        // return json_decode(json_encode($permission_names));
-        // return implode(',', $permission_names);
-
-        // $data = [
-        //     'name' => $request->name,
-        //     'is_free_trial' => $request->is_free_trial,
-        //     'monthly_fee' => $request->monthly_fee,
-        //     'yearly_fee' => $request->yearly_fee,
-        //     'number_of_user_account' => $request->number_of_user_account,
-        //     'number_of_employee' => $request->number_of_employee,
-        //     'features' => $request->features[0],
-        //     'permission_ids' => $request->permission_ids,
-        //     'is_active' => $request->is_active,
-        // ];
-
-        $data = [
-            'name' => 'standard',
-            'is_free_trial' => true,
-            'monthly_fee' => 20,
-            'yearly_fee' => 200,
-            'number_of_user_account' => 100,
-            'number_of_employee' => 200,
-            'features' => $request->features[0],
-            'permissions' => json_encode($resultOfPermissions),
-            'permission_names' => implode(',', $permission_names),
-            'permission_ids' => implode(',', $permission_ids),
-            'is_active' => 1,
-        ];
-
-        Package::create($data);
-
-        return 'ok';
+        return $resultOfPermissions;
     }
-
-
-
 
 }
 
