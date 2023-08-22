@@ -3,6 +3,9 @@
 
 @push('css')
     <link rel="stylesheet" href="{{ asset('css/kendo.default.v2.min.css') }}" type="text/css">
+    <style>
+
+    </style>
 @endpush
 
 
@@ -85,7 +88,7 @@
                                         <div id="treeview1"></div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div  id="treeview2"></div>
+                                        <div id="treeview2"></div>
                                     </div>
                                     <div class="col-md-4">
                                         <div id="treeview3"></div>
@@ -132,11 +135,47 @@
                         id: 'user',
                         text: "{{trans('User')}}",
                         checked: true,
+                        // expanded: false,
+                        // items: [
+                        //     {
+                        //         id: 'view-user',
+                        //         text: '{{__('View User')}}',
+                        //         checked: true,
+                        //     },
+                        //     {
+                        //         id: 'store-user',
+                        //         text: '{{__('Add User')}}',
+                        //         checked: true
+                        //     },
+                        //     {
+                        //         id: 'edit-user',
+                        //         text: '{{__('Edit User')}}',
+                        //         checked: true
+                        //     },
+                        //     {
+                        //         id: 'delete-user',
+                        //         text: "{{__('Delete User')}}",
+                        //         checked: true
+                        //     },
+                        //     {
+                        //         id: 'last-login-user',
+                        //         text: "{{__('Users Last Login')}}",
+                        //         checked: true
+                        //     },
+                        //     {
+                        //         id: 'role-access-user',
+                        //         text: "{{__('Assign Role')}}",
+                        //         checked: true
+                        //     }
+                        // ],
+                        // checkboxes: {
+                        //     checkChildren: true // This will make the parent node adopt the checked state of its children
+                        // },
                     },
                     {
                         id: 'details-employee',
                         text: "{{trans('Employee Details')}}",
-                        checked: true,
+                        checked: false,
                     },
 
                     {
@@ -158,22 +197,22 @@
                             {
                                 id: 'mail-setting',
                                 text: "{{__('Mail Setting')}}",
-                                checked: true,
+                                checked: false,
                             },
                             {
                                 id: 'access-variable_type',
                                 text: '{{__('Access Variable Type')}}',
-                                checked: true,
+                                checked: false,
                             },
                             {
                                 id: 'access-variable_method',
                                 text: '{{__('Access Variable Method')}}',
-                                checked: true,
+                                checked: false,
                             },
                             {
                                 id: 'access-language',
                                 text: '{{__('Access Language')}}',
-                                checked: true,
+                                checked: false,
                             },
                         ]
                     },
@@ -201,7 +240,7 @@
                     {
                         id: 'core_hr',
                         text: "{{trans('Core HR')}}",
-                        expanded: true,
+                        expanded: false,
                         items: [
                             {
                                 id: 'view-calendar',
@@ -251,219 +290,7 @@
                 ]
             });
 
-
-            $("#treeview2").empty();
-            $("#treeview2").kendoTreeView({
-                checkboxes: {
-                    checkChildren: true
-                },
-                check: onCheck,
-                dataSource: [
-                    {
-                        id: 'timesheet',
-                        text: "{{trans('Timesheet')}}",
-                        expanded: true,
-                        items: [
-
-                            {
-                                id: 'attendance',
-                                text: "{{trans('Attendance')}}",
-                            },
-                            {
-                                id: 'office_shift',
-                                text: "{{trans('Office Shift')}}",
-                                checked: true,
-                            },
-
-                            {
-                                id: 'holiday',
-                                text: "{{trans('Holiday')}}",
-                            },
-                            {
-                                id: 'leave',
-                                text: "{{trans('Leave')}}",
-                            },
-                        ]
-                    },
-                    {
-                        id: 'payment-module',
-                        text: "{{trans('Payment Module')}}",
-                    },
-                    {
-                        id: 'hr_report',
-                        text: "{{trans('HR Reports')}}",
-                    },
-
-                    {
-                        id: 'recruitment',
-                        text: "{{__('Recruitment')}}",
-                        expanded: true,
-                        items: [
-                            {
-                                id: 'job_post',
-                                text: "{{trans('Job Post')}}",
-                            },
-                            {
-                                id: 'job_candidate',
-                                text: "{{trans('Job Candidate')}}",
-                            },
-                            {
-                                id: 'job_interview',
-                                text: "{{trans('Job Interview')}}",
-                            },
-                            {
-                                id: 'cms',
-                                text: "{{__('CMS')}}",
-                            }
-                        ]
-                    },
-                    {
-                        id: 'project-management',
-                        text: "{{trans('Project Management')}}",
-                        expanded: true,
-                        items: [
-                            {
-                                id: 'project',
-                                text: "{{trans('Project')}}",
-                            },
-                            {
-                                id: 'task',
-                                text: "{{trans('Task')}}",
-                            },
-                            {
-                                id: 'client',
-                                text: "{{trans('Client')}}",
-                            },
-                            {
-                                id: 'invoice',
-                                text: "{{trans('Invoice')}}",
-                            },
-                        ]
-                    },
-                    {
-                        id: 'ticket',
-                        text: "{{trans('Ticket')}}",
-                    },
-                    {
-                        id: 'file_module',
-                        text: "{{trans('File Module')}}",
-                        expanded: true,
-                        items: [
-                            {
-                                id: 'file_manager',
-                                text: "{{trans('File Manager')}}",
-                            },
-                            {
-                                id: 'official_document',
-                                text: "{{trans('Official Document')}}",
-                            },
-                        ]
-                    },
-                ]
-            });
-
-
-            $("#treeview3").empty();
-            $("#treeview3").kendoTreeView({
-                checkboxes: {
-                    checkChildren: true
-                },
-                check: onCheck,
-                dataSource: [
-                    {
-                        id: 'event-meeting',
-                        text: "{{trans('Event and Meeting')}}",
-                        expanded: true,
-                        items: [
-                            {
-                                id: 'meeting',
-                                text: "{{trans('Meeting')}}",
-                            },
-                            {
-                                id: 'event',
-                                text: "{{trans('Event')}}",
-                            },
-                        ]
-                    },
-                    {
-                        id: 'assets-and-category',
-                        text: "{{trans('Assets And Category')}}",
-                    },
-                    {
-                        id: 'finance',
-                        text: "{{trans('Finance')}}",
-                        expanded: true,
-                        items: [
-                            {
-                                id: 'account',
-                                text: "{{trans('Account')}}",
-                            },
-                            {
-                                id: 'expense',
-                                text: "{{trans('Expense')}}",
-                            },
-                            {
-                                id: 'deposit',
-                                text: "{{trans('Deposit')}}",
-                            },
-                            {
-                                id: 'payer',
-                                text: "{{trans('Payer')}}",
-                            },
-                            {
-                                id: 'payee',
-                                text: "{{trans('payee')}}",
-                            },
-                        ]
-                    },
-                    {
-                        id: 'training_module',
-                        text: "{{trans('Training Module')}}",
-                        expanded: true,
-                        items: [
-                            {
-                                id: 'trainer',
-                                text: "{{trans('Trainer')}}",
-                            },
-                            {
-                                id: 'training',
-                                text: "{{trans('Training')}}",
-                            },
-                        ]
-                    },
-                    {
-                        id: 'announcement',
-                        text: "{{trans('Announcement')}}",
-                    },
-                    {
-                        id: 'policy',
-                        text: "{{trans('Policy')}}",
-                    },
-                    {
-                        id: 'performance',
-                        text: "{{trans('Performance')}}",
-                        expanded: true,
-                        items: [
-                            {
-                                id: 'goal-type',
-                                text: "{{trans('Goal Type')}}",
-                            },
-                            {
-                                id: 'goal-tracking',
-                                text: "{{trans('Goal Tracking')}}",
-                            },
-                            {
-                                id: 'indicator',
-                                text: "{{trans('Indicator')}}",
-                            },
-                            {
-                                id: 'appraisal',
-                                text: "{{trans('Appraisal')}}",
-                            },
-                        ]
-                    },
-                ]
-            });
+            // $(".k-group").hide();
             onCheck();
         });
 
@@ -471,13 +298,8 @@
             checkedNodes = [];
             var treeView1 = $('#treeview1').data("kendoTreeView"),
                 message;
-            var treeView2 = $('#treeview2').data("kendoTreeView"),
-                message;
-            var treeView3 = $('#treeview3').data("kendoTreeView"),
-                message;
+
             checkedNodeIds(treeView1.dataSource.view(), checkedNodes);
-            checkedNodeIds(treeView2.dataSource.view(), checkedNodes);
-            checkedNodeIds(treeView3.dataSource.view(), checkedNodes);
 
             console.log(checkedNodes);
             $('#features').val(checkedNodes);

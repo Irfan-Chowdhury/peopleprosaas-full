@@ -189,20 +189,11 @@ Route::middleware(['auth','setLocale'])->group(function () {
         Route::prefix('settings')->group(function () {
             Route::controller(SettingController::class)->group(function () {
                 Route::get('/', 'index')->name('setting.general.index');
-
                 Route::post('/general', 'generalSettingManage')->name('setting.general.manage')->middleware('demoCheck');
                 Route::post('/payment', 'paymentSettingManage')->name('setting.payment.manage')->middleware('demoCheck');
                 Route::post('/mail', 'mailSettingManage')->name('setting.mail.manage')->middleware('demoCheck');
                 Route::post('/analytic', 'analyticSettingManage')->name('setting.analytic.manage')->middleware('demoCheck');
                 Route::post('/seo', 'seoSettingManage')->name('setting.seo.manage')->middleware('demoCheck');
-
-
-                // Route::get('/datatable', 'datatable')->name('feature.datatable');
-                // Route::post('/store', 'store')->name('feature.store')->middleware('demoCheck');
-                // Route::get('/edit/{feature}', 'edit')->name('feature.edit');
-                // Route::post('/update/{feature}', 'update')->name('feature.update')->middleware('demoCheck');
-                // Route::get('/destroy/{feature}', 'destroy')->name('feature.destroy')->middleware('demoCheck');
-                // Route::post('/sort', 'sort')->name('feature.sort')->middleware('demoCheck');
             });
         });
     });
