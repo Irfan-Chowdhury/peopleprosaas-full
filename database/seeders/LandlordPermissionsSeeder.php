@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class LandlordPermissionsSeeder extends Seeder
 {
-    // php artisan db:seed --class=PermissionsSeeder
+    // php artisan db:seed --class=LandlordPermissionsSeeder
 
     public function run()
     {

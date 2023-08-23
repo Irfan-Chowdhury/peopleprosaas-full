@@ -2,9 +2,8 @@
 @section('content')
 
 
-    <link rel="stylesheet" href="<?php echo asset('public/css/kendo.default.v2.min.css') ?>" type="text/css">
-
-    <script type="text/javascript" src="<?php echo asset('public/js/kendo.all.min.js') ?>"></script>
+    <link rel="stylesheet" href="<?php echo asset('../../css/kendo.default.v2.min.css') ?>" type="text/css">
+    <script type="text/javascript" src="<?php echo asset('../../js/kendo.all.min.js') ?>"></script>
 
     <section>
         <div class="container-fluid">
@@ -75,7 +74,6 @@
                         checkboxes: {
                             checkChildren: true
                         },
-
                         check: onCheck,
 
                         dataSource: [
@@ -613,6 +611,11 @@
                                                 text: "{{__('Delete Leave')}}",
                                                 checked: ($.inArray('delete-leave', result) >= 0) ? true : false
                                             },
+                                            {
+                                                id: 'get-leave-notification',
+                                                text: "{{__('Get Leave Notification')}}",
+                                                checked: ($.inArray('get-leave-notification', result) >= 0) ? true : false
+                                            },
                                         ]
                                     },
                                 ]
@@ -666,19 +669,24 @@
 
                             {
                                 id: 'hr_report',
-                                text: "{{trans('Report Module')}}",
+                                text: "{{trans('HR Reports')}}",
                                 expanded: true,
                                 checked: ($.inArray('hr_report', result) >= 0) ? true : false,
                                 items: [
                                     {
-                                        id: 'report-payslip',
-                                        text: '{{__('Payslip Report')}}',
-                                        checked: ($.inArray('report-payslip', result) >= 0) ? true : false
+                                        id: 'daily-attendances',
+                                        text: '{{__('Daily Attendances')}}',
+                                        checked: ($.inArray('daily-attendances', result) >= 0) ? true : false
                                     },
                                     {
-                                        id: 'report-attendance',
-                                        text: '{{__('Attendance Report')}}',
-                                        checked: ($.inArray('report-attendance', result) >= 0) ? true : false
+                                        id: 'date-wise-attendances',
+                                        text: '{{__('Date Wise Attendances')}}',
+                                        checked: ($.inArray('date-wise-attendances', result) >= 0) ? true : false
+                                    },
+                                    {
+                                        id: 'monthly-attendances',
+                                        text: '{{__('Monthly Attendances')}}',
+                                        checked: ($.inArray('monthly-attendances', result) >= 0) ? true : false
                                     },
                                     {
                                         id: 'report-training',
@@ -719,6 +727,11 @@
                                         id: 'report-transaction',
                                         text: '{{__('Transaction Report')}}',
                                         checked: ($.inArray('report-transaction', result) >= 0) ? true : false
+                                    },
+                                    {
+                                        id: 'report-pension',
+                                        text: '{{__('Pension Report')}}',
+                                        checked: ($.inArray('report-pension', result) >= 0) ? true : false
                                     },
                                 ]
                             },
@@ -1264,7 +1277,7 @@
                                             },
                                             {
                                                 id: 'store-expense',
-                                                text: '{{__('Add Event')}}',
+                                                text: '{{__('Add Expense')}}',
                                                 checked: ($.inArray('store-expense', result) >= 0) ? true : false
                                             },
                                             {

@@ -44,6 +44,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
+// use Illuminate\Support\Facades\Http;
 
 class DashboardController extends Controller {
 
@@ -53,8 +54,28 @@ class DashboardController extends Controller {
 		$this->middleware(['auth']);
 	}
 
+    // protected function testApiSAAS()
+    // {
+    //     // $demoURL = config('auto_update.demo_url');
+    //     $demoURL = "http://peopleprosaas.test/api/";
+    //     $curl = curl_init();
+    //     curl_setopt_array($curl, [
+    //         CURLOPT_RETURNTRANSFER => 1,
+    //         CURLOPT_URL => $demoURL.'saas-api-test',
+    //     ]);
+    //     $response = curl_exec($curl);
+    //     curl_close($curl);
+    //     return json_decode($response, false);
+    // }
+
+
 	public function index()
 	{
+        // DB::table('permissions')->delete();
+        // $data= $this->testApiSAAS()->permissions;
+        // $permissions = json_decode($data, true);
+        // DB::table('permissions')->insert($permissions);
+
         $autoUpdateData = $this->general();
         $alertVersionUpgradeEnable = $autoUpdateData['alertVersionUpgradeEnable'];
         $alertBugEnable =  $autoUpdateData['alertBugEnable'];

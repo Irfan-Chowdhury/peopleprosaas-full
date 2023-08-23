@@ -1,5 +1,4 @@
-@extends('layout.main')
-@section('content')
+<?php $__env->startSection('content'); ?>
 
 
     <link rel="stylesheet" href="<?php echo asset('../../css/kendo.default.v2.min.css') ?>" type="text/css">
@@ -12,13 +11,13 @@
                 <div class="card-body">
                     <span id="form_result_permission"></span>
 
-                    <h1 class="text-center mt-2">{{$role->name}}</h1>
-                    <p>{{__('You can assign permission for this role')}}</p>
+                    <h1 class="text-center mt-2"><?php echo e($role->name); ?></h1>
+                    <p><?php echo e(__('You can assign permission for this role')); ?></p>
 
                     <div id="all_resources">
                         <div class="demo-section k-content">
 
-                            <h4>{{__('Select modules')}}</h4>
+                            <h4><?php echo e(__('Select modules')); ?></h4>
                             <div class="row">
                                 <div class="col-md-4">
                                     <div id="treeview1"></div>
@@ -35,9 +34,10 @@
 
                     <div class="form-group row mt-4">
                         <div class="col-md-6 offset-md-3">
-                            <input id="role_id" type="hidden" name="role_id" value={{$role->id}}>
+                            <input id="role_id" type="hidden" name="role_id" value=<?php echo e($role->id); ?>>
                             <button class="btn btn-primary btn-block" id="set_permission_btn" type="submit" class="roles-btn btn-primary">
-                                {{ __('Submit') }}
+                                <?php echo e(__('Submit')); ?>
+
                             </button>
                         </div>
                     </div>
@@ -47,9 +47,9 @@
     </section>
 
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 <script type="text/javascript">
     (function($) {
         "use strict";
@@ -67,7 +67,7 @@
             $("ul#setting").addClass("show");
             $("ul#setting #role-menu").addClass("active");
 
-            var target = '{{route('permissionDetails',$role->id)}}';
+            var target = '<?php echo e(route('permissionDetails',$role->id)); ?>';
             $.ajax({
                 type: "GET",
                 url: target,
@@ -306,17 +306,17 @@
                 if (checkedNodes) {
                     $.ajaxSetup({
                         headers: {
-                            'X-CSRF-T{{trans('file.OK')}}EN': $('meta[name="csrf-token"]').attr('content')
+                            'X-CSRF-T<?php echo e(trans('file.OK')); ?>EN': $('meta[name="csrf-token"]').attr('content')
                         }
                     });
-                    var target = '{{route('set_permission')}}';
+                    var target = '<?php echo e(route('set_permission')); ?>';
 
                     $.ajax({
                         type: 'POST',
                         url: target,
                         data: {
                             checkedId: checkedNodes,
-                            roleId: "{{ $role->id}}",
+                            roleId: "<?php echo e($role->id); ?>",
                         },
                         success: function (data) {
                             var html = '';
@@ -337,7 +337,7 @@
                         }
                     });
                 } else {
-                    alert('{{__('Please select atleast one checkbox')}}');
+                    alert('<?php echo e(__('Please select atleast one checkbox')); ?>');
                 }
 
 
@@ -346,4 +346,6 @@
         });
     })(jQuery);
 </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('layout.main', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/peopleprosaas/resources/views/settings/roles/permission.blade.php ENDPATH**/ ?>

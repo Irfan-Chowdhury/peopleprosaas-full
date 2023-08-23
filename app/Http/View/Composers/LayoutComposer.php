@@ -19,12 +19,18 @@ class LayoutComposer {
 
 	public function compose(View $view)
 	{
-        if(config('database.connections.peopleprosaas_landlord')) {
+        // if(config('database.connections.peopleprosaas_landlord')) {
+        //     $languages = Language::all();
+        // }
+        // else {
+        //     $languages = $this->translation->allLanguages();
+        // }
+
+        if (in_array(request()->getHost(), config('tenancy.central_domains')))
             $languages = Language::all();
-        }
-        else {
+        else
             $languages = $this->translation->allLanguages();
-        }
+
         $view->with('languages', $languages);
 	}
 

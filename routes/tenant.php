@@ -152,8 +152,8 @@ use App\Models\company;
 // });
 
 
-Route::get('/php-test', function () {
-    return 'ok';
+Route::get('/get-host', function () {
+    return config('tenancy.central_domains');
 });
 
 
@@ -179,6 +179,14 @@ Route::get('/php-test', function () {
 // });
 
 
+
+
+// Route::get('/', function () {
+//     dd(\App\Models\User::all());
+//     return 'This is your multi-tenant application. The id of the current tenant is ' . tenant('id');
+// });
+
+
 Route::middleware(['XSS', 'web',InitializeTenancyByDomain::class, PreventAccessFromCentralDomains::class])->group(function () {
 
     Auth::routes(['register' => false]);
@@ -194,7 +202,6 @@ Route::middleware(['XSS', 'web',InitializeTenancyByDomain::class, PreventAccessF
     //
     // Route::get('/tenant-saas', [GeneralSettingController::class, 'testGeneral']);
     // Route::group(['middleware' => ['XSS']], function () {
-
 
 
         Route::get('/pdf', function () {

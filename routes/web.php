@@ -37,6 +37,9 @@ use Illuminate\Support\Facades\Session;
 Route::get('/lang', function () {
     // return Session::has('DefaultSuperAdminLocale') ?? 'en';
 });
+Route::get('/get-host', function () {
+    return request()->getHost();
+});
 
 Route::middleware(['setPublicLocale'])->group(function () {
     Route::controller(LandingPageController::class)->group(function () {

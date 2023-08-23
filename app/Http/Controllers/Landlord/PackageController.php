@@ -148,63 +148,11 @@ class PackageController extends Controller
     public function store(Request $request)
     {
         // $dbPermissions =  Permission::select('id','name','parent','treeview')->get();
-        // $dbPermissions =  Package::latest()->first();
-        // return json_decode($dbPermissions->permissions);
-
-        // $selectedparentSlugs = explode(',',$request->features[0]);
-        // $skipSlug = [
-        //     'customize-setting',
-        //     'core_hr',
-        //     'timesheet'
-        // ];
-
-        // $matchedSlugs = [];
-        // foreach ($skipSlug as $element) {
-        //     if (in_array($element, $selectedparentSlugs)) {
-        //         $matchedSlugs[] = $element;
-        //     }
-        // }
-
-        // $selectedparentSlugs = array_values(array_diff($selectedparentSlugs, $matchedSlugs));
-
-        // $data1 = Permission::select('id','name','parent','treeview')
-        //         ->whereIn('parent', $selectedparentSlugs)
-        //         ->orderBy('id','ASC')
-        //         ->get()->toArray();
-
-        // $parentSlug = array_merge($selectedparentSlugs, $matchedSlugs);
-
-        // $data2 = Permission::select('id','name','parent','treeview')
-        //         ->whereIn('name', $parentSlug)
-        //         ->orderBy('id','ASC')
-        //         ->get()->toArray();
-
-        // // $mergedData = array_merge($data1, $data2);
-
-        // $resultOfPermissions = array_merge($data1, $data2);
-        // usort($resultOfPermissions, function ($a, $b) {
-        //     return $a['id'] - $b['id'];
-        // });
 
         $resultOfPermissions = $this->featureAndPermissionManage($request->features[0]);
 
         $permission_names = array_column($resultOfPermissions,'name');
         $permission_ids = array_column($resultOfPermissions,'id');
-
-        // return json_decode(json_encode($permission_names));
-        // return implode(',', $permission_names);
-
-        // $data = [
-        //     'name' => $request->name,
-        //     'is_free_trial' => $request->is_free_trial,
-        //     'monthly_fee' => $request->monthly_fee,
-        //     'yearly_fee' => $request->yearly_fee,
-        //     'number_of_user_account' => $request->number_of_user_account,
-        //     'number_of_employee' => $request->number_of_employee,
-        //     'features' => $request->features[0],
-        //     'permission_ids' => $request->permission_ids,
-        //     'is_active' => $request->is_active,
-        // ];
 
         Package::create([
             'name' => $request->name,
@@ -225,6 +173,8 @@ class PackageController extends Controller
 
     public function edit(Package $package)
     {
+        // return json_decode($package->permissions);
+
         $permissionNames = explode(',',$package->permission_names);
         return view('landlord.super-admin.pages.packages.edit',compact('package', 'permissionNames'));
     }
@@ -256,12 +206,8 @@ class PackageController extends Controller
     protected function featureAndPermissionManage($features) : array
     {
         $selectedparentSlugs = explode(',',$features);
-        $skipSlug = [
-            'customize-setting',
-            'core_hr',
-            'timesheet'
-        ];
 
+        $skipSlug = $this->skipParentSlug;
         $matchedSlugs = [];
         foreach ($skipSlug as $element) {
             if (in_array($element, $selectedparentSlugs)) {
@@ -292,6 +238,19 @@ class PackageController extends Controller
 
         return $resultOfPermissions;
     }
+
+    private $skipParentSlug = [
+        'customize-setting',
+        'core_hr',
+        'timesheet',
+        'recruitment',
+        'project-management',
+        'file_module',
+        'event-meeting',
+        'finance',
+        'training_module',
+        'performance',
+    ];
 
 }
 
