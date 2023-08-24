@@ -109,6 +109,8 @@
 <?php $__env->startPush('scripts'); ?>
 <script type="text/javascript" src="<?php echo e(asset('js/kendo.all.min.js')); ?>"></script>
 <script type="text/javascript">
+    let storeURL = "<?php echo e(route('package.store')); ?>";
+
     (function($) {
         "use strict";
 
@@ -504,6 +506,9 @@
 
     })(jQuery);
 </script>
+
+<script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/store.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/alertMessages.js')); ?>"></script>
 <?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('landlord.super-admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/pages/packages/create.blade.php ENDPATH**/ ?>

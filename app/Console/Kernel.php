@@ -22,6 +22,8 @@ class Kernel extends ConsoleKernel
         Commands\MakeService::class,
         Commands\MakeContract::class,
         Commands\MakeRepository::class,
+        Commands\MakeRepositoryWithInterface::class,
+        Commands\MakeRepositoryWithInterfaceAndService::class,
 	];
 
     /**

@@ -13,8 +13,10 @@ use App\Contracts\LanguageContract;
 use App\Contracts\MailSettingContract;
 use App\Contracts\ModuleContract;
 use App\Contracts\ModuleDetailContract;
+use App\Contracts\PackageContract;
 use App\Contracts\PageContract;
 use App\Contracts\PaymentSettingContract;
+use App\Contracts\PermissionContract;
 use App\Contracts\SeoSettingContract;
 use App\Contracts\SocialContract;
 use App\Contracts\TenantSignupDescriptionContract;
@@ -30,8 +32,10 @@ use App\Repositories\LanguageRepository;
 use App\Repositories\MailSettingRepository;
 use App\Repositories\ModuleDetailRepository;
 use App\Repositories\ModuleRepository;
+use App\Repositories\PackageRepository;
 use App\Repositories\PageRepository;
 use App\Repositories\PaymentSettingRepository;
+use App\Repositories\PermissionRepository;
 use App\Repositories\SeoSettingRepository;
 use App\Repositories\SocialRepository;
 use App\Repositories\TenantSignupDescriptionRepository;
@@ -59,6 +63,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(SeoSettingContract::class, SeoSettingRepository::class);
         $this->app->bind(PaymentSettingContract::class, PaymentSettingRepository::class);
         $this->app->bind(MailSettingContract::class, MailSettingRepository::class);
+        $this->app->bind(PackageContract::class, PackageRepository::class);
+        $this->app->bind(PermissionContract::class, PermissionRepository::class);
     }
 
 

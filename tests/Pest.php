@@ -4,6 +4,7 @@
 |--------------------------------------------------------------------------
 | Test Case
 |--------------------------------------------------------------------------
+| ./vendor/bin/pest --filter FaqTest
 |
 | The closure you provide to your test functions is always bound to a specific PHPUnit test
 | case class. By default, that class is "PHPUnit\Framework\TestCase". Of course, you may
@@ -17,6 +18,12 @@ uses(
     Tests\Authenticate::class,
     // App\Http\traits\TestTrait::class,
 )->in('Feature');
+
+uses(
+    Tests\TestCase::class,
+    App\Http\traits\PermissionHandleTrait::class,
+    Tests\Traits\PermissionTestTrait::class,
+)->in('Unit');
 
 /*
 |--------------------------------------------------------------------------
@@ -126,5 +133,20 @@ function TenantSignupDescriptionData()
         'sub_heading' => 'SalePro is packed with all the features you\'ll need to seamlessly run your business',
     ];
 }
+
+// function permissionDataSets()
+// {
+//     return  [
+//         'language_id' => 1,
+//         'heading' => 'Customer Sign Up',
+//     ];
+// }
+// function expectResults()
+// {
+//     return  [
+//         'language_id' => 1,
+//         'heading' => 'Customer Sign Up',
+//     ];
+// }
 
 

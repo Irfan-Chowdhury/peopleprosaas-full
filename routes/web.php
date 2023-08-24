@@ -67,9 +67,8 @@ Route::middleware(['auth','setLocale'])->group(function () {
                 Route::get('/create', 'create')->name('package.create');
                 Route::post('/store', 'store')->name('package.store')->middleware('demoCheck');
                 Route::get('/edit/{package}', 'edit')->name('package.edit');
-                Route::post('/update/{package}', 'update')->name('package.update')->middleware('demoCheck');
-                Route::get('/destroy/{package}', 'destroy')->name('package.destroy')->middleware('demoCheck');
-                Route::post('/sort', 'sort')->name('package.sort')->middleware('demoCheck');
+                Route::post('/update/{packageId}', 'update')->name('package.update')->middleware('demoCheck');
+                Route::get('/destroy/{packageId}', 'destroy')->name('package.destroy')->middleware('demoCheck');
             });
         });
 

@@ -110,6 +110,8 @@
 @push('scripts')
 <script type="text/javascript" src="{{ asset('js/kendo.all.min.js') }}"></script>
 <script type="text/javascript">
+    let storeURL = "{{ route('package.store') }}";
+
     (function($) {
         "use strict";
 
@@ -505,4 +507,7 @@
 
     })(jQuery);
 </script>
+
+<script type="text/javascript" src="{{ asset('js/landlord/common-js/store.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script>
 @endpush

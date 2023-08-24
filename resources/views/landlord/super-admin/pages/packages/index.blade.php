@@ -35,6 +35,7 @@
 @push('scripts')
 <script type="text/javascript">
     let dataTableURL = "{{ route('package.datatable') }}";
+    let destroyURL = '/super-admin/packages/destroy/';
 </script>
 
 <script type="text/javascript">
@@ -188,30 +189,9 @@
                 new $.fn.dataTable.FixedHeader(table);
             });
 
-            //--------- Edit -------
-            // $(document).on('click', '.edit', function() {
-            //     let id = $(this).data("id");
-            //     $.get({
-            //         url: editURL + id,
-            //         success: function(response) {
-            //             console.log(response);
-            //             $("#editModal input[name='blog_id']").val(response.id);
-            //             $("#editModal input[name='title']").val(response.title);
-            //             tinyMCE.get('edit-description').setContent(response.description);
-            //             $("#editModal input[name='meta_title']").val(response.meta_title);
-            //             $("#editModal input[name='og_title']").val(response.og_title);
-            //             $("#metaDescriptionEdit").val(response.meta_description);
-            //             $("#ogDescriptionEdit").val(response.og_description);
-            //             $('#editModal').modal('show');
-            //         }
-            //     })
-            // });
-
         })(jQuery);
 </script>
 
-    {{-- <script type="text/javascript" src="{{ asset('js/landlord/common-js/store.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/update.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/delete.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script> --}}
+<script type="text/javascript" src="{{ asset('js/landlord/common-js/delete.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script>
 @endpush

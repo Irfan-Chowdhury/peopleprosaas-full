@@ -3,7 +3,7 @@
 
     $(document).ready(function() {
         $("#updateForm").on("submit",function(e){
-            e.preventDefault();
+            // e.preventDefault();
             let modelId = $('#modelId').val();
             $('#updateButton').text('Updating...');
             $.post({
@@ -22,9 +22,11 @@
                 success: function (response) {
                     console.log(response);
                     displaySuccessMessage(response.success);
-                    $('#dataListTable').DataTable().ajax.reload();
-                    $('#updateForm')[0].reset();
-                    $("#editModal").modal('hide');
+                    if ($.fn.DataTable.isDataTable('#dataListTable')) {
+                        $('#dataListTable').DataTable().ajax.reload();
+                        $('#updateForm')[0].reset();
+                        $("#editModal").modal('hide');
+                    }
                     $('#updateButton').text('Update');
                 }
             });
