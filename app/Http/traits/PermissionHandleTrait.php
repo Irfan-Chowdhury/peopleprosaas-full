@@ -746,6 +746,7 @@ trait PermissionHandleTrait
     private function treeview2() : array
     {
         return [
+            // timesheet
             array(
                 'id' => 88,
                 'guard_name' => 'web',

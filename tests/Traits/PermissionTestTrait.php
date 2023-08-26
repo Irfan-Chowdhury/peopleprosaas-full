@@ -111,6 +111,7 @@ trait PermissionTestTrait
                 'parent' => null,
                 'treeview' => 1
             ),
+            // Core HR | view-calendar
             array(
                 'id' => 47,
                 'guard_name' => 'web',
@@ -118,7 +119,7 @@ trait PermissionTestTrait
                 'parent' => 'core_hr',
                 'treeview' => 1
             ),
-            // Promotion
+            // Core HR | Promotion
             array(
                 'id' => 48,
                 'guard_name' => 'web',
@@ -126,7 +127,7 @@ trait PermissionTestTrait
                 'parent' => 'core_hr',
                 'treeview' => 1
             ),
-            // Award
+            // Core HR | Award
             array(
                 'id' => 53,
                 'guard_name' => 'web',
@@ -134,6 +135,7 @@ trait PermissionTestTrait
                 'parent' => 'core_hr',
                 'treeview' => 1
             ),
+            // Core HR | Transfer
             array(
                 'id' => 58,
                 'guard_name' => 'web',
@@ -141,7 +143,7 @@ trait PermissionTestTrait
                 'parent' => 'core_hr',
                 'treeview' => 1
             ),
-            // Travel
+            // Core HR | Travel
             array(
                 'id' => 63,
                 'guard_name' => 'web',
@@ -149,7 +151,7 @@ trait PermissionTestTrait
                 'parent' => 'core_hr',
                 'treeview' => 1
             ),
-            // Resignation
+            // Core HR | Resignation
             array(
                 'id' => 68,
                 'guard_name' => 'web',
@@ -157,7 +159,7 @@ trait PermissionTestTrait
                 'parent' => 'core_hr',
                 'treeview' => 1
             ),
-            // Complaint
+            // Core HR | Complaint
             array(
                 'id' => 73,
                 'guard_name' => 'web',
@@ -165,7 +167,7 @@ trait PermissionTestTrait
                 'parent' => 'core_hr',
                 'treeview' => 1
             ),
-            // Warning
+            // Core HR | Warning
             array(
                 'id' => 78,
                 'guard_name' => 'web',
@@ -173,13 +175,229 @@ trait PermissionTestTrait
                 'parent' => 'core_hr',
                 'treeview' => 1
             ),
-            // Termination
+            // Core HR | Termination
             array(
                 'id' => 83,
                 'guard_name' => 'web',
                 'name' => 'termination',
                 'parent' => 'core_hr',
                 'treeview' => 1
+            ),
+            // timesheet
+            array(
+                'id' => 88,
+                'guard_name' => 'web',
+                'name' => 'timesheet',
+                'parent'=> null,
+                'treeview'=> 2
+            ),
+            // timesheet | Attendance
+            array(
+                'id' => 89,
+                'guard_name' => 'web',
+                'name' => 'attendance',
+                'parent'=> 'timesheet',
+                'treeview'=> 2
+            ),
+            // timesheet | office_shift
+            array(
+                'id' => 94,
+                'guard_name' => 'web',
+                'name' => 'office_shift',
+                'parent' => 'timesheet',
+                'treeview' => 2
+            ),
+            // timesheet | holiday
+            array(
+                'id' => 99,
+                'guard_name' => 'web',
+                'name' => 'holiday',
+                'parent' => 'timesheet',
+                'treeview' => 2
+            ),
+            // timesheet | leave
+            array(
+                'id' => 104,
+                'guard_name' => 'web',
+                'name' => 'leave',
+                'parent'=> 'timesheet',
+                'treeview'=> 2
+            ),
+            // payment-module
+            array(
+                'id' => 110,
+                'guard_name' => 'web',
+                'name' => 'payment-module',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // hr_report
+            array(
+                'id' => 116,
+                'guard_name' => 'web',
+                'name' => 'hr_report',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // recruitment
+            array(
+                'id' => 129,
+                'guard_name' => 'web',
+                'name' => 'recruitment',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // recruitment | job_post
+            array(
+                'id' => 130,
+                'guard_name' => 'web',
+                'name' => 'job_post',
+                'parent' => 'recruitment',
+                'treeview' => 2
+            ),
+            // recruitment | job_candidate
+            array(
+                'id' => 135,
+                'guard_name' => 'web',
+                'name' => 'job_candidate',
+                'parent' => 'recruitment',
+                'treeview' => 2
+            ),
+            // recruitment | job_interview
+            array(
+                'id' => 138,
+                'guard_name' => 'web',
+                'name' => 'job_interview',
+                'parent' => 'recruitment',
+                'treeview' => 2
+            ),
+            // CMS
+            array(
+                'id' => 142,
+                'guard_name' => 'web',
+                'name' => 'cms',
+                'parent' => 'recruitment',
+                'treeview' => 2
+            ),
+            // project-management
+            array(
+                'id' => 145,
+                'guard_name' => 'web',
+                'name' => 'project-management',
+                'parent' => null,
+                'treeview' => 2
+            ),
+
+            // project-management | Project
+            array(
+                'id' => 146,
+                'guard_name' => 'web',
+                'name' => 'project',
+                'parent' => 'project-management',
+                'treeview' => 2
+            ),
+            // project-management | task
+            array(
+                'id' => 152,
+                'guard_name' => 'web',
+                'name' => 'task',
+                'parent' => 'project-management',
+                'treeview' => 2
+            ),
+            // client
+            array(
+                'id' => 158,
+                'guard_name' => 'web',
+                'name' => 'client',
+                'parent' => 'project-management',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 163,
+                'guard_name' => 'web',
+                'name' => 'invoice',
+                'parent' => 'project-management',
+                'treeview' => 2
+            ),
+            // Ticket
+            array(
+                'id' => 168,
+                'guard_name' => 'web',
+                'name' => 'ticket',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // File Module
+            array(
+                'id' => 174,
+                'guard_name' => 'web',
+                'name' => 'file_module',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // File Module | File Manager
+            array(
+                'id' => 175,
+                'guard_name' => 'web',
+                'name' => 'file_manager',
+                'parent' => 'file_module',
+                'treeview' => 2
+            ),
+            // File Module | Official Document
+            array(
+                'id' => 181,
+                'guard_name' => 'web',
+                'name' => 'official_document',
+                'parent' => 'file_module',
+                'treeview' => 2
+            ),
+            // Event Meeting
+            array(
+                'id' => 186,
+                'guard_name' => 'web',
+                'name' => 'event-meeting',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // Event Meeting | Meeting
+            array(
+                'id' => 187,
+                'guard_name' => 'web',
+                'name' => 'meeting',
+                'parent' => 'event-meeting',
+                'treeview' => 2
+            ),
+            // Event Meeting | Event
+            array(
+                'id' => 192,
+                'guard_name' => 'web',
+                'name' => 'event',
+                'parent' => 'event-meeting',
+                'treeview' => 2
+            ),
+            // assets-and-category
+            array(
+                'id' => 197,
+                'guard_name' => 'web',
+                'name' => 'assets-and-category',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // assets-and-category | category
+            array(
+                'id' => 198,
+                'guard_name' => 'web',
+                'name' => 'category',
+                'parent' => 'assets-and-category',
+                'treeview' => 2
+            ),
+            // assets-and-category | assets
+            array(
+                'id' => 203,
+                'guard_name' => 'web',
+                'name' => 'assets',
+                'parent' => 'assets-and-category',
+                'treeview' => 2
             ),
         );
     }
@@ -845,7 +1063,879 @@ trait PermissionTestTrait
                 'parent' => 'termination',
                 'treeview' => 1
             ),
+             // timesheet
+             array(
+                'id' => 88,
+                'guard_name' => 'web',
+                'name' => 'timesheet',
+                'parent'=> null,
+                'treeview'=> 2
+            ),
 
+            // Attendance
+            array(
+                'id' => 89,
+                'guard_name' => 'web',
+                'name' => 'attendance',
+                'parent'=> 'timesheet',
+                'treeview'=> 2
+            ),
+            array(
+                'id' => 90,
+                'guard_name' => 'web',
+                'name' => 'view-attendance',
+                'parent' => 'attendance',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 91,
+                'guard_name' => 'web',
+                'name' => 'edit-attendance',
+                'parent' => 'attendance',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 92,
+                'guard_name' => 'web',
+                'name' => 'delete-attendance',
+                'parent' => 'attendance',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 93,
+                'guard_name' => 'web',
+                'name' => 'import-attendance',
+                'parent' => 'attendance',
+                'treeview' => 2
+            ),
+            // office_shift
+            array(
+                'id' => 94,
+                'guard_name' => 'web',
+                'name' => 'office_shift',
+                'parent' => 'timesheet',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 95,
+                'guard_name' => 'web',
+                'name' => 'view-office_shift',
+                'parent' => 'office_shift',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 96,
+                'guard_name' => 'web',
+                'name' => 'store-office_shift',
+                'parent' => 'office_shift',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 97,
+                'guard_name' => 'web',
+                'name' => 'edit-office_shift',
+                'parent' => 'office_shift',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 98,
+                'guard_name' => 'web',
+                'name' => 'delete-office_shift',
+                'parent' => 'office_shift',
+                'treeview' => 2
+            ),
+            // holiday
+            array(
+                'id' => 99,
+                'guard_name' => 'web',
+                'name' => 'holiday',
+                'parent' => 'timesheet',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 100,
+                'guard_name' => 'web',
+                'name' => 'view-holiday',
+                'parent' => 'holiday',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 101,
+                'guard_name' => 'web',
+                'name' => 'store-holiday',
+                'parent' => 'holiday',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 102,
+                'guard_name' => 'web',
+                'name' => 'edit-holiday',
+                'parent' => 'holiday',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 103,
+                'guard_name' => 'web',
+                'name' => 'delete-holiday',
+                'parent' => 'holiday',
+                'treeview' => 2
+            ),
+            // leave
+            array(
+                'id' => 104,
+                'guard_name' => 'web',
+                'name' => 'leave',
+                'parent'=> 'timesheet',
+                'treeview'=> 2
+            ),
+            array(
+                'id' => 105,
+                'guard_name' => 'web',
+                'name' => 'view-leave',
+                'parent' => 'leave',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 106,
+                'guard_name' => 'web',
+                'name' => 'store-leave',
+                'parent' => 'leave',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 107,
+                'guard_name' => 'web',
+                'name' => 'edit-leave',
+                'parent' => 'leave',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 108,
+                'guard_name' => 'web',
+                'name' => 'delete-leave',
+                'parent' => 'leave',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 109,
+                'guard_name' => 'web',
+                'name' => 'get-leave-notification',
+                'parent' => 'leave',
+                'treeview' => 2
+            ),
+            // payment-module
+            array(
+                'id' => 110,
+                'guard_name' => 'web',
+                'name' => 'payment-module',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            array(
+                'id' => 111,
+                'guard_name' => 'web',
+                'name' => 'view-payslip',
+                'parent' => 'payment-module',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 112,
+                'guard_name' => 'web',
+                'name' => 'make-payment',
+                'parent' => 'payment-module',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 113,
+                'guard_name' => 'web',
+                'name' => 'make-bulk_payment',
+                'parent' => 'payment-module',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 114,
+                'guard_name' => 'web',
+                'name' => 'view-paylist',
+                'parent' => 'payment-module',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 115,
+                'guard_name' => 'web',
+                'name' => 'set-salary',
+                'parent' => 'payment-module',
+                'treeview' => 2
+            ),
+            // hr_report
+            array(
+                'id' => 116,
+                'guard_name' => 'web',
+                'name' => 'hr_report',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            array(
+                'id' => 117,
+                'guard_name' => 'web',
+                'name' => 'daily-attendances',
+                'parent' => 'hr_report',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 118,
+                'guard_name' => 'web',
+                'name' => 'date-wise-attendances',
+                'parent' => 'hr_report',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 119,
+                'guard_name' => 'web',
+                'name' => 'monthly-attendances',
+                'parent' => 'hr_report',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 120,
+                'guard_name' => 'web',
+                'name' => 'report-training',
+                'parent' => 'hr_report',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 121,
+                'guard_name' => 'web',
+                'name' => 'report-project',
+                'parent' => 'hr_report',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 122,
+                'guard_name' => 'web',
+                'name' => 'report-task',
+                'parent' => 'hr_report',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 123,
+                'guard_name' => 'web',
+                'name' => 'report-employee',
+                'parent' => 'hr_report',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 124,
+                'guard_name' => 'web',
+                'name' => 'report-account',
+                'parent' => 'hr_report',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 125,
+                'guard_name' => 'web',
+                'name' => 'report-deposit',
+                'parent' => 'hr_report',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 126,
+                'guard_name' => 'web',
+                'name' => 'report-expense',
+                'parent' => 'hr_report',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 127,
+                'guard_name' => 'web',
+                'name' => 'report-transaction',
+                'parent' => 'hr_report',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 128,
+                'guard_name' => 'web',
+                'name' => 'report-pension',
+                'parent' => 'hr_report',
+                'treeview' => 2
+            ),
+            // recruitment
+            array(
+                'id' => 129,
+                'guard_name' => 'web',
+                'name' => 'recruitment',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // job_post
+            array(
+                'id' => 130,
+                'guard_name' => 'web',
+                'name' => 'job_post',
+                'parent' => 'recruitment',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 131,
+                'guard_name' => 'web',
+                'name' => 'view-job_post',
+                'parent' => 'job_post',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 132,
+                'guard_name' => 'web',
+                'name' => 'store-job_post',
+                'parent' => 'job_post',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 133,
+                'guard_name' => 'web',
+                'name' => 'edit-job_post',
+                'parent' => 'job_post',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 134,
+                'guard_name' => 'web',
+                'name' => 'delete-job_post',
+                'parent' => 'job_post',
+                'treeview' => 2
+            ),
+            // job_candidate
+            array(
+                'id' => 135,
+                'guard_name' => 'web',
+                'name' => 'job_candidate',
+                'parent' => 'recruitment',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 136,
+                'guard_name' => 'web',
+                'name' => 'view-job_candidate',
+                'parent' => 'job_candidate',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 137,
+                'guard_name' => 'web',
+                'name' => 'delete-job_candidate',
+                'parent' => 'job_candidate',
+                'treeview' => 2
+            ),
+            // job_interview
+            array(
+                'id' => 138,
+                'guard_name' => 'web',
+                'name' => 'job_interview',
+                'parent' => 'recruitment',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 139,
+                'guard_name' => 'web',
+                'name' => 'view-job_interview',
+                'parent' => 'job_interview',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 140,
+                'guard_name' => 'web',
+                'name' => 'edit-job_interview',
+                'parent' => 'job_interview',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 141,
+                'guard_name' => 'web',
+                'name' => 'delete-job_interview',
+                'parent' => 'job_interview',
+                'treeview' => 2
+            ),
+            // CMS
+            array(
+                'id' => 142,
+                'guard_name' => 'web',
+                'name' => 'cms',
+                'parent' => 'recruitment',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 143,
+                'guard_name' => 'web',
+                'name' => 'view-cms',
+                'parent' => 'cms',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 144,
+                'guard_name' => 'web',
+                'name' => 'store-cms',
+                'parent' => 'cms',
+                'treeview' => 2
+            ),
+            // project-management
+            array(
+                'id' => 145,
+                'guard_name' => 'web',
+                'name' => 'project-management',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // Project
+            array(
+                'id' => 146,
+                'guard_name' => 'web',
+                'name' => 'project',
+                'parent' => 'project-management',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 147,
+                'guard_name' => 'web',
+                'name' => 'view-project',
+                'parent' => 'project',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 148,
+                'guard_name' => 'web',
+                'name' => 'store-project',
+                'parent' => 'project',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 149,
+                'guard_name' => 'web',
+                'name' => 'edit-project',
+                'parent' => 'project',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 150,
+                'guard_name' => 'web',
+                'name' => 'delete-project',
+                'parent' => 'project',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 151,
+                'guard_name' => 'web',
+                'name' => 'assign-project',
+                'parent' => 'project',
+                'treeview' => 2
+            ),
+            // Task
+            array(
+                'id' => 152,
+                'guard_name' => 'web',
+                'name' => 'task',
+                'parent' => 'project-management',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 153,
+                'guard_name' => 'web',
+                'name' => 'view-task',
+                'parent' => 'task',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 154,
+                'guard_name' => 'web',
+                'name' => 'store-task',
+                'parent' => 'task',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 155,
+                'guard_name' => 'web',
+                'name' => 'edit-task',
+                'parent' => 'task',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 156,
+                'guard_name' => 'web',
+                'name' => 'delete-task',
+                'parent' => 'task',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 157,
+                'guard_name' => 'web',
+                'name' => 'assign-task',
+                'parent' => 'task',
+                'treeview' => 2
+            ),
+            // client
+            array(
+                'id' => 158,
+                'guard_name' => 'web',
+                'name' => 'client',
+                'parent' => 'project-management',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 159,
+                'guard_name' => 'web',
+                'name' => 'view-client',
+                'parent' => 'client',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 160,
+                'guard_name' => 'web',
+                'name' => 'store-client',
+                'parent' => 'client',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 161,
+                'guard_name' => 'web',
+                'name' => 'edit-client',
+                'parent' => 'client',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 162,
+                'guard_name' => 'web',
+                'name' => 'delete-client',
+                'parent' => 'client',
+                'treeview' => 2
+            ),
+            // invoice
+            array(
+                'id' => 163,
+                'guard_name' => 'web',
+                'name' => 'invoice',
+                'parent' => 'project-management',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 164,
+                'guard_name' => 'web',
+                'name' => 'view-invoice',
+                'parent' => 'invoice',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 165,
+                'guard_name' => 'web',
+                'name' => 'store-invoice',
+                'parent' => 'invoice',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 166,
+                'guard_name' => 'web',
+                'name' => 'edit-invoice',
+                'parent' => 'invoice',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 167,
+                'guard_name' => 'web',
+                'name' => 'delete-invoice',
+                'parent' => 'invoice',
+                'treeview' => 2
+            ),
+            // Ticket
+            array(
+                'id' => 168,
+                'guard_name' => 'web',
+                'name' => 'ticket',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            array(
+                'id' => 169,
+                'guard_name' => 'web',
+                'name' => 'view-ticket',
+                'parent' => 'ticket',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 170,
+                'guard_name' => 'web',
+                'name' => 'store-ticket',
+                'parent' => 'ticket',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 171,
+                'guard_name' => 'web',
+                'name' => 'edit-ticket',
+                'parent' => 'ticket',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 172,
+                'guard_name' => 'web',
+                'name' => 'delete-ticket',
+                'parent' => 'ticket',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 173,
+                'guard_name' => 'web',
+                'name' => 'assign-ticket',
+                'parent' => 'ticket',
+                'treeview' => 2
+            ),
+            // File Module
+            array(
+                'id' => 174,
+                'guard_name' => 'web',
+                'name' => 'file_module',
+                'parent' => null,
+                'treeview' => 2
+            ),
+
+            // File Manager
+            array(
+                'id' => 175,
+                'guard_name' => 'web',
+                'name' => 'file_manager',
+                'parent' => 'file_module',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 176,
+                'guard_name' => 'web',
+                'name' => 'view-file_manager',
+                'parent' => 'file_manager',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 177,
+                'guard_name' => 'web',
+                'name' => 'store-file_manager',
+                'parent' => 'file_manager',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 178,
+                'guard_name' => 'web',
+                'name' => 'edit-file_manager',
+                'parent' => 'file_manager',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 179,
+                'guard_name' => 'web',
+                'name' => 'delete-file_manager',
+                'parent' => 'file_manager',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 180,
+                'guard_name' => 'web',
+                'name' => 'view-file_config',
+                'parent' => 'file_manager',
+                'treeview' => 2
+            ),
+
+            // Official Document
+            array(
+                'id' => 181,
+                'guard_name' => 'web',
+                'name' => 'official_document',
+                'parent' => 'file_module',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 182,
+                'guard_name' => 'web',
+                'name' => 'view-official_document',
+                'parent' => 'official_document',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 183,
+                'guard_name' => 'web',
+                'name' => 'store-official_document',
+                'parent' => 'official_document',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 184,
+                'guard_name' => 'web',
+                'name' => 'edit-official_document',
+                'parent' => 'official_document',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 185,
+                'guard_name' => 'web',
+                'name' => 'delete-official_document',
+                'parent' => 'official_document',
+                'treeview' => 2
+            ),
+            // Event Meeting
+            array(
+                'id' => 186,
+                'guard_name' => 'web',
+                'name' => 'event-meeting',
+                'parent' => null,
+                'treeview' => 2
+            ),
+
+            // Meeting
+            array(
+                'id' => 187,
+                'guard_name' => 'web',
+                'name' => 'meeting',
+                'parent' => 'event-meeting',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 188,
+                'guard_name' => 'web',
+                'name' => 'view-meeting',
+                'parent' => 'meeting',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 189,
+                'guard_name' => 'web',
+                'name' => 'store-meeting',
+                'parent' => 'meeting',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 190,
+                'guard_name' => 'web',
+                'name' => 'edit-meeting',
+                'parent' => 'meeting',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 191,
+                'guard_name' => 'web',
+                'name' => 'delete-meeting',
+                'parent' => 'meeting',
+                'treeview' => 2
+            ),
+
+            // Event
+            array(
+                'id' => 192,
+                'guard_name' => 'web',
+                'name' => 'event',
+                'parent' => 'event-meeting',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 193,
+                'guard_name' => 'web',
+                'name' => 'view-event',
+                'parent' => 'event',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 194,
+                'guard_name' => 'web',
+                'name' => 'store-event',
+                'parent' => 'event',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 195,
+                'guard_name' => 'web',
+                'name' => 'edit-event',
+                'parent' => 'event',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 196,
+                'guard_name' => 'web',
+                'name' => 'delete-event',
+                'parent' => 'event',
+                'treeview' => 2
+            ),
+
+            // assets-and-category
+            // array(
+            //     'id' => 197,
+            //     'guard_name' => 'web',
+            //     'name' => 'assets-and-category',
+            //     'parent' => null,
+            //     'treeview' => 2
+            // ),
+            // category
+            array(
+                'id' => 198,
+                'guard_name' => 'web',
+                'name' => 'category',
+                'parent' => 'assets-and-category',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 199,
+                'guard_name' => 'web',
+                'name' => 'view-category',
+                'parent' => 'category',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 200,
+                'guard_name' => 'web',
+                'name' => 'store-category',
+                'parent' => 'category',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 201,
+                'guard_name' => 'web',
+                'name' => 'edit-category',
+                'parent' => 'category',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 202,
+                'guard_name' => 'web',
+                'name' => 'delete-category',
+                'parent' => 'category',
+                'treeview' => 2
+            ),
+            // assets
+            array(
+                'id' => 203,
+                'guard_name' => 'web',
+                'name' => 'assets',
+                'parent' => 'assets-and-category',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 204,
+                'guard_name' => 'web',
+                'name' => 'view-assets',
+                'parent' => 'assets',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 205,
+                'guard_name' => 'web',
+                'name' => 'store-assets',
+                'parent' => 'assets',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 206,
+                'guard_name' => 'web',
+                'name' => 'edit-assets',
+                'parent' => 'assets',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 207,
+                'guard_name' => 'web',
+                'name' => 'delete-assets',
+                'parent' => 'assets',
+                'treeview' => 2
+            ),
         );
     }
 }
