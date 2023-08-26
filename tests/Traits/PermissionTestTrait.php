@@ -376,14 +376,14 @@ trait PermissionTestTrait
                 'treeview' => 2
             ),
             // assets-and-category
-            array(
-                'id' => 197,
-                'guard_name' => 'web',
-                'name' => 'assets-and-category',
-                'parent' => null,
-                'treeview' => 2
-            ),
-            // assets-and-category | category
+            // array(
+            //     'id' => 197,
+            //     'guard_name' => 'web',
+            //     'name' => 'assets-and-category',
+            //     'parent' => null,
+            //     'treeview' => 2
+            // ),
+            // // assets-and-category | category
             array(
                 'id' => 198,
                 'guard_name' => 'web',
@@ -398,6 +398,135 @@ trait PermissionTestTrait
                 'name' => 'assets',
                 'parent' => 'assets-and-category',
                 'treeview' => 2
+            ),
+            // Finance
+            array(
+                'id' => 208,
+                'guard_name' => 'web',
+                'name' => 'finance',
+                'parent' => null,
+                'treeview' => 3
+            ),
+
+            // Finance | Account
+            array(
+                'id' => 209,
+                'guard_name' => 'web',
+                'name' => 'account',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            // Finance | expense
+            array(
+                'id' => 217,
+                'guard_name' => 'web',
+                'name' => 'expense',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            // Finance | deposit
+            array(
+                'id' => 222,
+                'guard_name' => 'web',
+                'name' => 'deposit',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            // Finance | payer
+            array(
+                'id' => 227,
+                'guard_name' => 'web',
+                'name' => 'payer',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            // Finance | payee
+            array(
+                'id' => 232,
+                'guard_name' => 'web',
+                'name' => 'payee',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            // Training Module
+            array(
+                'id' => 237,
+                'guard_name' => 'web',
+                'name' => 'training_module',
+                'parent' => null,
+                'treeview' => 3
+            ),
+            // Training Module | trainer
+            array(
+                'id' => 238,
+                'guard_name' => 'web',
+                'name' => 'trainer',
+                'parent' => 'training_module',
+                'treeview' => 3
+            ),
+           // Training Module | training
+           array(
+                'id' => 243,
+                'guard_name' => 'web',
+                'name' => 'training',
+                'parent' => 'training_module',
+                'treeview' => 3
+            ),
+            // Training Module | announcement
+            array(
+                'id' => 248,
+                'guard_name' => 'web',
+                'name' => 'announcement',
+                'parent' => null,
+                'treeview' => 3
+            ),
+            // Training Module | policy
+            array(
+                'id' => 252,
+                'guard_name' => 'web',
+                'name' => 'policy',
+                'parent' => null,
+                'treeview' => 3
+            ),
+            // performance
+            array(
+                'id' => 256,
+                'guard_name' => 'web',
+                'name' => 'performance',
+                'parent' => null,
+                'treeview' => 3
+            ),
+            // performance | goal-type
+            array(
+                'id' => 257,
+                'guard_name' => 'web',
+                'name' => 'goal-type',
+                'parent' => 'performance',
+                'treeview' => 3
+            ),
+            // performance | goal-tracking
+            array(
+                'id' => 262,
+                'guard_name' => 'web',
+                'name' => 'goal-tracking',
+                'parent' => 'performance',
+                'treeview' => 3
+            ),
+            // performance | indicator
+            array(
+                'id' => 267,
+                'guard_name' => 'web',
+                'name' => 'indicator',
+                'parent' => 'performance',
+                'treeview' => 3
+            ),
+            // performance | appraisal
+            array(
+                'id' => 272,
+                'guard_name' => 'web',
+                'name' => 'appraisal',
+                'parent' => 'performance',
+                'treeview' => 3
             ),
         );
     }
@@ -1864,7 +1993,7 @@ trait PermissionTestTrait
             //     'parent' => null,
             //     'treeview' => 2
             // ),
-            // category
+            // // category
             array(
                 'id' => 198,
                 'guard_name' => 'web',
@@ -1900,7 +2029,7 @@ trait PermissionTestTrait
                 'parent' => 'category',
                 'treeview' => 2
             ),
-            // assets
+            // // assets
             array(
                 'id' => 203,
                 'guard_name' => 'web',
@@ -1935,6 +2064,512 @@ trait PermissionTestTrait
                 'name' => 'delete-assets',
                 'parent' => 'assets',
                 'treeview' => 2
+            ),
+
+            // Finance
+            array(
+                'id' => 208,
+                'guard_name' => 'web',
+                'name' => 'finance',
+                'parent' => null,
+                'treeview' => 3
+            ),
+
+            // Account
+            array(
+                'id' => 209,
+                'guard_name' => 'web',
+                'name' => 'account',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 210,
+                'guard_name' => 'web',
+                'name' => 'view-account',
+                'parent' => 'account',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 211,
+                'guard_name' => 'web',
+                'name' => 'store-account',
+                'parent' => 'account',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 212,
+                'guard_name' => 'web',
+                'name' => 'edit-account',
+                'parent' => 'account',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 213,
+                'guard_name' => 'web',
+                'name' => 'delete-account',
+                'parent' => 'account',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 214,
+                'guard_name' => 'web',
+                'name' => 'view-transaction',
+                'parent' => 'account',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 215,
+                'guard_name' => 'web',
+                'name' => 'view-balance_transfer',
+                'parent' => 'account',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 216,
+                'guard_name' => 'web',
+                'name' => 'store-balance_transfer',
+                'parent' => 'account',
+                'treeview' => 3
+            ),
+            // expense
+            array(
+                'id' => 217,
+                'guard_name' => 'web',
+                'name' => 'expense',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 218,
+                'guard_name' => 'web',
+                'name' => 'view-expense',
+                'parent' => 'expense',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 219,
+                'guard_name' => 'web',
+                'name' => 'store-expense',
+                'parent' => 'expense',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 220,
+                'guard_name' => 'web',
+                'name' => 'edit-expense',
+                'parent' => 'expense',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 221,
+                'guard_name' => 'web',
+                'name' => 'delete-expense',
+                'parent' => 'expense',
+                'treeview' => 3
+            ),
+
+            // deposit
+            array(
+                'id' => 222,
+                'guard_name' => 'web',
+                'name' => 'deposit',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 223,
+                'guard_name' => 'web',
+                'name' => 'view-deposit',
+                'parent' => 'deposit',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 224,
+                'guard_name' => 'web',
+                'name' => 'store-deposit',
+                'parent' => 'deposit',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 225,
+                'guard_name' => 'web',
+                'name' => 'edit-deposit',
+                'parent' => 'deposit',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 226,
+                'guard_name' => 'web',
+                'name' => 'delete-deposit',
+                'parent' => 'deposit',
+                'treeview' => 3
+            ),
+            // payer
+            array(
+                'id' => 227,
+                'guard_name' => 'web',
+                'name' => 'payer',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 228,
+                'guard_name' => 'web',
+                'name' => 'view-payer',
+                'parent' => 'payer',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 229,
+                'guard_name' => 'web',
+                'name' => 'store-payer',
+                'parent' => 'payer',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 230,
+                'guard_name' => 'web',
+                'name' => 'edit-payer',
+                'parent' => 'payer',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 231,
+                'guard_name' => 'web',
+                'name' => 'delete-payer',
+                'parent' => 'payer',
+                'treeview' => 3
+            ),
+            // payee
+            array(
+                'id' => 232,
+                'guard_name' => 'web',
+                'name' => 'payee',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 233,
+                'guard_name' => 'web',
+                'name' => 'view-payee',
+                'parent' => 'payee',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 234,
+                'guard_name' => 'web',
+                'name' => 'store-payee',
+                'parent' => 'payee',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 235,
+                'guard_name' => 'web',
+                'name' => 'edit-payee',
+                'parent' => 'payee',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 236,
+                'guard_name' => 'web',
+                'name' => 'delete-payee',
+                'parent' => 'payee',
+                'treeview' => 3
+            ),
+            // Training Module
+            array(
+                'id' => 237,
+                'guard_name' => 'web',
+                'name' => 'training_module',
+                'parent' => null,
+                'treeview' => 3
+            ),
+            // Training Module | trainer
+            array(
+                'id' => 238,
+                'guard_name' => 'web',
+                'name' => 'trainer',
+                'parent' => 'training_module',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 239,
+                'guard_name' => 'web',
+                'name' => 'view-trainer',
+                'parent' => 'trainer',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 240,
+                'guard_name' => 'web',
+                'name' => 'store-trainer',
+                'parent' => 'trainer',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 241,
+                'guard_name' => 'web',
+                'name' => 'edit-trainer',
+                'parent' => 'trainer',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 242,
+                'guard_name' => 'web',
+                'name' => 'delete-trainer',
+                'parent' => 'trainer',
+                'treeview' => 3
+            ),
+           // training
+           array(
+                'id' => 243,
+                'guard_name' => 'web',
+                'name' => 'training',
+                'parent' => 'training_module',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 244,
+                'guard_name' => 'web',
+                'name' => 'view-training',
+                'parent' => 'training',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 245,
+                'guard_name' => 'web',
+                'name' => 'store-training',
+                'parent' => 'training',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 246,
+                'guard_name' => 'web',
+                'name' => 'edit-training',
+                'parent' => 'training',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 247,
+                'guard_name' => 'web',
+                'name' => 'delete-training',
+                'parent' => 'training',
+                'treeview' => 3
+            ),
+
+            // announcement
+            array(
+                'id' => 248,
+                'guard_name' => 'web',
+                'name' => 'announcement',
+                'parent' => null,
+                'treeview' => 3
+            ),
+            array(
+                'id' => 249,
+                'guard_name' => 'web',
+                'name' => 'store-announcement',
+                'parent' => 'announcement',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 250,
+                'guard_name' => 'web',
+                'name' => 'edit-announcement',
+                'parent' => 'announcement',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 251,
+                'guard_name' => 'web',
+                'name' => 'delete-announcement',
+                'parent' => 'announcement',
+                'treeview' => 3
+            ),
+            // policy
+            array(
+                'id' => 252,
+                'guard_name' => 'web',
+                'name' => 'policy',
+                'parent' => null,
+                'treeview' => 3
+            ),
+            array(
+                'id' => 253,
+                'guard_name' => 'web',
+                'name' => 'store-policy',
+                'parent' => 'policy',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 254,
+                'guard_name' => 'web',
+                'name' => 'edit-policy',
+                'parent' => 'policy',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 255,
+                'guard_name' => 'web',
+                'name' => 'delete-policy',
+                'parent' => 'policy',
+                'treeview' => 3
+            ),
+            // performance
+            array(
+                'id' => 256,
+                'guard_name' => 'web',
+                'name' => 'performance',
+                'parent' => null,
+                'treeview' => 3
+            ),
+
+            // goal-type
+            array(
+                'id' => 257,
+                'guard_name' => 'web',
+                'name' => 'goal-type',
+                'parent' => 'performance',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 258,
+                'guard_name' => 'web',
+                'name' => 'view-goal-type',
+                'parent' => 'goal-type',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 259,
+                'guard_name' => 'web',
+                'name' => 'store-goal-type',
+                'parent' => 'goal-type',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 260,
+                'guard_name' => 'web',
+                'name' => 'edit-goal-type',
+                'parent' => 'goal-type',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 261,
+                'guard_name' => 'web',
+                'name' => 'delete-goal-type',
+                'parent' => 'goal-type',
+                'treeview' => 3
+            ),
+            // goal-tracking
+            array(
+                'id' => 262,
+                'guard_name' => 'web',
+                'name' => 'goal-tracking',
+                'parent' => 'performance',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 263,
+                'guard_name' => 'web',
+                'name' => 'view-goal-tracking',
+                'parent' => 'goal-tracking',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 264,
+                'guard_name' => 'web',
+                'name' => 'store-goal-tracking',
+                'parent' => 'goal-tracking',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 265,
+                'guard_name' => 'web',
+                'name' => 'edit-goal-tracking',
+                'parent' => 'goal-tracking',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 266,
+                'guard_name' => 'web',
+                'name' => 'delete-goal-tracking',
+                'parent' => 'goal-tracking',
+                'treeview' => 3
+            ),
+
+            // indicator
+            array(
+                'id' => 267,
+                'guard_name' => 'web',
+                'name' => 'indicator',
+                'parent' => 'performance',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 268,
+                'guard_name' => 'web',
+                'name' => 'view-indicator',
+                'parent' => 'indicator',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 269,
+                'guard_name' => 'web',
+                'name' => 'store-indicator',
+                'parent' => 'indicator',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 270,
+                'guard_name' => 'web',
+                'name' => 'edit-indicator',
+                'parent' => 'indicator',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 271,
+                'guard_name' => 'web',
+                'name' => 'delete-indicator',
+                'parent' => 'indicator',
+                'treeview' => 3
+            ),
+
+            // appraisal
+            array(
+                'id' => 272,
+                'guard_name' => 'web',
+                'name' => 'appraisal',
+                'parent' => 'performance',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 273,
+                'guard_name' => 'web',
+                'name' => 'view-appraisal',
+                'parent' => 'appraisal',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 274,
+                'guard_name' => 'web',
+                'name' => 'store-appraisal',
+                'parent' => 'appraisal',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 275,
+                'guard_name' => 'web',
+                'name' => 'edit-appraisal',
+                'parent' => 'appraisal',
+                'treeview' => 3
+            ),
+            array(
+                'id' => 276,
+                'guard_name' => 'web',
+                'name' => 'delete-appraisal',
+                'parent' => 'appraisal',
+                'treeview' => 3
             ),
         );
     }

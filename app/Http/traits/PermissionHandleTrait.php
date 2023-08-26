@@ -93,12 +93,12 @@ trait PermissionHandleTrait
 
     public function getAllPermissions() : array
     {
-        $treeview1 = $this->treeview1();
-        $treeview2 = $this->treeview2();
-        $treeview3 = $this->treeview3();
-        $customize = $this->customize();
+        $treeview1  = $this->treeview1();
+        $treeview2  = $this->treeview2();
+        $treeview3  = $this->treeview3();
+        $addedLater = $this->addedLater();
 
-        return array_merge($treeview1, $treeview2, $treeview3, $customize);
+        return array_merge($treeview1, $treeview2, $treeview3, $addedLater);
     }
 
 
@@ -2162,7 +2162,7 @@ trait PermissionHandleTrait
         );
     }
 
-    private function customize() : array
+    private function addedLater() : array
     {
         return [
             [
