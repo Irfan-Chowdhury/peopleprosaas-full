@@ -1,6 +1,4 @@
-<?php
-    $generalSetting =  DB::table('general_settings')->latest()->first();
-?>
+
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
@@ -333,6 +331,8 @@
       gtag('config', 'G-D0S4KHQ1D6');
     </script>
     <?php endif; ?>
+
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
 

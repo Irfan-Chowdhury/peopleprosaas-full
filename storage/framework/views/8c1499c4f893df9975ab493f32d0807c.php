@@ -156,7 +156,7 @@
 </section>
 
 <?php echo $__env->yieldPushContent('scripts'); ?>
-
+    
 </body>
 </html>
 <?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/layouts/master.blade.php ENDPATH**/ ?>

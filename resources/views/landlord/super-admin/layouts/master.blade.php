@@ -173,6 +173,6 @@
 </section>
 
 @stack('scripts')
-
+    
 </body>
 </html>

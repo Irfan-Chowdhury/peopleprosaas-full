@@ -20,6 +20,15 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        if (in_array(request()->getHost(), config('tenancy.central_domains'))) {
+            $generalSetting = GeneralSetting::latest()->first();
+            view()->composer([
+                'landlord.public-section.layouts.master',
+                'landlord.public-section.pages.landing-page.index',
+            ], function ($view) use ($generalSetting) {
+                $view->with('generalSetting', $generalSetting);
+            });
+        }
 
         // Procedure - 1
         // $general_settings = GeneralSetting::latest()->first();

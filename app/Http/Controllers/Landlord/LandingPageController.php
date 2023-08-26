@@ -6,11 +6,13 @@ use App\Contracts\BlogContract;
 use App\Contracts\FaqContract;
 use App\Contracts\FeatureContract;
 use App\Contracts\ModuleContract;
+use App\Contracts\PackageContract;
 use App\Contracts\PageContract;
 use App\Contracts\SocialContract;
 use App\Contracts\TenantSignupDescriptionContract;
 use App\Contracts\TestimonialContract;
 use App\Http\Controllers\Controller;
+use App\Http\traits\PermissionHandleTrait;
 use App\Models\Landlord\Hero;
 use App\Models\Landlord\Page;
 use App\Models\Landlord\Social;
@@ -23,6 +25,8 @@ class LandingPageController extends Controller
 {
 
     public $languageId;
+    use PermissionHandleTrait;
+
     public function __construct(
         public SocialContract $socialContract,
         public BlogContract $blogContract,
@@ -43,6 +47,7 @@ class LandingPageController extends Controller
         FaqContract $faqContract,
         TestimonialContract $testimonialContract,
         TenantSignupDescriptionContract $tenantSignupDescriptionContract,
+        PackageContract $packageContract,
     )
     {
         $socials = $this->socialContract->getOrderByPosition(); //Common
@@ -65,8 +70,12 @@ class LandingPageController extends Controller
         $blogs =  $this->blogContract->getAllByLanguageId($this->languageId);
         $pages =  $this->pageContract->getAllByLanguageId($this->languageId); //Common
 
+        $saasFeatures =  $this->features();
+        $packages = $packageContract->all();
+
         return view('landlord.public-section.pages.landing-page.index',compact([
-            'socials','hero','module','features','faq','testimonials','tenantSignupDescription','blogs','pages'
+            'socials','hero','module','features','faq','testimonials','tenantSignupDescription',
+            'blogs','pages', 'saasFeatures','packages'
         ]));
     }
 

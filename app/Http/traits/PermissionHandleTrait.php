@@ -2188,4 +2188,543 @@ trait PermissionHandleTrait
             ]
         ];
     }
+
+    public function selectedPermissions()
+    {
+        return array(
+            array(
+				'id' => 1,
+				'guard_name' => 'web',
+				'name' => 'user',
+                'parent'=> null,
+                'treeview'=> 1
+			),
+            array(
+				'id' => 5,
+				'guard_name' => 'web',
+				'name' => 'details-employee',
+                'parent'=> null,
+                'treeview'=> 1
+			),
+            array(
+				'id' => 10,
+				'guard_name' => 'web',
+				'name' => 'customize-setting',
+                'parent'=> null,
+                'treeview'=> 1
+			),
+            array(
+				'id' => 11,
+				'guard_name' => 'web',
+				'name' => 'role',
+                'parent'=> 'customize-setting',
+                'treeview'=> 1
+			),
+            array(
+				'id' => 17,
+				'guard_name' => 'web',
+				'name' => 'general-setting',
+                'parent'=> 'customize-setting',
+                'treeview'=> 1
+			),
+            array(
+				'id' => 20,
+				'guard_name' => 'web',
+				'name' => 'mail-setting',
+                'parent'=> 'customize-setting',
+                'treeview'=> 1
+			),
+            array(
+				'id' => 23,
+				'guard_name' => 'web',
+				'name' => 'access-variable_type',
+                'parent'=> 'customize-setting',
+                'treeview'=> 1
+			),
+            array(
+				'id' => 24,
+				'guard_name' => 'web',
+				'name' => 'access-variable_method',
+                'parent'=> 'customize-setting',
+                'treeview'=> 1
+			),
+            array(
+				'id' => 25,
+				'guard_name' => 'web',
+				'name' => 'access-language',
+                'parent'=> 'customize-setting',
+                'treeview'=> 1
+			),
+            // Company
+            array(
+                'id' => 26,
+                'guard_name' => 'web',
+                'name' => 'company',
+                'parent' => null,
+                'treeview' => 1
+            ),
+
+            // Department
+            array(
+                'id' => 31,
+                'guard_name' => 'web',
+                'name' => 'department',
+                'parent' => null,
+                'treeview' => 1
+            ),
+            // Designation
+            array(
+                'id' => 36,
+                'guard_name' => 'web',
+                'name' => 'designation',
+                'parent' => null,
+                'treeview' => 1
+            ),
+            // Location
+            array(
+                'id' => 41,
+                'guard_name' => 'web',
+                'name' => 'location',
+                'parent' => null,
+                'treeview' => 1
+            ),
+            // Core HR
+            array(
+                'id' => 46,
+                'guard_name' => 'web',
+                'name' => 'core_hr',
+                'parent' => null,
+                'treeview' => 1
+            ),
+            // Core HR | view-calendar
+            array(
+                'id' => 47,
+                'guard_name' => 'web',
+                'name' => 'view-calendar',
+                'parent' => 'core_hr',
+                'treeview' => 1
+            ),
+            // Core HR | Promotion
+            array(
+                'id' => 48,
+                'guard_name' => 'web',
+                'name' => 'promotion',
+                'parent' => 'core_hr',
+                'treeview' => 1
+            ),
+            // Core HR | Award
+            array(
+                'id' => 53,
+                'guard_name' => 'web',
+                'name' => 'award',
+                'parent' => 'core_hr',
+                'treeview' => 1
+            ),
+            // Core HR | Transfer
+            array(
+                'id' => 58,
+                'guard_name' => 'web',
+                'name' => 'transfer',
+                'parent' => 'core_hr',
+                'treeview' => 1
+            ),
+            // Core HR | Travel
+            array(
+                'id' => 63,
+                'guard_name' => 'web',
+                'name' => 'travel',
+                'parent' => 'core_hr',
+                'treeview' => 1
+            ),
+            // Core HR | Resignation
+            array(
+                'id' => 68,
+                'guard_name' => 'web',
+                'name' => 'resignation',
+                'parent' => 'core_hr',
+                'treeview' => 1
+            ),
+            // Core HR | Complaint
+            array(
+                'id' => 73,
+                'guard_name' => 'web',
+                'name' => 'complaint',
+                'parent' => 'core_hr',
+                'treeview' => 1
+            ),
+            // Core HR | Warning
+            array(
+                'id' => 78,
+                'guard_name' => 'web',
+                'name' => 'warning',
+                'parent' => 'core_hr',
+                'treeview' => 1
+            ),
+            // Core HR | Termination
+            array(
+                'id' => 83,
+                'guard_name' => 'web',
+                'name' => 'termination',
+                'parent' => 'core_hr',
+                'treeview' => 1
+            ),
+            // timesheet
+            array(
+                'id' => 88,
+                'guard_name' => 'web',
+                'name' => 'timesheet',
+                'parent'=> null,
+                'treeview'=> 2
+            ),
+            // timesheet | Attendance
+            array(
+                'id' => 89,
+                'guard_name' => 'web',
+                'name' => 'attendance',
+                'parent'=> 'timesheet',
+                'treeview'=> 2
+            ),
+            // timesheet | office_shift
+            array(
+                'id' => 94,
+                'guard_name' => 'web',
+                'name' => 'office_shift',
+                'parent' => 'timesheet',
+                'treeview' => 2
+            ),
+            // timesheet | holiday
+            array(
+                'id' => 99,
+                'guard_name' => 'web',
+                'name' => 'holiday',
+                'parent' => 'timesheet',
+                'treeview' => 2
+            ),
+            // timesheet | leave
+            array(
+                'id' => 104,
+                'guard_name' => 'web',
+                'name' => 'leave',
+                'parent'=> 'timesheet',
+                'treeview'=> 2
+            ),
+            // payment-module
+            array(
+                'id' => 110,
+                'guard_name' => 'web',
+                'name' => 'payment-module',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // hr_report
+            array(
+                'id' => 116,
+                'guard_name' => 'web',
+                'name' => 'hr_report',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // recruitment
+            array(
+                'id' => 129,
+                'guard_name' => 'web',
+                'name' => 'recruitment',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // recruitment | job_post
+            array(
+                'id' => 130,
+                'guard_name' => 'web',
+                'name' => 'job_post',
+                'parent' => 'recruitment',
+                'treeview' => 2
+            ),
+            // recruitment | job_candidate
+            array(
+                'id' => 135,
+                'guard_name' => 'web',
+                'name' => 'job_candidate',
+                'parent' => 'recruitment',
+                'treeview' => 2
+            ),
+            // recruitment | job_interview
+            array(
+                'id' => 138,
+                'guard_name' => 'web',
+                'name' => 'job_interview',
+                'parent' => 'recruitment',
+                'treeview' => 2
+            ),
+            // CMS
+            array(
+                'id' => 142,
+                'guard_name' => 'web',
+                'name' => 'cms',
+                'parent' => 'recruitment',
+                'treeview' => 2
+            ),
+            // project-management
+            array(
+                'id' => 145,
+                'guard_name' => 'web',
+                'name' => 'project-management',
+                'parent' => null,
+                'treeview' => 2
+            ),
+
+            // project-management | Project
+            array(
+                'id' => 146,
+                'guard_name' => 'web',
+                'name' => 'project',
+                'parent' => 'project-management',
+                'treeview' => 2
+            ),
+            // project-management | task
+            array(
+                'id' => 152,
+                'guard_name' => 'web',
+                'name' => 'task',
+                'parent' => 'project-management',
+                'treeview' => 2
+            ),
+            // client
+            array(
+                'id' => 158,
+                'guard_name' => 'web',
+                'name' => 'client',
+                'parent' => 'project-management',
+                'treeview' => 2
+            ),
+            array(
+                'id' => 163,
+                'guard_name' => 'web',
+                'name' => 'invoice',
+                'parent' => 'project-management',
+                'treeview' => 2
+            ),
+            // Ticket
+            array(
+                'id' => 168,
+                'guard_name' => 'web',
+                'name' => 'ticket',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // File Module
+            array(
+                'id' => 174,
+                'guard_name' => 'web',
+                'name' => 'file_module',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // File Module | File Manager
+            array(
+                'id' => 175,
+                'guard_name' => 'web',
+                'name' => 'file_manager',
+                'parent' => 'file_module',
+                'treeview' => 2
+            ),
+            // File Module | Official Document
+            array(
+                'id' => 181,
+                'guard_name' => 'web',
+                'name' => 'official_document',
+                'parent' => 'file_module',
+                'treeview' => 2
+            ),
+            // Event Meeting
+            array(
+                'id' => 186,
+                'guard_name' => 'web',
+                'name' => 'event-meeting',
+                'parent' => null,
+                'treeview' => 2
+            ),
+            // Event Meeting | Meeting
+            array(
+                'id' => 187,
+                'guard_name' => 'web',
+                'name' => 'meeting',
+                'parent' => 'event-meeting',
+                'treeview' => 2
+            ),
+            // Event Meeting | Event
+            array(
+                'id' => 192,
+                'guard_name' => 'web',
+                'name' => 'event',
+                'parent' => 'event-meeting',
+                'treeview' => 2
+            ),
+            // assets-and-category
+            // array(
+            //     'id' => 197,
+            //     'guard_name' => 'web',
+            //     'name' => 'assets-and-category',
+            //     'parent' => null,
+            //     'treeview' => 2
+            // ),
+            // // assets-and-category | category
+            array(
+                'id' => 198,
+                'guard_name' => 'web',
+                'name' => 'category',
+                'parent' => 'assets-and-category',
+                'treeview' => 2
+            ),
+            // assets-and-category | assets
+            array(
+                'id' => 203,
+                'guard_name' => 'web',
+                'name' => 'assets',
+                'parent' => 'assets-and-category',
+                'treeview' => 2
+            ),
+            // Finance
+            array(
+                'id' => 208,
+                'guard_name' => 'web',
+                'name' => 'finance',
+                'parent' => null,
+                'treeview' => 3
+            ),
+
+            // Finance | Account
+            array(
+                'id' => 209,
+                'guard_name' => 'web',
+                'name' => 'account',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            // Finance | expense
+            array(
+                'id' => 217,
+                'guard_name' => 'web',
+                'name' => 'expense',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            // Finance | deposit
+            array(
+                'id' => 222,
+                'guard_name' => 'web',
+                'name' => 'deposit',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            // Finance | payer
+            array(
+                'id' => 227,
+                'guard_name' => 'web',
+                'name' => 'payer',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            // Finance | payee
+            array(
+                'id' => 232,
+                'guard_name' => 'web',
+                'name' => 'payee',
+                'parent' => 'finance',
+                'treeview' => 3
+            ),
+            // Training Module
+            array(
+                'id' => 237,
+                'guard_name' => 'web',
+                'name' => 'training_module',
+                'parent' => null,
+                'treeview' => 3
+            ),
+            // Training Module | trainer
+            array(
+                'id' => 238,
+                'guard_name' => 'web',
+                'name' => 'trainer',
+                'parent' => 'training_module',
+                'treeview' => 3
+            ),
+           // Training Module | training
+           array(
+                'id' => 243,
+                'guard_name' => 'web',
+                'name' => 'training',
+                'parent' => 'training_module',
+                'treeview' => 3
+            ),
+            // Training Module | announcement
+            array(
+                'id' => 248,
+                'guard_name' => 'web',
+                'name' => 'announcement',
+                'parent' => null,
+                'treeview' => 3
+            ),
+            // Training Module | policy
+            array(
+                'id' => 252,
+                'guard_name' => 'web',
+                'name' => 'policy',
+                'parent' => null,
+                'treeview' => 3
+            ),
+            // performance
+            array(
+                'id' => 256,
+                'guard_name' => 'web',
+                'name' => 'performance',
+                'parent' => null,
+                'treeview' => 3
+            ),
+            // performance | goal-type
+            array(
+                'id' => 257,
+                'guard_name' => 'web',
+                'name' => 'goal-type',
+                'parent' => 'performance',
+                'treeview' => 3
+            ),
+            // performance | goal-tracking
+            array(
+                'id' => 262,
+                'guard_name' => 'web',
+                'name' => 'goal-tracking',
+                'parent' => 'performance',
+                'treeview' => 3
+            ),
+            // performance | indicator
+            array(
+                'id' => 267,
+                'guard_name' => 'web',
+                'name' => 'indicator',
+                'parent' => 'performance',
+                'treeview' => 3
+            ),
+            // performance | appraisal
+            array(
+                'id' => 272,
+                'guard_name' => 'web',
+                'name' => 'appraisal',
+                'parent' => 'performance',
+                'treeview' => 3
+            ),
+        );
+    }
+
+    public function features()
+    {
+        $features = [];
+        $selectedPermissions = $this->selectedPermissions();
+        foreach ($selectedPermissions as $key => $value) {
+            if(!in_array($value['name'], $this->skipParentSlug))
+            $features[] = $value['name'];
+        }
+        
+        return $features;
+    }
 }

@@ -1,6 +1,6 @@
-@php
+{{-- @php
     $generalSetting =  DB::table('general_settings')->latest()->first();
-@endphp
+@endphp --}}
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
@@ -464,6 +464,8 @@
       gtag('config', 'G-D0S4KHQ1D6');
     </script>
     @endif
+
+    @stack('scripts')
 </body>
 </html>
 

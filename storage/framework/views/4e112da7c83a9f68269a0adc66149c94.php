@@ -1,9 +1,3 @@
-<?php
-    $generalSetting =  DB::table('general_settings')->latest()->first();
-?>
-
-
-
 <?php $__env->startSection('public-content'); ?>
 
 
@@ -114,8 +108,83 @@
 
 
 
+    <!-- Pricing Plan -->
 
-    
+    <section id="packages"class="grey-bg">
+        <div class="container">
+            <div class="col-md-6 offset-md-3 text-center mb-5">
+                <h2 class="regular"><?php echo app('translator')->get('file.Pricing plans'); ?></h2>
+                <div class="custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input" id="plan_type">
+                    <label class="custom-control-label" for="plan_type"><?php echo app('translator')->get('file.Show Yearly Price'); ?></label>
+                </div>
+            </div>
+            <div class="d-none d-lg-flex d-xl-flex justify-content-between mb-5">
+                <?php if($packages): ?>
+                    <div class="col">
+                        <div class="pricing">
+                            <div class="pricing-header">
+                                <span class="h3"><?php echo app('translator')->get('file.Plan'); ?></span>
+                            </div>
+                            <div class="price">
+                                <span class="h4"><?php echo app('translator')->get('file.Price'); ?></span>
+                            </div>
+                            <div class="pricing-details">
+                                <p class="bold"><?php echo e(trans('file.Free Trial')); ?></p>
+                                <?php $__currentLoopData = $saasFeatures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php
+                                        $delimiter = '-';
+                                        if (strpos($item, '_') !== false) {
+                                            $delimiter = '_';
+                                        }
+                                        $words = explode($delimiter, $item);
+                                        $convertedString = implode(' ', array_map('ucfirst', $words));
+                                    ?>
+                                    <p class="bold"><?php echo e($convertedString); ?></p>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php $__currentLoopData = $packages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $package): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="col">
+                            <div class="pricing">
+                                <div class="pricing-header">
+                                    <span class="h3"><?php echo e($package->name); ?></span>
+                                </div>
+                                <div class="price">
+                                    <div>
+                                        <span class="h4"><span class="currency-code"><?php echo e($generalSetting->currency_code); ?></span> <span class="package-price" data-monthly="<?php echo e($package->monthly_fee); ?>" data-yearly="<?php echo e($package->yearly_fee); ?>"><?php echo e($package->monthly_fee); ?>/month</span></span><br>
+                                        <button href="#customer-signup" data-free="<?php echo e($package->is_free_trial); ?>" data-package_id="<?php echo e($package->id); ?>" class="button style2 signup-btn">Sign Up</button>
+                                    </div>
+                                </div>
+                                <div class="pricing-details">
+
+                                    <?php if($package->is_free_trial): ?>
+                                        <p><?php echo e($generalSetting->free_trial_limit); ?> days</p>
+                                    <?php else: ?>
+                                        <p>N/A</p>
+                                    <?php endif; ?>
+
+                                    <?php
+                                        $selectedFeatures = explode(',',$package->features);
+                                    ?>
+
+                                    <?php $__currentLoopData = $saasFeatures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if(in_array($item, $selectedFeatures)): ?>
+                                            <p><i class="ti-check"></i></p>
+                                        <?php else: ?>
+                                            <p><i class="ti-close"></i></p>
+                                        <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
 
     <section class="grey-bg">
         <div class="container">
@@ -227,5 +296,46 @@
     
 
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('scripts'); ?>
+
+<script>
+        (function ($) {
+            "use strict";
+
+            $("#plan_type").change(function(){
+                if($("#plan_type").is(':checked')){
+                    $('input[name=subscription_type]').val('yearly');
+
+                    $(".package-price").each(function(){
+                        var plan = $(this).data('yearly')+'/year';
+                        $(this).html(plan);
+                    })
+                }
+                else {
+                    $('input[name=subscription_type]').val('monthly');
+                    $(".package-price").each(function(){
+                        var plan = $(this).data('monthly')+'/month';
+                        $(this).html(plan);
+                    })
+                }
+            });
+
+            $(".signup-btn").on("click", function () {
+                $('input[name=package_id]').val($(this).data('package_id'));
+                if($('input[name=subscription_type]').val() == 'monthly') {
+                    $('input[name=price]').val($(this).parent().parent().find('.package-price').data('monthly'));
+                } else {
+                    $('input[name=price]').val($(this).parent().parent().find('.package-price').data('yearly'));
+                }
+                $('html, body').animate({
+                    scrollTop: $("#customer-signup").offset().top
+                });
+            });
+
+        })(jQuery);
+</script>
+
+<?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('landlord.public-section.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/peopleprosaas/resources/views/landlord/public-section/pages/landing-page/index.blade.php ENDPATH**/ ?>

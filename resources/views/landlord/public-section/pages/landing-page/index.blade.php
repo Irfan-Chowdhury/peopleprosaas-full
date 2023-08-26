@@ -1,8 +1,3 @@
-@php
-    $generalSetting =  DB::table('general_settings')->latest()->first();
-@endphp
-
-
 @extends('landlord.public-section.layouts.master')
 @section('public-content')
 
@@ -114,326 +109,83 @@
 
 
 
+    <!-- Pricing Plan -->
 
-    {{-- <section id="packages"class="grey-bg">
+    <section id="packages"class="grey-bg">
         <div class="container">
             <div class="col-md-6 offset-md-3 text-center mb-5">
-                <h2 class="regular">Pricing plans</h2>
+                <h2 class="regular">@lang('file.Pricing plans')</h2>
                 <div class="custom-control custom-switch">
                     <input type="checkbox" class="custom-control-input" id="plan_type">
-                    <label class="custom-control-label" for="plan_type">Show Yearly Price</label>
+                    <label class="custom-control-label" for="plan_type">@lang('file.Show Yearly Price')</label>
                 </div>
-
             </div>
             <div class="d-none d-lg-flex d-xl-flex justify-content-between mb-5">
-                <div class="col">
-                    <div class="pricing">
-                        <div class="pricing-header">
-                            <span class="h3">Plan</span>
-                        </div>
-                        <div class="price">
-                            <span class="h4">Price</span>
-                        </div>
-                        <div class="pricing-details">
-                            <p class="bold">{{trans('file.Free Trial')}}</p>
-                            <p class="bold">Product and Categories</p>
-                            <p class="bold">Sale and Purchase</p>
-                            <p class="bold">Sale Return</p>
-                            <p class="bold">Purchase Return</p>
-                            <p class="bold">Expenses</p>
-                            <p class="bold">Stock Transfer</p>
-                            <p class="bold">Quotation</p>
-                            <p class="bold">Product Delivery</p>
-                            <p class="bold">Stock Count and Adjustment</p>
-                            <p class="bold">Reports</p>
-                            <p class="bold">HRM</p>
-                            <p class="bold">Accounting</p>
-                            <p class="bold">{{trans('file.Number of Warehouses')}}</p>
-                            <p class="bold">{{trans('file.Number of Products')}}</p>
-                            <p class="bold">{{trans('file.Number of Invoices')}}</p>
-                            <p class="bold">{{trans('file.Number of User Account')}}</p>
-                            <p class="bold">{{trans('file.Number of Employees')}}</p>
-                        </div>
-                    </div>
-                </div>
-                @foreach($packages as $package)
-                <?php
-                    $features = json_decode($package->features);
-                ?>
-                <div class="col">
-                    <div class="pricing">
-                        <div class="pricing-header">
-                            <span class="h3">{{$package->name}}</span>
-                        </div>
-                        <div class="price">
-                            <div>
-                                <span class="h4"><span class="currency-code">{{$general_setting->currency}}</span> <span class="package-price" data-monthly="{{$package->monthly_fee}}" data-yearly="{{$package->yearly_fee}}">{{$package->monthly_fee}}/month</span></span><br>
-                                <button href="#customer-signup" data-free="{{$package->is_free_trial}}" data-package_id="{{$package->id}}" class="button style2 signup-btn">Sign Up</button>
+                @if ($packages)
+                    <div class="col">
+                        <div class="pricing">
+                            <div class="pricing-header">
+                                <span class="h3">@lang('file.Plan')</span>
+                            </div>
+                            <div class="price">
+                                <span class="h4">@lang('file.Price')</span>
+                            </div>
+                            <div class="pricing-details">
+                                <p class="bold">{{trans('file.Free Trial')}}</p>
+                                @foreach ($saasFeatures as $item)
+                                    @php
+                                        $delimiter = '-';
+                                        if (strpos($item, '_') !== false) {
+                                            $delimiter = '_';
+                                        }
+                                        $words = explode($delimiter, $item);
+                                        $convertedString = implode(' ', array_map('ucfirst', $words));
+                                    @endphp
+                                    <p class="bold">{{ $convertedString }}</p>
+                                @endforeach
                             </div>
                         </div>
-                        <div class="pricing-details">
-                            @if($package->is_free_trial)
-                                <p>{{$general_setting->free_trial_limit}} days</p>
-                            @else
-                                <p>N/A</p>
-                            @endif
-                            @if(in_array("product_and_categories", $features))
-                                <p><i class="ti-check"></i></p>
-                            @else
-                                <p><i class="ti-close"></i></p>
-                            @endif
+                    </div>
 
-                            @if(in_array("purchase_and_sale", $features))
-                                <p><i class="ti-check"></i></p>
-                            @else
-                                <p><i class="ti-close"></i></p>
-                            @endif
+                    @foreach ($packages as $key => $package)
+                        <div class="col">
+                            <div class="pricing">
+                                <div class="pricing-header">
+                                    <span class="h3">{{ $package->name }}</span>
+                                </div>
+                                <div class="price">
+                                    <div>
+                                        <span class="h4"><span class="currency-code">{{$generalSetting->currency_code}}</span> <span class="package-price" data-monthly="{{$package->monthly_fee}}" data-yearly="{{$package->yearly_fee}}">{{$package->monthly_fee}}/month</span></span><br>
+                                        <button href="#customer-signup" data-free="{{$package->is_free_trial}}" data-package_id="{{$package->id}}" class="button style2 signup-btn">Sign Up</button>
+                                    </div>
+                                </div>
+                                <div class="pricing-details">
 
-                            @if(in_array("sale_return", $features))
-                                <p><i class="ti-check"></i></p>
-                            @else
-                                <p><i class="ti-close"></i></p>
-                            @endif
+                                    @if($package->is_free_trial)
+                                        <p>{{ $generalSetting->free_trial_limit }} days</p>
+                                    @else
+                                        <p>N/A</p>
+                                    @endif
 
-                            @if(in_array("purchase_return", $features))
-                                <p><i class="ti-check"></i></p>
-                            @else
-                                <p><i class="ti-close"></i></p>
-                            @endif
+                                    @php
+                                        $selectedFeatures = explode(',',$package->features);
+                                    @endphp
 
-                            @if(in_array("expense", $features))
-                                <p><i class="ti-check"></i></p>
-                            @else
-                                <p><i class="ti-close"></i></p>
-                            @endif
-
-                            @if(in_array("transfer", $features))
-                                <p><i class="ti-check"></i></p>
-                            @else
-                                <p><i class="ti-close"></i></p>
-                            @endif
-
-                            @if(in_array("quotation", $features))
-                                <p><i class="ti-check"></i></p>
-                            @else
-                                <p><i class="ti-close"></i></p>
-                            @endif
-
-                            @if(in_array("delivery", $features))
-                                <p><i class="ti-check"></i></p>
-                            @else
-                                <p><i class="ti-close"></i></p>
-                            @endif
-
-                            @if(in_array("stock_count_and_adjustment", $features))
-                                <p><i class="ti-check"></i></p>
-                            @else
-                                <p><i class="ti-close"></i></p>
-                            @endif
-
-                            @if(in_array("report", $features))
-                                <p><i class="ti-check"></i></p>
-                            @else
-                                <p><i class="ti-close"></i></p>
-                            @endif
-
-                            @if(in_array("hrm", $features))
-                                <p><i class="ti-check"></i></p>
-                            @else
-                                <p><i class="ti-close"></i></p>
-                            @endif
-
-                            @if(in_array("accounting", $features))
-                                <p><i class="ti-check"></i></p>
-                            @else
-                                <p><i class="ti-close"></i></p>
-                            @endif
-
-                            @if($package->number_of_warehouse)
-                                <p>{{$package->number_of_warehouse}}</p>
-                            @else
-                                <p>{{trans('file.Unlimited')}}</p>
-                            @endif
-
-                            @if($package->number_of_product)
-                                <p>{{$package->number_of_product}}</p>
-                            @else
-                                <p>{{trans('file.Unlimited')}}</p>
-                            @endif
-
-                            @if($package->number_of_invoice)
-                                <p>{{$package->number_of_invoice}}</p>
-                            @else
-                                <p>{{trans('file.Unlimited')}}</p>
-                            @endif
-
-                            @if($package->number_of_user_account)
-                                <p>{{$package->number_of_user_account}}</p>
-                            @else
-                                <p>{{trans('file.Unlimited')}}</p>
-                            @endif
-
-                            @if($package->number_of_employee)
-                                <p>{{$package->number_of_employee}}</p>
-                            @else
-                                <p>{{trans('file.Unlimited')}}</p>
-                            @endif
+                                    @foreach ($saasFeatures as $item)
+                                        @if(in_array($item, $selectedFeatures))
+                                            <p><i class="ti-check"></i></p>
+                                        @else
+                                            <p><i class="ti-close"></i></p>
+                                        @endif
+                                    @endforeach
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
-
-            @foreach($packages as $package)
-            <?php
-                $features = json_decode($package->features);
-            ?>
-            <div class="pricing-m d-block d-lg-none d-xl-none mb-5">
-                <div class="d-flex justify-content-between">
-                    <div class="pricing-header">
-                        <span class="h3">{{$package->name}}</span>
-                    </div>
-                    <div class="price">
-                        <span class="h4"><span class="currency-code">{{$general_setting->currency}}</span> <span class="package-price" data-monthly="{{$package->monthly_fee}}" data-yearly="{{$package->yearly_fee}}">{{$package->monthly_fee}}/month</span></span>
-                    </div>
-                </div>
-                <div class="price">
-                    <button href="#customer-signup" data-free="{{$package->is_free_trial}}" data-package_id="{{$package->id}}" class="button style2 d-block w-100 signup-btn">Sign Up</button>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <div class="pricing-details">
-                        <p class="bold">{{trans('file.Free Trial')}}</p>
-                        <p class="bold">Product and Categories</p>
-                        <p class="bold">Sale and Purchase</p>
-                        <p class="bold">Sale Return</p>
-                        <p class="bold">Purchase Return</p>
-                        <p class="bold">Expenses</p>
-                        <p class="bold">Stock Transfer</p>
-                        <p class="bold">Quotation</p>
-                        <p class="bold">Product Delivery</p>
-                        <p class="bold">Stock Count and Adjustment</p>
-                        <p class="bold">Reports</p>
-                        <p class="bold">HRM</p>
-                        <p class="bold">Accounting</p>
-                        <p class="bold">{{trans('file.Number of Warehouses')}}</p>
-                        <p class="bold">{{trans('file.Number of Products')}}</p>
-                        <p class="bold">{{trans('file.Number of Invoices')}}</p>
-                        <p class="bold">{{trans('file.Number of User Account')}}</p>
-                        <p class="bold">{{trans('file.Number of Employees')}}</p>
-                    </div>
-                    <div class="pricing-details">
-                        @if($package->is_free_trial)
-                            <p>{{$general_setting->free_trial_limit}} days</p>
-                        @else
-                            <p>N/A</p>
-                        @endif
-                        @if(in_array("product_and_categories", $features))
-                            <p><i class="ti-check"></i></p>
-                        @else
-                            <p><i class="ti-close"></i></p>
-                        @endif
-
-                        @if(in_array("purchase_and_sale", $features))
-                            <p><i class="ti-check"></i></p>
-                        @else
-                            <p><i class="ti-close"></i></p>
-                        @endif
-
-                        @if(in_array("sale_return", $features))
-                            <p><i class="ti-check"></i></p>
-                        @else
-                            <p><i class="ti-close"></i></p>
-                        @endif
-
-                        @if(in_array("purchase_return", $features))
-                            <p><i class="ti-check"></i></p>
-                        @else
-                            <p><i class="ti-close"></i></p>
-                        @endif
-
-                        @if(in_array("expense", $features))
-                            <p><i class="ti-check"></i></p>
-                        @else
-                            <p><i class="ti-close"></i></p>
-                        @endif
-
-                        @if(in_array("transfer", $features))
-                            <p><i class="ti-check"></i></p>
-                        @else
-                            <p><i class="ti-close"></i></p>
-                        @endif
-
-                        @if(in_array("quotation", $features))
-                            <p><i class="ti-check"></i></p>
-                        @else
-                            <p><i class="ti-close"></i></p>
-                        @endif
-
-                        @if(in_array("delivery", $features))
-                            <p><i class="ti-check"></i></p>
-                        @else
-                            <p><i class="ti-close"></i></p>
-                        @endif
-
-                        @if(in_array("stock_count_and_adjustment", $features))
-                            <p><i class="ti-check"></i></p>
-                        @else
-                            <p><i class="ti-close"></i></p>
-                        @endif
-
-                        @if(in_array("report", $features))
-                            <p><i class="ti-check"></i></p>
-                        @else
-                            <p><i class="ti-close"></i></p>
-                        @endif
-
-                        @if(in_array("hrm", $features))
-                            <p><i class="ti-check"></i></p>
-                        @else
-                            <p><i class="ti-close"></i></p>
-                        @endif
-
-                        @if(in_array("accounting", $features))
-                            <p><i class="ti-check"></i></p>
-                        @else
-                            <p><i class="ti-close"></i></p>
-                        @endif
-
-                        @if($package->number_of_warehouse)
-                            <p>{{$package->number_of_warehouse}}</p>
-                        @else
-                            <p>{{trans('file.Unlimited')}}</p>
-                        @endif
-
-                        @if($package->number_of_product)
-                            <p>{{$package->number_of_product}}</p>
-                        @else
-                            <p>{{trans('file.Unlimited')}}</p>
-                        @endif
-
-                        @if($package->number_of_invoice)
-                            <p>{{$package->number_of_invoice}}</p>
-                        @else
-                            <p>{{trans('file.Unlimited')}}</p>
-                        @endif
-
-                        @if($package->number_of_user_account)
-                            <p>{{$package->number_of_user_account}}</p>
-                        @else
-                            <p>{{trans('file.Unlimited')}}</p>
-                        @endif
-
-                        @if($package->number_of_employee)
-                            <p>{{$package->number_of_employee}}</p>
-                        @else
-                            <p>{{trans('file.Unlimited')}}</p>
-                        @endif
-                    </div>
-                </div>
-            </div>
-            @endforeach
         </div>
-    </section> --}}
+    </section>
 
     <section class="grey-bg">
         <div class="container">
@@ -559,3 +311,44 @@
     @endif --}}
 
 @endsection
+
+@push('scripts')
+
+<script>
+        (function ($) {
+            "use strict";
+
+            $("#plan_type").change(function(){
+                if($("#plan_type").is(':checked')){
+                    $('input[name=subscription_type]').val('yearly');
+
+                    $(".package-price").each(function(){
+                        var plan = $(this).data('yearly')+'/year';
+                        $(this).html(plan);
+                    })
+                }
+                else {
+                    $('input[name=subscription_type]').val('monthly');
+                    $(".package-price").each(function(){
+                        var plan = $(this).data('monthly')+'/month';
+                        $(this).html(plan);
+                    })
+                }
+            });
+
+            $(".signup-btn").on("click", function () {
+                $('input[name=package_id]').val($(this).data('package_id'));
+                if($('input[name=subscription_type]').val() == 'monthly') {
+                    $('input[name=price]').val($(this).parent().parent().find('.package-price').data('monthly'));
+                } else {
+                    $('input[name=price]').val($(this).parent().parent().find('.package-price').data('yearly'));
+                }
+                $('html, body').animate({
+                    scrollTop: $("#customer-signup").offset().top
+                });
+            });
+
+        })(jQuery);
+</script>
+
+@endpush
