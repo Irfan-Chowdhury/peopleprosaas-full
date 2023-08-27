@@ -19,6 +19,7 @@ use App\Http\Controllers\Landlord\TenantSignupDescriptionController;
 use App\Http\Controllers\Landlord\TestimonialController;
 use App\Http\Controllers\Landlord\TranslationController;
 use App\Http\Controllers\LanguageSettingController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -48,6 +49,11 @@ Route::middleware(['setPublicLocale'])->group(function () {
         Route::get('/blogs/{slug}', 'blogDetail')->name('landingPage.blogDetail');
         Route::get('/pages/{slug}', 'pageDetails')->name('landingPage.pageDetail');
     });
+});
+
+// tenant.checkout
+Route::controller(CustomerController::class)->group(function () {
+    Route::post('/customer-signup', 'customerSignUp')->name('customer.signup')->middleware('demoCheck');
 });
 
 

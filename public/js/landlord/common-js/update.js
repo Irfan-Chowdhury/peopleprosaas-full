@@ -3,7 +3,7 @@
 
     $(document).ready(function() {
         $("#updateForm").on("submit",function(e){
-            // e.preventDefault();
+            e.preventDefault();
             let modelId = $('#modelId').val();
             $('#updateButton').text('Updating...');
             $.post({

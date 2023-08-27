@@ -27,7 +27,7 @@
                                         'fieldType' => 'text',
                                         'nameData' => 'name',
                                         'placeholderData' => 'Basic',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                     ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                                     <?php echo $__env->make('landlord.super-admin.partials.input-field',[
@@ -46,7 +46,7 @@
                                         'fieldType' => 'number',
                                         'nameData' => 'monthly_fee',
                                         'placeholderData' => '19',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                     ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                                     <?php echo $__env->make('landlord.super-admin.partials.input-field',[
@@ -55,7 +55,7 @@
                                         'fieldType' => 'number',
                                         'nameData' => 'yearly_fee',
                                         'placeholderData' => '200',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                     ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                                     <?php echo $__env->make('landlord.super-admin.partials.input-field',[
@@ -64,7 +64,7 @@
                                         'fieldType' => 'number',
                                         'nameData' => 'number_of_user_account',
                                         'placeholderData' => '5',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                     ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                                     <?php echo $__env->make('landlord.super-admin.partials.input-field',[
@@ -73,7 +73,7 @@
                                         'fieldType' => 'number',
                                         'nameData' => 'number_of_employee',
                                         'placeholderData' => '10',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                     ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                                     <div class="col-md-12 mt-3">

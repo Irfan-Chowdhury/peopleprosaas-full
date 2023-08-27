@@ -17,7 +17,7 @@ class GeneralSettingSeeder extends Seeder
         $timeZone = "Asia/Dhaka";
         $dateFormat = "d-m-Y";
 
-        if(config('database.connections.peopleprosaas_landlord'))
+        if(!config('database.connections.peopleprosaas_landlord'))
         {
             $siteTitle = "PeopleProSAAS";
 

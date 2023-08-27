@@ -8,7 +8,8 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        if(!config('database.connections.peopleprosaas_landlord')) {
+        // if(!config('database.connections.peopleprosaas_landlord')) {
+        if (in_array(request()->getHost(), config('tenancy.central_domains'))) {
             $data = [
                 [
                     'first_name'=>'Mr',

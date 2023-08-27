@@ -28,7 +28,7 @@
                                         'fieldType' => 'text',
                                         'nameData' => 'name',
                                         'placeholderData' => 'Basic',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                     ])
 
                                     @include('landlord.super-admin.partials.input-field',[
@@ -47,7 +47,7 @@
                                         'fieldType' => 'number',
                                         'nameData' => 'monthly_fee',
                                         'placeholderData' => '19',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                     ])
 
                                     @include('landlord.super-admin.partials.input-field',[
@@ -56,7 +56,7 @@
                                         'fieldType' => 'number',
                                         'nameData' => 'yearly_fee',
                                         'placeholderData' => '200',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                     ])
 
                                     @include('landlord.super-admin.partials.input-field',[
@@ -65,7 +65,7 @@
                                         'fieldType' => 'number',
                                         'nameData' => 'number_of_user_account',
                                         'placeholderData' => '5',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                     ])
 
                                     @include('landlord.super-admin.partials.input-field',[
@@ -74,7 +74,7 @@
                                         'fieldType' => 'number',
                                         'nameData' => 'number_of_employee',
                                         'placeholderData' => '10',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                     ])
 
                                     <div class="col-md-12 mt-3">

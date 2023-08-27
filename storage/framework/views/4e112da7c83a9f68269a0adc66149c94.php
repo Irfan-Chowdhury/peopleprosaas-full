@@ -224,12 +224,12 @@
                         <p class="lead mb-3"><?php echo e($tenantSignupDescription->sub_heading); ?></p>
                     <?php else: ?>
                         <h2 class="regular">Customer Sign Up</h2>
-                        <p class="lead mb-3">SalePro is packed with all the features you'll need to seamlessly run your business</p>
+                        <p class="lead mb-3">Peoplepro is packed with all the features you'll need to seamlessly run your business</p>
                     <?php endif; ?>
                 </div>
             </div>
             <div class="col-md-6 offset-md-3 mb-5">
-                <form action="" method="POST"  class="form row customer-signup-form">
+                <form action="<?php echo e(route('customer.signup')); ?>" method="POST"  class="form row customer-signup-form">
                     <?php echo csrf_field(); ?>
                     <div class="col-12">
                         <input type="hidden" name="package_id" value="1">
@@ -238,10 +238,10 @@
                         <input class="form-control" type="text" name="company_name"  placeholder="company name..." required>
                     </div>
                     <div class="col-md-6">
-                        <input class="form-control" type="text" name="phone_number"  placeholder="contact number..." required>
+                        <input class="form-control" type="number" name="phone_number"  placeholder="contact number..." required>
                     </div>
                     <div class="col-md-6">
-                        <input class="form-control" type="text" name="email"  placeholder="email..." required>
+                        <input class="form-control" type="email" name="email"  placeholder="email..." required>
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" type="text" name="name"  placeholder="username..." required>

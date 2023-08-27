@@ -29,7 +29,7 @@
                                         'fieldType' => 'text',
                                         'nameData' => 'name',
                                         'placeholderData' => 'Basic',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                         'valueData' => $package->name
                                     ])
 
@@ -49,7 +49,7 @@
                                         'fieldType' => 'number',
                                         'nameData' => 'monthly_fee',
                                         'placeholderData' => '19',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                         'valueData' => $package->monthly_fee ?? null
                                     ])
 
@@ -59,7 +59,7 @@
                                         'fieldType' => 'number',
                                         'nameData' => 'yearly_fee',
                                         'placeholderData' => '200',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                         'valueData' => $package->yearly_fee ?? null
                                     ])
 
@@ -69,7 +69,7 @@
                                         'fieldType' => 'number',
                                         'nameData' => 'number_of_user_account',
                                         'placeholderData' => '5',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                         'valueData' => $package->number_of_user_account ?? 0
                                     ])
 
@@ -79,7 +79,7 @@
                                         'fieldType' => 'number',
                                         'nameData' => 'number_of_employee',
                                         'placeholderData' => '10',
-                                        'isRequired' => false,
+                                        'isRequired' => true,
                                         'valueData' => $package->number_of_employee ?? 0
                                     ])
 
@@ -559,37 +559,6 @@
                 checkedNodes.push(node.parent().parent().id);
             }
         }
-
-
-        // $(document).ready(function() {
-        //     $("#updateForm").on("submit",function(e){
-        //         e.preventDefault();
-        //         let modelId = $('#modelId').val();
-        //         $('#updateButton').text('Updating...');
-        //         $.post({
-        //             url: updateURL + modelId,
-        //             data: new FormData(this),
-        //             contentType: false,
-        //             cache: false,
-        //             processData: false,
-        //             dataType: "json",
-        //             error: function(response) {
-        //                 console.log(response);
-        //                 let htmlContent = prepareMessage(response);
-        //                 displayErrorMessage(htmlContent);
-        //                 $('#updateButton').text('Update');
-        //             },
-        //             success: function (response) {
-        //                 console.log(response);
-        //                 displaySuccessMessage(response.success);
-        //                 $('#dataListTable').DataTable().ajax.reload();
-        //                 $('#updateForm')[0].reset();
-        //                 $("#editModal").modal('hide');
-        //                 $('#updateButton').text('Update');
-        //             }
-        //         });
-        //     });
-        // });
 
     })(jQuery);
 </script>

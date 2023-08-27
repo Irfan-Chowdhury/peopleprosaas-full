@@ -16,6 +16,7 @@ use App\Http\traits\PermissionHandleTrait;
 use App\Models\Landlord\Hero;
 use App\Models\Landlord\Page;
 use App\Models\Landlord\Social;
+use App\Models\Tenant;
 use App\Services\SocialService;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -40,6 +41,12 @@ class LandingPageController extends Controller
         });
     }
 
+    private function test()
+    {
+        $tenant = Tenant::create(['id' => 'bar']);
+        $tenant->domains()->create(['domain' => 'bar'.'.'.env('CENTRAL_DOMAIN')]); // This Line
+    }
+
 
     public function index(
         ModuleContract $moduleContract,
@@ -60,6 +67,8 @@ class LandingPageController extends Controller
         // return Session::get('DefaultSuperAdminLangId');
         // $languageId = Session::has('TempSuperAdminLangId')==true ? Session::get('TempSuperAdminLangId') : Session::get('DefaultSuperAdminLangId');
         // return $languageId;
+
+        // return $this->test();
 
         // ========== Test =============
 

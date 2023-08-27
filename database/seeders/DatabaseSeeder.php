@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(CountriesTableSeeder::class);
 
-        if(config('database.connections.peopleprosaas_landlord')) {
+        // if(config('database.connections.peopleprosaas_landlord')) {
+        if (!in_array(request()->getHost(), config('tenancy.central_domains'))) {
             $this->call([
                 UserSeeder::class,
                 GeneralSettingSeeder::class,
@@ -37,7 +38,7 @@ class DatabaseSeeder extends Seeder
             $this->call([
                 CountriesTableSeeder::class,
                 GeneralSettingSeeder::class,
-                PermissionsSeeder::class,
+                // PermissionsSeeder::class,
                 RoleSeeder::class,
                 UserSeeder::class,
             ]);
