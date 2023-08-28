@@ -19,7 +19,7 @@ use App\Http\Controllers\Landlord\TenantSignupDescriptionController;
 use App\Http\Controllers\Landlord\TestimonialController;
 use App\Http\Controllers\Landlord\TranslationController;
 use App\Http\Controllers\LanguageSettingController;
-use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\Landlord\CustomerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 

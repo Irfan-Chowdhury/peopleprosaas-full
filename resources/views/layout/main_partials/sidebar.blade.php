@@ -4,7 +4,8 @@
         <!-- Sidebar Navigation Menus-->
         <div class="main-menu">
             <ul id="side-main-menu" class="side-menu list-unstyled">
-                @if(auth()->user()->role_users_id ==1)
+                {{-- @if(auth()->user()->role_users_id ==1) --}}
+                @if(auth()->user()->role_users_id == 4)
                     <li class="{{ (request()->is('admin/dashboard*')) ? 'active' : '' }}"><a
                                 href="{{route('admin.dashboard')}}"> <i
                                     class="dripicons-meter"></i><span>{{trans('file.Dashboard')}}</span></a>
@@ -266,7 +267,8 @@
                 @endcan
 
 
-                @can('performance')
+                {{-- @can('performance') --}}
+                @if(auth()->user()->can('performance'))
                         <li class="has-dropdown {{ (request()->is('performance*')) ? 'active' : '' }}">
                             @if(auth()->user()->can('view-goal-type') || auth()->user()->can('view-goal-tracking') || auth()->user()->can('view-indicator') || auth()->user()->can('view-appraisal'))
                                 <a href="#performance" aria-expanded="false" data-toggle="collapse"> <i class="fa fa-bar-chart"></i>
@@ -288,7 +290,8 @@
                                 @endcan
                             </ul>
                         </li>
-                    @endcan
+                    {{-- @endcan --}}
+                @endif
 
                 @can('view-calendar')
                     <li class="{{ (request()->is('calendar*')) ? 'active' : '' }}"><a

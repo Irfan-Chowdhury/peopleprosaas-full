@@ -32,7 +32,8 @@ class AppServiceProvider extends ServiceProvider
 		if(isset($_COOKIE['language'])) {
 			App::setLocale($_COOKIE['language']);
 		} else {
-			App::setLocale('English');
+			// App::setLocale('English');
+			App::setLocale('en');
 		}
 
 //		if (!isset(env('Date_Format')) && !isset($_COOKIE['date_format_js'])){

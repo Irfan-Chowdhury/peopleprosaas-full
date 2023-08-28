@@ -15,7 +15,7 @@ class RoleSeeder extends Seeder
         DB::table('roles')->delete();
 
         $roles = array(
-			array(
+            array(
 				'id' => 1,
 				'name' => 'admin',
 				'guard_name' => 'web',
@@ -35,7 +35,7 @@ class RoleSeeder extends Seeder
 				'guard_name' => 'web',
 				'description' => 'When you create a client, this role and associated.',
 				'is_active' => '1'
-            )
+            ),
         );
 
 		DB::table('roles')->insert($roles);

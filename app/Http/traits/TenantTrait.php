@@ -5,7 +5,9 @@ namespace App\Http\traits;
 use App\Models\Landlord\GeneralSetting;
 use App\Models\Tenant;
 use App\Models\User;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 trait TenantTrait {
     // use \App\Traits\MailInfo;
@@ -111,16 +113,53 @@ trait TenantTrait {
         }
     }
 
-    public function createTenant($request, $package) : void
+    public function createTenant($request, $customer, $package) : void
     {
-        $tenant = Tenant::create(['id' => $request->tenant]);
+        $generalSetting = GeneralSetting::latest()->first();
+
+        if($package->is_free_trial)
+            $numberOfDaysToExpired = $generalSetting->free_trial_limit;
+        elseif($request->subscription_type == 'monthly')
+            $numberOfDaysToExpired = 30;
+        elseif($request->subscription_type == 'yearly')
+            $numberOfDaysToExpired = 365;
+
+        $tenant = [
+            'id' => $request->tenant,
+            'tenancy_db_name' => $request->tenant,
+            'customer_id' => $customer->id,
+            'package_id' => $package->id,
+            'subscription_type'=> $request->subscription_type,
+            'expiry_date' => date("Y-m-d", strtotime("+".$numberOfDaysToExpired." days"))
+        ];
+
+        $tenant = Tenant::create($tenant);
         $tenant->domains()->create(['domain' => $request->tenant.'.'.env('CENTRAL_DOMAIN')]); // This Line
 
         $permissions = json_decode($package->permissions, true);
+        $allPermissionIds = explode(',',$package->permission_ids);
 
-        $tenant->run(function ($tenant) use ($permissions) {
+        $tenant->run(function ($tenant) use ($request, $permissions, $customer, $allPermissionIds) {
             DB::table('permissions')->insert($permissions);
+
+            $user = User::create([
+                'first_name'=> $customer->first_name,
+                'last_name'=> $customer->last_name,
+                'username'=> $customer->username,
+                'email'=> $customer->email,
+                'contact_no'=> $customer->contact_no,
+                'role_users_id'=> 1,
+                'is_active'=> true,
+                'password'=> bcrypt($request->password)
+            ]);
+
+            $role = Role::findById(1);
+			$role->syncPermissions($allPermissionIds);
+			$user->syncRoles(1);
         });
     }
 
 }
+
+
+

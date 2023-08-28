@@ -231,20 +231,27 @@
             <div class="col-md-6 offset-md-3 mb-5">
                 <form action="{{ route('customer.signup') }}" method="POST"  class="form row customer-signup-form">
                     @csrf
+                    <input type="hidden" name="package_id">
+                    <input type="hidden" name="subscription_type" value="monthly">
+                    <input type="hidden" name="price">
+
                     <div class="col-12">
-                        <input type="hidden" name="package_id" value="1">
-                        <input type="hidden" name="subscription_type" value="monthly">
-                        <input type="hidden" name="price" value="">
                         <input class="form-control" type="text" name="company_name"  placeholder="company name..." required>
                     </div>
+                    <div class="col-6">
+                        <input class="form-control" type="text" name="first_name"  placeholder="First Name..." required>
+                    </div>
+                    <div class="col-6">
+                        <input class="form-control" type="text" name="last_name"  placeholder="Last Name..." required>
+                    </div>
                     <div class="col-md-6">
-                        <input class="form-control" type="number" name="phone_number"  placeholder="contact number..." required>
+                        <input class="form-control" type="number" name="contact_no"  placeholder="Contact Number..." required>
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" type="email" name="email"  placeholder="email..." required>
                     </div>
                     <div class="col-md-6">
-                        <input class="form-control" type="text" name="name"  placeholder="username..." required>
+                        <input class="form-control" type="text" name="username"  placeholder="username..." required>
                     </div>
                     <div class="col-md-6">
                         <input class="form-control" type="password" name="password"  placeholder="password..." required>

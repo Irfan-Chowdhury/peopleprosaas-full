@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Models\GeneralSetting;
 use Illuminate\Support\ServiceProvider;
-
+use Illuminate\Support\Facades\Schema;
 class ViewComposerServiceProvider extends ServiceProvider
 {
     /**
@@ -20,7 +20,7 @@ class ViewComposerServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (in_array(request()->getHost(), config('tenancy.central_domains'))) {
+        if (Schema::hasTable('general_settings') && in_array(request()->getHost(), config('tenancy.central_domains'))) {
             $generalSetting = GeneralSetting::latest()->first();
             view()->composer([
                 'landlord.public-section.layouts.master',

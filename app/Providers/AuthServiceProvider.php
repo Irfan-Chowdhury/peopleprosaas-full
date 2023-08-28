@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The policy mappings for the application.
-     *
-     * @var array
-     */
     protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
     ];
@@ -25,10 +20,8 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
-
-		Gate::before(function ($user, $ability) {
-			return $user->hasRole('admin') ? true : null;
-		});
+		// Gate::before(function ($user, $ability) {
+		// 	return $user->hasRole('admin') ? true : null;
+		// });
     }
 }
