@@ -6,17 +6,32 @@ use App\Http\traits\TenantTrait;
 use App\Models\Landlord\Package;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Customer\CustomerSignUpRequest;
 use App\Models\Landlord\Customer;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
 {
     use TenantTrait;
 
-    public function customerSignUp(Request $request)
+    // public function customerSignUp(Request $request)
+    public function customerSignUp(CustomerSignUpRequest $request)
     {
-        // return $request->all();
+        // try
+		// {
+        //     $test = Package::find(6565);
+        //     $set = $test->name;
+        // } catch (Exception $e) {
+        //     // return $e->getMessage();
+        //     // Session::flash('success', $e->getMessage());
+        //     // return redirect()->back();
+        //     return redirect()->back()->withErrors(['errors' => [$e->getMessage()]]);
+        // }
+        // Session::flash('success', 'Form submitted successfully!');
+        // return redirect()->back()->with(['success' => 'Form submitted successfully!']);
+
         $customerData = [
             'company_name' => $request->company_name,
             'first_name' => $request->first_name,
@@ -28,8 +43,8 @@ class CustomerController extends Controller
         ];
 
         DB::beginTransaction();
-        try
-		{
+
+        try {
             $customer = Customer::create($customerData);
             $package = Package::find($request->package_id);
 
@@ -39,34 +54,11 @@ class CustomerController extends Controller
             }
             DB::commit();
 
-        } catch (Exception $e)
-        {
+        } catch (Exception $e) {
             DB::rollback();
-            return $e->getMessage();
+            return redirect()->back()->withErrors(['errors' => [$e->getMessage()]]);
         }
-        return 'Tenant Created';
 
-        // {
-        //     "db_id":null,
-        //     "expiry_date":"2023-07-31",
-        //     "tenancy_db_name":"acme",
-        //     "package_id":"3",
-        //     "subscription_type":"monthly",
-        //     "company_name":"Acme Inc",
-        //     "phone_number":"34234234",
-        //     "email":"info@acme.com"
-        // }
-
-        // {
-        //     "email": "acme@lioncoders.com",
-        //     "created_at": "2023-08-28 11:20:03",
-        //     "package_id": 3,
-        //     "updated_at": "2023-08-28 11:20:03",
-        //     "company_name": "Lion Coders",
-        //     "tenancy_db_name": "lionsaas",
-        //     "subscription_type": "monthly"
-        // }
-
-
+        return redirect()->back()->with(['success' => 'Created successfully!']);
     }
 }

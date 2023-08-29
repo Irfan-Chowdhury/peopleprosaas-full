@@ -1,6 +1,4 @@
-{{-- @php
-    $generalSetting =  DB::table('general_settings')->latest()->first();
-@endphp --}}
+
 
 <!DOCTYPE html>
 <html dir="ltr" lang="en-US">
@@ -11,31 +9,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="LionCoders" />
     <meta name="csrf-token" content="CmSeExxpkZmScDB9ArBZKMGKAyzPqnxEriplXWrS">
-    {{-- <link rel="icon" type="image/png" href="{{url('public/landlord/images/logo', $general_setting->site_logo)}}" /> --}}
+    
     <!-- Document Title -->
-    {{-- <title>{{$general_setting->meta_title ?? 'PeoplePro SAAS'}}</title> --}}
+    
     <title>PeoplePro SAAS</title>
     <!-- Links -->
-    {{-- <meta name="description" content="{{$general_setting->meta_description ?? 'Buy SalePro inventory management & POS SAAS php script'}}" />
-    <meta property="og:url" content="{{url()->full()}}" />
-    <meta property="og:title" content="{{$general_setting->og_title ?? 'SalePro SAAS'}}" />
-    <meta property="og:description" content="{{$general_setting->og_description ?? 'Buy SalePro inventory management & POS SAAS php script'}}" />
-    <meta property="og:image" content="{{url('/public/landlord/images/og-image')}}/{{$general_setting->og_image ?? 'saleprosaas.jpg'}}" /> --}}
+    
 
     <!-- Bootstrap CSS -->
-    <link href="{{url('/')}}/landlord/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo e(url('/')); ?>/landlord/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome CSS-->
     <link rel="preload" href="<?php echo asset('../../vendor/font-awesome/css/font-awesome.min.css') ?>" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="<?php echo asset('../../vendor/font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet"></noscript>
 
     <!-- Plugins CSS -->
-    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{url('/')}}/landlord/css/plugins.css">
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="<?php echo e(url('/')); ?>/landlord/css/plugins.css">
     <noscript>
-        <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="{{url('/')}}/landlord/css/plugins.css">
+        <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="<?php echo e(url('/')); ?>/landlord/css/plugins.css">
     </noscript>
 
     <!-- common style CSS -->
-    <link href="{{url('/')}}/landlord/css/common-style.css" rel="stylesheet">
+    <link href="<?php echo e(url('/')); ?>/landlord/css/common-style.css" rel="stylesheet">
 
     <!-- google fonts-->
     <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'"
@@ -210,9 +204,7 @@
         }
     </style>
 
-    {{-- @if(isset($general_setting->fb_pixel_script))
-    {!!$general_setting->fb_pixel_script!!}
-    @endif --}}
+    
 </head>
 
 <body>
@@ -224,56 +216,34 @@
                 <div class="col-lg-2 col-7">
                     <div class="mobile-menu-icon d-lg-none"><i class="ti-menu"></i></div>
                     <div class="logo">
-                        <a href="{{url('/')}}">
-                            <img class="lazy" src="{{asset('landlord/images/logo/'. $generalSetting->site_logo)}}">
+                        <a href="<?php echo e(url('/')); ?>">
+                            <img class="lazy" src="<?php echo e(asset('landlord/images/logo/'. $generalSetting->site_logo)); ?>">
                         </a>
                     </div>
                 </div>
                 <div class="col-lg-6 d-none d-lg-flex d-xl-flex middle-column justify-content-center">
                     <div id="main-menu" class="main-menu">
                         <ul class="pl-0">
-                            <li><a href="{{url('/')}}#features">Features</a></li>
+                            <li><a href="<?php echo e(url('/')); ?>#features">Features</a></li>
 
-                            <li><a href="{{url('/')}}#faq">FAQ</a></li>
+                            <li><a href="<?php echo e(url('/')); ?>#faq">FAQ</a></li>
 
-                            <li><a href="{{url('/')}}#packages">Pricing</a></li>
+                            <li><a href="<?php echo e(url('/')); ?>#packages">Pricing</a></li>
 
-                            <li><a href="{{url('/blogs')}}">Blogs</a></li>
-                            {{-- @if(count($languages) > 1)
-                            <li class="d-lg-none dropdown">
-                                <a class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                Language
-                                </a>
-                                <div class="dropdown-menu">
-                                @foreach($languages as $language)
-                                    <a class="dropdown-item" href="{{url('switch-landing-page-language/'.$language->id)}}">{{$language->name}}</a>
-                                @endforeach
-                                </div>
-                            </li>
-                            @endif --}}
+                            <li><a href="<?php echo e(url('/blogs')); ?>">Blogs</a></li>
+                            
                         </ul>
                     </div>
                 </div>
 
                 <div class="col-lg-4 col-5" style="text-align:right">
                     <ul class="offset-menu-wrapper p-0 d-none d-lg-flex d-xl-flex">
-                        @foreach($socials as $social)
+                        <?php $__currentLoopData = $socials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $social): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <li>
-                                <a href="{{$social->link}}"><i class="{{$social->icon}}"></i></a>
+                                <a href="<?php echo e($social->link); ?>"><i class="<?php echo e($social->icon); ?>"></i></a>
                             </li>
-                        @endforeach
-                        {{-- @if(count($languages) > 1)
-                        <li class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Lang
-                            </button>
-                            <div class="dropdown-menu">
-                                @foreach($languages as $language)
-                                <a class="dropdown-item" style="line-height:1.5" href="{{url('switch-landing-page-language/'.$language->id)}}">{{$language->name}}</a>
-                                @endforeach
-                            </div>
-                        </li>
-                        @endif --}}
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        
                         <li>
                             <a class="button style2" href="#packages">Try Now</a>
                         </li>
@@ -284,25 +254,25 @@
         </div>
         <nav id="mobile-nav"></nav>
     </header>
-    @yield('public-content')
+    <?php echo $__env->yieldContent('public-content'); ?>
 
     <!-- Footer section Starts-->
     <div class="footer-wrapper pt-0">
         <div class="container">
             <div class="footer-links">
-                @foreach($pages as $key => $page)
-                    <a href="{{url('pages/'.$page->slug)}}">{{$page->title}} &nbsp; @if($key !== (count($pages)-1)) | @endif</a>
-                @endforeach
+                <?php $__currentLoopData = $pages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $page): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <a href="<?php echo e(url('pages/'.$page->slug)); ?>"><?php echo e($page->title); ?> &nbsp; <?php if($key !== (count($pages)-1)): ?> | <?php endif; ?></a>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
             <div class="footer-bottom">
                 <ul class="footer-social p-0 pt-3 pb-3">
-                    @foreach($socials as $social)
+                    <?php $__currentLoopData = $socials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $social): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <li>
-                        <a href="{{$social->link}}"><i class="{{$social->icon}}"></i></a>
+                        <a href="<?php echo e($social->link); ?>"><i class="<?php echo e($social->icon); ?>"></i></a>
                     </li>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </ul>
-                {{-- <p class="copyright">&copy; {{$general_setting->site_title}} {{date_format(date_create(date('Y-m-d')), $general_setting->date_format)}}. All rights reserved</p> --}}
+                
             </div>
         </div>
     </div>
@@ -324,120 +294,15 @@
     <script src="landlord/js/plugin.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.9/jquery.lazy.min.js"></script>
     <!-- Sweetalert2 -->
-    {{-- <script src="landlord/js/sweetalert2@11.js"></script> --}}
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Main js -->
     <script src="landlord/js/main.js"></script>
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
-    <script type="text/javascript" src="{{ asset('js/payment/razorpay.js') }}"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/payment/razorpay.js')); ?>"></script>
 
-    {{-- <script>
-        let targetURL = "{{ url('/payment/razorpay/pay/confirm')}}";
-        let cancelURL = "{{ url('payment/razorpay/pay/cancel')}}";
-        let redirectURL = "{{ url('/payment_success')}}";
-        let redirectURLAfterCancel = "{{ url('/payment_cancel')}}";
-
-        $("div.alert").delay(3000).slideUp(800);
-        var public_key = <?php echo json_encode($general_setting->stripe_public_key)?>;
-        var active_payment_gateway = <?php echo json_encode($general_setting->active_payment_gateway)?>;
-        (function ($) {
-            "use strict";
-
-            $(".card-element").hide();
-            $(".card-errors").hide();
-
-            $('.banner-slide-up').on('click', function () {
-                $(this).parent().slideUp();
-            });
-
-            $(document).ready(function () {
-                $('#newsletter-modal').modal('toggle');
-            });
-
-            $(".signup-btn").on("click", function () {
-                $('input[name=package_id]').val($(this).data('package_id'));
-                if($('input[name=subscription_type]').val() == 'monthly') {
-                    $('input[name=price]').val($(this).parent().parent().find('.package-price').data('monthly'));
-                } else {
-                    $('input[name=price]').val($(this).parent().parent().find('.package-price').data('yearly'));
-                }
-                $('html, body').animate({
-                    scrollTop: $("#customer-signup").offset().top
-                });
-            });
-
-            $("#plan_type").change(function(){
-                if($("#plan_type").is(':checked')){
-                    $('input[name=subscription_type]').val('yearly');
-
-                    $(".package-price").each(function(){
-                        var plan = $(this).data('yearly')+'/year';
-                        $(this).html(plan);
-                    })
-                }
-                else {
-                    $('input[name=subscription_type]').val('monthly');
-                    $(".package-price").each(function(){
-                        var plan = $(this).data('monthly')+'/month';
-                        $(this).html(plan);
-                    })
-                }
-            })
-
-            $('input[name=tenant]').on('input', function () {
-                var tenant = $(this).val();
-                var letters = /^[a-zA-Z0-9]+$/;
-                if(!letters.test(tenant)) {
-                    alert('Tenant name must be alpha numeric(a-z and 0-9)!');
-                    tenant = tenant.substring(0, tenant.length-1);
-                    $('input[name=tenant]').val(tenant);
-                }
-            });
-
-            $(document).on('submit', '.customer-signup-form', function(e) {
-                $("#submit-btn").prop('disabled', true);
-                $("p#waiting-msg").text("Please wait. It will take some few seconds. System will redirect you to the tenant url automatically.")
-            });
-
-            //Search field
-            $('#search_field').hide();
-
-            $(document).ready(function () {
-                $('#searchText').keyup(function () {
-                    var txt = $(this).val();
-                    if (txt != '') {
-                        $('#search_field').show();
-                        $('#result').html('<li>loading...</li>');
-                        $.ajax({
-                            url: "data_ajax_search",
-                            type: "GET",
-                            data: {
-                                search_txt: txt
-                            },
-                            success: function (data) {
-                                $('#search_field').show();
-                                $('#result').empty().html(data);
-                            }
-                        })
-                    } else if (txt.length === 0) {
-                        $('#search_field').hide();
-                    } else {
-                        $('#search_field').hide();
-                        $('#result').empty();
-                    }
-                })
-            });
-
-            $('#stripeContent').hide();
-
-            $(window).on('load', function () {
-
-                $('.lazy').Lazy();
-            });
-
-        })(jQuery);
-    </script> --}}
+    
     <script>
         function isNumberKey(evt) {
             var charCode = (evt.which) ? evt.which : evt.keyCode
@@ -447,15 +312,17 @@
         }
     </script>
 
-    @if(isset($general_setting->ga_script))
-    {!!$general_setting->ga_script!!}
-    @endif
+    <?php if(isset($general_setting->ga_script)): ?>
+    <?php echo $general_setting->ga_script; ?>
 
-    @if(isset($general_setting->chat_script))
-    {!!$general_setting->chat_script!!}
-    @endif
+    <?php endif; ?>
 
-    @if(env('USER_VERIFIED')==0)
+    <?php if(isset($general_setting->chat_script)): ?>
+    <?php echo $general_setting->chat_script; ?>
+
+    <?php endif; ?>
+
+    <?php if(env('USER_VERIFIED')==0): ?>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D0S4KHQ1D6"></script>
     <script>
@@ -465,9 +332,10 @@
 
       gtag('config', 'G-D0S4KHQ1D6');
     </script>
-    @endif
+    <?php endif; ?>
 
-    @stack('scripts')
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
 
+<?php /**PATH /var/www/peopleprosaas/resources/views/landlord/public-section/layouts/master.blade.php ENDPATH**/ ?>

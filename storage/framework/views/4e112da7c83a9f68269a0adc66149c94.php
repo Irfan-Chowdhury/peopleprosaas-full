@@ -1,27 +1,24 @@
-@extends('landlord.public-section.layouts.master')
-@section('public-content')
+<?php $__env->startSection('public-content'); ?>
 
 
 
-    {{-- @if(session()->has('not_permitted'))
-      <div class="alert alert-danger alert-dismissible text-center">{{ session()->get('not_permitted') }}</div>
-    @endif --}}
+    
     <!--Header-->
     <!--Header Area starts-->
-    @if(!env('USER_VERIFIED'))
+    <?php if(!env('USER_VERIFIED')): ?>
     <div class="d-block text-center"><a class="button style1 w-100" href="https://lion-coders.com/software/salepro-saas">Buy Salepro SAAS</a></div>
-    @endif
+    <?php endif; ?>
 
     <section class="hero mt-0">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2 text-center hero-text mb-5">
-                    <h1 class="heading">{{$hero->heading}}</h1>
-                    <h2 class="light h5 mb-3">{{$hero->sub_heading}}</h2>
-                    <a href="#packages" class="button style1">{{$hero->button_text}}</a>
+                    <h1 class="heading"><?php echo e($hero->heading); ?></h1>
+                    <h2 class="light h5 mb-3"><?php echo e($hero->sub_heading); ?></h2>
+                    <a href="#packages" class="button style1"><?php echo e($hero->button_text); ?></a>
                 </div>
                 <div class="col-md-8 offset-md-2">
-                    <img class="hero-img" src="{{asset('landlord/images/hero/'.$hero->image)}}" alt=""/>
+                    <img class="hero-img" src="<?php echo e(asset('landlord/images/hero/'.$hero->image)); ?>" alt=""/>
                 </div>
             </div>
         </div>
@@ -33,79 +30,81 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3 text-center mb-5">
-                    <h2 class="regular">{{$module->heading}}</h2>
-                    <p class="lead mb-5">{{$module->sub_heading}}</p>
+                    <h2 class="regular"><?php echo e($module->heading); ?></h2>
+                    <p class="lead mb-5"><?php echo e($module->sub_heading); ?></p>
                 </div>
                 <div class="col-md-5">
-                    @if(isset($module) && $module->image)
-                        <img class="mb-5" src="{{asset('landlord/images/module/'.$module->image)}}" alt="Module image"/>
-                    @else
+                    <?php if(isset($module) && $module->image): ?>
+                        <img class="mb-5" src="<?php echo e(asset('landlord/images/module/'.$module->image)); ?>" alt="Module image"/>
+                    <?php else: ?>
                         <img class="mb-5" src="landlord/images/preview.png" alt=""/>
-                    @endif
+                    <?php endif; ?>
                 </div>
                 <div class="col-md-6 offset-md-1">
                     <div class="row">
-                        @foreach($module->moduleDetails as $module)
+                        <?php $__currentLoopData = $module->moduleDetails; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $module): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col-md-6 feature">
                             <div class="icon">
-                                <i class="{{$module->icon}}"></i>
+                                <i class="<?php echo e($module->icon); ?>"></i>
                             </div>
-                            <h3>{{$module->name}}</h3>
-                            <p>{{$module->description}}</p>
+                            <h3><?php echo e($module->name); ?></h3>
+                            <p><?php echo e($module->description); ?></p>
                         </div>
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    @if(count($features) > 0)
+    <?php if(count($features) > 0): ?>
     <section class="grey-bg">
         <div class="container">
             <div class="row">
-                @foreach($features as $feature)
+                <?php $__currentLoopData = $features; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $feature): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-md-3 feature2">
                     <div class="icon">
-                        <i class="{{$feature->icon}}"></i>
+                        <i class="<?php echo e($feature->icon); ?>"></i>
                     </div>
-                    <h4 class="h6">{{$feature->name}}</h4>
+                    <h4 class="h6"><?php echo e($feature->name); ?></h4>
                 </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
             </div>
         </div>
     </section>
-    @endif
+    <?php endif; ?>
 
-    @if(isset($faq))
+    <?php if(isset($faq)): ?>
         <section id="faq" class="accordion pb-0" id="accordionExample">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 offset-md-3 text-center mb-5">
-                        <h2 class="regular">{{$faq->heading}}</h2>
-                        <p class="lead">{{$faq->sub_heading}}</p>
+                        <h2 class="regular"><?php echo e($faq->heading); ?></h2>
+                        <p class="lead"><?php echo e($faq->sub_heading); ?></p>
                     </div>
                     <div class="col-md-6 offset-md-3 mb-5">
-                        @foreach($faq->faqDetails as $key => $item)
+                        <?php $__currentLoopData = $faq->faqDetails; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="heading1">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{ $key }}" aria-expanded="false" aria-controls="collapse1">
-                                    {{$item->question}}
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-<?php echo e($key); ?>" aria-expanded="false" aria-controls="collapse1">
+                                    <?php echo e($item->question); ?>
+
                                 </button>
                                 </h2>
-                                <div id="collapse-{{ $key }}" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#accordionExample">
+                                <div id="collapse-<?php echo e($key); ?>" class="accordion-collapse collapse" aria-labelledby="heading1" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
-                                        {!!$item->answer!!}
+                                        <?php echo $item->answer; ?>
+
                                     </div>
                                 </div>
                             </div>
 
-                        @endforeach
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
             </div>
         </section>
-    @endif
+    <?php endif; ?>
 
 
 
@@ -114,75 +113,75 @@
     <section id="packages"class="grey-bg">
         <div class="container">
             <div class="col-md-6 offset-md-3 text-center mb-5">
-                <h2 class="regular">@lang('file.Pricing plans')</h2>
+                <h2 class="regular"><?php echo app('translator')->get('file.Pricing plans'); ?></h2>
                 <div class="custom-control custom-switch">
                     <input type="checkbox" class="custom-control-input" id="plan_type">
-                    <label class="custom-control-label" for="plan_type">@lang('file.Show Yearly Price')</label>
+                    <label class="custom-control-label" for="plan_type"><?php echo app('translator')->get('file.Show Yearly Price'); ?></label>
                 </div>
             </div>
             <div class="d-none d-lg-flex d-xl-flex justify-content-between mb-5">
-                @if ($packages)
+                <?php if($packages): ?>
                     <div class="col">
                         <div class="pricing">
                             <div class="pricing-header">
-                                <span class="h3">@lang('file.Plan')</span>
+                                <span class="h3"><?php echo app('translator')->get('file.Plan'); ?></span>
                             </div>
                             <div class="price">
-                                <span class="h4">@lang('file.Price')</span>
+                                <span class="h4"><?php echo app('translator')->get('file.Price'); ?></span>
                             </div>
                             <div class="pricing-details">
-                                <p class="bold">{{trans('file.Free Trial')}}</p>
-                                @foreach ($saasFeatures as $item)
-                                    @php
+                                <p class="bold"><?php echo e(trans('file.Free Trial')); ?></p>
+                                <?php $__currentLoopData = $saasFeatures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php
                                         $delimiter = '-';
                                         if (strpos($item, '_') !== false) {
                                             $delimiter = '_';
                                         }
                                         $words = explode($delimiter, $item);
                                         $convertedString = implode(' ', array_map('ucfirst', $words));
-                                    @endphp
-                                    <p class="bold">{{ $convertedString }}</p>
-                                @endforeach
+                                    ?>
+                                    <p class="bold"><?php echo e($convertedString); ?></p>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                         </div>
                     </div>
 
-                    @foreach ($packages as $key => $package)
+                    <?php $__currentLoopData = $packages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $key => $package): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <div class="col">
                             <div class="pricing">
                                 <div class="pricing-header">
-                                    <span class="h3">{{ $package->name }}</span>
+                                    <span class="h3"><?php echo e($package->name); ?></span>
                                 </div>
                                 <div class="price">
                                     <div>
-                                        <span class="h4"><span class="currency-code">{{$generalSetting->currency_code}}</span> <span class="package-price" data-monthly="{{$package->monthly_fee}}" data-yearly="{{$package->yearly_fee}}">{{$package->monthly_fee}}/month</span></span><br>
-                                        <button href="#customer-signup" data-free="{{$package->is_free_trial}}" data-package_id="{{$package->id}}" class="button style2 signup-btn">Sign Up</button>
+                                        <span class="h4"><span class="currency-code"><?php echo e($generalSetting->currency_code); ?></span> <span class="package-price" data-monthly="<?php echo e($package->monthly_fee); ?>" data-yearly="<?php echo e($package->yearly_fee); ?>"><?php echo e($package->monthly_fee); ?>/month</span></span><br>
+                                        <button href="#customer-signup" data-free="<?php echo e($package->is_free_trial); ?>" data-package_id="<?php echo e($package->id); ?>" class="button style2 signup-btn">Sign Up</button>
                                     </div>
                                 </div>
                                 <div class="pricing-details">
 
-                                    @if($package->is_free_trial)
-                                        <p>{{ $generalSetting->free_trial_limit }} days</p>
-                                    @else
+                                    <?php if($package->is_free_trial): ?>
+                                        <p><?php echo e($generalSetting->free_trial_limit); ?> days</p>
+                                    <?php else: ?>
                                         <p>N/A</p>
-                                    @endif
+                                    <?php endif; ?>
 
-                                    @php
+                                    <?php
                                         $selectedFeatures = explode(',',$package->features);
-                                    @endphp
+                                    ?>
 
-                                    @foreach ($saasFeatures as $item)
-                                        @if(in_array($item, $selectedFeatures))
+                                    <?php $__currentLoopData = $saasFeatures; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <?php if(in_array($item, $selectedFeatures)): ?>
                                             <p><i class="ti-check"></i></p>
-                                        @else
+                                        <?php else: ?>
                                             <p><i class="ti-close"></i></p>
-                                        @endif
-                                    @endforeach
+                                        <?php endif; ?>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                @endif
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                <?php endif; ?>
             </div>
         </div>
     </section>
@@ -191,22 +190,23 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3 text-center mb-5">
-                    <h2 class="regular">{{ __('file.Testimonials') }}</h2>
+                    <h2 class="regular"><?php echo e(__('file.Testimonials')); ?></h2>
                 </div>
             </div>
             <div class="swiper mySwiper swiper-container-horizontal swiper-container-autoheight">
                 <div class="swiper-wrapper" style="height: 348px;">
-                @forelse($testimonials as $testimonial)
+                <?php $__empty_1 = true; $__currentLoopData = $testimonials; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $testimonial): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); $__empty_1 = false; ?>
                     <div class="swiper-slide swiper-slide-active" style="width: 563px; margin-right: 50px;">
                         <div class="review">
                             <div class="review-text">
-                                {!!$testimonial->description!!}
+                                <?php echo $testimonial->description; ?>
+
                             </div>
-                            <div class="reviewer"><img src="{{asset('landlord/images/testimonial')}}/{{$testimonial->image}}" alt="{{$testimonial->name}}" /> {{$testimonial->name}}@if($testimonial->business_name), {{$testimonial->business_name}}@endif</div>
+                            <div class="reviewer"><img src="<?php echo e(asset('landlord/images/testimonial')); ?>/<?php echo e($testimonial->image); ?>" alt="<?php echo e($testimonial->name); ?>" /> <?php echo e($testimonial->name); ?><?php if($testimonial->business_name): ?>, <?php echo e($testimonial->business_name); ?><?php endif; ?></div>
                         </div>
                     </div>
-                @empty
-                @endforelse
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
+                <?php endif; ?>
                 </div>
                 <div class="swiper-nav-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"><i class="ti-arrow-right"></i></div>
                 <div class="swiper-nav-prev swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"><i class="ti-arrow-left"></i></div>
@@ -219,18 +219,18 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3 text-center mb-3">
-                    @if($tenantSignupDescription)
-                        <h2 class="regular">{{$tenantSignupDescription->heading}}</h2>
-                        <p class="lead mb-3">{{$tenantSignupDescription->sub_heading}}</p>
-                    @else
+                    <?php if($tenantSignupDescription): ?>
+                        <h2 class="regular"><?php echo e($tenantSignupDescription->heading); ?></h2>
+                        <p class="lead mb-3"><?php echo e($tenantSignupDescription->sub_heading); ?></p>
+                    <?php else: ?>
                         <h2 class="regular">Customer Sign Up</h2>
                         <p class="lead mb-3">Peoplepro is packed with all the features you'll need to seamlessly run your business</p>
-                    @endif
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="col-md-6 offset-md-3 mb-5">
-                <form action="{{ route('customer.signup') }}" method="POST"  class="form row customer-signup-form">
-                    @csrf
+                <form action="<?php echo e(route('customer.signup')); ?>" method="POST"  class="form row customer-signup-form">
+                    <?php echo csrf_field(); ?>
                     <input type="hidden" name="package_id">
                     <input type="hidden" name="subscription_type" value="monthly">
                     <input type="hidden" name="price">
@@ -262,7 +262,7 @@
                     <div class="col-md-12">
                         <div class="input-group mt-3">
                             <input class="form-control mt-0" type="text" name="tenant"  placeholder="Subdomain..." aria-label="ubdomain..." aria-describedby="basic-addon2">
-                          <span class="input-group-text" id="basic-addon2">{{'@'.env('CENTRAL_DOMAIN')}}</span>
+                          <span class="input-group-text" id="basic-addon2"><?php echo e('@'.env('CENTRAL_DOMAIN')); ?></span>
                         </div>
                     </div>
                     <div class="col-md-12 mt-3">
@@ -272,61 +272,46 @@
                     </div>
                     <div class="col-12 mt-3">
                         <p id="waiting-msg mb-3"></p>
-                        <input id="submit-btn" type="submit" class="button style1 d-block w-100" value="{{trans('file.submit')}}">
+                        <input id="submit-btn" type="submit" class="button style1 d-block w-100" value="<?php echo e(trans('file.submit')); ?>">
                     </div>
                 </form>
             </div>
         </div>
     </section>
 
-    @if(count($blogs) > 0)
+    <?php if(count($blogs) > 0): ?>
     <section id="blog">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3 text-center mb-5">
-                    <h2 class="regular">{{ __('file.Blog') }}</h2>
+                    <h2 class="regular"><?php echo e(__('file.Blog')); ?></h2>
                 </div>
-                @foreach($blogs as $blog)
+                <?php $__currentLoopData = $blogs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $blog): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-md-4">
-                    <a href="{{ route('landingPage.blogDetail',$blog->slug) }}">
-                        <img src="{{asset('landlord/images/blog')}}/{{$blog->image}}" alt="{{$blog->title}}"/>
-                        <h4 class="mt-3">{{$blog->title}}</h4>
+                    <a href="<?php echo e(route('landingPage.blogDetail',$blog->slug)); ?>">
+                        <img src="<?php echo e(asset('landlord/images/blog')); ?>/<?php echo e($blog->image); ?>" alt="<?php echo e($blog->title); ?>"/>
+                        <h4 class="mt-3"><?php echo e($blog->title); ?></h4>
                     </a>
                 </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 <div class="col-md-6 offset-md-3 text-center mt-3 mb-5">
-                    <a href="{{url('blogs')}}" class="button style1">{{ __('file.All Blogs') }}</a>
+                    <a href="<?php echo e(url('blogs')); ?>" class="button style1"><?php echo e(__('file.All Blogs')); ?></a>
                 </div>
             </div>
         </div>
 
     </section>
-    @endif
+    <?php endif; ?>
 
-    {{-- @if(env('USER_VERIFIED')==0)
-    <section class="pt-5">
-        <div class="container">
-            <div class="place-cta row">
-                <div class="col-md-8">
-                    <h3 class="regular h3 white-txt">Start your software business today. Buy SalePro SAAS</h3>
-                </div>
-                <div class="col-md-3 offset-md-1">
-                    <div class="d-flex  justify-content-center">
-                        <a class="button lg style3 mt-3" href="https://lion-coders.com/sale-pro-saas-purchase">Buy Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    @endif --}}
+    
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
 
 
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
 
 <script>
     (function ($) {
@@ -366,10 +351,10 @@
 </script>
 
 
-@if ($errors->any())
+<?php if($errors->any()): ?>
     <script>
         $(document).ready(function() {
-            let errorMessages = @json($errors->all());
+            let errorMessages = <?php echo json_encode($errors->all(), 15, 512) ?>;
             htmlContent = "";
             errorMessages.forEach(function(errorMsg) {
                 htmlContent += '<p class="text-danger">' + errorMsg + '</p>';
@@ -378,17 +363,19 @@
             displayErrorMessage(htmlContent);
         });
     </script>
-@endif
+<?php endif; ?>
 
-@if(session()->has('success'))
+<?php if(session()->has('success')): ?>
     <script>
         $(document).ready(function() {
-            displaySuccessMessage('{{ Session::get('success') }}');
+            displaySuccessMessage('<?php echo e(Session::get('success')); ?>');
         });
     </script>
-@endif
-<script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script>
+<?php endif; ?>
+<script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/alertMessages.js')); ?>"></script>
 
 
 
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('landlord.public-section.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/peopleprosaas/resources/views/landlord/public-section/pages/landing-page/index.blade.php ENDPATH**/ ?>
