@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\CustomerSignUpRequest;
 use App\Models\Landlord\Customer;
+use App\Models\Tenant;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;

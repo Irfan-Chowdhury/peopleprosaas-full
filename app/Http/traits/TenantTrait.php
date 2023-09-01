@@ -158,7 +158,6 @@ trait TenantTrait {
 			$user->syncRoles(1);
         });
     }
-
 }
 
 
