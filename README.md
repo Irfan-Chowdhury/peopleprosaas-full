@@ -543,8 +543,3 @@ public function createDatabase(TenantWithDatabase $tenant): bool
 - Backend Developer : [Irfan Chowdhury](https://github.com/Irfan-Chowdhury)
 - Reference : [Tenancy for Laravel](https://tenancyforlaravel.com/)
 - Guided by : [Ashfaqur Rahman](https://github.com/ashfaqdev)
-
-
-
-<br><br>
-##### <p>[Note:  Due to copyright reasons, the migration files (tenant) have been kept hide]</p>

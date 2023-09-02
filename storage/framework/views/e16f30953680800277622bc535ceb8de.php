@@ -204,6 +204,9 @@
         }
     </style>
 
+    <?php echo $__env->yieldPushContent('css'); ?>
+
+
     
 </head>
 

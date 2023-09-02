@@ -124,7 +124,7 @@ trait TenantTrait {
         elseif($request->subscription_type == 'yearly')
             $numberOfDaysToExpired = 365;
 
-        $tenant = [
+        $tenantData = [
             'id' => $request->tenant,
             'tenancy_db_name' => $request->tenant,
             'customer_id' => $customer->id,
@@ -133,30 +133,34 @@ trait TenantTrait {
             'expiry_date' => date("Y-m-d", strtotime("+".$numberOfDaysToExpired." days"))
         ];
 
-        $tenant = Tenant::create($tenant);
+        $tenant = Tenant::create($tenantData);
         $tenant->domains()->create(['domain' => $request->tenant.'.'.env('CENTRAL_DOMAIN')]); // This Line
 
         $permissions = json_decode($package->permissions, true);
         $allPermissionIds = explode(',',$package->permission_ids);
 
-        $tenant->run(function ($tenant) use ($request, $permissions, $customer, $allPermissionIds) {
+        $tenant->run(function ($tenant) use ($request, $permissions, $allPermissionIds) {
             DB::table('permissions')->insert($permissions);
-
-            $user = User::create([
-                'first_name'=> $customer->first_name,
-                'last_name'=> $customer->last_name,
-                'username'=> $customer->username,
-                'email'=> $customer->email,
-                'contact_no'=> $customer->contact_no,
-                'role_users_id'=> 1,
-                'is_active'=> true,
-                'password'=> bcrypt($request->password)
-            ]);
-
+            $user = $this->tenantAdminCreate($request);
             $role = Role::findById(1);
 			$role->syncPermissions($allPermissionIds);
 			$user->syncRoles(1);
         });
+    }
+
+
+    protected function tenantAdminCreate($request) : object
+    {
+        return User::create([
+            'first_name'=> $request->first_name,
+            'last_name'=> $request->last_name,
+            'username'=> $request->username,
+            'email'=> $request->email,
+            'contact_no'=> $request->contact_no,
+            'role_users_id'=> 1,
+            'is_active'=> true,
+            'password'=> bcrypt($request->password)
+        ]);
     }
 }
 

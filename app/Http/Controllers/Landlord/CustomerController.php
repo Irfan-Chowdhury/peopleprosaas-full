@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers\Landlord;
 
+use App\Events\CustomerRegistered;
 use App\Http\traits\TenantTrait;
 use App\Models\Landlord\Package;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\CustomerSignUpRequest;
+use App\Mail\ConfirmationEmail;
 use App\Models\Landlord\Customer;
 use App\Models\Tenant;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class CustomerController extends Controller
@@ -20,6 +23,8 @@ class CustomerController extends Controller
     // public function customerSignUp(Request $request)
     public function customerSignUp(CustomerSignUpRequest $request)
     {
+        // event(new UserRegistered($user));
+
         // try
 		// {
         //     $test = Package::find(6565);
@@ -53,6 +58,10 @@ class CustomerController extends Controller
                 $this->createTenant($request, $customer, $package);
                 // return \Redirect::to('https://'.$request->tenant.'.'.env('CENTRAL_DOMAIN'));
             }
+
+            // Mail::to($request->email)->send(new ConfirmationEmail($request));
+            // event(new CustomerRegistered($request));
+
             DB::commit();
 
         } catch (Exception $e) {
