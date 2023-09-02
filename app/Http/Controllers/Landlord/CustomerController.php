@@ -54,6 +54,8 @@ class CustomerController extends Controller
             $customer = Customer::create($customerData);
             $package = Package::find($request->package_id);
 
+
+
             if($package->is_free_trial) {
                 $this->createTenant($request, $customer, $package);
                 // return \Redirect::to('https://'.$request->tenant.'.'.env('CENTRAL_DOMAIN'));

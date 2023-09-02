@@ -2,6 +2,7 @@
 
 namespace App\Http\traits;
 
+use App\Models\GeneralSetting as TenantGeneralSetting;
 use App\Models\Landlord\GeneralSetting;
 use App\Models\Tenant;
 use App\Models\User;
@@ -138,13 +139,33 @@ trait TenantTrait {
 
         $permissions = json_decode($package->permissions, true);
         $allPermissionIds = explode(',',$package->permission_ids);
+        // package_details
 
-        $tenant->run(function ($tenant) use ($request, $permissions, $allPermissionIds) {
+        $packageDetailsForTenant = [
+            'package_id' => $package->id,
+            'name' => $package->name,
+            'is_free_trial' => $package->is_free_trial,
+            'free_trial_limit' => $generalSetting->free_trial_limit,
+            'monthly_fee' => $package->monthly_fee,
+            'yearly_fee' => $package->yearly_fee,
+            'number_of_user_account' => $package->number_of_user_account,
+            'number_of_employee' => $package->number_of_employee,
+            'subscription_type'=> $request->subscription_type,
+            'expiry_date' => date("Y-m-d", strtotime("+".$numberOfDaysToExpired." days"))
+        ];
+
+        $tenant->run(function ($tenant) use ($request, $permissions, $allPermissionIds, $packageDetailsForTenant) {
             DB::table('permissions')->insert($permissions);
             $user = $this->tenantAdminCreate($request);
             $role = Role::findById(1);
 			$role->syncPermissions($allPermissionIds);
 			$user->syncRoles(1);
+
+
+            $tenantGeneralSetting = TenantGeneralSetting::latest()->first();
+            $tenantGeneralSetting->update([
+                'package_details' => json_encode($packageDetailsForTenant)
+            ]);
         });
     }
 
