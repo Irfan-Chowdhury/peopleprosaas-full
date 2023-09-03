@@ -18,6 +18,7 @@ class CustomerSignUpRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'package_id' => 'required',
             'first_name' => 'required|string',
             'last_name' => 'required|string',
             'company_name' => 'required|string|min:3',
@@ -32,6 +33,7 @@ class CustomerSignUpRequest extends FormRequest
     public function messages(): array
     {
         return [
+            'package_id.required' => "Package has been required",
             'tenant.required' => 'The sub-domain field is required.',
             'tenant.unique' => 'The sub-domain has already been taken.',
             'tenant.regex' => 'The :attribute must not contain any whitespace',

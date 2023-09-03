@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Landlord;
 
+use App\Contracts\PackageContract;
 use App\Events\CustomerRegistered;
+use App\Facades\Alert;
 use App\Http\traits\TenantTrait;
 use App\Models\Landlord\Package;
 use Illuminate\Http\Request;
@@ -11,6 +13,7 @@ use App\Http\Requests\Customer\CustomerSignUpRequest;
 use App\Mail\ConfirmationEmail;
 use App\Models\Landlord\Customer;
 use App\Models\Tenant;
+use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
@@ -20,25 +23,107 @@ class CustomerController extends Controller
 {
     use TenantTrait;
 
-    // public function customerSignUp(Request $request)
+    public function __construct(public PackageContract $packageContract)
+    {}
+
+    public function index()
+    {
+        $packages = $this->packageContract->getSelectData(['id','name']);
+
+        return view('landlord.super-admin.pages.customers.index', compact('packages'));
+    }
+
+    public function datatable()
+    {
+        $tenants = Tenant::with(['customer','package','domainInfo'])->get();
+
+        if (request()->ajax()) {
+            return datatables()->of($tenants)
+                ->setRowId(function ($row) {
+                    return $row->id;
+                })
+                ->addColumn('tenantId', function ($row) {
+                    return $row->id;
+                })
+                ->addColumn('database', function ($row) {
+                    return $row->tenancy_db_name;
+                })
+                ->addColumn('domain', function ($row) {
+                    return '<a href="https://'.$row->domainInfo->domain.'" target="_blank">'.$row->domainInfo->domain.'</a>';
+                })
+                ->addColumn('customer', function ($row) {
+                    return $row->customer->first_name.' '.$row->customer->last_name;
+                })
+                ->addColumn('email', function ($row) {
+                    return $row->customer->email;
+                })
+                ->addColumn('package', function ($row) {
+                    return $row->package->name;
+                })
+                ->addColumn('subscription_type', function ($row) {
+                    return $row->subscription_type;
+                })
+                ->addColumn('action', function ($row) {
+                    $button = '<button type="button" data-id="'.$row->id.'" class="edit btn btn-primary btn-sm"><i class="dripicons-pencil"></i></button>';
+                    $button .= '&nbsp;&nbsp;';
+                    $button .= '<button type="button" data-id="'.$row->id.'" class="delete btn btn-danger btn-sm"><i class="dripicons-trash"></i></button>';
+
+                    return $button;
+                })
+                ->rawColumns(['domain','action'])
+                ->make(true);
+        }
+    }
+
+
     public function customerSignUp(CustomerSignUpRequest $request)
     {
-        // event(new UserRegistered($user));
+        DB::beginTransaction();
+        try {
 
-        // try
-		// {
-        //     $test = Package::find(6565);
-        //     $set = $test->name;
-        // } catch (Exception $e) {
-        //     // return $e->getMessage();
-        //     // Session::flash('success', $e->getMessage());
-        //     // return redirect()->back();
-        //     return redirect()->back()->withErrors(['errors' => [$e->getMessage()]]);
-        // }
-        // Session::flash('success', 'Form submitted successfully!');
-        // return redirect()->back()->with(['success' => 'Form submitted successfully!']);
+            $this->tenantGenerate($request);
 
-        $customerData = [
+            DB::commit();
+            $result =  Alert::successMessage('Data Created Successfully');
+
+            if (request()->ajax()) {
+                return response()->json($result['alertMsg'], $result['statusCode']);
+            } else {
+                return redirect()->back()->with(['success' => 'Data Created Successfully']);
+            }
+
+        }
+        catch (Exception $e) {
+            DB::rollback();
+            $result =  Alert::errorMessage($e->getMessage());
+
+            if (request()->ajax()) {
+                return response()->json($result['alertMsg'], $result['statusCode']);
+            } else {
+                return redirect()->back()->withErrors(['errors' => [$result['alertMsg']]]);
+            }
+        }
+    }
+
+
+    protected function tenantGenerate($request) : void
+    {
+        $customer = Customer::create($this->customerData($request));
+        $package = Package::find($request->package_id);
+
+        if($package->is_free_trial) {
+            $this->createTenant($request, $customer, $package);
+            // return \Redirect::to('https://'.$request->tenant.'.'.env('CENTRAL_DOMAIN'));
+        }
+
+        // Mail::to($request->email)->send(new ConfirmationEmail($request)); //This is ok
+        // event(new CustomerRegistered($request));
+    }
+
+
+    protected function customerData($request)
+    {
+        return  [
             'company_name' => $request->company_name,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -47,30 +132,25 @@ class CustomerController extends Controller
             'username' => $request->username,
             'password' => bcrypt($request->password),
         ];
-
-        DB::beginTransaction();
-
-        try {
-            $customer = Customer::create($customerData);
-            $package = Package::find($request->package_id);
+    }
 
 
+    public function test()
+    {
+        // Update --
+        // $tenant = Tenant::find('saastest24');
+        // $tenant->run(function ($tenant) {
+        //     $user = User::find(3);
+        //     $user->first_name = 'irfan';
+        //     $user->update();
+        // });
 
-            if($package->is_free_trial) {
-                $this->createTenant($request, $customer, $package);
-                // return \Redirect::to('https://'.$request->tenant.'.'.env('CENTRAL_DOMAIN'));
-            }
 
-            // Mail::to($request->email)->send(new ConfirmationEmail($request));
-            // event(new CustomerRegistered($request));
 
-            DB::commit();
-
-        } catch (Exception $e) {
-            DB::rollback();
-            return redirect()->back()->withErrors(['errors' => [$e->getMessage()]]);
-        }
-
-        return redirect()->back()->with(['success' => 'Created successfully!']);
+        // Delete --
+        // $tenant = Tenant::find('saastest1');
+        // $tenant->domainInfo->delete();
+        // $tenant->delete();
+        // return 'ok';
     }
 }

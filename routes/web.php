@@ -54,7 +54,13 @@ Route::middleware(['setPublicLocale'])->group(function () {
 // tenant.checkout
 Route::controller(CustomerController::class)->group(function () {
     Route::post('/customer-signup', 'customerSignUp')->name('customer.signup')->middleware('demoCheck');
+
+    Route::prefix('customers')->group(function () {
+        Route::get('/', 'index')->name('customer.index');
+        Route::get('/datatable', 'datatable')->name('customer.datatable');
+    });
 });
+
 
 
 Route::get('/super-admin', [AdminController::class, 'showLoginForm'])->name('landlord.login')->middleware('guest');
