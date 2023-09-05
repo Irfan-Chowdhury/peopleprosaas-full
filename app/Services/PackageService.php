@@ -4,14 +4,21 @@ namespace App\Services;
 
 use App\Contracts\PackageContract;
 use App\Contracts\PermissionContract;
+use App\Contracts\TenantContract;
 use App\Facades\Alert;
 use App\Http\traits\PermissionHandleTrait;
 use Exception;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class PackageService
 {
     use PermissionHandleTrait;
-    public function __construct(private PackageContract $packageContract, private PermissionContract $permissionContract) {}
+    public function __construct(
+        private PackageContract $packageContract,
+        private PermissionContract $permissionContract,
+        private TenantContract $tenantContract,
+    ) {}
 
     public function getAll()
     {
@@ -170,6 +177,42 @@ class PackageService
             $permission_names = array_column($resultOfPermissions,'name');
             $permission_ids = array_column($resultOfPermissions,'id');
 
+            // =====================  ============================
+            if($request->is_update_existing) {
+                $package = $this->packageContract->getById($id);
+                $prevPermissions = json_decode($package->permissions, true);
+                $prevPermissionsIds = array_column($prevPermissions, 'id');
+
+                $newAddedPermissions = [];
+                foreach ($resultOfPermissions as $element) {
+                    if (!in_array($element["id"], $prevPermissionsIds)) {
+                        $newAddedPermissions[] = $element;
+                    }
+                }
+
+                $tenants = $this->tenantContract->getDataByCondition(['package_id' => $id]);
+                foreach ($tenants as $tenant) {
+                    $tenant->run(function ($tenant) use ($newAddedPermissions, $permission_ids) {
+                        DB::table('permissions')->whereNotIn('id', $permission_ids)->delete();
+                        DB::table('permissions')->insert($newAddedPermissions);
+                        $role = Role::findById(1);
+                        $role->syncPermissions($permission_ids);
+                    });
+                 }
+            }
+            // if($request->is_update_existing) {
+            //     $tenants = $this->tenantContract->getDataByCondition(['package_id' => $id]);
+            //     foreach ($tenants as $tenant) {
+            //         $tenant->run(function ($tenant) use ($resultOfPermissions, $permission_ids) {
+            //             DB::table('permissions')->delete();
+            //             DB::table('permissions')->insert($resultOfPermissions);
+            //             $role = Role::find(1);
+            //             $role->syncPermissions($permission_ids);
+            //         });
+            //     }
+            // }
+            // =================================================
+
             $data = $this->requestHandle($request, $resultOfPermissions, $permission_names, $permission_ids);
             $this->packageContract->update($id, $data);
 
@@ -178,6 +221,11 @@ class PackageService
         } catch (Exception $exception) {
             return Alert::errorMessage($exception->getMessage());
         }
+    }
+
+    protected function existingTenantsUpdate()
+    {
+
     }
 
     public function remove($id)

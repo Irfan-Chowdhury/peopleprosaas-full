@@ -434,6 +434,7 @@ return array (
   'Unpublished' => 'Unpublished',
   'Unsolved' => 'Unsolved',
   'Update' => 'Update',
+  'Update existing customers who are using this package' => 'Update existing customers who are using this package',
   'Upload' => 'Upload',
   'User' => 'User',
   'User Name' => 'User Name',

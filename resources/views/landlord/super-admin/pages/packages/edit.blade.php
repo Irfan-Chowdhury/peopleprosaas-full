@@ -99,8 +99,13 @@
 
                                     <input type="hidden" name="features[]" id="features">
 
+
+                                    <div class="col-md-12 form-group mt-5">
+                                        <input type="checkbox" name="is_update_existing" value="1">&nbsp; <strong>{{trans('file.Update existing customers who are using this package')}}</strong>
+                                    </div>
+
                                     <div class="col-md-12 mt-2">
-                                        <button type="submit" class="btn btn-primary">{{ trans('file.submit') }}</button>
+                                        <button type="submit" id="updateButton" class="btn btn-primary">{{ trans('file.Update') }}</button>
                                     </div>
                                 </div>
                             </form>
