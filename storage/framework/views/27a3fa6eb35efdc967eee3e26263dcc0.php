@@ -1,9 +1,8 @@
-@extends('landlord.super-admin.layouts.master')
-@section('landlord-content')
+<?php $__env->startSection('landlord-content'); ?>
 
-@push('css')
-    <link rel="stylesheet" href="{{ asset('css/kendo.default.v2.min.css') }}" type="text/css">
-@endpush
+<?php $__env->startPush('css'); ?>
+    <link rel="stylesheet" href="<?php echo e(asset('css/kendo.default.v2.min.css')); ?>" type="text/css">
+<?php $__env->stopPush(); ?>
 
 
     <section class="forms">
@@ -12,18 +11,18 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
-                            <h4>{{ trans('file.Edit Package') }}</h4>
+                            <h4><?php echo e(trans('file.Edit Package')); ?></h4>
                         </div>
                         <div class="card-body">
                             <p class="italic">
-                                <small>{{ trans('file.The field labels marked with * are required input fields') }}.</small>
+                                <small><?php echo e(trans('file.The field labels marked with * are required input fields')); ?>.</small>
                             </p>
-                            <form id="updateForm" action="{{ route('package.update', $package->id) }}" method="POST">
-                                @csrf
-                                <input type="hidden" name="package_id" id="modelId" value="{{ $package->id }}">
+                            <form id="updateForm" action="<?php echo e(route('package.update', $package->id)); ?>" method="POST">
+                                <?php echo csrf_field(); ?>
+                                <input type="hidden" name="package_id" id="modelId" value="<?php echo e($package->id); ?>">
 
                                 <div class="row">
-                                    @include('landlord.super-admin.partials.input-field',[
+                                    <?php echo $__env->make('landlord.super-admin.partials.input-field',[
                                         'colSize' => 6,
                                         'labelName' => 'Name',
                                         'fieldType' => 'text',
@@ -31,9 +30,9 @@
                                         'placeholderData' => 'Basic',
                                         'isRequired' => true,
                                         'valueData' => $package->name
-                                    ])
+                                    ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-                                    @include('landlord.super-admin.partials.input-field',[
+                                    <?php echo $__env->make('landlord.super-admin.partials.input-field',[
                                         'colSize' => 6,
                                         'labelName' => 'Free Trial',
                                         'fieldType' => 'checkbox',
@@ -41,9 +40,9 @@
                                         'placeholderData' => null,
                                         'isRequired' => false,
                                         'isChecked' => $package->is_free_trial ? true : false
-                                    ])
+                                    ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-                                    @include('landlord.super-admin.partials.input-field',[
+                                    <?php echo $__env->make('landlord.super-admin.partials.input-field',[
                                         'colSize' => 6,
                                         'labelName' => 'Monthly Fee',
                                         'fieldType' => 'number',
@@ -51,9 +50,9 @@
                                         'placeholderData' => '19',
                                         'isRequired' => true,
                                         'valueData' => $package->monthly_fee ?? null
-                                    ])
+                                    ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-                                    @include('landlord.super-admin.partials.input-field',[
+                                    <?php echo $__env->make('landlord.super-admin.partials.input-field',[
                                         'colSize' => 6,
                                         'labelName' => 'Yearly Fee',
                                         'fieldType' => 'number',
@@ -61,9 +60,9 @@
                                         'placeholderData' => '200',
                                         'isRequired' => true,
                                         'valueData' => $package->yearly_fee ?? null
-                                    ])
+                                    ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-                                    @include('landlord.super-admin.partials.input-field',[
+                                    <?php echo $__env->make('landlord.super-admin.partials.input-field',[
                                         'colSize' => 6,
                                         'labelName' => 'Number of User Account (0 = Infinity)',
                                         'fieldType' => 'number',
@@ -71,9 +70,9 @@
                                         'placeholderData' => '5',
                                         'isRequired' => true,
                                         'valueData' => $package->number_of_user_account ?? 0
-                                    ])
+                                    ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-                                    @include('landlord.super-admin.partials.input-field',[
+                                    <?php echo $__env->make('landlord.super-admin.partials.input-field',[
                                         'colSize' => 6,
                                         'labelName' => 'Number of Employees (0 = Infinity)',
                                         'fieldType' => 'number',
@@ -81,10 +80,10 @@
                                         'placeholderData' => '10',
                                         'isRequired' => true,
                                         'valueData' => $package->number_of_employee ?? 0
-                                    ])
+                                    ], \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                                     <div class="col-md-12 mt-3">
-                                        <h4>{{__('Select Features')}}</h4>
+                                        <h4><?php echo e(__('Select Features')); ?></h4>
                                     </div>
 
                                     <div class="col-md-4">
@@ -100,7 +99,7 @@
                                     <input type="hidden" name="features[]" id="features">
 
                                     <div class="col-md-12 mt-2">
-                                        <button type="submit" class="btn btn-primary">{{ trans('file.submit') }}</button>
+                                        <button type="submit" class="btn btn-primary"><?php echo e(trans('file.submit')); ?></button>
                                     </div>
                                 </div>
                             </form>
@@ -110,11 +109,11 @@
             </div>
         </div>
     </section>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
-@push('scripts')
-<script type="text/javascript" src="{{ asset('js/kendo.all.min.js') }}"></script>
+<?php $__env->startPush('scripts'); ?>
+<script type="text/javascript" src="<?php echo e(asset('js/kendo.all.min.js')); ?>"></script>
 <script type="text/javascript">
     let updateURL = '/super-admin/packages/update/';
 
@@ -140,129 +139,129 @@
                 dataSource: [
                     {
                         id: 'user',
-                        text: "{{trans('User')}}",
+                        text: "<?php echo e(trans('User')); ?>",
                         checked: true,
                     },
                     {
                         id: 'details-employee',
-                        text: "{{trans('Employee Details')}}",
+                        text: "<?php echo e(trans('Employee Details')); ?>",
                         checked: true,
                     },
 
                     {
                         id: 'customize-setting',
-                        text: "{{__('Customize Setting')}}",
+                        text: "<?php echo e(__('Customize Setting')); ?>",
                         expanded: true,
                         checked: true,
                         items: [
                             {
                                 id: 'role',
-                                text: "{{trans('Role')}}",
+                                text: "<?php echo e(trans('Role')); ?>",
                                 checked: true,
                             },
                             {
                                 id: 'general-setting',
-                                text: "{{__('General Setting')}}",
+                                text: "<?php echo e(__('General Setting')); ?>",
                                 checked: true,
                             },
                             {
                                 id: 'mail-setting',
-                                text: "{{__('Mail Setting')}}",
+                                text: "<?php echo e(__('Mail Setting')); ?>",
                                 checked: true,
                             },
                             {
                                 id: 'access-variable_type',
-                                text: '{{__('Access Variable Type')}}',
+                                text: '<?php echo e(__('Access Variable Type')); ?>',
                                 checked: true,
                             },
                             {
                                 id: 'access-variable_method',
-                                text: '{{__('Access Variable Method')}}',
+                                text: '<?php echo e(__('Access Variable Method')); ?>',
                                 checked: true,
                             },
                             {
                                 id: 'access-language',
-                                text: '{{__('Access Language')}}',
+                                text: '<?php echo e(__('Access Language')); ?>',
                                 checked: true,
                             },
                         ]
                     },
                     {
                         id: 'company',
-                        text: "{{trans('Company')}}",
+                        text: "<?php echo e(trans('Company')); ?>",
                         checked: true,
                     },
                     {
                         id: 'department',
-                        text: "{{trans('Department')}}",
+                        text: "<?php echo e(trans('Department')); ?>",
                         checked: true,
                     },
                     {
                         id: 'designation',
-                        text: "{{trans('Designation')}}",
+                        text: "<?php echo e(trans('Designation')); ?>",
                         checked: true,
                     },
                     {
                         id: 'location',
-                        text: "{{trans('Location')}}",
+                        text: "<?php echo e(trans('Location')); ?>",
                         checked: true,
                     },
 
                     {
                         id: 'core_hr',
-                        text: "{{trans('Core HR')}}",
+                        text: "<?php echo e(trans('Core HR')); ?>",
                         expanded: true,
                         checked: ($.inArray('core_hr', permissionNames) >= 0) ? true : false,
                         items: [
                             {
                                 id: 'view-calendar',
-                                text: '{{__('View Calendar')}}',
+                                text: '<?php echo e(__('View Calendar')); ?>',
                                 checked: ($.inArray('view-calendar', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'promotion',
-                                text: "{{trans('Promotion')}}",
+                                text: "<?php echo e(trans('Promotion')); ?>",
                                 checked: ($.inArray('promotion', permissionNames) >= 0) ? true : false,
                             },
 
                             {
                                 id: 'award',
-                                text: "{{trans('Award')}}",
+                                text: "<?php echo e(trans('Award')); ?>",
                                 checked: ($.inArray('award', permissionNames) >= 0) ? true : false,
                             },
 
                             {
                                 id: 'transfer',
-                                text: "{{trans('Transfer')}}",
+                                text: "<?php echo e(trans('Transfer')); ?>",
                                 checked: ($.inArray('transfer', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'travel',
-                                text: "{{trans('Travel')}}",
+                                text: "<?php echo e(trans('Travel')); ?>",
                                 checked: ($.inArray('travel', permissionNames) >= 0) ? true : false,
                             },
 
                             {
                                 id: 'resignation',
-                                text: "{{trans('Resignation')}}",
+                                text: "<?php echo e(trans('Resignation')); ?>",
                                 checked: ($.inArray('resignation', permissionNames) >= 0) ? true : false,
                             },
 
                             {
                                 id: 'complaint',
-                                text: "{{trans('Complaint')}}",
+                                text: "<?php echo e(trans('Complaint')); ?>",
                                 checked: ($.inArray('complaint', permissionNames) >= 0) ? true : false,
                             },
 
                             {
                                 id: 'warning',
-                                text: "{{trans('Warning')}}",
+                                text: "<?php echo e(trans('Warning')); ?>",
                                 checked: ($.inArray('warning', permissionNames) >= 0) ? true : false,
                             },
 
                             {
                                 id: 'termination',
-                                text: "{{trans('Termination')}}",
+                                text: "<?php echo e(trans('Termination')); ?>",
                                 checked: ($.inArray('termination', permissionNames) >= 0) ? true : false,
                             },
                         ]
@@ -280,118 +279,118 @@
                 dataSource: [
                     {
                         id: 'timesheet',
-                        text: "{{trans('Timesheet')}}",
+                        text: "<?php echo e(trans('Timesheet')); ?>",
                         expanded: true,
                         items: [
                             {
                                 id: 'attendance',
-                                text: "{{trans('Attendance')}}",
+                                text: "<?php echo e(trans('Attendance')); ?>",
                                 checked: ($.inArray('attendance', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'office_shift',
-                                text: "{{trans('Office Shift')}}",
+                                text: "<?php echo e(trans('Office Shift')); ?>",
                                 checked: true,
                             },
 
                             {
                                 id: 'holiday',
-                                text: "{{trans('Holiday')}}",
+                                text: "<?php echo e(trans('Holiday')); ?>",
                                 checked: ($.inArray('holiday', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'leave',
-                                text: "{{trans('Leave')}}",
+                                text: "<?php echo e(trans('Leave')); ?>",
                                 checked: ($.inArray('leave', permissionNames) >= 0) ? true : false,
                             },
                         ]
                     },
                     {
                         id: 'payment-module',
-                        text: "{{trans('Payment Module')}}",
+                        text: "<?php echo e(trans('Payment Module')); ?>",
                         checked: ($.inArray('payment-module', permissionNames) >= 0) ? true : false,
                     },
                     {
                         id: 'hr_report',
-                        text: "{{trans('HR Reports')}}",
+                        text: "<?php echo e(trans('HR Reports')); ?>",
                         checked: ($.inArray('hr_report', permissionNames) >= 0) ? true : false,
                     },
 
                     {
                         id: 'recruitment',
-                        text: "{{__('Recruitment')}}",
+                        text: "<?php echo e(__('Recruitment')); ?>",
                         expanded: true,
                         checked: ($.inArray('recruitment', permissionNames) >= 0) ? true : false,
                         items: [
                             {
                                 id: 'job_post',
-                                text: "{{trans('Job Post')}}",
+                                text: "<?php echo e(trans('Job Post')); ?>",
                                 checked: ($.inArray('job_post', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'job_candidate',
-                                text: "{{trans('Job Candidate')}}",
+                                text: "<?php echo e(trans('Job Candidate')); ?>",
                                 checked: ($.inArray('job_candidate', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'job_interview',
-                                text: "{{trans('Job Interview')}}",
+                                text: "<?php echo e(trans('Job Interview')); ?>",
                                 checked: ($.inArray('job_interview', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'cms',
-                                text: "{{__('CMS')}}",
+                                text: "<?php echo e(__('CMS')); ?>",
                                 checked: ($.inArray('cms', permissionNames) >= 0) ? true : false,
                             }
                         ]
                     },
                     {
                         id: 'project-management',
-                        text: "{{trans('Project Management')}}",
+                        text: "<?php echo e(trans('Project Management')); ?>",
                         checked: ($.inArray('project-management', permissionNames) >= 0) ? true : false,
                         expanded: true,
                         items: [
                             {
                                 id: 'project',
-                                text: "{{trans('Project')}}",
+                                text: "<?php echo e(trans('Project')); ?>",
                                 checked: ($.inArray('project', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'task',
-                                text: "{{trans('Task')}}",
+                                text: "<?php echo e(trans('Task')); ?>",
                                 checked: ($.inArray('task', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'client',
-                                text: "{{trans('Client')}}",
+                                text: "<?php echo e(trans('Client')); ?>",
                                 checked: ($.inArray('client', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'invoice',
-                                text: "{{trans('Invoice')}}",
+                                text: "<?php echo e(trans('Invoice')); ?>",
                                 checked: ($.inArray('invoice', permissionNames) >= 0) ? true : false,
                             },
                         ]
                     },
                     {
                         id: 'ticket',
-                        text: "{{trans('Ticket')}}",
+                        text: "<?php echo e(trans('Ticket')); ?>",
                         checked: ($.inArray('ticket', permissionNames) >= 0) ? true : false,
                     },
                     {
                         id: 'file_module',
-                        text: "{{trans('File Module')}}",
+                        text: "<?php echo e(trans('File Module')); ?>",
                         checked: ($.inArray('file_module', permissionNames) >= 0) ? true : false,
                         expanded: true,
                         items: [
                             {
                                 id: 'file_manager',
-                                text: "{{trans('File Manager')}}",
+                                text: "<?php echo e(trans('File Manager')); ?>",
                                 checked: ($.inArray('file_manager', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'official_document',
-                                text: "{{trans('Official Document')}}",
+                                text: "<?php echo e(trans('Official Document')); ?>",
                                 checked: ($.inArray('official_document', permissionNames) >= 0) ? true : false,
                             },
                         ]
@@ -409,112 +408,112 @@
                 dataSource: [
                     {
                         id: 'event-meeting',
-                        text: "{{trans('Event and Meeting')}}",
+                        text: "<?php echo e(trans('Event and Meeting')); ?>",
                         checked: ($.inArray('event-meeting', permissionNames) >= 0) ? true : false,
                         expanded: true,
                         items: [
                             {
                                 id: 'meeting',
-                                text: "{{trans('Meeting')}}",
+                                text: "<?php echo e(trans('Meeting')); ?>",
                                 checked: ($.inArray('meeting', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'event',
-                                text: "{{trans('Event')}}",
+                                text: "<?php echo e(trans('Event')); ?>",
                                 checked: ($.inArray('event', permissionNames) >= 0) ? true : false,
                             },
                         ]
                     },
                     {
                         id: 'assets-and-category',
-                        text: "{{trans('Assets And Category')}}",
+                        text: "<?php echo e(trans('Assets And Category')); ?>",
                         checked: ($.inArray('assets-and-category', permissionNames) >= 0) ? true : false,
                     },
                     {
                         id: 'finance',
-                        text: "{{trans('Finance')}}",
+                        text: "<?php echo e(trans('Finance')); ?>",
                         checked: ($.inArray('finance', permissionNames) >= 0) ? true : false,
                         expanded: true,
                         items: [
                             {
                                 id: 'account',
-                                text: "{{trans('Account')}}",
+                                text: "<?php echo e(trans('Account')); ?>",
                                 checked: ($.inArray('account', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'expense',
-                                text: "{{trans('Expense')}}",
+                                text: "<?php echo e(trans('Expense')); ?>",
                                 checked: ($.inArray('expense', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'deposit',
-                                text: "{{trans('Deposit')}}",
+                                text: "<?php echo e(trans('Deposit')); ?>",
                                 checked: ($.inArray('deposit', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'payer',
-                                text: "{{trans('Payer')}}",
+                                text: "<?php echo e(trans('Payer')); ?>",
                                 checked: ($.inArray('payer', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'payee',
-                                text: "{{trans('payee')}}",
+                                text: "<?php echo e(trans('payee')); ?>",
                                 checked: ($.inArray('payee', permissionNames) >= 0) ? true : false,
                             },
                         ]
                     },
                     {
                         id: 'training_module',
-                        text: "{{trans('Training Module')}}",
+                        text: "<?php echo e(trans('Training Module')); ?>",
                         checked: ($.inArray('training_module', permissionNames) >= 0) ? true : false,
                         expanded: true,
                         items: [
                             {
                                 id: 'trainer',
-                                text: "{{trans('Trainer')}}",
+                                text: "<?php echo e(trans('Trainer')); ?>",
                                 checked: ($.inArray('trainer', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'training',
-                                text: "{{trans('Training')}}",
+                                text: "<?php echo e(trans('Training')); ?>",
                                 checked: ($.inArray('training', permissionNames) >= 0) ? true : false,
                             },
                         ]
                     },
                     {
                         id: 'announcement',
-                        text: "{{trans('Announcement')}}",
+                        text: "<?php echo e(trans('Announcement')); ?>",
                         checked: ($.inArray('announcement', permissionNames) >= 0) ? true : false,
                     },
                     {
                         id: 'policy',
-                        text: "{{trans('Policy')}}",
+                        text: "<?php echo e(trans('Policy')); ?>",
                         checked: ($.inArray('policy', permissionNames) >= 0) ? true : false,
                     },
                     {
                         id: 'performance',
-                        text: "{{trans('Performance')}}",
+                        text: "<?php echo e(trans('Performance')); ?>",
                         checked: ($.inArray('performance', permissionNames) >= 0) ? true : false,
                         expanded: true,
                         items: [
                             {
                                 id: 'goal-type',
-                                text: "{{trans('Goal Type')}}",
+                                text: "<?php echo e(trans('Goal Type')); ?>",
                                 checked: ($.inArray('goal-type', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'goal-tracking',
-                                text: "{{trans('Goal Tracking')}}",
+                                text: "<?php echo e(trans('Goal Tracking')); ?>",
                                 checked: ($.inArray('goal-tracking', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'indicator',
-                                text: "{{trans('Indicator')}}",
+                                text: "<?php echo e(trans('Indicator')); ?>",
                                 checked: ($.inArray('indicator', permissionNames) >= 0) ? true : false,
                             },
                             {
                                 id: 'appraisal',
-                                text: "{{trans('Appraisal')}}",
+                                text: "<?php echo e(trans('Appraisal')); ?>",
                                 checked: ($.inArray('appraisal', permissionNames) >= 0) ? true : false,
                             },
                         ]
@@ -563,6 +562,8 @@
     })(jQuery);
 </script>
 
-<script type="text/javascript" src="{{ asset('js/landlord/common-js/update.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script>
-@endpush
+<script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/update.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/alertMessages.js')); ?>"></script>
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('landlord.super-admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/pages/packages/edit.blade.php ENDPATH**/ ?>

@@ -54,11 +54,6 @@ Route::middleware(['setPublicLocale'])->group(function () {
 // tenant.checkout
 Route::controller(CustomerController::class)->group(function () {
     Route::post('/customer-signup', 'customerSignUp')->name('customer.signup')->middleware('demoCheck');
-
-    Route::prefix('customers')->group(function () {
-        Route::get('/', 'index')->name('customer.index');
-        Route::get('/datatable', 'datatable')->name('customer.datatable');
-    });
 });
 
 
@@ -71,6 +66,18 @@ Route::middleware(['web','auth','setLocale'])->group(function () {
     Route::prefix('super-admin')->group(function () {
 
         Route::get('dashboard',[DashboardController::class, 'index'])->name('landlord.dashboard');
+
+
+        Route::controller(CustomerController::class)->group(function () {
+            Route::prefix('customers')->group(function () {
+                Route::get('/', 'index')->name('customer.index');
+                Route::get('/datatable', 'datatable')->name('customer.datatable');
+                Route::get('/tenant-info/{tenant}', 'tenantInfo')->name('customer.tenant_info');
+                Route::post('/renew-subscription/{tenant}', 'renewSubscriptionUpdate')->name('customer.renew_subscription_update')->middleware('demoCheck');
+                Route::post('/change-package/{tenant}', 'changePackageProcess')->name('customer.change_package')->middleware('demoCheck');
+                Route::get('/destroy/{tenant}', 'destroy')->name('customer.destroy')->middleware('demoCheck');
+            });
+        });
 
         Route::prefix('packages')->group(function () {
             Route::controller(PackageController::class)->group(function () {

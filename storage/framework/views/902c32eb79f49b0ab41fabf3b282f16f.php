@@ -1,33 +1,12 @@
-@extends('landlord.super-admin.layouts.master')
-@section('landlord-content')
-{{-- @push('css')
-    <style>
-    .loading-icon {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(255, 255, 255, 0.8);
-        z-index: 9999;
-        justify-content: center;
-        align-items: center;
-    }
+<?php $__env->startSection('landlord-content'); ?>
 
-    .loading-icon i {
-        font-size: 40px;
-        color: #333;
-    }
-</style>
-@endpush --}}
 
 
 <div class="container-fluid mb-3">
     <div class="card">
-        <div class="card-header"><h3>{{__('file.Customers')}}</h3></div>
+        <div class="card-header"><h3><?php echo e(__('file.Customers')); ?></h3></div>
         <div class="card-body">
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createModal"><i class="fa fa-plus"></i> {{__('file.Add New')}}</button>
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createModal"><i class="fa fa-plus"></i> <?php echo e(__('file.Add New')); ?></button>
         </div>
     </div>
 </div>
@@ -38,34 +17,31 @@
         <thead>
             <tr>
                 <th class="not-exported"></th>
-                <th>{{trans('file.ID')}}</th>
-                <th>{{trans('file.Database')}}</th>
-                <th>{{trans('file.Domain')}}</th>
-                <th>{{trans('file.Customer')}}</th>
-                <th>{{trans('file.Email')}}</th>
-                <th>{{trans('file.Package')}}</th>
-                <th>{{trans('file.Subscription Type')}}</th>
-                {{-- <th>{{trans('file.Company Name')}}</th>
-                <th>{{trans('file.Phone Number')}}</th>
-                <th>{{trans('file.Created At')}}</th>
-                <th>{{trans('file.Expiry Date')}}</th> --}}
-                <th class="not-exported">{{trans('file.Action')}}</th>
+                <th><?php echo e(trans('file.ID')); ?></th>
+                <th><?php echo e(trans('file.Database')); ?></th>
+                <th><?php echo e(trans('file.Domain')); ?></th>
+                <th><?php echo e(trans('file.Customer')); ?></th>
+                <th><?php echo e(trans('file.Email')); ?></th>
+                <th><?php echo e(trans('file.Package')); ?></th>
+                <th><?php echo e(trans('file.Subscription Type')); ?></th>
+                
+                <th class="not-exported"><?php echo e(trans('file.Action')); ?></th>
             </tr>
         </thead>
         <tbody></tbody>
     </table>
 </div>
 
-@include('landlord.super-admin.pages.customers.create-modal')
-@include('landlord.super-admin.pages.customers.renew-modal')
-@include('landlord.super-admin.pages.customers.change-package-modal')
+<?php echo $__env->make('landlord.super-admin.pages.customers.create-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('landlord.super-admin.pages.customers.renew-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('landlord.super-admin.pages.customers.change-package-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script type="text/javascript">
-        let dataTableURL = "{{ route('customer.datatable') }}";
-        let storeURL = "{{ route('customer.signup') }}";
+        let dataTableURL = "<?php echo e(route('customer.datatable')); ?>";
+        let storeURL = "<?php echo e(route('customer.signup')); ?>";
         let tenantInfoURL = '/super-admin/customers/tenant-info/';
         let renewSubscriptionURL = '/super-admin/customers/renew-subscription/';
         let changePackageURL = '/super-admin/customers/change-package/';
@@ -74,7 +50,7 @@
 
     <script type="text/javascript">
         (function ($) {
-            var packages = @json($packages);
+            var packages = <?php echo json_encode($packages, 15, 512) ?>;
 
             "use strict";
             $(document).ready(function() {
@@ -82,7 +58,7 @@
 
                 var date = $('.date');
                 date.datepicker({
-                    format: '{{ env('Date_Format_JS')}}',
+                    format: '<?php echo e(env('Date_Format_JS')); ?>',
                     autoclose: true,
                     todayHighlight: true
                 });
@@ -167,12 +143,12 @@
 
                     "order": [],
                     'language': {
-                        'lengthMenu': '_MENU_ {{ __('records per page') }}',
-                        "info": '{{ trans('file.Showing') }} _START_ - _END_ (_TOTAL_)',
-                        "search": '{{ trans('file.Search') }}',
+                        'lengthMenu': '_MENU_ <?php echo e(__('records per page')); ?>',
+                        "info": '<?php echo e(trans('file.Showing')); ?> _START_ - _END_ (_TOTAL_)',
+                        "search": '<?php echo e(trans('file.Search')); ?>',
                         'paginate': {
-                            'previous': '{{ trans('file.Previous') }}',
-                            'next': '{{ trans('file.Next') }}'
+                            'previous': '<?php echo e(trans('file.Previous')); ?>',
+                            'next': '<?php echo e(trans('file.Next')); ?>'
                         }
                     },
                     'columnDefs': [{
@@ -345,27 +321,15 @@
         })(jQuery);
     </script>
 
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/store.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/delete.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/store.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/delete.js')); ?>"></script>
+    <script type="text/javascript" src="<?php echo e(asset('js/landlord/common-js/alertMessages.js')); ?>"></script>
 
 
 
 
-    {{-- <script>
-        function showLoadingIcon() {
-            $('#loading-icon').css('display', 'flex');
-        }
+    
 
-        function hideLoadingIcon() {
-            $('#loading-icon').css('display', 'none');
-        }
+<?php $__env->stopPush(); ?>
 
-        function simulateTimeConsumingTask() {
-            showLoadingIcon(); // Show the loading icon before the task starts
-            setTimeout(function () {
-            }, 3000);
-        }
-    </script> --}}
-
-@endpush
+<?php echo $__env->make('landlord.super-admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/pages/customers/index.blade.php ENDPATH**/ ?>

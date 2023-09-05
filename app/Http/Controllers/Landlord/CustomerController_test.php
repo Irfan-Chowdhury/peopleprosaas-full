@@ -10,7 +10,6 @@ use App\Models\Landlord\Package;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Customer\CustomerSignUpRequest;
-use App\Http\Requests\Customer\RenewSubscriptionRequest;
 use App\Mail\ConfirmationEmail;
 use App\Models\Landlord\Customer;
 use App\Models\Landlord\GeneralSetting;
@@ -78,43 +77,34 @@ class CustomerController extends Controller
         }
     }
 
-
     public function customerSignUp(CustomerSignUpRequest $request)
     {
-        DB::beginTransaction();
-        try {
+        $customerData = [
+            'company_name' => $request->company_name,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'contact_no' => $request->contact_no,
+            'email' => $request->email,
+            'username' => $request->username,
+            'password' => bcrypt($request->password),
+        ];
+        $customer = Customer::create($customerData);
+        $package = Package::find($request->package_id);
 
-            $this->tenantGenerate($request);
-
-            DB::commit();
-            $result =  Alert::successMessage('Data Created Successfully');
-
-            if (request()->ajax()) {
-                return response()->json($result['alertMsg'], $result['statusCode']);
-            } else {
-                return redirect()->back()->with(['success' => 'Data Created Successfully']);
-            }
-
+        if($package->is_free_trial) {
+            return $this->createTenant($request, $customer, $package);
         }
-        catch (Exception $e) {
-            DB::rollback();
-            $result =  Alert::errorMessage($e->getMessage());
-
-            if (request()->ajax()) {
-                return response()->json($result['alertMsg'], $result['statusCode']);
-            } else {
-                return redirect()->back()->withErrors(['errors' => [$result['alertMsg']]]);
-            }
-        }
+        return 'success';
     }
 
 
     public function tenantInfo(Tenant $tenant)
     {
+        // return response()->json(['tenant'=>$tenant, 'package'=> $tenant->package]);
         return response()->json($tenant);
     }
 
-    public function renewSubscriptionUpdate(RenewSubscriptionRequest $request, Tenant $tenant)
+    public function renewSubscriptionUpdate(Request $request, Tenant $tenant)
     {
         DB::beginTransaction();
         try {
@@ -132,55 +122,62 @@ class CustomerController extends Controller
             $tenant->expiry_date = $expiryDate;
             $tenant->subscription_type = $request->subscription_type;
             $tenant->update();
-            $result =  Alert::successMessage('Data Update Successfully');
 
-            DB::commit();
+            $result =  Alert::successMessage('Data Update Successfully');
+            return response()->json($result['alertMsg'], $result['statusCode']);
 
         } catch (Exception $e) {
             DB::rollback();
             $result =  Alert::errorMessage($e->getMessage());
-        }
 
-        return response()->json($result['alertMsg'], $result['statusCode']);
+            return response()->json($result['alertMsg'], $result['statusCode']);
+        }
     }
 
+    // SELECT COUNT(id) FROM permissions;
     public function changePackageProcess(Request $request, Tenant $tenant)
     {
-        DB::beginTransaction();
-        try {
+        // try {
             $tenant->package_id = $request->package_id;
             $tenant->update();
 
-            $permissions = json_decode($tenant->package->permissions, true);
-            $allPermissionIds = explode(',',$tenant->package->permission_ids);
+            $package = Package::find(2);
+            $permissions = json_decode($package->permissions, true); // 96
+            $allPermissionIds = explode(',',$package->permission_ids);
+
 
             $tenant->run(function ($tenant) use ($request, $permissions, $allPermissionIds) {
+                // $prevPermissions = DB::table('permissions')->get();
+                // DB::table('permissions')->whereNotIn('id',$allPermissionIds)->delete();
+
                 DB::table('permissions')->delete();
                 DB::table('permissions')->insert($permissions);
                 $role = Role::find(1);
                 $role->syncPermissions($allPermissionIds);
+
+                // $role = Role::findById(1);
+                // $role->syncPermissions($allPermissionIds);
+                // $user->syncRoles(1);
+                // DB::table('role_has_permissions')->where('role_id', '!=', 1)->delete();
             });
-            $result =  Alert::successMessage('Package Switched Successfully');
-            DB::commit();
 
-        } catch (Exception $e) {
-            DB::rollback();
-            $result =  Alert::errorMessage($e->getMessage());
-        }
+            return 55;
 
-        return response()->json($result['alertMsg'], $result['statusCode']);
+            // $result =  Alert::successMessage('Package Switch Successfully');
+            // return response()->json($result['alertMsg'], $result['statusCode']);
+
+        // } catch (Exception $e) {
+        //     DB::rollback();
+        //     $result =  Alert::errorMessage($e->getMessage());
+
+        //     return response()->json($result['alertMsg'], $result['statusCode']);
+        // }
     }
 
 
     protected function tenantGenerate($request) : void
     {
-        $customer = Customer::create($this->customerData($request));
-        $package = Package::find($request->package_id);
 
-        if($package->is_free_trial) {
-            $this->createTenant($request, $customer, $package);
-            // return \Redirect::to('https://'.$request->tenant.'.'.env('CENTRAL_DOMAIN'));
-        }
 
         // Mail::to($request->email)->send(new ConfirmationEmail($request)); //This is ok
         // event(new CustomerRegistered($request));
