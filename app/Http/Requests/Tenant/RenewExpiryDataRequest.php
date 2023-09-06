@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Customer;
+namespace App\Http\Requests\Tenant;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RenewSubscriptionRequest extends FormRequest
+class RenewExpiryDataRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

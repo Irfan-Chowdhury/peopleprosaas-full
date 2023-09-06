@@ -177,29 +177,8 @@ class PackageService
             $permission_names = array_column($resultOfPermissions,'name');
             $permission_ids = array_column($resultOfPermissions,'id');
 
+            $this->existingTenantsUpdate($request, $id, $resultOfPermissions, $permission_ids);
             // =====================  ============================
-            if($request->is_update_existing) {
-                $package = $this->packageContract->getById($id);
-                $prevPermissions = json_decode($package->permissions, true);
-                $prevPermissionsIds = array_column($prevPermissions, 'id');
-
-                $newAddedPermissions = [];
-                foreach ($resultOfPermissions as $element) {
-                    if (!in_array($element["id"], $prevPermissionsIds)) {
-                        $newAddedPermissions[] = $element;
-                    }
-                }
-
-                $tenants = $this->tenantContract->getDataByCondition(['package_id' => $id]);
-                foreach ($tenants as $tenant) {
-                    $tenant->run(function ($tenant) use ($newAddedPermissions, $permission_ids) {
-                        DB::table('permissions')->whereNotIn('id', $permission_ids)->delete();
-                        DB::table('permissions')->insert($newAddedPermissions);
-                        $role = Role::findById(1);
-                        $role->syncPermissions($permission_ids);
-                    });
-                 }
-            }
             // if($request->is_update_existing) {
             //     $tenants = $this->tenantContract->getDataByCondition(['package_id' => $id]);
             //     foreach ($tenants as $tenant) {
@@ -223,9 +202,30 @@ class PackageService
         }
     }
 
-    protected function existingTenantsUpdate()
+    protected function existingTenantsUpdate($request, $id, $resultOfPermissions, $permission_ids) : void
     {
+        if($request->is_update_existing) {
+            $package = $this->packageContract->getById($id);
+            $prevPermissions = json_decode($package->permissions, true);
+            $prevPermissionsIds = array_column($prevPermissions, 'id');
 
+            $newAddedPermissions = [];
+            foreach ($resultOfPermissions as $element) {
+                if (!in_array($element["id"], $prevPermissionsIds)) {
+                    $newAddedPermissions[] = $element;
+                }
+            }
+
+            $tenants = $this->tenantContract->getDataByCondition(['package_id' => $id]);
+            foreach ($tenants as $tenant) {
+                $tenant->run(function ($tenant) use ($newAddedPermissions, $permission_ids) {
+                    DB::table('permissions')->whereNotIn('id', $permission_ids)->delete();
+                    DB::table('permissions')->insert($newAddedPermissions);
+                    $role = Role::findById(1);
+                    $role->syncPermissions($permission_ids);
+                });
+            }
+        }
     }
 
     public function remove($id)

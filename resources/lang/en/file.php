@@ -457,6 +457,7 @@ return array (
   'Yearly Fee' => 'Yearly Fee',
   'Years' => 'Years',
   'Yes' => 'Yes',
+  'Your subscription has expired!' => 'Your subscription has expired!',
   'ZIP' => 'ZIP',
   'action' => 'action',
   'category' => 'category',

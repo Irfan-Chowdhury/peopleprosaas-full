@@ -9,8 +9,9 @@ use App\Http\traits\TenantTrait;
 use App\Models\Landlord\Package;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Customer\CustomerSignUpRequest;
-use App\Http\Requests\Customer\RenewSubscriptionRequest;
+use App\Http\Requests\Tenant\CustomerSignUpRequest;
+use App\Http\Requests\Tenant\RenewExpiryDataRequest;
+use App\Http\Requests\Tenant\RenewSubscriptionRequest;
 use App\Mail\ConfirmationEmail;
 use App\Models\Landlord\Customer;
 use App\Models\Landlord\GeneralSetting;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Role;
 
-class CustomerController extends Controller
+class TenantController extends Controller
 {
     use TenantTrait;
 
@@ -114,7 +115,7 @@ class CustomerController extends Controller
         return response()->json($tenant);
     }
 
-    public function renewSubscriptionUpdate(RenewSubscriptionRequest $request, Tenant $tenant)
+    public function renewSubscriptionUpdate(RenewExpiryDataRequest $request, Tenant $tenant)
     {
         DB::beginTransaction();
         try {
@@ -261,6 +262,44 @@ class CustomerController extends Controller
         return response()->json($result['alertMsg'], $result['statusCode']);
     }
 
+    public function renewSubscription(RenewSubscriptionRequest $request)
+    {
+        DB::beginTransaction();
+        try {
+            $tenant = Tenant::find($request->tenant_id);
+            $prevPermissions = json_decode($tenant->package->permissions, true);
+            $prevPermissionIds = array_column($prevPermissions, 'id');
+
+            $tenant->package_id = $request->package_id;
+            $tenant->update();
+
+            $package = Package::find($request->package_id);
+            $latestPermissions = json_decode($package->permissions, true);
+            $latestPermissionsIds = array_column($latestPermissions, 'id');
+
+            $newAddedPermissions = [];
+            foreach ($latestPermissions as $element) {
+                if (!in_array($element["id"], $prevPermissionIds)) {
+                    $newAddedPermissions[] = $element;
+                }
+            }
+
+            $tenant->run(function ($tenant) use ($newAddedPermissions, $latestPermissionsIds) {
+                DB::table('permissions')->whereNotIn('id', $latestPermissionsIds)->delete();
+                DB::table('permissions')->insert($newAddedPermissions);
+                $role = Role::findById(1);
+                $role->syncPermissions($latestPermissionsIds);
+            });
+
+            DB::commit();
+            return redirect()->back()->with(['success' => 'Data Created Successfully']);
+        }
+        catch (Exception $e) {
+            DB::rollback();
+
+            return redirect()->back()->withErrors(['errors' => [$e->getMessage()]]);
+        }
+    }
 
     public function test()
     {

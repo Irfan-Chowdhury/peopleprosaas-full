@@ -417,8 +417,6 @@
 
 @if ($errors->any())
     <script>
-        // hideLoadingIcon();
-
         $(document).ready(function() {
             hideLoadingIcon();
             let errorMessages = @json($errors->all());
@@ -441,7 +439,4 @@
     </script>
 @endif
 <script type="text/javascript" src="{{ asset('js/landlord/common-js/alertMessages.js') }}"></script>
-
-
-
 @endpush
