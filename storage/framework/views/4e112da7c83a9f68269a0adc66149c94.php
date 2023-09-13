@@ -133,7 +133,6 @@
 
 
     <!-- Pricing Plan -->
-
     <section id="packages"class="grey-bg">
         <div class="container">
             <div class="col-md-6 offset-md-3 text-center mb-5">
@@ -239,6 +238,7 @@
         </div>
     </section>
 
+    <!-- Customer Sign Up -->
     <section id="customer-signup">
         <div class="container">
             <div class="row">
@@ -253,8 +253,10 @@
                 </div>
             </div>
             <div class="col-md-6 offset-md-3 mb-5">
-                <form action="<?php echo e(route('customer.signup')); ?>" method="POST"  class="form row customer-signup-form">
+                <form action="<?php echo e(route('customer.signup')); ?>" method="POST" class="form row customer-signup-form">
                     <?php echo csrf_field(); ?>
+                    <input type="hidden" name="is_free_trail">
+                    <input type="hidden" name="is_new_tenant" value="1">
                     <input type="hidden" name="package_id">
                     <input type="hidden" name="subscription_type" value="monthly">
                     <input type="hidden" name="price">
@@ -289,6 +291,17 @@
                           <span class="input-group-text" id="basic-addon2"><?php echo e('@'.env('CENTRAL_DOMAIN')); ?></span>
                         </div>
                     </div>
+
+                    <div class="col-md-12 mt-3 d-none" id="paymentArea">
+                        <label><strong><?php echo e(trans('file.Payment Method')); ?> <small class="text-danger">*</small> : &nbsp;&nbsp; </strong></label>
+                        <?php $__currentLoopData = $paymentMethods; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="payment_method" value="<?php echo e($item->payment_method); ?>">
+                                <label class="form-check-label"><?php echo app('translator')->get("file.$item->title"); ?></label>
+                            </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
+
                     <div class="col-md-12 mt-3">
                         <div class="card-element" class="form-control">
                         </div>
@@ -296,7 +309,7 @@
                     </div>
                     <div class="col-12 mt-3">
                         <p id="waiting-msg mb-3"></p>
-                        <input id="submitBtn" type="submit" class="button style1 d-block w-100" value="<?php echo e(trans('file.submit')); ?>">
+                        <input id="submitBtn" type="submit" class="button style1 d-block w-100" value="<?php echo e(trans('file.Submit')); ?>">
                     </div>
                 </form>
             </div>
@@ -360,6 +373,16 @@
         });
 
         $(".signup-btn").on("click", function () {
+            let trailLimit = $(this).data('free');
+            if (!trailLimit) {
+                $('#paymentArea').removeClass('d-none');
+                $('input[name=is_free_trail]').val(0);
+            }else{
+                $("#paymentArea").addClass("d-none");
+                $('input[name=is_free_trail]').val(1);
+            }
+
+
             $('input[name=package_id]').val($(this).data('package_id'));
             if($('input[name=subscription_type]').val() == 'monthly') {
                 $('input[name=price]').val($(this).parent().parent().find('.package-price').data('monthly'));

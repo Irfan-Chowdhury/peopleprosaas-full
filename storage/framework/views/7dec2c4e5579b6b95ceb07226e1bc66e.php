@@ -15,6 +15,8 @@
                     <?php echo csrf_field(); ?>
                     <div class="row">
 
+                        <input type="hidden" name="created_by" value="admin">
+
                         <div class="col-md-6">
                             <label><strong><?php echo app('translator')->get('file.Package'); ?></strong></label>
                             <select name="package_id" class="form-control">
