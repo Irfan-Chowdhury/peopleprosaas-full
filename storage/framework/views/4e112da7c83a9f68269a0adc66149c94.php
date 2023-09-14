@@ -255,6 +255,7 @@
             <div class="col-md-6 offset-md-3 mb-5">
                 <form action="<?php echo e(route('customer.signup')); ?>" method="POST" class="form row customer-signup-form">
                     <?php echo csrf_field(); ?>
+                    <input type="hidden" name="created_by" value="customer">
                     <input type="hidden" name="is_free_trail">
                     <input type="hidden" name="is_new_tenant" value="1">
                     <input type="hidden" name="package_id">
