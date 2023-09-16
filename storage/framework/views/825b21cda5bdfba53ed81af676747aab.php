@@ -3,12 +3,11 @@
         
     </span>
     <ul id="side-main-menu" class="side-menu list-unstyled">
-        <li><a href="#"> <i class="dripicons-meter"></i><span><?php echo e(__('file.dashboard')); ?></span></a></li>
+        <li><a href="<?php echo e(route('landlord.dashboard')); ?>"> <i class="dripicons-meter"></i><span><?php echo e(__('file.Dashboard')); ?></span></a></li>
         <li><a target="_blank" href="<?php echo e(route('landingPage.index')); ?>"> <i class="dripicons-monitor"></i><span>Frontend</span></a></li>
-
         <li><a href="<?php echo e(route('customer.index')); ?>"><i class="dripicons-list"></i> <?php echo e(trans('file.Customers')); ?></a></li>
 
-        <li><a href=""><i class="dripicons-card"></i> <?php echo e(trans('file.Payments')); ?></a></li>
+        <li><a href="<?php echo e(route('payment.index')); ?>"><i class="dripicons-card"></i> <?php echo e(trans('file.Payments')); ?></a></li>
         <li><a href="#package" aria-expanded="false" data-toggle="collapse"> <i class="dripicons-archive"></i><span><?php echo e(trans('file.Package')); ?></span><span></a>
             <ul id="package" class="collapse list-unstyled ">
                 <li id="package-list-menu"><a href="<?php echo e(route('package.index')); ?>"><?php echo e(trans('file.Package List')); ?></a></li>

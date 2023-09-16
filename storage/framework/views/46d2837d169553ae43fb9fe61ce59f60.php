@@ -22,32 +22,12 @@
                     <li class="nav-item">
                         <a class="dropdown-header-name" style="padding-right: 10px" href="<?php echo e(route('landingPage.index')); ?>" target="_blank" title="View Website"><i class="dripicons-preview"></i></a>
                     </li>
-                    <li class="nav-item"><a id="btnFullscreen" data-toggle="tooltip"
-                                            title="<?php echo e(__('Full Screen')); ?>"><i class="dripicons-expand"></i></a></li>
-                    <li class="nav-item">
-                        <a rel="nofollow" id="notify-btn" href="#" class="nav-link dropdown-item" data-toggle="tooltip"
-                           title="<?php echo e(__('Notifications')); ?>">
-                            <i class="dripicons-bell"></i>
-                            
-                            <span class="badge badge-danger">
-                                5
-                            </span>
-                        </a>
-                        <ul class="right-sidebar">
-                            <li class="header">
-                                <span class="pull-right"><a href=""><?php echo e(__('Clear All')); ?></a></span>
-                                <span class="pull-left"><a href=""><?php echo e(__('See All')); ?></a></span>
-                            </li>
-                            
-                        </ul>
-                    </li>
+                    <li class="nav-item"><a id="btnFullscreen" data-toggle="tooltip" title="<?php echo e(__('Full Screen')); ?>"><i class="dripicons-expand"></i></a></li>
                     <li class="nav-item">
                         <a rel="nofollow" href="#" class="nav-link dropdown-item" data-toggle="tooltip"
                            title="<?php echo e(__('Language')); ?>">
                             <i class="dripicons-web">
-                                
-                                <?php echo e(Session::has('TempSuperAdminLocale') ? strtoupper(Session::get('TempSuperAdminLocale')) : strtoupper(Session::has('DefaultSuperAdminLocale'))); ?>
-
+                                <?php echo e(Session::has('TempSuperAdminLocale') ? strtoupper(Session::get('TempSuperAdminLocale')) : strtoupper(Session::get('DefaultSuperAdminLocale'))); ?>
 
                             </i>
                         </a>
@@ -68,15 +48,6 @@
                         </ul>
                     </li>
 
-                
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" target="_blank" data-toggle="tooltip"
-                           title="<?php echo e(__('Documentation')); ?>">
-                            <i class="dripicons-information"></i>
-                        </a>
-                    </li>
-                
-
                     <li class="nav-item">
                         <a rel="nofollow" href="#" class="nav-link dropdown-item">
                             
@@ -93,24 +64,6 @@
 
                                 </a>
                             </li>
-                            
-                                <li id="empty_database">
-                                    <a href="#">
-                                        <i class="dripicons-stack"></i>
-                                        <?php echo e(__('Empty Database')); ?>
-
-                                    </a>
-                                </li>
-                            
-                            
-                                <li id="export_database">
-                                    <a href="#">
-                                        <i class="dripicons-cloud-download"></i>
-                                        <?php echo e(__('Export Database')); ?>
-
-                                    </a>
-                                </li>
-                            
                             <li>
                                 <form id="logout-form" action="<?php echo e(route('landlord.logout')); ?>" method="POST">
                                     <?php echo csrf_field(); ?>
