@@ -5,6 +5,7 @@ namespace App\Payment;
 
 use App\Contracts\PaybleContract;
 use App\Models\Landlord\Payment;
+use App\Models\Tenant;
 use Exception;
 use Illuminate\Support\Facades\Session;
 
@@ -76,7 +77,9 @@ class PaystackPayment implements PaybleContract
                 ]);
             }
         } else {
-
+            Payment::find(Session::get('paymentId'))->delete();
+            Tenant::find(Session::get('tenantId'))->delete();
+            
             throw new Exception("Something Wrong ! Please try again later.");
         }
     }

@@ -119,6 +119,7 @@ class PaymentController extends Controller
             DB::commit();
 
             if ($paymentMethod === 'paystack' && Session::has('authorization_url')) {
+                Session::put('tenantId', $tenantId);
                 Session::put('domain', $tenant->domainInfo->domain);
                 return redirect(Session::get('authorization_url'));
             }
@@ -179,7 +180,7 @@ class PaymentController extends Controller
             $payment = $paymentService->initialize('paystack');
             $payment->paymentCallback();
 
-            Session::forget(['paymentId','reference','authorization_url']);
+            Session::forget(['paymentId','reference','authorization_url','tenantId']);
 
             return redirect()->route('payment.success', Session::get('domain'));
         }
