@@ -6,39 +6,42 @@ namespace App\Payment;
 use App\Contracts\PaybleContract;
 use App\Models\Landlord\Payment;
 use Exception;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PaystackPayment implements PaybleContract
 {
     public function pay($tenantRequestData, $paymentRequestData)
     {
-
-        // $request->email        = 'irfanchowdhury80@gmail.com';
-        // $request->amount       = $request->total_amount * 100;
-        // $request->currency     = env('PAYSTACK_CURRENCY');
-        // $request->callback_url = route('payment.pay.callback');
         $totalAmount = request()->session()->get('price');
-
         $data= [
             'reference' => date('Ymdhis'),
             'amount' => $totalAmount * 100,
             'currency' => 'NGN',
             'email' => 'user@mail.com',
-            // 'callback_url' => route('payment.success'),
+            'callback_url' => url("/payment/paystack/pay/callback"),
         ];
         $objectData = (object)$data;
 
         $pay = json_decode($this->initiatePayment($objectData));
-        if ($pay) {
-            if ($pay->status) {
-                return redirect($pay->data->authorization_url);
-            } else {
-                // return $pay->message;
-                throw new Exception($pay->message);
-            }
+        if ($pay->status) {
+            $payment = Payment::create([
+                'package_id' => $tenantRequestData->package_id,
+                'amount' => $totalAmount,
+                'payment_method' => $tenantRequestData->payment_method,
+                'status' => 'pending',
+                'subscription_type' => $tenantRequestData->subscription_type,
+                'data' => json_encode($paymentRequestData)
+            ]);
+            Session::put('paymentId', $payment->id);
+            Session::put('reference', $pay->data->reference);
+            Session::put('authorization_url', $pay->data->authorization_url);
+
+            return $payment;
+
         } else {
-            throw new Exception("Something went wrong");
+            throw new Exception($pay->message);
         }
+
     }
 
     protected function initiatePayment($objectData)
@@ -64,19 +67,17 @@ class PaystackPayment implements PaybleContract
 
     public function paymentCallback()
     {
-        return $response = json_decode($this->verifyPayment(request('reference')));
-        if ($response) {
-            $reference  = $response->data->reference;
-            if ($response->status=='success') {
-                $payment_id = $response->data->id;
-                // return $this->updateOrderAfterPaymentComplete($reference, $payment_id);
-            } else {
-                // $this->undoTableDataAndRestoreProductQuantity($reference);
-                return redirect('order_cancel')->withError($response->message);
+        $response = json_decode($this->verifyPayment(request('reference')));
+        if (isset($response) && $response->status) {
+            if(Session::has('paymentId')) {
+                Payment::where('id', Session::get('paymentId'))->update([
+                    'status' => 'paid',
+                    'data' => json_encode($response)
+                ]);
             }
         } else {
-            // $this->latestOrderCancel();
-            return redirect('order_cancel')->withError("Something went wrong");
+
+            throw new Exception("Something Wrong ! Please try again later.");
         }
     }
 

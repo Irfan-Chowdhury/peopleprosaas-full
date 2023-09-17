@@ -107,19 +107,21 @@ class PaymentController extends Controller
             $paymentRequestData = $request->except('tenantRequestData');
             $tenantRequestData = json_decode(str_replace('&quot;', '"', $request->tenantRequestData));
 
-            return $payment = self::paymentPayConfirm($paymentMethod, $tenantRequestData, $paymentRequestData);
-
+            $payment = self::paymentPayConfirm($paymentMethod, $tenantRequestData, $paymentRequestData);
             if(isset($tenantRequestData->is_new_tenant) && (int) $tenantRequestData->is_new_tenant ===1) {
                 $tenant = $this->tenantService->NewTenantGenerate($tenantRequestData);
             } else {
                 $tenant = self::existingTenantHandle($tenantRequestData);
             }
-            // $tenantId = isset($tenant) ? $tenant->id : $tenantRequestData->tenant_id;
             $tenantId = $tenant->id;
             self::landlordHandle($payment, $tenantId);
 
-
             DB::commit();
+
+            if ($paymentMethod === 'paystack' && Session::has('authorization_url')) {
+                Session::put('domain', $tenant->domainInfo->domain);
+                return redirect(Session::get('authorization_url'));
+            }
 
             $result =  Alert::successMessage('Data Created Successfully');
             if (request()->ajax()) {
@@ -169,14 +171,22 @@ class PaymentController extends Controller
         $socials = $this->socialContract->getOrderByPosition(); //Common
         $pages =  $this->pageContract->getAllByLanguageId($this->languageId); //Common
         return view('landlord.public-section.pages.payment.payment_success', compact('socials','pages','domain'));
-
     }
 
+    public function handleGatewayCallback(PaymentService $paymentService)
+    {
+        try {
+            $payment = $paymentService->initialize('paystack');
+            $payment->paymentCallback();
 
-    public function handleGatewayCallback(PaymentService $paymentService){
-        $payment = $paymentService->initialize('paystack');
-        return $payment->paymentCallback();
+            Session::forget(['paymentId','reference','authorization_url']);
+
+            return redirect()->route('payment.success', Session::get('domain'));
+        }
+        catch (Exception $e) {
+
+            return redirect()->back()->withErrors(['errors' => [$e->getMessage()]]);
+        }
+
     }
-
-
 }
