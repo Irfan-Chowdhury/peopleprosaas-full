@@ -93,6 +93,8 @@ class PaymentController extends Controller
                 return view('landlord.public-section.pages.payment.paypal',compact('socials', 'pages','paymentMethod','tenantRequestData','totalAmount'));
             case 'razorpay':
                 return view('landlord.public-section.pages.payment.razorpay',compact('socials', 'pages','paymentMethod','tenantRequestData','totalAmount'));
+            case 'paystack':
+                return view('landlord.public-section.pages.payment.paystack',compact('socials', 'pages','paymentMethod','tenantRequestData','totalAmount'));
             default:
                 break;
         }
@@ -106,6 +108,7 @@ class PaymentController extends Controller
             $tenantRequestData = json_decode(str_replace('&quot;', '"', $request->tenantRequestData));
 
             $payment = self::paymentPayConfirm($paymentMethod, $tenantRequestData, $paymentRequestData);
+
             if(isset($tenantRequestData->is_new_tenant) && (int) $tenantRequestData->is_new_tenant ===1) {
                 $tenant = $this->tenantService->NewTenantGenerate($tenantRequestData);
             } else {
