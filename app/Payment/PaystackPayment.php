@@ -6,12 +6,13 @@ namespace App\Payment;
 use App\Contracts\PaybleContract;
 use App\Models\Landlord\Payment;
 use Exception;
+use Illuminate\Http\Request;
 
 class PaystackPayment implements PaybleContract
 {
     public function pay($tenantRequestData, $paymentRequestData)
     {
-        // $request->reference    = 12345;
+
         // $request->email        = 'irfanchowdhury80@gmail.com';
         // $request->amount       = $request->total_amount * 100;
         // $request->currency     = env('PAYSTACK_CURRENCY');
@@ -38,17 +39,6 @@ class PaystackPayment implements PaybleContract
         } else {
             throw new Exception("Something went wrong");
         }
-
-        // $totalAmount = request()->session()->get('price');
-        // $payment = Payment::create([
-        //     'package_id' => $tenantRequestData->package_id,
-        //     'amount' => $totalAmount,
-        //     'payment_method' => $tenantRequestData->payment_method,
-        //     'status' => 'paid',
-        //     'subscription_type' => $tenantRequestData->subscription_type,
-        //     'data' => json_encode($paymentRequestData)
-        // ]);
-        // return $payment;
     }
 
     protected function initiatePayment($objectData)
@@ -74,7 +64,7 @@ class PaystackPayment implements PaybleContract
 
     public function paymentCallback()
     {
-        $response = json_decode($this->verifyPayment(request('reference')));
+        return $response = json_decode($this->verifyPayment(request('reference')));
         if ($response) {
             $reference  = $response->data->reference;
             if ($response->status=='success') {

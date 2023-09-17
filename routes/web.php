@@ -63,6 +63,8 @@ Route::middleware(['setPublicLocale'])->group(function () {
         Route::post('payment/{paymentMethod}/pay/process', 'paymentProcessWithTenantAndLandlord')->name('payment.pay.process');
         Route::post('payment/{paymentMethod}/pay/cancel', 'paymentPayCancel')->name('payment.pay.cancel');
         Route::get('payment-success/{domain}', 'paymentSuccess')->name('payment.success');
+
+        Route::get('/payment/paystack/pay/callback', 'handleGatewayCallback')->name('payment.paystack.pay.callback');
     });
 });
 

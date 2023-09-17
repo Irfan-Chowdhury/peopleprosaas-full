@@ -107,7 +107,7 @@ class PaymentController extends Controller
             $paymentRequestData = $request->except('tenantRequestData');
             $tenantRequestData = json_decode(str_replace('&quot;', '"', $request->tenantRequestData));
 
-            $payment = self::paymentPayConfirm($paymentMethod, $tenantRequestData, $paymentRequestData);
+            return $payment = self::paymentPayConfirm($paymentMethod, $tenantRequestData, $paymentRequestData);
 
             if(isset($tenantRequestData->is_new_tenant) && (int) $tenantRequestData->is_new_tenant ===1) {
                 $tenant = $this->tenantService->NewTenantGenerate($tenantRequestData);
@@ -170,6 +170,12 @@ class PaymentController extends Controller
         $pages =  $this->pageContract->getAllByLanguageId($this->languageId); //Common
         return view('landlord.public-section.pages.payment.payment_success', compact('socials','pages','domain'));
 
+    }
+
+
+    public function handleGatewayCallback(PaymentService $paymentService){
+        $payment = $paymentService->initialize('paystack');
+        return $payment->paymentCallback();
     }
 
 
