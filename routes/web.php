@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\Landlord\ClientAutoUpdateController;
+use App\Http\Controllers\Landlord\DeveloperSectionController;
 use App\Http\Controllers\Landlord\AdminController;
 use App\Http\Controllers\Landlord\BlogController;
 use App\Http\Controllers\Landlord\LandingPageController;
@@ -75,6 +77,15 @@ Route::post('/super-admin/logout', [AdminController::class, 'logout'])->name('la
 
 Route::middleware(['web','auth','setSuperAdminLocale'])->group(function () {
     Route::prefix('super-admin')->group(function () {
+
+        Route::controller(AdminController::class)->group(function () {
+            Route::prefix('profile')->group(function () {
+                Route::get('/', 'profile')->name('admin.profile');
+                Route::post('/{user}', 'profileUpdate')->name('admin.profile_update');
+                Route::post('/{user}/password', 'passwordUpdate')->name('admin.password_update');
+            });
+        });
+
 
         Route::get('dashboard',[DashboardController::class, 'index'])->name('landlord.dashboard');
 
@@ -233,6 +244,24 @@ Route::middleware(['web','auth','setSuperAdminLocale'])->group(function () {
                 Route::post('/analytic', 'analyticSettingManage')->name('setting.analytic.manage')->middleware('demoCheck');
                 Route::post('/seo', 'seoSettingManage')->name('setting.seo.manage')->middleware('demoCheck');
             });
+        });
+
+        // Auto Update
+        Route::prefix('developer-section')->group(function () {
+            Route::controller(DeveloperSectionController::class)->group(function () {
+                Route::get('/', 'index')->name('admin.developer-section.index');
+                Route::post('/', 'submit')->name('admin.developer-section.submit');
+                Route::post('/bug-update-setting', 'bugUpdateSetting')->name('admin.bug-update-setting.submit');
+                Route::post('/version-upgrade-setting', 'versionUpgradeSetting')->name('admin.version-upgrade-setting.submit');
+            });
+        });
+
+        Route::controller(ClientAutoUpdateController::class)->group(function () {
+            Route::get('/new-release', 'newVersionReleasePage')->name('new-release');
+            Route::get('/bugs', 'bugUpdatePage')->name('bug-update-page');
+            // Action on Client server
+            Route::post('version-upgrade', 'versionUpgrade')->name('version-upgrade');
+            Route::post('bug-update', 'bugUpdate')->name('bug-update');
         });
     });
 });

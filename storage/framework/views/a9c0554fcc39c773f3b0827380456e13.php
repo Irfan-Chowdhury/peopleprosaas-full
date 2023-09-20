@@ -7,6 +7,15 @@
     </div>
 <?php endif; ?>
 
+<?php if(session()->has('msg')): ?>
+    <div class="alert alert-<?php echo e(session('type')); ?> alert-dismissible fade show text-center" role="alert">
+        <strong><?php echo e(session('msg')); ?></strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
+
 
 <?php if($errors->any()): ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert" >

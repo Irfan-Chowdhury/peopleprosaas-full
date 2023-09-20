@@ -38,6 +38,13 @@
         </li>
         <li><a href="<?php echo e(route('setting.general.index')); ?>"><i class="dripicons-gear"></i> <?php echo e(trans('file.Settings')); ?></a></li>
         <li><a target="_blank" href=""> <i class="dripicons-information"></i><span><?php echo e(trans('file.Documentation')); ?></span></a></li>
+
+        <?php if(config('auto_update.product_mode') === "DEVELOPER"): ?>
+            <li class="<?php echo e((request()->is('developer-section*')) ? 'active' : ''); ?>"><a
+                href="<?php echo e(route('admin.developer-section.index')); ?>">
+                <i class="dripicons-calendar"></i><span> <?php echo e(__('Auto Update Setting')); ?></span></a>
+            </li>
+        <?php endif; ?>
     </ul>
   </nav>
 <?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/partials/sidebar.blade.php ENDPATH**/ ?>

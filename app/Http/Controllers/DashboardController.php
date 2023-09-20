@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Facades\Utility;
 use App\Models\Announcement;
 use App\Models\Attendance;
 use App\Models\Award;
@@ -45,6 +46,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Throwable;
 // use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\File;
 
 class DashboardController extends Controller {
 
@@ -71,14 +73,9 @@ class DashboardController extends Controller {
 
 	public function index()
 	{
-        // DB::table('permissions')->delete();
-        // $data= $this->testApiSAAS()->permissions;
-        // $permissions = json_decode($data, true);
-        // DB::table('permissions')->insert($permissions);
-
-        $autoUpdateData = $this->general();
-        $alertVersionUpgradeEnable = $autoUpdateData['alertVersionUpgradeEnable'];
-        $alertBugEnable =  $autoUpdateData['alertBugEnable'];
+        // $autoUpdateData = $this->general();
+        // $alertVersionUpgradeEnable = $autoUpdateData['alertVersionUpgradeEnable'];
+        // $alertBugEnable =  $autoUpdateData['alertBugEnable'];
 
 		$employees = Employee::with('department:id,department_name', 'designation:id,designation_name')
 			->select('id', 'department_id', 'designation_id', 'is_active')
@@ -226,8 +223,7 @@ class DashboardController extends Controller {
 			'payslips', 'companies', 'leave_types',
 			'training_types', 'trainers', 'travel_types', 'clients', 'projects',
 			'project_count_array', 'project_name_array', 'completed_projects',
-			'announcements', 'ticket_count', 'per_month', 'per_month_payment', 'months', 'this_month_payment', 'last_six_month_payment',
-            'alertBugEnable','alertVersionUpgradeEnable'
+			'announcements', 'ticket_count', 'per_month', 'per_month_payment', 'months', 'this_month_payment', 'last_six_month_payment'
         ));
 	}
 
@@ -295,13 +291,16 @@ class DashboardController extends Controller {
 
 		if (isset($photo))
 		{
-			$new_user = $request->username;
-			if ($photo->isValid())
-			{
-				$file_name = preg_replace('/\s+/', '', $new_user) . '_' . time() . '.' . $photo->getClientOriginalExtension();
-				$photo->storeAs('profile_photos', $file_name);
-				$user->profile_photo = $file_name;
-			}
+			// $new_user = $request->username;
+			// if ($photo->isValid())
+			// {
+			// 	$file_name = preg_replace('/\s+/', '', $new_user) . '_' . time() . '.' . $photo->getClientOriginalExtension();
+			// 	$photo->storeAs('profile_photos', $file_name);
+			// 	$user->profile_photo = $file_name;
+			// }
+            //
+            $imageName = Utility::imageFileStore($photo, 'tenants/'.tenant('id').'/uploads/profile_photos/', 300, 200);
+            $user->profile_photo = $imageName;
 		}
 
 		$username = strtolower(trim($request->username));

@@ -50,15 +50,15 @@
 
                     <li class="nav-item">
                         <a rel="nofollow" href="#" class="nav-link dropdown-item">
-                            
-
-                            
-                            <img class="profile-photo sm mr-1" src="<?php echo e(asset('uploads/profile_photos/avatar.jpg')); ?>">
-                             <span> Admin</span>
+                            <?php if(isset(auth()->user()->profile_photo)): ?>
+                                <img class="profile-photo sm mr-1" src="<?php echo e(asset('landlord/images/profile/'.auth()->user()->profile_photo)); ?>">
+                            <?php else: ?>
+                                <img class="profile-photo sm mr-1" src="<?php echo e(asset('uploads/profile_photos/avatar.jpg')); ?>"><span> Admin</span>
+                            <?php endif; ?>
                         </a>
                         <ul class="right-sidebar">
                             <li>
-                                <a href="#">
+                                <a href="<?php echo e(route('admin.profile')); ?>">
                                     <i class="dripicons-user"></i>
                                     <?php echo e(trans('file.Profile')); ?>
 
@@ -76,6 +76,5 @@
             </div>
         </div>
     </nav>
-    
 </header>
 <?php /**PATH /var/www/peopleprosaas/resources/views/landlord/super-admin/partials/header.blade.php ENDPATH**/ ?>
