@@ -75,7 +75,9 @@ Experience the next evolution in organizational management with PeoplePro, a cut
 
 2. Add the following line to the hosts file
     ```bash
-    127.0.0.1 peopleprosjaas.test
+    127.0.0.1 peopleprossaas.test
+    127.0.0.1 foo.peopleprossaas.test
+    127.0.0.1 acme.peopleprossaas.test
     ```
 3. Configure the Virtual Host (Apache)
     ```bash
@@ -86,15 +88,41 @@ Experience the next evolution in organizational management with PeoplePro, a cut
     <VirtualHost *:80>
         ServerName peoplepro.test
         DocumentRoot /path/to/your/laravel/project/public
-
         <Directory /path/to/your/laravel/project/public>
             Options Indexes FollowSymLinks
             AllowOverride All
             Require all granted
         </Directory>
-
         ErrorLog ${APACHE_LOG_DIR}/peoplepro.test_error.log
         CustomLog ${APACHE_LOG_DIR}/peoplepro.test_access.log combined
+    </VirtualHost>
+
+
+    <VirtualHost *:80>
+        ServerName foo.peopleprosaas.test
+        ServerAlias www.foo.peopleprosaas.test
+        DocumentRoot /var/www/peopleprosaas/public
+        <Directory /var/www/peopleprosaas/public>
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            Require all granted
+        </Directory>
+        ErrorLog ${APACHE_LOG_DIR}/peopleprosaas-error.log
+        CustomLog ${APACHE_LOG_DIR}/peopleprosaas-access.log combined
+    </VirtualHost>
+
+
+    <VirtualHost *:80>
+        ServerName acme.peopleprosaas.test
+        ServerAlias www.acme.peopleprosaas.test
+        DocumentRoot /var/www/peopleprosaas/public
+        <Directory /var/www/peopleprosaas/public>
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            Require all granted
+        </Directory>
+        ErrorLog ${APACHE_LOG_DIR}/peopleprosaas-error.log
+        CustomLog ${APACHE_LOG_DIR}/peopleprosaas-access.log combined
     </VirtualHost>
     ```
 
