@@ -66,16 +66,18 @@ class UtilityService
         return $imageName;
     }
 
+    // public function imageFileStore(object|null $image, string $directory, int $width, int $height) : string|null
     public function imageFileStore($image, $directory, $width, $height) : string|null
     {
-        $imageName = null;
-        if ($image) {
+        if (isset($image)) {
             $imageName = Str::random(10). '.' .$image->getClientOriginalExtension();
             $location  = public_path($directory.$imageName);
             Image::make($image)->resize($width, $height)->save($location);
+
+            return $imageName;
         }
 
-        return $imageName;
+        return null;
     }
 
     public function directoryCleanAndImageStore($image, $directory, $width, $height) : string|null
@@ -95,13 +97,25 @@ class UtilityService
         return $imageName;
     }
 
-    public function fileDelete($filePath, $fileName) : void
+    public function fileUploadHandle(object|null $file, string $directory, string $name): string | null
+    {
+		if (isset($file)) {
+			if ($file->isValid()) {
+				$fullFileName = preg_replace('/\s+/', '', $name) . '_' . time() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path($directory), $fullFileName);
+
+				return $fullFileName;
+			}
+		}
+        return null;
+    }
+
+    public function fileDelete(string $filePath, string|null $fileName) : void
     {
         if ($fileName && !config('database.connections.peopleprosaas_landlord') && File::exists(public_path().$filePath.$fileName))
            File::delete(public_path().$filePath.$fileName);
         else if($fileName && File::exists($filePath.$fileName))
            File::delete($filePath.$fileName);
-
 
         // if($fileName && !config('database.connections.peopleprosaas_landlord') && file_exists('public/'.$filePath.$fileName))
         //     unlink('public/'.$filePath.$fileName);

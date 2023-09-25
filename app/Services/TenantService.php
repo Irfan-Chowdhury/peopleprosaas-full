@@ -147,19 +147,19 @@ class TenantService
             public_path('tenants/'.$tenantId.'/logo'), // no link found
             public_path('tenants/'.$tenantId.'/sample_file'), //Done
             public_path('tenants/'.$tenantId.'/uploads/asset_file'),
-            public_path('tenants/'.$tenantId.'/uploads/award_photos'), // -> File Delete During Update, Delete
-            public_path('tenants/'.$tenantId.'/uploads/candidate_cv'),
-            public_path('tenants/'.$tenantId.'/uploads/company_logo'),
-            public_path('tenants/'.$tenantId.'/uploads/document_documents'),
-            public_path('tenants/'.$tenantId.'/uploads/file_manager'),
-            public_path('tenants/'.$tenantId.'/uploads/immigration_documents'),
-            public_path('tenants/'.$tenantId.'/uploads/official_documents'),
+            public_path('tenants/'.$tenantId.'/uploads/award_photos'), // Done -> File Delete During Update, Delete
+            public_path('tenants/'.$tenantId.'/uploads/candidate_cv'), // Done
+            public_path('tenants/'.$tenantId.'/uploads/company_logo'), // Done
+            public_path('tenants/'.$tenantId.'/uploads/employee_documents'), // Done
+            public_path('tenants/'.$tenantId.'/uploads/file_manager'), // Done
+            public_path('tenants/'.$tenantId.'/uploads/immigration_documents'), //Done
+            public_path('tenants/'.$tenantId.'/uploads/official_documents'), //Done
             public_path('tenants/'.$tenantId.'/uploads/profile_photos'), //Done
-            public_path('tenants/'.$tenantId.'/uploads/project_bug_attachments'),
-            public_path('tenants/'.$tenantId.'/uploads/project_discussion_attachments'),
-            public_path('tenants/'.$tenantId.'/uploads/project_file_attachments'),
-            public_path('tenants/'.$tenantId.'/uploads/task_file_attachments'),
-            public_path('tenants/'.$tenantId.'/uploads/ticket_attachments')
+            public_path('tenants/'.$tenantId.'/uploads/project_bug_attachments'), //Done
+            public_path('tenants/'.$tenantId.'/uploads/project_discussion_attachments'), //Done
+            public_path('tenants/'.$tenantId.'/uploads/project_file_attachments'), //Done
+            public_path('tenants/'.$tenantId.'/uploads/task_file_attachments'), //Done
+            public_path('tenants/'.$tenantId.'/uploads/ticket_attachments') //Done
         ];
 
         foreach($data as $item) {
