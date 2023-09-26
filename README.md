@@ -619,12 +619,31 @@ public function createDatabase(TenantWithDatabase $tenant): bool
 }
 ```
 
+## .cpanel.yml file create for cPanel
+create file name -  `.cpanel.yml` and 
+then write the code - 
+
+```php
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/smarthishab/public_html/
+    - /bin/cp * $DEPLOYPATH
+```
+Here `smarthishab` is the cPanel user name. Just replace with your username.
+
+
+
 ## Credits
 - Author : [LION CODERS](https://lion-coders.com/)
 - Template Design : [Tarik Iqbal](https://www.linkedin.com/in/tarik-iqbal-51046b34/)
 - Backend Developer : [Irfan Chowdhury](https://github.com/Irfan-Chowdhury)
 - Reference : [Tenancy for Laravel](https://tenancyforlaravel.com/)
 - Guided by : [Ashfaqur Rahman](https://github.com/ashfaqdev)
+- cPanel :
+    - Youtube : [Deploy GitHub Public & Private Repositories to any Shared Hosting (cPanel & hPanel)](https://www.youtube.com/watch?v=4LmTjKuvpYs&t=1027s) 
+    - [cPanel Documentation](https://docs.cpanel.net/cpanel/files/git-version-control/)
+    - [Setup SSH Key with cPanel](https://docs.cpanel.net/knowledge-base/web-services/guide-to-git-set-up-access-to-private-repositories/) 
 
 
 
