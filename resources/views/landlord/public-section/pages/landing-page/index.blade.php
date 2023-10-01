@@ -78,27 +78,29 @@
     </section>
 
 
-    <section id="features" class="">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 offset-md-3 text-center mb-5">
-                    <h2 class="heading">{{$module->heading}}</h2>
-                    <p class="lead mb-5">{{$module->sub_heading}}</p>
-                </div>
-                @foreach($module->moduleDetails as $module)
-                <div class="col-md-4">
-                    <div class="feature">
-                        <div class="icon m-auto mb-3">
-                            <i class="{{$module->icon}}"></i>
-                        </div>
-                        <h3>{{$module->name}}</h3>
-                        <p>{{$module->description}}</p>
+    @isset($module)
+        <section id="features" class="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 offset-md-3 text-center mb-5">
+                        <h2 class="heading">{{$module->heading}}</h2>
+                        <p class="lead mb-5">{{$module->sub_heading}}</p>
                     </div>
+                    @foreach($module->moduleDetails as $module)
+                    <div class="col-md-4">
+                        <div class="feature">
+                            <div class="icon m-auto mb-3">
+                                <i class="{{$module->icon}}"></i>
+                            </div>
+                            <h3>{{$module->name}}</h3>
+                            <p>{{$module->description}}</p>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
-                @endforeach
             </div>
-        </div>
-    </section>
+        </section>
+    @endisset
 
     @if(count($features) > 0)
     <section class="grey-bg">

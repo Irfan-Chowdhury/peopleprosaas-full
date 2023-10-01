@@ -48,13 +48,13 @@
 
 <body>
 
-    @if(!env('USER_VERIFIED'))
+    @if(env('PRODUCT_MODE')==='DEMO')
         <div class="notice">
             <a target="_blank" href="https://lion-coders.com/software/salepro-saas">Buy Salepro SAAS with full source code</a>
         </div>
     @endif
 
-    @if(env('USER_VERIFIED'))
+    @if(env('PRODUCT_MODE')==='DEMO')
         <div style="position:fixed;right:0;top:200px;z-index:99">
             <span id="light-theme" class="btn btn-light d-block"><i class="fa fa-sun-o"></i></span>
             <span id="dark-theme" class="btn btn-dark d-block"><i class="fa fa-moon-o"></i></span>
@@ -62,110 +62,18 @@
     @endif
 
 
+    @include('landlord.public-section.partials.header')
 
-    <header id="header-middle" class="header-middle">
-
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2 col-7">
-                    <div class="mobile-menu-icon d-lg-none"><i class="ti-menu"></i></div>
-                    <div class="logo">
-                        <a href="{{url('/')}}">
-                            <img class="lazy" src="{{asset('landlord/images/logo/'. $generalSetting->site_logo)}}">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-6 d-none d-lg-flex d-xl-flex middle-column justify-content-center">
-                    <div id="main-menu" class="main-menu">
-                        <ul class="pl-0">
-                            <li><a href="{{url('/')}}#features">Features</a></li>
-
-                            <li><a href="{{url('/')}}#faq">FAQ</a></li>
-
-                            <li><a href="{{url('/')}}#packages">Pricing</a></li>
-
-                            <li><a href="{{url('/blogs')}}">Blogs</a></li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-5" style="text-align:right">
-                    <ul class="offset-menu-wrapper p-0 d-none d-lg-flex d-xl-flex">
-                        <li class="has-dropdown">
-                            <i class="fa fa-globe" aria-hidden="true"></i> English
-                            <div class="dropdown">
-                                @foreach($languages as $language)
-                                    <a href="#">{{$language->name}}</a>
-                                @endforeach
-                            </div>
-                        </li>
-
-                        <li>
-                            <a class="button style2" href="#packages">Try Now</a>
-                        </li>
-                    </ul>
-                    <a class="button style2 d-lg-none" href="#packages">Try Now</a>
-                </div>
-            </div>
-        </div>
-        <nav id="mobile-nav"></nav>
-    </header>
     @yield('public-content')
 
-
-
-    <!-- Footer section Starts-->
-
-    {{-- <div class="footer-wrapper pt-0">
-        <div class="container">
-            <div class="footer-links">
-                @foreach($pages as $key => $page)
-                    <a href="{{url('pages/'.$page->slug)}}">{{$page->title}} &nbsp; @if($key !== (count($pages)-1)) | @endif</a>
-                @endforeach
-            </div>
-            <div class="footer-bottom">
-                <ul class="footer-social p-0 pt-3 pb-3">
-                    @foreach($socials as $social)
-                    <li>
-                        <a href="{{$social->link}}"><i class="{{$social->icon}}"></i></a>
-                    </li>
-                    @endforeach
-                </ul>
-                <p class="copyright">&copy; {{$general_setting->site_title}} {{date_format(date_create(date('Y-m-d')), $general_setting->date_format)}}. All rights reserved</p>
-            </div>
-        </div>
-    </div> --}}
-
-    <!-- Footer section Starts-->
-    <div class="footer-wrapper">
-        <div class="container">
-            @if (env('PRODUCT_MODE')==='DEMO')
-                <div class="mt-5 mb-5 cta">
-                    <h3 class="h1 mb-5">Start your software subscription business</h3>
-                    <a class="button lg style2" href="https://lion-coders.com/software/salepro-saas-pos-inventory-saas-php-script">Get SalePro SAAS</a>
-                </div>
-                <hr>
-            @endif
-            <div class="d-flex justify-content-between mt-5">
-                <div class="footer-links">
-                    @foreach($pages as $page)
-                    <a href="{{url('page/'.$page->slug)}}">{{$page->title}}</a>
-                    @endforeach
-                </div>
-                <div class="footer-bottom">
-                    <p class="copyright">&copy; {{$generalSetting->site_title}} {{date('Y')}}. All rights reserved</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Footer section Ends-->
+    @include('landlord.public-section.partials.footer')
 
 
     <!--Scroll to top starts-->
     <a href="#" id="scrolltotop"><i class="ti-arrow-up"></i></a>
     <!--Scroll to top ends-->
-
     <div class="body__overlay"></div>
+
 
     <!--Plugin js -->
     <script src="{{ asset('landlord/js/plugin.js')}}"></script>
@@ -314,7 +222,7 @@
     </script>
     @endif
 
-    @if(!env('USER_VERIFIED'))
+    @if(env('PRODUCT_MODE')==='DEMO')
         <script>
             $('#light-theme').on('click',function(){
                 var css = $('#switch-style').attr('href');

@@ -23,6 +23,7 @@ use App\Models\Tenant;
 use App\Services\SocialService;
 use Exception;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Spatie\Permission\Models\Role;
