@@ -525,20 +525,23 @@
                     </ul>
                 </div>
                 <div class="col-md-6 offset-md-1">
-                    <form action="" method="POST"  class="form contact-form">
+                    <form action="{{ route('landingPage.contactUsSubmit') }}" method="POST"  class="form contact-form">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
-                                <input class="form-control" type="text" name="name"  placeholder="name..." required>
+                                <input class="form-control" type="text" name="name"  placeholder="Name..." >
                             </div>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" name="phone"  placeholder="contact number..." required>
+                                <input class="form-control" type="text" name="phone"  placeholder="Contact Number..." >
                             </div>
                             <div class="col-md-12">
-                                <input class="form-control" type="text" name="email"  placeholder="email..." required>
+                                <input class="form-control" type="email" name="public_email"  placeholder="Your Email..." >
                             </div>
                             <div class="col-md-12">
-                                <textarea class="form-control" name="message"  placeholder="your message" required></textarea>
+                                <input class="form-control" type="text" name="subject"  placeholder="Subject..." >
+                            </div>
+                            <div class="col-md-12">
+                                <textarea class="form-control" name="message"  placeholder="Your Message" ></textarea>
                             </div>
 
                             <div class="col-12 mt-3">

@@ -52,6 +52,7 @@ Route::middleware(['setPublicLocale'])->group(function () {
         Route::get('/blogs', 'blog')->name('landingPage.blog');
         Route::get('/blogs/{slug}', 'blogDetail')->name('landingPage.blogDetail');
         Route::get('/pages/{slug}', 'pageDetails')->name('landingPage.pageDetail');
+        Route::post('/contact-us', 'contactUsSubmit')->name('landingPage.contactUsSubmit');
     });
 
     Route::controller(TenantController::class)->group(function () {
