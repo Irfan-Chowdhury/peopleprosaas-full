@@ -88,11 +88,7 @@
     <script src="{{ asset('landlord/js/main.js')}}"></script>
 
 
-
-
-
     {{-- <script>
-
         $("div.alert").delay(3000).slideUp(800);
         var public_key = <?php echo json_encode($general_setting->stripe_public_key)?>;
         var active_payment_gateway = <?php echo json_encode($general_setting->active_payment_gateway)?>;
