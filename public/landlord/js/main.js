@@ -27,14 +27,6 @@
         $(document).ready(function(){
             $(".sticker").sticky({ topSpacing: 70 });
         });
-
-        // $(window).on('scroll', function() {
-        //     if ($(window).scrollTop() >= $(
-        //       '.middle').offset().top + $('.middle').
-        //         outerHeight() - window.innerHeight) {
-        //         $(".sticker").css('position','relative');
-        //     }
-        // });
     }
 
     if (isMobile) {

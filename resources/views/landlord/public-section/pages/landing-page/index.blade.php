@@ -154,168 +154,11 @@
     @endif
 
 
-
-    <!-- Pricing Plan -->
-    {{-- <section id="packages"class="grey-bg">
-        <div class="container">
-            <div class="col-md-6 offset-md-3 text-center mb-5">
-                <h2 class="heading">@lang('file.Pricing plans')</h2>
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="plan_type">
-                    <label class="custom-control-label" for="plan_type">@lang('file.Show Yearly Price')</label>
-                </div>
-            </div>
-            <div class="d-none d-lg-flex d-xl-flex justify-content-between mb-5">
-                @if ($packages)
-                    <div class="col">
-                        <div class="pricing">
-                            <div class="pricing-header">
-                                <span class="h3">@lang('file.Plan')</span>
-                            </div>
-                            <div class="price">
-                                <span class="h4">@lang('file.Price')</span>
-                            </div>
-                            <div class="pricing-details">
-                                <p class="bold">{{trans('file.Free Trial')}}</p>
-                                @foreach ($saasFeatures as $item)
-                                    @php
-                                        $delimiter = '-';
-                                        if (strpos($item, '_') !== false) {
-                                            $delimiter = '_';
-                                        }
-                                        $words = explode($delimiter, $item);
-                                        $convertedString = implode(' ', array_map('ucfirst', $words));
-                                    @endphp
-                                    <p class="bold">{{ $convertedString }}</p>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                    @foreach ($packages as $key => $package)
-                        <div class="col">
-                            <div class="pricing">
-                                <div class="pricing-header">
-                                    <span class="h3">{{ $package->name }}</span>
-                                </div>
-                                <div class="price">
-                                    <div>
-                                        <span class="h4"><span class="currency-code">{{$generalSetting->currency_code}}</span> <span class="package-price" data-monthly="{{$package->monthly_fee}}" data-yearly="{{$package->yearly_fee}}">{{$package->monthly_fee}}/month</span></span><br>
-                                        <button href="#customer-signup" data-free="{{$package->is_free_trial}}" data-package_id="{{$package->id}}" class="button style2 signup-btn">Sign Up</button>
-                                    </div>
-                                </div>
-                                <div class="pricing-details">
-
-                                    @if($package->is_free_trial)
-                                        <p>{{ $generalSetting->free_trial_limit }} days</p>
-                                    @else
-                                        <p>N/A</p>
-                                    @endif
-
-                                    @php
-                                        $selectedFeatures = explode(',',$package->features);
-                                    @endphp
-
-                                    @foreach ($saasFeatures as $item)
-                                        @if(in_array($item, $selectedFeatures))
-                                            <p><i class="ti-check"></i></p>
-                                        @else
-                                            <p><i class="ti-close"></i></p>
-                                        @endif
-                                    @endforeach
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                @endif
-            </div>
-        </div>
-    </section> --}}
-    {{-- <section id="customer-signup">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 offset-md-3 text-center mb-3">
-                    @if($tenantSignupDescription)
-                        <h2 class="regular">{{$tenantSignupDescription->heading}}</h2>
-                        <p class="lead mb-3">{{$tenantSignupDescription->sub_heading}}</p>
-                    @else
-                        <h2 class="regular">Customer Sign Up</h2>
-                        <p class="lead mb-3">Peoplepro is packed with all the features you'll need to seamlessly run your business</p>
-                    @endif
-                </div>
-            </div>
-            <div class="col-md-6 offset-md-3 mb-5">
-                <form action="{{ route('customer.signup') }}" method="POST" class="form row customer-signup-form">
-                    @csrf
-                    <input type="hidden" name="created_by" value="customer">
-                    <input type="hidden" name="is_free_trail">
-                    <input type="hidden" name="is_new_tenant" value="1">
-                    <input type="hidden" name="package_id">
-                    <input type="hidden" name="subscription_type" value="monthly">
-                    <input type="hidden" name="price">
-
-                    <div class="col-6">
-                        <input class="form-control" type="text" name="first_name"  placeholder="First Name..." required>
-                    </div>
-                    <div class="col-6">
-                        <input class="form-control" type="text" name="last_name"  placeholder="Last Name..." required>
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" type="number" name="contact_no"  placeholder="Contact Number..." required>
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" type="email" name="email"  placeholder="Email..." required>
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" type="text" name="username"  placeholder="Username..." required>
-                    </div>
-                    <div class="col-6">
-                        <input class="form-control" type="text" name="company_name"  placeholder="Company Name..." required>
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" type="password" name="password"  placeholder="Password..." required>
-                    </div>
-                    <div class="col-md-6">
-                        <input class="form-control" type="password" name="password_confirmation"  placeholder="Confirm Password..." required>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="input-group mt-3">
-                            <input required class="form-control mt-0" type="text" name="tenant"  placeholder="Subdomain..." aria-label="ubdomain..." aria-describedby="basic-addon2">
-                          <span class="input-group-text" id="basic-addon2">{{'@'.env('CENTRAL_DOMAIN')}}</span>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12 mt-3 d-none" id="paymentArea">
-                        <label><strong>{{ trans('file.Payment Method') }} <small class="text-danger">*</small> : &nbsp;&nbsp; </strong></label>
-                        @foreach ($paymentMethods as $item)
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="payment_method" value="{{ $item->payment_method }}">
-                                <label class="form-check-label">@lang("file.$item->title")</label>
-                            </div>
-                        @endforeach
-                    </div>
-
-                    <div class="col-md-12 mt-3">
-                        <div class="card-element" class="form-control">
-                        </div>
-                        <div class="card-errors" role="alert"></div>
-                    </div>
-                    <div class="col-12 mt-3">
-                        <p id="waiting-msg mb-3"></p>
-                        <input id="submitBtn" type="submit" class="button style1 d-block w-100" value="{{trans('file.Submit')}}">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section> --}}
-
-
-
     <!-- Pricing Plan -->
     <section id="packages"class="grey-bg">
         <div class="container">
             <div class="col-md-6 offset-md-3 text-center mb-5">
                 <h2 class="heading">@lang('file.Pricing plans')</h2>
-
                 <ul class="nav nav-tabs pricing-tab" id="pricingTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="monthly-tab" data-bs-toggle="tab" data-bs-target="#monthly-tab-pane" type="button" role="tab" aria-controls="monthly-tab-pane" aria-selected="true">{{ trans('file.Monthly') }}</button>
@@ -326,17 +169,18 @@
                         </span></button>
                     </li>
                 </ul>
-
             </div>
             <div class="d-none d-lg-flex d-xl-flex justify-content-between mb-5">
                 @if ($packages)
                     <div class="col">
                         <div class="pricing">
-                            <div class="pricing-header">
-                                <span class="h3">@lang('file.Plan')</span>
-                            </div>
-                            <div class="price">
-                                <span class="h4">@lang('file.Price')</span>
+                            <div class="sticker">
+                                <div class="pricing-header">
+                                    <span class="h3">@lang('file.Plan')</span>
+                                </div>
+                                <div class="price">
+                                    <span class="h4">@lang('file.Price')</span>
+                                </div>
                             </div>
                             <div class="pricing-details">
                                 <p>{{trans('file.Free Trial')}}</p>
@@ -357,15 +201,17 @@
                     @foreach ($packages as $key => $package)
                         <div class="col">
                             <div class="pricing">
-                                <div class="pricing-header">
-                                    <span class="h3">{{ $package->name }}</span>
-                                </div>
-                                <div class="price">
-                                    <div>
-                                        <span class="h4"><span class="currency-code">{{$generalSetting->currency_code}}</span> <span class="package-price" data-monthly="{{$package->monthly_fee}}" data-yearly="{{$package->yearly_fee}}">{{$package->monthly_fee}}/month</span></span><br>
-                                        {{-- <button href="#customer-signup" data-free="{{$package->is_free_trial}}" data-package_id="{{$package->id}}" class="button style2 signup-btn">Sign Up</button> --}}
-                                        <button  data-bs-toggle="modal" data-bs-target="#signupModal" data-free="{{$package->is_free_trial}}" data-package_id="{{$package->id}}" class="button style2 d-block w-100 signup-btn mt-2">Sign Up</button>
+                                <div class="sticker">
+                                    <div class="pricing-header">
+                                        <span class="h3">{{ $package->name }}</span>
+                                    </div>
+                                    <div class="price">
+                                        <div>
+                                            <span class="h4"><span class="currency-code">{{$generalSetting->currency_code}}</span> <span class="package-price" data-monthly="{{$package->monthly_fee}}" data-yearly="{{$package->yearly_fee}}">{{$package->monthly_fee}}/month</span></span><br>
+                                            {{-- <button href="#customer-signup" data-free="{{$package->is_free_trial}}" data-package_id="{{$package->id}}" class="button style2 signup-btn">Sign Up</button> --}}
+                                            <button  data-bs-toggle="modal" data-bs-target="#signupModal" data-free="{{$package->is_free_trial}}" data-package_id="{{$package->id}}" class="button style2 d-block w-100 signup-btn mt-2">Sign Up</button>
 
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="pricing-details">
@@ -394,6 +240,9 @@
             </div>
         </div>
     </section>
+
+
+
 
     <!--Scroll to top starts-->
     <a href="#" id="scrolltotop"><i class="ti-arrow-up"></i></a>
@@ -529,24 +378,24 @@
                         @csrf
                         <div class="row">
                             <div class="col-md-6">
-                                <input class="form-control" type="text" name="name"  placeholder="Name..." >
+                                <input required class="form-control" type="text" name="name"  placeholder="Name..." >
                             </div>
                             <div class="col-md-6">
-                                <input class="form-control" type="text" name="phone"  placeholder="Contact Number..." >
+                                <input required class="form-control" type="text" name="phone"  placeholder="Contact Number..." >
                             </div>
                             <div class="col-md-12">
-                                <input class="form-control" type="email" name="public_email"  placeholder="Your Email..." >
+                                <input required class="form-control" type="email" name="public_email"  placeholder="Your Email..." >
                             </div>
                             <div class="col-md-12">
-                                <input class="form-control" type="text" name="subject"  placeholder="Subject..." >
+                                <input required class="form-control" type="text" name="subject"  placeholder="Subject..." >
                             </div>
                             <div class="col-md-12">
-                                <textarea class="form-control" name="message"  placeholder="Your Message" ></textarea>
+                                <textarea required class="form-control" name="message"  placeholder="Your Message" ></textarea>
                             </div>
 
                             <div class="col-12 mt-3">
                                 <p id="waiting-msg mb-3"></p>
-                                <input id="submit-btn" type="submit" class="button style2 d-block w-100" value="{{trans('file.submit')}}">
+                                <input id="submit-btn" type="submit" class="button style2 d-block w-100" value="{{trans('file.Submit')}}">
                             </div>
                         </div>
                     </form>

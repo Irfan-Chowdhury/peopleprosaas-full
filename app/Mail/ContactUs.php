@@ -16,9 +16,7 @@ class ContactUs extends Mailable
 
     public function __construct(public $request){}
 
-    /**
-     * Get the message envelope.
-     */
+    
     public function envelope(): Envelope
     {
         return new Envelope(
