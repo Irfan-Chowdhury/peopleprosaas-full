@@ -48,20 +48,6 @@
 
 <body>
 
-    @if(env('PRODUCT_MODE')==='DEMO')
-        <div class="notice">
-            <a target="_blank" href="https://lion-coders.com/software/salepro-saas">Buy Salepro SAAS with full source code</a>
-        </div>
-    @endif
-
-    @if(env('PRODUCT_MODE')==='DEMO')
-        <div style="position:fixed;right:0;top:200px;z-index:99">
-            <span id="light-theme" class="btn btn-light d-block"><i class="fa fa-sun-o"></i></span>
-            <span id="dark-theme" class="btn btn-dark d-block"><i class="fa fa-moon-o"></i></span>
-        </div>
-    @endif
-
-
     @include('landlord.public-section.partials.header')
 
     @yield('public-content')
