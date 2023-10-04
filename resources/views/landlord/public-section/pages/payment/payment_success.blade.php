@@ -1,4 +1,6 @@
 @extends('landlord.public-section.layouts.master')
+@section('public-title', config('app.name').' | '.'Payment Success')
+
 @section('public-content')
 
 @push('css')

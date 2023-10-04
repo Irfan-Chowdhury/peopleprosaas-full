@@ -42,6 +42,7 @@
     {!!$general_setting->fb_pixel_script!!}
     @endif --}}
 
+    <title>@yield('public-title')</title>
     @stack('css')
 
 </head>

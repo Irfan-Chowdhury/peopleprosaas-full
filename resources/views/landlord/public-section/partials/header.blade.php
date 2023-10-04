@@ -25,11 +25,11 @@
             <div class="col-lg-6 d-none d-lg-flex d-xl-flex middle-column justify-content-center">
                 <div id="main-menu" class="main-menu">
                     <ul class="pl-0">
-                        <li><a href="{{url('/')}}#features">Features</a></li>
-                        <li><a href="{{url('/')}}#faq">FAQ</a></li>
-                        <li><a href="{{url('/')}}#packages">Pricing</a></li>
-                        <li><a href="{{url('/')}}#contact">Contact Us</a></li>
-                        <li><a href="{{url('/blogs')}}">Blogs</a></li>
+                        <li><a href="{{url('/')}}#features">@lang('file.Features')</a></li>
+                        <li><a href="{{url('/')}}#faq">@lang('file.FAQ')</a></li>
+                        <li><a href="{{url('/')}}#packages">@lang('file.Pricing')</a></li>
+                        <li><a href="{{url('/')}}#contact">@lang('file.Contact Us')</a></li>
+                        <li><a href="{{url('/blogs')}}">@lang('file.Blogs')</a></li>
                     </ul>
                 </div>
             </div>
